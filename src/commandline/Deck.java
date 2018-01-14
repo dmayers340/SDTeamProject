@@ -27,7 +27,7 @@ public class Deck {
 
 	public void addCategory (String c)	
 	{
-		categories.add(c); 
+		categories.add(c);
 	}
 
 
@@ -38,7 +38,8 @@ public class Deck {
 
 	public void addCard(String [] cAttributes) 
 	{
-		cardsInDeck.add(new Card(cAttributes)); // 
+		cardsInDeck.add(new Card(cAttributes));
+		numberOfCards++; 
 	}
 
 
@@ -79,16 +80,59 @@ public class Deck {
 	{
 		return categories;
 	}
+	
+	
+	/**
+	 * toString
+	 * @return deck as a string 
+	 */
+	
+	public String dString () 
+	{
+		String dString = "";
+		Card temp;
+		
+		dString = dString + String.format( "%s ", cString());
+		
+		for (int i = 0; i < numberOfCards; i++)
+		{
+			temp = cardsInDeck.get(i);
+			dString = dString + String.format( "\n%s ", temp.toString());
+		}
+		
+		return dString;
+	}
+
+	
+	/**
+	 * toString method
+	 * @return categories in one String 
+	 */
+	
+	private String cString ()
+	{
+		String cString = "";
+		
+		// print categories
+		for (int i = 0; i < categories.size(); i++)
+		{
+			cString = cString + String.format( "%s ", categories.get(i));
+		}
+		
+		return cString; 	
+	}
+	
 
 	/**
 	 * accessor method
 	 * @return current deck
 	 * will need this after each shuffle!
 	 */
-
+	
 	public ArrayList<Card> getDeck()
 	{
 		return cardsInDeck;
 	}
+
 
 }

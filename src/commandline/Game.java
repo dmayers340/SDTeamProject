@@ -20,6 +20,11 @@ public class Game {
 	{
 		d.shuffleDeck();
 		currentDeck = d;
+		
+		System.out.println();
+		System.out.println("Current deck printed below:");
+		System.out.println(currentDeck.dString());
+		
 	}
 
 }
