@@ -20,6 +20,11 @@ public class Deck {
 		categories = new ArrayList<String>();
 	}
 
+	public int getNumberOfCards() {
+
+		return numberOfCards;
+	}
+
 
 	public void setNumPlayers(int nP) {
 		
@@ -144,23 +149,12 @@ public class Deck {
 		return cardsInDeck;
 	}
 
+
+	
+
+	
+	
+	
+
+
 }
-	
-	
-	
-//	
-//	private int numCardsEach() {
-//		
-//		if (cardsInDeck.size() % numPlayers != 0) {
-//			
-//			
-//			
-//		}
-//		
-//		
-//		
-//		int numCardsEach = cardsInDeck.size()/numPlayers;
-//		
-//	}
-//
-//}
