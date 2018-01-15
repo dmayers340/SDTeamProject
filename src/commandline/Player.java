@@ -5,10 +5,8 @@ public class Player {
 
 	private String playerName;
 	private ArrayList<Card> hand;
+	private Card card;
 	
-//	public Player() {
-//		
-//	}
 	
 	public Player(String pName) { 
 		
@@ -20,4 +18,10 @@ public class Player {
 
 		return playerName;
 	}
+
+	public void addCardsToHand(Card c) {
+		
+		
+	}
+	
 }

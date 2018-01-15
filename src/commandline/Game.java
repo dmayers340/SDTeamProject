@@ -8,9 +8,9 @@ public class Game {
 	 *  instance variables
 	 */
 	
-	private int numberOfPlayers = 4; //for testing
+	private int numberOfPlayers = 4; //hard-coded for testing
 	private Deck currentDeck; 
-	private Player player;
+	private ArrayList <Player> listOfPlayers;
 	
 	
 	/**
@@ -32,8 +32,8 @@ public class Game {
 
 	public void createPlayers() {
 		
-//		numberOfPlayers = currentDeck.getNumPlayers();
-		ArrayList <Player> listOfPlayers = new ArrayList<Player>(numberOfPlayers);
+//		numberOfPlayers = currentDeck.getNumPlayers(); //commented out while testing
+		listOfPlayers = new ArrayList<Player>(numberOfPlayers);
 		
 		int i;
 		for (i = 0; i < numberOfPlayers; i++) {
@@ -42,18 +42,38 @@ public class Game {
 			listOfPlayers.add(p);
 		}
 	
-		System.out.print(listOfPlayers.toString());
+//		System.out.print(listOfPlayers.toString());
+	}
 		
+		private int numCardsEach() {
+			
+			int numCardsEach = currentDeck.getNumberOfCards() / numberOfPlayers;
+			int leftoverCards = currentDeck.getNumberOfCards() % numberOfPlayers;
+			
+			if (leftoverCards > 0) {
+				
+				listOfPlayers.get(pickRandomPlayer());
+				
+			}
+			
+			
+			
+			
+			
+		}	
+
 		
+		public int pickRandomPlayer() { //returns random index number
 		
-		
-		
-		
+			int randomIndex = (int)Math.floor(Math.random() * numberOfPlayers);
+			return randomIndex;
+		}
 	
 		}
 		
 		
-	}
+}
+
 	
 	
 
