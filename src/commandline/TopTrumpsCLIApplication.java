@@ -186,4 +186,15 @@ public class TopTrumpsCLIApplication {
 		}
 
 	} 
+	
+	private static void howManyPlayers() {
+		
+		System.out.print("How many opponents would you like? Maximum is 4.");
+		int numberOfPlayers = Integer.parseInt(getInput());
+		newDeck.setNumPlayers(numberOfPlayers);
+		
+	}
+	
+	
+	
 }

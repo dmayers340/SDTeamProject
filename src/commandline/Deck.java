@@ -9,6 +9,7 @@ public class Deck {
 	private ArrayList<String> categories;
 	private ArrayList<Card> cardsInDeck;
 	private int numberOfCards;
+	private int numPlayers;
 
 	/**
 	 * constructor
@@ -20,6 +21,12 @@ public class Deck {
 	}
 
 
+	public void setNumPlayers(int nP) {
+		
+		this.numPlayers = nP;
+	}
+	
+	
 	/**
 	 * category names are stored in an array list ('categories')
 	 * @param String c = a category name
