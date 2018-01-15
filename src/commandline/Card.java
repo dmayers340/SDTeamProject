@@ -22,7 +22,6 @@ public class Card implements Comparable<Card>{
 
 	{ 
 		cardAttributes = cA;
-		System.out.println(toString());
 	}
 
 

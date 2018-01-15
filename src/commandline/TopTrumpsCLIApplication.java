@@ -63,15 +63,20 @@ public class TopTrumpsCLIApplication {
 	// play game or view stats?
 	private static void optionMenu() 
 	{
-		System.out.println("Enter the letter 'S' to view the statistics of past games "
-				+ "or the letter 'G' to start a  new game.");
+		System.out.println();
+		System.out.println("Options: ");
+		System.out.println("G - play a new game ");
+		System.out.println("S - view past game statistics ");
+		System.out.println("Q - exit the application ");
+		System.out.println();
 
 		String choice = getInput();
 
 		// if letter S was entered - nothing happens
 		if (choice.charAt(0) == 'S')
 		{
-			System.out.println("You chose to view past game statistics");
+			System.out.println("No statistics to display ");
+			System.out.println();
 		}
 
 
@@ -91,7 +96,8 @@ public class TopTrumpsCLIApplication {
 
 			// reads from new deck at first round or if asked
 			if (readDeck.charAt(0) == 'Y' || numberOfGames == 0)
-			{
+			{	
+				System.out.println();
 				readIn();
 			}
 
@@ -104,7 +110,8 @@ public class TopTrumpsCLIApplication {
 		// not sure how to use the boolean :D 
 		else if (choice.charAt(0)=='Q')
 		{
-			System.out.println ("You chose to quit the program");
+			System.out.println ("You exited the program");
+			System.out.println();
 			System.exit(0);
 		}
 
@@ -112,6 +119,7 @@ public class TopTrumpsCLIApplication {
 		else 
 		{
 			System.out.println("Please enter valid input");
+			System.out.println();
 			return;
 		}
 
@@ -124,11 +132,10 @@ public class TopTrumpsCLIApplication {
 	 */
 	private static String getInput()
 	{
-		String input = " ";
 		Scanner in = new Scanner (System.in);
-
+		String input = " ";
+		
 		input = in.next();
-
 		return input;
 	}
 
@@ -175,6 +182,7 @@ public class TopTrumpsCLIApplication {
 		{
 			System.out.println("File not Found");
 			System.out.println("Check if file name is correct");
+			System.out.println();
 		}
 
 	} 
