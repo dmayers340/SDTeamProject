@@ -26,6 +26,9 @@ public class Deck {
 		this.numPlayers = nP;
 	}
 	
+	public int getNumPlayers() {
+		return numPlayers;
+	}
 	
 	/**
 	 * category names are stored in an array list ('categories')
@@ -141,5 +144,23 @@ public class Deck {
 		return cardsInDeck;
 	}
 
-
 }
+	
+	
+	
+//	
+//	private int numCardsEach() {
+//		
+//		if (cardsInDeck.size() % numPlayers != 0) {
+//			
+//			
+//			
+//		}
+//		
+//		
+//		
+//		int numCardsEach = cardsInDeck.size()/numPlayers;
+//		
+//	}
+//
+//}

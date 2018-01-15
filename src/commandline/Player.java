@@ -6,11 +6,18 @@ public class Player {
 	private String playerName;
 	private ArrayList<Card> hand;
 	
+//	public Player() {
+//		
+//	}
 	
-	public Player(String pName) { //can't create a player without assigning them a name
+	public Player(String pName) { 
 		
 		this.playerName = pName;
 	}
-}
 
-	
+
+	public String toString() {
+
+		return playerName;
+	}
+}

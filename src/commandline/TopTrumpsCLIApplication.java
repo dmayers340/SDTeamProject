@@ -104,6 +104,7 @@ public class TopTrumpsCLIApplication {
 			// play time! 
 			Game newGame = new Game(newDeck);
 			numberOfGames++;
+			newGame.createPlayers();
 		}
 
 		// if Q or QUIT was entered

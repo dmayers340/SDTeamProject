@@ -8,7 +8,7 @@ public class Game {
 	 *  instance variables
 	 */
 	
-	private int numberOfPlayers;
+	private int numberOfPlayers = 4; //for testing
 	private Deck currentDeck; 
 	private Player player;
 	
@@ -30,9 +30,9 @@ public class Game {
 		
 	}
 
-	private void createPlayers() {
+	public void createPlayers() {
 		
-		numberOfPlayers = currentDeck.getNumPlayers();
+//		numberOfPlayers = currentDeck.getNumPlayers();
 		ArrayList <Player> listOfPlayers = new ArrayList<Player>(numberOfPlayers);
 		
 		int i;
@@ -41,7 +41,8 @@ public class Game {
 			Player p = new Player("Player" + "" + (i+1));
 			listOfPlayers.add(p);
 		}
-		
+	
+		System.out.print(listOfPlayers.toString());
 		
 		
 		
