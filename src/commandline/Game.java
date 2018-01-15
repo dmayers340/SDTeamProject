@@ -1,5 +1,7 @@
 package commandline;
 
+import java.util.ArrayList;
+
 public class Game {
 	
 	/**
@@ -8,6 +10,7 @@ public class Game {
 	
 	private int numberOfPlayers;
 	private Deck currentDeck; 
+	private Player player;
 	
 	
 	/**
@@ -27,4 +30,29 @@ public class Game {
 		
 	}
 
-}
+	private void createPlayers() {
+		
+		numberOfPlayers = currentDeck.getNumPlayers();
+		ArrayList <Player> listOfPlayers = new ArrayList<Player>(numberOfPlayers);
+		
+		int i;
+		for (i = 0; i < numberOfPlayers; i++) {
+			
+			Player p = new Player("Player" + "" + (i+1));
+			listOfPlayers.add(p);
+		}
+		
+		
+		
+		
+		
+		
+		
+	
+		}
+		
+		
+	}
+	
+	
+
