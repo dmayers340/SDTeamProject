@@ -6,6 +6,7 @@ public class Player {
 	private String playerName;
 	private ArrayList<Card> hand;
 	private Card card;
+	private int numberOfCardsEach;
 	
 	
 	public Player(String pName) { 
@@ -14,14 +15,26 @@ public class Player {
 	}
 
 
+	public void setNumberOfCardsEach(int numC) {
+		
+		this.numberOfCardsEach = numC;
+	}
+	
+	
+	
 	public String toString() {
 
 		return playerName;
 	}
 
-	public void addCardsToHand(Card c) {
+	public void receiveCards(ArrayList<Card>dealtCards) {
 		
-		
+		this.hand = dealtCards;
 	}
 	
+	public ArrayList<Card> getHand() {
+		
+		return hand;
+		
+	}
 }

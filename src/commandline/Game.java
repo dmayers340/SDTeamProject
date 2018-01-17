@@ -44,32 +44,43 @@ public class Game {
 	
 //		System.out.print(listOfPlayers.toString());
 	}
-		
-	
-	
-		private void dealCards() {
 
-			int numCardsEach = currentDeck.getNumberOfCards() / numberOfPlayers;
 
-			int i;
-			for (i = 0; i < numberOfPlayers; i++) {
 
-				ArrayList<Card> cardsForEachPlayer = new ArrayList<Card>(currentDeck.getDeck().subList(0, numCardsEach));
-				listOfPlayers.get(i).receiveCards(cardsForEachPlayer);
-				currentDeck.getDeck().removeAll(cardsForEachPlayer);
+	private void dealCards() {
 
-			}
+		int numCardsEach = currentDeck.getNumberOfCards() / numberOfPlayers;
+
+		int i;
+		for (i = 0; i < numberOfPlayers; i++) {
+
+			ArrayList<Card> cardsForEachPlayer = new ArrayList<Card>(currentDeck.getDeck().subList(0, numCardsEach));
+			listOfPlayers.get(i).receiveCards(cardsForEachPlayer);
+			currentDeck.getDeck().removeAll(cardsForEachPlayer);
+
 		}
 
+		if (!currentDeck.getDeck().isEmpty()) { //if cards remaining in deck
+
+			listOfPlayers.get(pickRandomPlayer()).receiveExtraCards(currentDeck.getDeck());
+			
+
+
 		
-		public int pickRandomPlayer() { //returns random index number
-		
-			int randomIndex = (int)Math.floor(Math.random() * numberOfPlayers);
-			return randomIndex;
-		}
+	}
 	
-		}
-		
+	
+	}
+
+
+	public int pickRandomPlayer() { //returns random index number
+
+		int randomIndex = (int)Math.floor(Math.random() * numberOfPlayers);
+		return randomIndex;
+	}
+
+}
+
 
 }
 

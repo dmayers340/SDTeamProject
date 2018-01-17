@@ -25,10 +25,21 @@ public class Deck {
 		return numberOfCards;
 	}
 
+	public Card getCardAt(int i) {
+		
+		return cardsInDeck.get(i);
+	}
+	
 
 	public void setNumPlayers(int nP) {
 		
 		this.numPlayers = nP;
+	}
+	
+	
+	public ArrayList<Card> getDeck()
+	{
+		return cardsInDeck;
 	}
 	
 	public int getNumPlayers() {
@@ -143,18 +154,7 @@ public class Deck {
 	 * @return current deck
 	 * will need this after each shuffle!
 	 */
-	
-	public ArrayList<Card> getDeck()
-	{
-		return cardsInDeck;
-	}
 
-
-	
-
-	
-	
-	
 
 
 }
