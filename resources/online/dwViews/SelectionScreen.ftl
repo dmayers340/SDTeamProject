@@ -23,7 +23,13 @@
     <body onload="initalize()"> <!-- Call the initalize method when the page loads -->
     	
     	<div class="container">
-
+    	<h1><b>Please make a selection</b></h1>
+    	
+		<ul>
+		<button type = "button">Play Game!</button>
+		<!-- When they press Play Game! Load the GameScreen.ftl -->
+		&emsp; &emsp; &emsp; &emsp; <button type= "button">Statistics</button>
+		</ul>
 			<!-- Add your HTML Here -->
 		
 		</div>
