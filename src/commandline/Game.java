@@ -8,7 +8,7 @@ public class Game {
 	 *  instance variables
 	 */
 	
-	private int numberOfPlayers = 4; //hard-coded for testing
+	private int numberOfPlayers = 5; 
 	private Deck currentDeck; 
 	private ArrayList <Player> listOfPlayers;
 	
@@ -68,6 +68,7 @@ public class Game {
 	 System.out.println(listOfPlayers.get(0).getHand().toString());
 	 System.out.println(listOfPlayers.get(1).getHand().toString());
 	 System.out.println(listOfPlayers.get(2).getHand().toString());
+	 System.out.println(listOfPlayers.get(3).getHand().toString());
 	 System.out.println(listOfPlayers.get(3).getHand().toString());
 	 
 	
