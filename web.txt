@@ -1,0 +1,123 @@
+<html>
+	<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<!-- Web page title -->
+    	<title>Top Trumps</title>
+		<!-Heading picture->
+		<img src="images/grey.png"/>
+	</head>
+	<body>
+	<!-main->
+		<div id="main">
+			<div class="box">
+						<!-- player card -->
+						<div class="player">
+							<div class="a">&nbsp;</div>
+							<div class="stripe">
+								<strong>Your card</strong>
+							</div>
+							<div class="a">&nbsp;</div>
+							<img src="images/card.jpg" alt="" />
+							<div class="a">&nbsp;</div>
+							?<>Your card number<>
+						</div>
+						<!-- End player card -->
+						
+						<!--AI card-->
+						<div class="right-col">
+							<h2>AI</h2>
+							<div class="player">
+								<div class="a">&nbsp;</div>
+								<div class="stripe">
+									<strong>AI1</strong>
+								</div>
+								<div class="a">&nbsp;</div>
+								<img src="images/card.jpg" alt="" />
+								<div class="a">&nbsp;</div>
+								?<>AI1 card number<>
+							</div>
+							
+							<div class="player-right">
+								<div class="stripe">
+									<strong>AI2</strong>
+								</div>
+								<div class="a">&nbsp;</div>
+								<img src="images/card.jpg" alt="" />
+								<div class="a">&nbsp;</div>
+								?<>AI2 card number<>
+							</div>
+							
+							<div class="player">
+								<div class="a">&nbsp;</div>
+								<div class="stripe">
+									<strong>AI3</strong>
+								</div>
+								<div class="a">&nbsp;</div>
+								<img src="images/card.jpg" alt="" />
+								<div class="a">&nbsp;</div>
+								?<>AI3 card number<>
+							</div>
+							
+							<div class="player-right">
+								<div class="stripe">
+									<strong>AI2</strong>
+								</div>
+								<div class="a">&nbsp;</div>
+								<img src="images/card.jpg" alt="" />
+								<div class="a">&nbsp;</div>
+								?<>AI2 card number<>
+							</div>
+					
+		<!-actionlistner->
+		<img 
+		
+	<!-end->
+	</body>
+	</html>
+	
+		
+		
+		
+		
+		
+		
+		
+		
+
+	
+
+	
+Css  
+	
+	
+	
+	.a {
+    font-size:0;
+    line-height:0;
+    height:0;
+    display:block;
+    clear:both;
+	}
+	
+	.heading{width:930px; margin:0 auto}
+	
+	h2{font-size: 20px; color:#2a2a2a; font-weight: normal; text-transform: uppercase; font-family: georgia, sans-serif; padding-bottom:8px; border-bottom:solid 2px #dedede; margin-right:5px}
+	h2 span{color:#ff0081}
+	
+	body{
+    background:url(images/background.jgp);
+    font-family:Arial;
+    color:#4e4e4e;
+    font-size:11px;
+    line-height:14px;
+    padding-bottom:70px;
+	}
+
+	#main{width:1000px; float: middle; display: inline;}
+	#main .box{width:1000px; background:url(images/background.jpg) repeat-y;  margin-bottom:8px}
+	#main .box .player-right{float: right; display: inline; width:200px; padding-left:10px; padding-top:10px}
+	#main .box .player-right h2{margin-bottom:10px;  }
+	#main .box .player-right .holder{width:200px; margin-bottom:20px; }
+	#main .box .holder{width:294px; position:relative; z-index: 1; float:left; display: inline;}
+	#main .box .holder .stripe{position:absolute; top:284px; left:44px; z-index: 10; height:84px; background:none; width:245px}
+	#main .box .holder .stripe strong{font-family: "Arial"; font-size: 23px; color:#00a2ff; text-transform: uppercase; line-height: 25px; padding:10px 0 0 13px; display: block;}
