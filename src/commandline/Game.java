@@ -45,22 +45,21 @@ public class Game {
 //		System.out.print(listOfPlayers.toString());
 	}
 		
-		private int numCardsEach() {
-			
+	
+	
+		private void dealCards() {
+
 			int numCardsEach = currentDeck.getNumberOfCards() / numberOfPlayers;
-			int leftoverCards = currentDeck.getNumberOfCards() % numberOfPlayers;
-			
-			if (leftoverCards > 0) {
-				
-				listOfPlayers.get(pickRandomPlayer());
-				
+
+			int i;
+			for (i = 0; i < numberOfPlayers; i++) {
+
+				ArrayList<Card> cardsForEachPlayer = new ArrayList<Card>(currentDeck.getDeck().subList(0, numCardsEach));
+				listOfPlayers.get(i).receiveCards(cardsForEachPlayer);
+				currentDeck.getDeck().removeAll(cardsForEachPlayer);
+
 			}
-			
-			
-			
-			
-			
-		}	
+		}
 
 		
 		public int pickRandomPlayer() { //returns random index number
@@ -71,9 +70,8 @@ public class Game {
 	
 		}
 		
-		
+
 }
 
-	
 	
 
