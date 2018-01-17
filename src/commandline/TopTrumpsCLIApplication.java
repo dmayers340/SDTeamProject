@@ -105,6 +105,8 @@ public class TopTrumpsCLIApplication {
 			Game newGame = new Game(newDeck);
 			numberOfGames++;
 			newGame.createPlayers();
+			newDeck.shuffleDeck();
+			newGame.dealCards();
 		}
 
 		// if Q or QUIT was entered

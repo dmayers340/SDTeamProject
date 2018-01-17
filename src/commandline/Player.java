@@ -24,12 +24,17 @@ public class Player {
 	
 	public String toString() {
 
-		return playerName;
+		return playerName + hand;
 	}
 
 	public void receiveCards(ArrayList<Card>dealtCards) {
 		
-		this.hand = dealtCards;
+		this.hand = dealtCards; 
+	}
+	
+	public void receiveExtraCards(ArrayList<Card>extraCards) {
+		
+		this.hand.addAll(extraCards);
 	}
 	
 	public ArrayList<Card> getHand() {

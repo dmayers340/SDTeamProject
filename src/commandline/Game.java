@@ -47,7 +47,7 @@ public class Game {
 
 
 
-	private void dealCards() {
+	public void dealCards() {
 
 		int numCardsEach = currentDeck.getNumberOfCards() / numberOfPlayers;
 
@@ -63,12 +63,13 @@ public class Game {
 		if (!currentDeck.getDeck().isEmpty()) { //if cards remaining in deck
 
 			listOfPlayers.get(pickRandomPlayer()).receiveExtraCards(currentDeck.getDeck());
-			
-
-
 		
 	}
-	
+	 System.out.println(listOfPlayers.get(0).getHand().toString());
+	 System.out.println(listOfPlayers.get(1).getHand().toString());
+	 System.out.println(listOfPlayers.get(2).getHand().toString());
+	 System.out.println(listOfPlayers.get(3).getHand().toString());
+	 
 	
 	}
 
@@ -82,7 +83,7 @@ public class Game {
 }
 
 
-}
+
 
 	
 
