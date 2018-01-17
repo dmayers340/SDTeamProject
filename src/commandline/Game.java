@@ -8,7 +8,7 @@ public class Game {
 	 *  instance variables
 	 */
 	
-	private int numberOfPlayers = 5; 
+	private int numberOfPlayers = 5; //we should assume there will always be 4 AI players
 	private Deck currentDeck; 
 	private ArrayList <Player> listOfPlayers;
 	
