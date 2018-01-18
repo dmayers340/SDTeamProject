@@ -36,15 +36,33 @@
 	       </div><!--/.nav-collapse -->
 	      </div>
 	    </nav>
+	  
+	  <div class="container">
+	  <div class="column">
+	  <h1><b>Please make a selection</b></h1>
+		<div class="card" style="width: 20rem; height: 100px">
+  		<img class="card-img-top" src="https://img.purch.com/h/1000/aHR0cDovL3d3dy5zcGFjZS5jb20vaW1hZ2VzL2kvMDAwLzA2Ni8yODcvb3JpZ2luYWwveHMtMS1zcGFjZS1wbGFuZS1ib2Vpbmctb3JiaXRhcnQuanBn" alt="Card Image">
+  		<div class="card-block">
+    		<h4 class="card-title">Play Game</h4>
+    		<p class="card-text">If you would like to play the game select the button below.</p>
+    		<a href="#" class="btn btn-primary">Play Game</a>
+  		</div>
+		</div>
+		</div><br /> <br /><br /><br /> <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+	
+ 
 
-    	<div class="container">
-    	<h1><b>Please make a selection</b></h1>
+		<div class="column">
+    	<p><div class="card" style="width: 20rem; height: 100px">
+  		<img class="card-img-top" src="https://cdn.spacetelescope.org/archives/images/wallpaper2/heic1509a.jpg" alt="Card image">
+  		<div class="card-block">
+    		<h4 class="card-title">View Statistics</h4>
+    		<p class="card-text">If you would like to view the statistics press the button below.</p>
+    		<a href="#" class="btn btn-primary">View Statistics</a>
+  		</div>
+		</div></p><br /> <br />
+		</div>
     	
-		<ul>
-		<button type = "button">Play Game!</button>
-		<!-- When they press Play Game! Load the GameScreen.ftl -->
-		&emsp; &emsp; &emsp; &emsp; <button type= "button">Statistics</button>
-		</ul>
 			<!-- Add your HTML Here -->
 		
 		</div>
