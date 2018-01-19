@@ -10,7 +10,7 @@ public class Card {
 	 * all the attributes are stored in one array
 	 */
 
-	String [] cardAttributes;
+	private String [] cardAttributes;
 
 
 	/**

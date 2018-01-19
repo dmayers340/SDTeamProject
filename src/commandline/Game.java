@@ -82,15 +82,17 @@ public class Game {
 	private void updatePlayers()
 
 	{
-		for (int i = 0; i<listOfPlayers.size(); i++)
+		int i; 
+		
+		for (i = 0; i<remainingPlayers; i++)
 		{
 			if (!listOfPlayers.get(i).hasCards())
 			{
-
 				System.out.println(listOfPlayers.get(i).getName() + " is out of cards");
-
 				listOfPlayers.remove(listOfPlayers.get(i));
-
+				remainingPlayers--;
+				i = -1;
+				
 				System.out.println("The players in the array list are:  ");
 
 				for (int j = 0; j<listOfPlayers.size(); j++)
@@ -102,9 +104,8 @@ public class Game {
 
 				System.out.println();
 
-				remainingPlayers--;
 			}
-
+			
 		}
 	}
 
@@ -128,7 +129,10 @@ public class Game {
 
 		// NEEDS EDITING
 		// if the current active player won the previous round
-		else if (activePlayer == newRound.getWinner())
+		else if (activePlayer.equals(newRound.getWinner()))
+			
+			// .equals vs == ? 
+			
 		{
 			for (int index = 0; index<listOfPlayers.size(); index++)
 
