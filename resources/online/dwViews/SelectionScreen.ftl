@@ -40,8 +40,8 @@
 	  <div class="container">
 	  <div class="column">
 	  <h1><b>Please make a selection</b></h1>
-		<div class="card" style="width: 20rem; height: 100px">
-  		<img class="card-img-top" src="https://img.purch.com/h/1000/aHR0cDovL3d3dy5zcGFjZS5jb20vaW1hZ2VzL2kvMDAwLzA2Ni8yODcvb3JpZ2luYWwveHMtMS1zcGFjZS1wbGFuZS1ib2Vpbmctb3JiaXRhcnQuanBn" alt="Card Image">
+		<div class="card border-dark mb-3" style="max-width: 18rem; height: 50rem;">  		
+		<img class="card-img-top" src="https://img.purch.com/h/1000/aHR0cDovL3d3dy5zcGFjZS5jb20vaW1hZ2VzL2kvMDAwLzA2Ni8yODcvb3JpZ2luYWwveHMtMS1zcGFjZS1wbGFuZS1ib2Vpbmctb3JiaXRhcnQuanBn" alt="Card Image">
   		<div class="card-block">
     		<h4 class="card-title">Play Game</h4>
     		<p class="card-text">If you would like to play the game select the button below.</p>
@@ -53,10 +53,10 @@
  
 
 		<div class="column">
-    	<p><div class="card" style="width: 20rem; height: 100px">
+		<div class="card border-dark mb-3" style="max-width: 18rem; height: 50rem;"> 
   		<img class="card-img-top" src="https://cdn.spacetelescope.org/archives/images/wallpaper2/heic1509a.jpg" alt="Card image">
   		<div class="card-block">
-    		<h4 class="card-title">View Statistics</h4>
+    		<center><b><h4 class="card-title">View Statistics</h4></b></center>
     		<p class="card-text">If you would like to view the statistics press the button below.</p>
     		<a href="#" class="btn btn-primary">View Statistics</a>
   		</div>
@@ -139,8 +139,8 @@
 			}
 			
 			// This calls the helloJSONList REST method from TopTrumpsRESTAPI
-			function helloWord(word) {
-			
+			function helloWord(word) 
+			{
 				// First create a CORS request, this is the message we are going to send (a get request in this case)
 				var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/helloWord?Word="+word); // Request type and URL+parameters
 				
