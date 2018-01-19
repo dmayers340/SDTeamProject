@@ -45,11 +45,30 @@ public class Player {
 		this.hand.add(c);
 	}
 	
+	/**
+	 * removes top card from the hand 
+	 */
+	
+	public void removeCard ()
+	
+	{
+		this.hand.remove(getTopCard());
+		System.out.println(this.getName() + " had a card removed from their deck");
+		System.out.println("They now have " + hand.size() + " cards in their deck. ");
+		System.out.println();
+	}
+	
+	
+	/**
+	 * @return hand
+	 */
+	
 	public ArrayList<Card> getHand() {
 
 		return hand;
 
 	}
+	
 	
 	/**
 	 * @return top card in hand

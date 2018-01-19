@@ -63,14 +63,11 @@ public class Round {
 			if (players.get(i)!=winner)
 				
 			{
-				
+			
+			// winner receives cards 
 			winner.receiveCard(players.get(i).getTopCard());
-			players.get(i).getHand().remove(players.get(i).getTopCard());
-			
-			System.out.println(players.get(i).getName() + " had a card removed from their deck");
-			System.out.println("They now have " + players.get(i).getHand().size() + " cards in their deck. ");
-			System.out.println();
-			
+			players.get(i).removeCard();
+	
 			// hurts my eyes
 			}
 		}
