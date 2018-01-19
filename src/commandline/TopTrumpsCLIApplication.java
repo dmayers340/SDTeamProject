@@ -189,14 +189,14 @@ public class TopTrumpsCLIApplication implements ActionListener{
 
 	} 
 
-	private static void howManyPlayers() {
+	public static int howManyPlayers() {
 
 		System.out.print("How many opponents would you like? Maximum is 4.");
 		int numberOfPlayers = Integer.parseInt(getInput());
-		newDeck.setNumPlayers(numberOfPlayers);
+		return numberOfPlayers;
 
 	}
-
+	
 	public static String getUsername()
 
 	{
@@ -206,6 +206,8 @@ public class TopTrumpsCLIApplication implements ActionListener{
 		String username = getInput();
 		return username;
 	}
+	
+	
 
 	/**
 	 * need this to be able to close the program at any time

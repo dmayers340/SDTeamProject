@@ -9,7 +9,7 @@ public class Game {
 	 *  instance variables
 	 */
 
-	private int numberOfPlayers = 5; //we should assume there will always be 4 AI players
+	private int numberOfPlayers; //we should assume there will always be 4 AI players
 	private Deck currentDeck;
 	private Round newRound;
 
@@ -30,7 +30,10 @@ public class Game {
 	{
 		d.shuffleDeck();
 		currentDeck = d;
-
+		
+		int p = TopTrumpsCLIApplication.howManyPlayers();
+		numberOfPlayers = p;
+		
 		// each game starts with all players active
 		remainingPlayers = numberOfPlayers;
 
@@ -78,6 +81,7 @@ public class Game {
 	/**
 	 * removes players with no cards
 	 */
+	
 
 	private void updatePlayers()
 
@@ -219,11 +223,14 @@ public class Game {
 			listOfPlayers.get(pickRandomPlayer()).receiveExtraCards(currentDeck.getDeck());
 
 		}
-		System.out.println(listOfPlayers.get(0).getHand().toString());
-		System.out.println(listOfPlayers.get(1).getHand().toString());
-		System.out.println(listOfPlayers.get(2).getHand().toString());
-		System.out.println(listOfPlayers.get(3).getHand().toString());
-		System.out.println(listOfPlayers.get(3).getHand().toString());
+		
+		
+	
+		for (Player p: listOfPlayers)
+			
+		{	
+			System.out.println(p.getHand().toString());
+		}
 
 
 	}
