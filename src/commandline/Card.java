@@ -3,14 +3,14 @@ package commandline;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-public class Card implements Comparable<Card>{
+public class Card {
 
 	/**
 	 * the only instance variable
 	 * all the attributes are stored in one array
 	 */
 
-	String [] cardAttributes;
+	private String [] cardAttributes;
 
 
 	/**
@@ -58,15 +58,13 @@ public class Card implements Comparable<Card>{
 	}
 
 	/**
-	 * need to write
+	 * return array 
 	 */
-
-	public int compareTo(Card o) 
-
+	
+	public String [] getCard () 
+	
 	{
-
-		// add code here
-		return 0;
+		return cardAttributes;
 	}
 
 }

@@ -1,5 +1,7 @@
 package commandline;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -9,7 +11,7 @@ import java.util.Scanner;
 /**
  * Top Trumps command line application
  */
-public class TopTrumpsCLIApplication {
+public class TopTrumpsCLIApplication implements ActionListener{
 
 	/**
 	 * class constants
@@ -87,11 +89,9 @@ public class TopTrumpsCLIApplication {
 			String readDeck =" ";
 			if (numberOfGames < 0)
 			{
-
 				// not sure if needed... 
 				System.out.println("Read from a new deck? (Y/N)"); 
 				readDeck = getInput();
-
 			}
 
 			// reads from new deck at first round or if asked
@@ -101,12 +101,11 @@ public class TopTrumpsCLIApplication {
 				readIn();
 			}
 
+
 			// play time! 
 			Game newGame = new Game(newDeck);
 			numberOfGames++;
-			newGame.createPlayers();
-			newDeck.shuffleDeck();
-			newGame.dealCards();
+
 		}
 
 		// if Q or QUIT was entered
@@ -137,7 +136,7 @@ public class TopTrumpsCLIApplication {
 	{
 		Scanner in = new Scanner (System.in);
 		String input = " ";
-		
+
 		input = in.next();
 		return input;
 	}
@@ -189,15 +188,45 @@ public class TopTrumpsCLIApplication {
 		}
 
 	} 
-	
+
 	private static void howManyPlayers() {
-		
+
 		System.out.print("How many opponents would you like? Maximum is 4.");
 		int numberOfPlayers = Integer.parseInt(getInput());
 		newDeck.setNumPlayers(numberOfPlayers);
-		
+
 	}
-	
-	
-	
+
+	public static String getUsername()
+
+	{
+		System.out.println();
+		System.out.println("Please enter your username: ");
+
+		String username = getInput();
+		return username;
+	}
+
+	/**
+	 * need this to be able to close the program at any time
+	 */
+	public void actionPerformed(ActionEvent i) 
+
+	{
+		if (i.getSource().equals(System.in))
+		{
+			String string = getInput();
+			{
+				if (string.charAt(0)=='Q')
+
+				System.out.println ("You exited the program");
+				System.out.println();
+				System.exit(0);
+
+			}
+
+		}
+
+	}
+
 }
