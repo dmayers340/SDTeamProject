@@ -45,7 +45,7 @@
   		<div class="card-block">
     		<h4 class="card-title">Play Game</h4>
     		<p class="card-text">If you would like to play the game select the button below.</p>
-    		<a href="#" class="btn btn-primary">Play Game</a>
+    		<a href="http://localhost:7777/toptrumps/game" class="btn btn-primary">Play Game</a>
   		</div>
 		</div>
 		</div><br /> <br /><br /><br /> <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
@@ -58,7 +58,7 @@
   		<div class="card-block">
     		<center><b><h4 class="card-title">View Statistics</h4></b></center>
     		<p class="card-text">If you would like to view the statistics press the button below.</p>
-    		<a href="#" class="btn btn-primary">View Statistics</a>
+    		<a href="http://localhost:7777/toptrumps/stats" class="btn btn-primary">View Statistics</a>
   		</div>
 		</div></p><br /> <br />
 		</div>

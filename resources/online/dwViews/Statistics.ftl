@@ -23,27 +23,34 @@
     <body onload="initalize()"> <!-- Call the initalize method when the page loads -->
     	
     	<div class="container">
-
+    	<center><h1><b>Past Statistics</b></h1></center>
+    	
 			<!-- Add your HTML Here -->
-			 <div class="container">
-	  		<div class="column">
-	  			<h1><b>Please make a selection</b></h1>
-			<div class="card" style="width: 20rem; height: 100px">
-  			<img class="card-img-top" src="https://img.purch.com/h/1000/aHR0cDovL3d3dy5zcGFjZS5jb20vaW1hZ2VzL2kvMDAwLzA2Ni8yODcvb3JpZ2luYWwveHMtMS1zcGFjZS1wbGFuZS1ib2Vpbmctb3JiaXRhcnQuanBn" alt="Card Image">
-  			<div class="card-block">
-    			<h4 class="card-title">Play Game</h4>
-    			<p class="card-text">
-    			<ul>
+		<div class="card border-dark mb-3" style="max-width: 18rem; height: 35rem;">  		
+		<img class="card-img-top" src="https://img.purch.com/h/1000/aHR0cDovL3d3dy5zcGFjZS5jb20vaW1hZ2VzL2kvMDAwLzA2Ni8yODcvb3JpZ2luYWwveHMtMS1zcGFjZS1wbGFuZS1ib2Vpbmctb3JiaXRhcnQuanBn" alt="Card Image">
+  		<div class="card-block">
+    		<center><h4 class="card-title">Statistics</h4></center>
+    		<p class="card-text">
+    		<ul>
     			<li>Number of games played overall: </li>
+    			<p></p>
+    			<p></p>
     			<li>The computer has won --- times</li>
+    			<p></p>
+    			<p></p>
     			<li>Human has won ---- times</li>
+    			<p></p>
+    			<p></p>
     			<li>Average number of draws: </li>
+    			<p></p>
+    			<p></p>
     			<li>Most amount of rounds played in a game: </li>
     			</ul>
     			</p>
-    			<a href="#" class="btn btn-primary">Play Game</a>
-  			</div>
-			</div>
+    		<center><a href="http://localhost:7777/toptrumps/" class="btn btn-primary">Home</a></center>
+  		</div>
+		</div>	  		
+    			
 		</div>
 		
 		<script type="text/javascript">
