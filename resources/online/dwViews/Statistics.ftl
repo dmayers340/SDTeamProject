@@ -30,8 +30,11 @@
 			}
 			
 		body{
-			background-image: url("https://i.kinja-img.com/gawker-media/image/upload/t_original/othklnrkmmln2e8vv3ug.jpg");	
+			background-image: url("http://kb4images.com/images/pictures-of-outer-space/37759075-pictures-of-outer-space.jpg");	
 			}
+		h1{
+			color: White
+		}
 		background-image{
 						opacity: 0.5;
 						}
