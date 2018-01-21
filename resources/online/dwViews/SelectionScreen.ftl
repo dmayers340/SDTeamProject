@@ -19,8 +19,26 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
 	</head>
-
+	
+	<style>
+		.nav{
+			 	padding-left:10px;
+  				padding-right:10px;
+  				margin-left:0px;
+  				margin-right:0px;
+  				margin-bottom:20px;
+			}
+			
+		body{
+			background-image: url("https://i.kinja-img.com/gawker-media/image/upload/t_original/othklnrkmmln2e8vv3ug.jpg");	
+			}
+		background-image{
+						opacity: 0.5;
+						}
+	</style
+	
     <body onload="initalize()"> <!-- Call the initalize method when the page loads -->
+    	<div class = "nav">
     	<nav class="navbar navbar-inverse navbar-fixed-top">
 	      	<div class="container">
 	        	<div class="navbar-header">
@@ -30,12 +48,13 @@
 			            <span class="icon-bar"></span>
 			            <span class="icon-bar"></span>
 	          		</button>
-	          	<a class="navbar-brand" href="#">Top Trumps</a>
+	          	<a class="navbar-brand" href="http://localhost:7777/toptrumps/">Top Trumps</a>
 	        </div>
 	        <div id="navbar" class="collapse navbar-collapse">
 	       </div><!--/.nav-collapse -->
 	      </div>
 	    </nav>
+	  </div>
 	  
 	  <div class="container">
 	  <div class="column">
