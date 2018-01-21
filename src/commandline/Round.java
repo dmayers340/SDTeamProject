@@ -30,6 +30,10 @@ public class Round {
 		currentDeck = cd;
 	}
 
+	
+	public int getRoundCount() {
+		return roundCount;
+	}
 
 	/**
 	 * game sequence
@@ -52,6 +56,7 @@ public class Round {
 
 		}
 
+		String topCard = players.get(0).getTopCard().toString();
 		chooseCategory();
 		compareCards();
 		addRound();
@@ -71,7 +76,7 @@ public class Round {
 			// hurts my eyes
 			}
 		}
-
+ 
 	}
 
 

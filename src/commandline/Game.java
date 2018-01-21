@@ -75,6 +75,7 @@ public class Game {
 			System.out.println("Starting a new round...");
 
 			newRound = new Round(listOfPlayers, activePlayer, currentDeck);
+			logCardsInPlay(); //prints each player's top card to log
 
 			newRound.playRound();
 
@@ -251,46 +252,6 @@ public class Game {
 
 
 
-	private void logPlayerCards(ArrayList<Card>eachPlayersCards, String pName) {
-		
-		PrintWriter printer = null;
-
-		try {
-			try {
-				FileWriter fw = new FileWriter(logFile, true);
-				BufferedWriter bw = new BufferedWriter(fw);
-				printer = new PrintWriter(bw);
-
-			{ 
-				printer.println(pName + "'s cards");
-				printer.println("");
-				printer.println(eachPlayersCards.toString()); 
-				printer.println("");
-			}
-
-
-			}
-			finally {
-
-				if (printer != null) {
-					printer.close();
-				}
-			} 	
-		}
-		catch (IOException ioe) {
-			JOptionPane.showMessageDialog(null, "File not found",
-					"Error", JOptionPane.ERROR_MESSAGE);
-		}
-		
-	}
-
-	private int pickRandomPlayer() { //returns random index number
-
-		int randomIndex = (int)Math.floor(Math.random() * numberOfPlayers);
-		return randomIndex;
-	}
-
-
 	private void logShuffledDeck()	{ //for printing to output log
 
 	PrintWriter printer = null;
@@ -327,5 +288,97 @@ public class Game {
 	}				
 
 }
+
+	private void logPlayerCards(ArrayList<Card>eachPlayersCards, String pName) {
+		
+		PrintWriter printer = null;
+
+		try {
+			try {
+				FileWriter fw = new FileWriter(logFile, true);
+				BufferedWriter bw = new BufferedWriter(fw);
+				printer = new PrintWriter(bw);
+
+			{ 
+				printer.println(pName + "'s cards");
+				printer.println("");
+				printer.println(eachPlayersCards.toString()); 
+				printer.println("");
+			}
+			
+			String logSeparator = "-------------------------------------------------------------"+
+			"-------------------------";
+			printer.println(logSeparator);
+			
+			}
+			
+			finally {
+
+				if (printer != null) {
+					printer.close();
+				}
+			} 	
+		}
+		catch (IOException ioe) {
+			JOptionPane.showMessageDialog(null, "File not found",
+					"Error", JOptionPane.ERROR_MESSAGE);
+		}
+		
+	}
+	
+	private void logCardsInPlay() {
+		
+		PrintWriter printer = null;
+
+		try {
+			try {
+				FileWriter fw = new FileWriter(logFile, true);
+				BufferedWriter bw = new BufferedWriter(fw);
+				printer = new PrintWriter(bw);
+				String logSeparator = "-----------------------------------------------------"+
+						"-------------------------";
+				printer.println("Round " + newRound.getRoundCount() + ". " + "Cards in play:-");
+				printer.println(" ");
+				
+
+				{
+				for (Player p: listOfPlayers) {
+					
+					
+					printer.print(p.getName() + ":" + " ");
+					printer.println(p.getTopCard().toString());
+					
+				}
+				
+				
+				printer.println(logSeparator);
+			}
+
+
+			}
+			finally {
+
+				if (printer != null) {
+					printer.close();
+				}
+			} 	
+		}
+		catch (IOException ioe) {
+			JOptionPane.showMessageDialog(null, "File not found",
+					"Error", JOptionPane.ERROR_MESSAGE);
+		}
+		
+		
+		
+	}
+	
+	
+
+	private int pickRandomPlayer() { //returns random index number
+
+		int randomIndex = (int)Math.floor(Math.random() * numberOfPlayers);
+		return randomIndex;
+	}
+
 }
 
