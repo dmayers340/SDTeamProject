@@ -19,8 +19,44 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
 	</head>
-
+	
+	<!-- Haven't been able to get CSS or a BASE HTML properly referenced. HOW to do this so we don't repeat so much? --> 
+	<style>
+		.nav{
+			 	padding-left:10px;
+  				padding-right:10px;
+  				margin-left:0px;
+  				margin-right:0px;
+  				margin-bottom:20px;
+			}
+			
+		body{
+			background-image: url("http://kb4images.com/images/pictures-of-outer-space/37759075-pictures-of-outer-space.jpg");	
+			
+			}
+		h1{
+			color: White
+			}
+		background-image{
+						opacity: 0.5;
+						}
+		.column2{
+		position:absolute;
+		right: 0px;
+		margin-left:150px;
+		margin-right:150px;
+		
+		}
+		.column{
+		position:absolute;
+		left: 0px;
+		margin-left:150px;
+		margin-right:150px;
+		}
+	</style
+	
     <body onload="initalize()"> <!-- Call the initalize method when the page loads -->
+    	<div class = "nav">
     	<nav class="navbar navbar-inverse navbar-fixed-top">
 	      	<div class="container">
 	        	<div class="navbar-header">
@@ -30,37 +66,42 @@
 			            <span class="icon-bar"></span>
 			            <span class="icon-bar"></span>
 	          		</button>
-	          	<a class="navbar-brand" href="#">Top Trumps</a>
+	          	<a class="navbar-brand" href="http://localhost:7777/toptrumps/">Top Trumps</a>
+	          	<ul>
+	          		<li class="nav-item">
+              			<a class="nav-link" href="http://localhost:7777/toptrumps/stats">Statistics</a>
+            		</li>
+	          			
 	        </div>
 	        <div id="navbar" class="collapse navbar-collapse">
 	       </div><!--/.nav-collapse -->
 	      </div>
 	    </nav>
+	  </div>
 	  
 	  <div class="container">
+	  	  <center><h1><b>Please make a selection</b></h1></center>
+
 	  <div class="column">
-	  <h1><b>Please make a selection</b></h1>
 		<div class="card border-dark mb-3" style="max-width: 18rem; height: 50rem;">  		
 		<img class="card-img-top" src="https://img.purch.com/h/1000/aHR0cDovL3d3dy5zcGFjZS5jb20vaW1hZ2VzL2kvMDAwLzA2Ni8yODcvb3JpZ2luYWwveHMtMS1zcGFjZS1wbGFuZS1ib2Vpbmctb3JiaXRhcnQuanBn" alt="Card Image">
   		<div class="card-block">
     		<h4 class="card-title">Play Game</h4>
     		<p class="card-text">If you would like to play the game select the button below.</p>
-    		<a href="#" class="btn btn-primary">Play Game</a>
+    		<a href="http://localhost:7777/toptrumps/game" class="btn btn-primary">Play Game</a>
   		</div>
 		</div>
-		</div><br /> <br /><br /><br /> <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-	
- 
+		</div>
 
-		<div class="column">
+		<div class="column2">
 		<div class="card border-dark mb-3" style="max-width: 18rem; height: 50rem;"> 
   		<img class="card-img-top" src="https://cdn.spacetelescope.org/archives/images/wallpaper2/heic1509a.jpg" alt="Card image">
   		<div class="card-block">
     		<center><b><h4 class="card-title">View Statistics</h4></b></center>
     		<p class="card-text">If you would like to view the statistics press the button below.</p>
-    		<a href="#" class="btn btn-primary">View Statistics</a>
+    		<a href="http://localhost:7777/toptrumps/stats" class="btn btn-primary">View Statistics</a>
   		</div>
-		</div></p><br /> <br />
+		</div>
 		</div>
     	
 			<!-- Add your HTML Here -->

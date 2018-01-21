@@ -2,11 +2,16 @@ package commandline;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import javax.swing.JOptionPane;
 
 /**
  * Top Trumps command line application
@@ -105,6 +110,7 @@ public class TopTrumpsCLIApplication implements ActionListener{
 			// play time! 
 			Game newGame = new Game(newDeck);
 			numberOfGames++;
+			
 
 		}
 
@@ -189,7 +195,7 @@ public class TopTrumpsCLIApplication implements ActionListener{
 
 	} 
 
-	public static int howManyPlayers() {
+	public static int howManyPlayers() { //add validation of input
 
 		System.out.print("How many opponents would you like? Maximum is 4.");
 		int numberOfPlayers = Integer.parseInt(getInput());
@@ -226,9 +232,53 @@ public class TopTrumpsCLIApplication implements ActionListener{
 				System.exit(0);
 
 			}
-
 		}
-
 	}
-
 }
+	
+
+
+
+//	public static void logShuffledDeck()	{
+//
+//
+//
+//		PrintWriter printer = null;
+//		try {
+//			try {
+//				FileWriter fw = new FileWriter("logFile", true);
+//				BufferedWriter bw = new BufferedWriter(fw);
+//				printer = new PrintWriter(bw);
+//
+//				{
+//					String shuffledDeck = game.getCurrentDeck().dString();
+//					printer.println(shuffledDeck); //deck before shuffled
+//				}
+//
+//
+//			}
+//			finally {
+//
+//				if (printer != null) {
+//					printer.close();
+//				}
+//			} 	
+//		}
+//		catch (IOException ioe) {
+//			JOptionPane.showMessageDialog(null, "File not found",
+//					"Error", JOptionPane.ERROR_MESSAGE);
+//
+//		}				
+//	
+//	
+//	}
+//}
+	
+	
+
+
+
+
+
+
+

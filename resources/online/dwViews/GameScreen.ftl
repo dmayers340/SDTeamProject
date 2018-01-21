@@ -1,4 +1,5 @@
-<html>
+
+	<html>
 
 	<head>
 		<!-- Web page title -->
@@ -17,16 +18,90 @@
     	<link rel="stylesheet" href="http://dcs.gla.ac.uk/~richardm/assets/stylesheets/vex-theme-os.css"/>
     	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-
-	</head>
-
+	
+	<style>
+		.nav{
+			 	padding-left:10px;
+  				padding-right:10px;
+  				margin-left:0px;
+  				margin-right:0px;
+  				margin-bottom:20px;
+			}
+			
+		body{
+			background-image: url("https://i.kinja-img.com/gawker-media/image/upload/t_original/othklnrkmmln2e8vv3ug.jpg");	
+			}
+		background-image{
+						opacity: 0.5;
+						}
+	</style
+	
     <body onload="initalize()"> <!-- Call the initalize method when the page loads -->
-    	
-    	<div class="container">
+    	<div class = "nav">
+    	<nav class="navbar navbar-inverse navbar-fixed-top">
+	      	<div class="container">
+	        	<div class="navbar-header">
+	          		<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+			            <span class="sr-only">Toggle navigation</span>
+			            <span class="icon-bar"></span>
+			            <span class="icon-bar"></span>
+			            <span class="icon-bar"></span>
+	          		</button>
+	          	<a class="navbar-brand" href="http://localhost:7777/toptrumps/">Top Trumps</a>
+	        </div>
+	        <div id="navbar" class="collapse navbar-collapse">
+	       </div><!--/.nav-collapse -->
+	      </div>
+	    </nav>
+	  </div>
+	  	<div class="container">
+  							<div class="main">
+  								<img src="http://www.hearthstonetopdecks.com/wp-content/uploads/2014/06/card-back-gold-open-202x300.png";  style="width:140px; height:250px; position:absolute; left:300px; top:200px; ">
+                               
+                                <div style="left: 150px; position: absolute; top: 200px;"> <font size=12px; font  face="Impact"; color="White">Player</font></div>
+                                <div style="left: 70px; position: absolute; top: 280px;"> <font size=5px; font  face="Arial" ; color="White">Card in Hands: </font></div>
+                                <div style="left: 70px; position: absolute; top: 360px;"> <font size=5px; font  face="Arial" ; color="White">Round wins: </font></div>
+                            </div>
+                            
+                            <div class="main1">
+                           <img src="http://www.hearthstonetopdecks.com/wp-content/uploads/2014/06/card-back-gold-open-202x300.png"; style="width:140px; height:250px;  position:absolute;left:800px; top:200px; ">
+                            	
+                                <div style="left: 700px; position: absolute; top: 200px;"> <font size="16";font  face="Impact" color="White">AI1</font></div>
+                                <div style="left: 560px; position: absolute; top: 280px;"> <font size=5px; font  face="Arial" ; color="White">Card in Hands: </font></div>
+								<div style="left: 560px; position: absolute; top: 350px;"> <font size=5px; font  face="Arial" ; color="White">Round wins: </font></div>
+                            </div>
+                            
+                           <div class="main2">
+                            <img src="http://www.hearthstonetopdecks.com/wp-content/uploads/2014/06/card-back-gold-open-202x300.png"; style="width:140px; height:250px; position:absolute; left:1300px; top:200px; ">
+                            
+                                <div style="left: 1200px; position: absolute; top: 200px;"> <font size="16";font  face="Impact" color="Black">AI2</font></div>
+								<div style="left: 1080px; position: absolute; top: 280px;"> <font size=5px; font  face="Arial" ; color="Black">Card in Hands: </font></div>
+								<div style="left: 1080px; position: absolute; top: 350px;"> <font size=5px; font  face="Arial" ; color="Black">Round wins: </font></div>
+                            </div>
+                            
+                            <div class="main3">
+                             <img src="http://www.hearthstonetopdecks.com/wp-content/uploads/2014/06/card-back-gold-open-202x300.png"; style="width:140px; height:250px; position:absolute; left:800px; top:500px; ">
+                            <div style="left: 700px; position: absolute; top: 500px;"> <font size="16";font  face="Impact" color="White">AI3</font></div>
+                            <div style="left: 560px; position: absolute; top: 580px;"> <font size=5px; font  face="Arial" ; color="White">Card in Hands: </font></div>
+								<div style="left: 560px; position: absolute; top: 650px;"> <font size=5px; font  face="Arial" ; color="White">Round wins: </font></div>
+                            </div>
+                            
+                            <div class="main4">
+                  			 <img src="http://www.hearthstonetopdecks.com/wp-content/uploads/2014/06/card-back-gold-open-202x300.png"; style="width:140px; height:250px; position:absolute; left:1300px; top:500px; ">
+                               <div style="left: 1200px; position: absolute; top: 500px;"> <font size="16";font  face="Impact" color="White">AI4</font></div>
+                            <div style="left: 1080px; position: absolute; top: 580px;"> <font size=5px; font  face="Arial" ; color="White">Card in Hands: </font></div>
+								<div style="left: 1080px; position: absolute; top: 650px;"> <font size=5px; font  face="Arial" ; color="White">Round wins: </font></div>
+                            </div>
+                            
+                            <div class="button">
+                            
+                            <div style="left: 120px; position: absolute; top: 510px"><a href="http://localhost:7777/toptrumps/"><button style="width:200px;height:60px;background-color:LightGreen ;color:Indigo  ">Start a new game</button></a></div>
+                            <div style="left: 120px; position: absolute; top: 610px"><a href="http://localhost:7777/toptrumps/stats"><button style="width:200px;height:60px;background-color:LightGreen ;color:Indigo   ">View statistic</button></a></div>
+                   
+						</div>
 
-			<!-- Add your HTML Here -->
-		
-		</div>
+
+
 		
 		<script type="text/javascript">
 		

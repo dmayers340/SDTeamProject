@@ -1,7 +1,13 @@
 package commandline;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import javax.swing.JOptionPane;
 
 public class Game {
 
@@ -18,6 +24,7 @@ public class Game {
 	private int remainingPlayers;
 	private int activePlayerIndex;
 	private Player activePlayer;
+	private final String logFile = "/Users/Lauren/MScSoftwareDev/toptrumps.log";
 
 
 	/**
@@ -27,9 +34,10 @@ public class Game {
 	 */
 
 	public Game (Deck d)
-	{
+	{	
 		d.shuffleDeck();
 		currentDeck = d;
+		logShuffledDeck(); //prints shuffled deck to log file
 		
 		int p = TopTrumpsCLIApplication.howManyPlayers();
 		numberOfPlayers = p;
@@ -67,6 +75,7 @@ public class Game {
 			System.out.println("Starting a new round...");
 
 			newRound = new Round(listOfPlayers, activePlayer, currentDeck);
+			logCardsInPlay(); //prints each player's top card to log
 
 			newRound.playRound();
 
@@ -77,6 +86,10 @@ public class Game {
 
 	}
 
+	public Deck getCurrentDeck()
+	{
+		return currentDeck;
+	}
 
 	/**
 	 * removes players with no cards
@@ -213,6 +226,8 @@ public class Game {
 
 			System.out.println("Dealing once");
 			ArrayList<Card> cardsForEachPlayer = new ArrayList<Card>(currentDeck.getDeck().subList(0, numCardsEach));
+			String playerName = listOfPlayers.get(i).getName();
+			logPlayerCards(cardsForEachPlayer, playerName);
 			listOfPlayers.get(i).receiveCards(cardsForEachPlayer);
 			currentDeck.getDeck().removeAll(cardsForEachPlayer);
 
@@ -236,10 +251,134 @@ public class Game {
 	}
 
 
+
+	private void logShuffledDeck()	{ //for printing to output log
+
+	PrintWriter printer = null;
+
+	try {
+		try {
+			FileWriter fw = new FileWriter(logFile, true);
+			BufferedWriter bw = new BufferedWriter(fw);
+			printer = new PrintWriter(bw);
+
+		{
+			String logSeparator = "----------------------------------------------------------------"+
+					"-------------------------";
+			String shuffledDeck = currentDeck.dString();
+			printer.println(logSeparator);
+			printer.println("Shuffled deck\n");
+			printer.println(shuffledDeck);
+			printer.println(logSeparator);
+		}
+
+
+		}
+		finally {
+
+			if (printer != null) {
+				printer.close();
+			}
+		} 	
+	}
+	catch (IOException ioe) {
+		JOptionPane.showMessageDialog(null, "File not found",
+				"Error", JOptionPane.ERROR_MESSAGE);
+
+	}				
+
+}
+
+	private void logPlayerCards(ArrayList<Card>eachPlayersCards, String pName) {
+		
+		PrintWriter printer = null;
+
+		try {
+			try {
+				FileWriter fw = new FileWriter(logFile, true);
+				BufferedWriter bw = new BufferedWriter(fw);
+				printer = new PrintWriter(bw);
+
+			{ 
+				printer.println(pName + "'s cards");
+				printer.println("");
+				printer.println(eachPlayersCards.toString()); 
+				printer.println("");
+			}
+			
+			String logSeparator = "-------------------------------------------------------------"+
+			"-------------------------";
+			printer.println(logSeparator);
+			
+			}
+			
+			finally {
+
+				if (printer != null) {
+					printer.close();
+				}
+			} 	
+		}
+		catch (IOException ioe) {
+			JOptionPane.showMessageDialog(null, "File not found",
+					"Error", JOptionPane.ERROR_MESSAGE);
+		}
+		
+	}
+	
+	private void logCardsInPlay() {
+		
+		PrintWriter printer = null;
+
+		try {
+			try {
+				FileWriter fw = new FileWriter(logFile, true);
+				BufferedWriter bw = new BufferedWriter(fw);
+				printer = new PrintWriter(bw);
+				String logSeparator = "-----------------------------------------------------"+
+						"-------------------------";
+				printer.println("Round " + newRound.getRoundCount() + ". " + "Cards in play:-");
+				printer.println(" ");
+				
+
+				{
+				for (Player p: listOfPlayers) {
+					
+					
+					printer.print(p.getName() + ":" + " ");
+					printer.println(p.getTopCard().toString());
+					
+				}
+				
+				
+				printer.println(logSeparator);
+			}
+
+
+			}
+			finally {
+
+				if (printer != null) {
+					printer.close();
+				}
+			} 	
+		}
+		catch (IOException ioe) {
+			JOptionPane.showMessageDialog(null, "File not found",
+					"Error", JOptionPane.ERROR_MESSAGE);
+		}
+		
+		
+		
+	}
+	
+	
+
 	private int pickRandomPlayer() { //returns random index number
 
 		int randomIndex = (int)Math.floor(Math.random() * numberOfPlayers);
 		return randomIndex;
 	}
+
 }
 
