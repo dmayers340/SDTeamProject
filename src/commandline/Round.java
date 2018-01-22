@@ -13,7 +13,7 @@ public class Round {
 	private ArrayList<Player> players;
 
 	private int currentCategory;
-	private ArrayList<Card> communalPile; 
+	private ArrayList<Card> communalPile = new ArrayList<Card>();
 
 	private static int roundCount = 1;
 	private static Deck currentDeck;
@@ -21,7 +21,7 @@ public class Round {
 
 
 	/**
-	 * * constructor method 
+	 * constructor method 
 	 */
 
 	public Round (ArrayList <Player> p, Player ap, Deck cd)
@@ -32,10 +32,6 @@ public class Round {
 		currentDeck = cd;
 	}
 
-	
-	public int getRoundCount() {
-		return roundCount;
-	}
 
 	/**
 	 * game sequence
@@ -47,7 +43,6 @@ public class Round {
 		if (players.get(0).isHuman())
 
 		{
-
 			System.out.println("Your card details are printed below:");
 			System.out.println();
 
@@ -55,29 +50,40 @@ public class Round {
 			System.out.println(currentDeck.cString());
 			System.out.println(players.get(0).getTopCard().toString());
 			System.out.println();
-
 		}
 
 		chooseCategory();
 		compareCards();
+		distributeCards();
 		addRound();
 
-		// winner gets cards
+	}
+
+
+	/**
+	 * winner receives cards 
+	 */
+
+	private void distributeCards() 
+
+	{
+		// winner receives cards from other players
 		for (int i = 0; i<players.size()-1; i++)
 		{
-			
 			if (players.get(i)!=winner)
-				
 			{
-			
-			// winner receives cards 
-			winner.receiveCard(players.get(i).getTopCard());
-			players.get(i).removeCard();
-	
-			// hurts my eyes
+				winner.receiveCard(players.get(i).getTopCard());
+				players.get(i).removeCard();
 			}
+		}	
+
+		// from communal pile (if not empty)
+		if (communalPile.size()>0)
+
+		{
+			winner.receiveCards(communalPile);
 		}
- 
+
 	}
 
 
@@ -88,57 +94,43 @@ public class Round {
 	private void compareCards()
 
 	{
-
-		int i;
-		int w = 0; // winning player
-		int t = 0; // temp value
+		int i; // temp index
+		int j = 0; // winner's index
+		int w = 0; // top score
+		int t = 0; // temp score
 
 		for (i = 0; i<players.size()-1; i++)
 
 		{
-			System.out.println("The index of player: " + i); System.out.println();
 			// takes an attribute and compares it with temp
-			// hurts my brain
-
 			String playerName = (players.get(i).getName());
-			System.out.println ("player in this position" + playerName);
-
-			String isActiveOrNot = "";
-			if (players.get(i).hasCards())
-
-			{
-				isActiveOrNot = ("Player has cards");
-			}
-
-			if (!players.get(i).hasCards())
-
-			{
-				isActiveOrNot = ("Player has NO cards");
-			}
-
-			System.out.println ("Does the player have cards? " + isActiveOrNot);
-
-			int hSize = players.get(i).getHand().size();
-			String handSize = ("the player's hand size is " + hSize);
-			System.out.println(handSize);
-
-			String topCard = (players.get(i).getHand().get(0).toString());
+			String topCard = (players.get(i).getTopCard().toString());
 			System.out.println("player's uppermost card is: " + topCard);
 
 			t = Integer.valueOf(players.get(i).getTopCard().getAttribute(currentCategory));
 
-
 			if (t>w)
-				w=t;
+
+			{	
+				w = t; // stores top score
+				j = i; // stores index 
+			}
 
 			System.out.println("Loop finished");
 		}
 
 		if (t==w)
+		{ 
 			draw();
+			winner.receiveCards(communalPile);
+			System.out.println("The winner received cards from the communal pile;");
+			communalPile.removeAll(communalPile);
+			System.out.println("Deleting communal pile... ");
+			System.out.println("The draw has ended");
+		}
 
 		else 
-			winner = players.get(i);
+			winner = players.get(j);
 
 	}
 
@@ -150,31 +142,27 @@ public class Round {
 	private void draw() 
 
 	{
-		
 		System.out.println("It's a draw!");
-		
+
 		// all cards go into the communal pile (add top card)
-		
+
 		for (int i = 0; i < players.size(); i++)
-			
+
 		{
 			// adds all top cards to the communal pile
-			System.out.println(players.get(i).toString() + " = player");
-			System.out.println(players.get(i).getTopCard().toString() + " = card");
+			// System.out.println(players.get(i).toString() + " = player");
+			// System.out.println(players.get(i).getTopCard().toString() + " = card");
 			communalPile.add(players.get(i).getTopCard());
-			players.get(i).removeCard();
+
 		}
-		
-		System.out.println("There currently " + communalPile.size() + " cards in the communal pile");
+
+		System.out.println("There are currently " + communalPile.size() + " cards in the communal pile");
 		System.out.println();
-		
+
 		chooseCategory();
 		compareCards();
-		
-		// winner receives all cards in the communal pile
-		winner.receiveCards(communalPile);
-		
 
+		// winner receives all cards in the communal pile
 	}
 
 
@@ -196,7 +184,7 @@ public class Round {
 			Scanner in = new Scanner (System.in);
 			String category;
 
-			System.out.print("You selected:");
+			System.out.print("You selected: ");
 			category = in.next();
 
 			// update variable
@@ -277,7 +265,15 @@ public class Round {
 
 		return winner;
 	}
+	
+	/**
+	 * accessor method
+	 * @return int
+	 */
 
+	public int getRoundCount() {
+		return roundCount;
+	}
 
 	/**
 	 * round counter

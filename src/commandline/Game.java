@@ -20,7 +20,6 @@ public class Game {
 	private Round newRound;
 
 	private ArrayList <Player> listOfPlayers;
-	private ArrayList <Card> communalPile; 
 	private int remainingPlayers;
 	private int activePlayerIndex;
 	private Player activePlayer;
@@ -96,7 +95,6 @@ public class Game {
 	/**
 	 * removes players with no cards
 	 */
-	
 
 	private void updatePlayers()
 
@@ -165,7 +163,7 @@ public class Game {
 		}
 
 		// if the current active player is on top of the array 
-		else if (activePlayerIndex >= (listOfPlayers.size()))
+		else if (activePlayerIndex >= (listOfPlayers.size())-1)
 		{
 			activePlayerIndex = 0;
 		}
