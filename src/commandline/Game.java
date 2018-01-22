@@ -35,12 +35,14 @@ public class Game {
 
 	public Game (Deck d)
 	{	
+		
+		
 		d.shuffleDeck();
 		currentDeck = d;
 		logShuffledDeck(); //prints shuffled deck to log file
 		
 		int p = TopTrumpsCLIApplication.howManyPlayers();
-		numberOfPlayers = p;
+		numberOfPlayers = p+1;
 		
 		// each game starts with all players active
 		remainingPlayers = numberOfPlayers;
@@ -194,7 +196,7 @@ public class Game {
 
 	public void createPlayers() {
 
-		//		numberOfPlayers = currentDeck.getNumPlayers(); //commented out while testing
+		// numberOfPlayers = currentDeck.getNumPlayers(); 
 		listOfPlayers = new ArrayList<Player>(numberOfPlayers);
 
 		int i = 0;

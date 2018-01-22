@@ -13,10 +13,12 @@ public class Round {
 	private ArrayList<Player> players;
 
 	private int currentCategory;
+	private ArrayList<Card> communalPile; 
 
 	private static int roundCount = 1;
 	private static Deck currentDeck;
 	private static Player winner;
+
 
 	/**
 	 * * constructor method 
@@ -56,7 +58,6 @@ public class Round {
 
 		}
 
-		String topCard = players.get(0).getTopCard().toString();
 		chooseCategory();
 		compareCards();
 		addRound();
@@ -149,12 +150,31 @@ public class Round {
 	private void draw() 
 
 	{
-		chooseCategory();
-
+		
 		System.out.println("It's a draw!");
-		System.out.println("This method is not going to write itself.");
+		
+		// all cards go into the communal pile (add top card)
+		
+		for (int i = 0; i < players.size(); i++)
+			
+		{
+			// adds all top cards to the communal pile
+			System.out.println(players.get(i).toString() + " = player");
+			System.out.println(players.get(i).getTopCard().toString() + " = card");
+			communalPile.add(players.get(i).getTopCard());
+			players.get(i).removeCard();
+		}
+		
+		System.out.println("There currently " + communalPile.size() + " cards in the communal pile");
+		System.out.println();
+		
+		chooseCategory();
+		compareCards();
+		
+		// winner receives all cards in the communal pile
+		winner.receiveCards(communalPile);
+		
 
-		winner = activePlayer;
 	}
 
 
