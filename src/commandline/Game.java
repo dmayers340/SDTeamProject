@@ -24,7 +24,7 @@ public class Game {
 	private int remainingPlayers;
 	private int activePlayerIndex;
 	private Player activePlayer;
-	private final String logFile = "/Users/Lauren/MScSoftwareDev/toptrumps.log";
+	private final String logFile = "toptrumps.log";
 
 
 	/**
