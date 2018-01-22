@@ -194,7 +194,7 @@ public class Game {
 
 	public void createPlayers() {
 
-		//		numberOfPlayers = currentDeck.getNumPlayers(); //commented out while testing
+		// numberOfPlayers = currentDeck.getNumPlayers(); 
 		listOfPlayers = new ArrayList<Player>(numberOfPlayers);
 
 		int i = 0;
