@@ -34,11 +34,12 @@ public class Game {
 	 */
 
 	public Game (Deck d)
-	{	
-		logDeck(d);
+	{	boolean deckOutputToLog = false;
+		logDeck(d,deckOutputToLog);
 		d.shuffleDeck();
+		deckOutputToLog = true;
 		currentDeck = d;
-		logDeck(currentDeck); //prints shuffled deck to log file
+		logDeck(currentDeck, deckOutputToLog); //prints shuffled deck to log file
 		
 		int p = TopTrumpsCLIApplication.howManyPlayers();
 		numberOfPlayers = p+1;
@@ -253,37 +254,51 @@ public class Game {
 
 
 
-	private void logDeck(Deck d)	{ //for printing to output log
+	private void logDeck(Deck d, boolean deckOutput)	{ //for printing to output log
 
-	PrintWriter printer = null;
+		PrintWriter printer = null;
 
-	try {
 		try {
-			FileWriter fw = new FileWriter(logFile, true);
-			BufferedWriter bw = new BufferedWriter(fw);
-			printer = new PrintWriter(bw);
+			try {
+				FileWriter fw = new FileWriter(logFile, true);
+				BufferedWriter bw = new BufferedWriter(fw);
+				printer = new PrintWriter(bw);
+				String deck = "";
+				String deckDescriptor = "";
+				String logSeparator = "----------------------------------------------------------------"+
+						"-------------------------";
+				{
 
-		{
-			String logSeparator = "----------------------------------------------------------------"+
-					"-------------------------";
-			String deck = d.dString();
-			printer.println(logSeparator);
-			printer.println("Deck\n");
-			printer.println(deck);
-			printer.println(logSeparator);
-		}
+					if (deckOutput == true) {
+						deck = currentDeck.dString();
+						deckDescriptor = "Shuffled deck\n";
+
+					}
+
+					else {
+						fw = new FileWriter(logFile, false); //overwrite log contents if new game
+						deck = d.dString();
+						deckDescriptor = "Deck as read from file\n";
+					}
 
 
-		}
-		finally {
+					printer.println(logSeparator);	
+					printer.println(deckDescriptor);
+					printer.println(deck);
+					printer.println(logSeparator);
+				}
 
-			if (printer != null) {
-				printer.close();
+
 			}
-		} 	
-	}
-	catch (IOException ioe) {
-		JOptionPane.showMessageDialog(null, "File not found",
+			finally {
+
+				if (printer != null) {
+					printer.close();
+				}
+			} 	
+		}
+		catch (IOException ioe) {
+			JOptionPane.showMessageDialog(null, "File not found",
 				"Error", JOptionPane.ERROR_MESSAGE);
 
 	}				
