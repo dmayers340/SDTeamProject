@@ -32,12 +32,29 @@
 		body{
 			background-image: url("http://kb4images.com/images/pictures-of-outer-space/37759075-pictures-of-outer-space.jpg");	
 			}
+			
 		h1{
 			color: White
 		}
+		
 		background-image{
 						opacity: 0.5;
 						}
+		.column3{
+			 position: absolute;
+        	top: 63%;
+        	left: 50%;
+        	margin-right: -50%;
+       		transform: translate(-50%, -50%)
+			}
+			
+		.left{
+		position: left;
+		}
+		
+		.right{
+			position: right;
+			}
 	</style
 	
     <body onload="initalize()"> <!-- Call the initalize method when the page loads -->
@@ -63,32 +80,34 @@
     	<center><h1><b>Past Statistics</b></h1></center>
     	
 			<!-- Add your HTML Here -->
-		<div class="card border-dark mb-3" style="max-width: 18rem; height: 35rem;">  		
-		<img class="card-img-top" src="https://img.purch.com/h/1000/aHR0cDovL3d3dy5zcGFjZS5jb20vaW1hZ2VzL2kvMDAwLzA2Ni8yODcvb3JpZ2luYWwveHMtMS1zcGFjZS1wbGFuZS1ib2Vpbmctb3JiaXRhcnQuanBn" alt="Card Image">
+		<div class="column3">
+		<div class="card border-dark mb-3" style="max-width: 18rem; height: 42rem;">  		
+		<img class="card-img-top" src="https://i.kinja-img.com/gawker-media/image/upload/t_original/othklnrkmmln2e8vv3ug.jpg" alt="Card Image">
+  		<br />
   		<div class="card-block">
-    		<center><h4 class="card-title">Statistics</h4></center>
+    		<center><h4><b>Statistics</b></h4>
+    		<br />
     		<p class="card-text">
     		<ul>
-    			<li>Number of games played overall: </li>
-    			<p></p>
-    			<p></p>
-    			<li>The computer has won --- times</li>
-    			<p></p>
-    			<p></p>
-    			<li>Human has won ---- times</li>
-    			<p></p>
-    			<p></p>
-    			<li>Average number of draws: </li>
-    			<p></p>
-    			<p></p>
+    			<li>Number of games played overall: </li><br /><br />
+    			
+
+    			<li>The computer has won --- times</li><br /><br />
+    			
+
+    			<li>Human has won ---- times</li><br /><br />
+    			
+    			<li>Average number of draws: </li><br /><br />
+    			
     			<li>Most amount of rounds played in a game: </li>
     			</ul>
     			</p>
-    		<center><a href="http://localhost:7777/toptrumps/" class="btn btn-primary">Home</a></center>
+    	
+    		<a href="http://localhost:7777/toptrumps/game" class="btn btn-primary">Play Game</a></center>
   		</div>
-		</div>	  		
-    			
 		</div>
+		</div>
+		
 		
 		<script type="text/javascript">
 		

@@ -29,7 +29,7 @@
 			}
 			
 		body{
-			background-image: url("https://i.kinja-img.com/gawker-media/image/upload/t_original/othklnrkmmln2e8vv3ug.jpg");	
+		background-image: url("http://kb4images.com/images/pictures-of-outer-space/37759075-pictures-of-outer-space.jpg")
 			}
 		background-image{
 						opacity: 0.5;
@@ -74,9 +74,9 @@
                            <div class="main2">
                             <img src="http://www.hearthstonetopdecks.com/wp-content/uploads/2014/06/card-back-gold-open-202x300.png"; style="width:140px; height:250px; position:absolute; left:1300px; top:200px; ">
                             
-                                <div style="left: 1200px; position: absolute; top: 200px;"> <font size="16";font  face="Impact" color="Black">AI2</font></div>
-								<div style="left: 1080px; position: absolute; top: 280px;"> <font size=5px; font  face="Arial" ; color="Black">Card in Hands: </font></div>
-								<div style="left: 1080px; position: absolute; top: 350px;"> <font size=5px; font  face="Arial" ; color="Black">Round wins: </font></div>
+                                <div style="left: 1200px; position: absolute; top: 200px;"> <font size="16";font  face="Impact" color="White">AI2</font></div>
+								<div style="left: 1080px; position: absolute; top: 280px;"> <font size=5px; font  face="Arial" ; color="White">Card in Hands: </font></div>
+								<div style="left: 1080px; position: absolute; top: 350px;"> <font size=5px; font  face="Arial" ; color="White">Round wins: </font></div>
                             </div>
                             
                             <div class="main3">
@@ -93,10 +93,10 @@
 								<div style="left: 1080px; position: absolute; top: 650px;"> <font size=5px; font  face="Arial" ; color="White">Round wins: </font></div>
                             </div>
                             
-                            <div class="button">
+                            <div class="btn btn-primary">
                             
-                            <div style="left: 120px; position: absolute; top: 510px"><a href="http://localhost:7777/toptrumps/"><button style="width:200px;height:60px;background-color:LightGreen ;color:Indigo  ">Start a new game</button></a></div>
-                            <div style="left: 120px; position: absolute; top: 610px"><a href="http://localhost:7777/toptrumps/stats"><button style="width:200px;height:60px;background-color:LightGreen ;color:Indigo   ">View statistic</button></a></div>
+                            <div style="left: 120px; position: absolute; top: 510px"><a href="http://localhost:7777/toptrumps/"><button style="width:200px;height:60px; ">New Game</button></a></div>
+                            <div style="left: 120px; position: absolute; top: 610px"><a href="http://localhost:7777/toptrumps/stats"><button style="width:200px;height:60px;">Statistics</button></a></div>
                    
 						</div>
 
