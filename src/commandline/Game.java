@@ -326,7 +326,7 @@ public class Game {
 		
 	}
 	
-	private void logCardsInPlay() {
+	private void logCardsInPlay() { //prints to log each players top cards in each round
 		
 		PrintWriter printer = null;
 
