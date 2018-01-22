@@ -35,11 +35,10 @@ public class Game {
 
 	public Game (Deck d)
 	{	
-		
-		
+		logDeck(d);
 		d.shuffleDeck();
 		currentDeck = d;
-		logShuffledDeck(); //prints shuffled deck to log file
+		logDeck(currentDeck); //prints shuffled deck to log file
 		
 		int p = TopTrumpsCLIApplication.howManyPlayers();
 		numberOfPlayers = p+1;
@@ -254,7 +253,7 @@ public class Game {
 
 
 
-	private void logShuffledDeck()	{ //for printing to output log
+	private void logDeck(Deck d)	{ //for printing to output log
 
 	PrintWriter printer = null;
 
@@ -267,10 +266,10 @@ public class Game {
 		{
 			String logSeparator = "----------------------------------------------------------------"+
 					"-------------------------";
-			String shuffledDeck = currentDeck.dString();
+			String deck = d.dString();
 			printer.println(logSeparator);
-			printer.println("Shuffled deck\n");
-			printer.println(shuffledDeck);
+			printer.println("Deck\n");
+			printer.println(deck);
 			printer.println(logSeparator);
 		}
 
