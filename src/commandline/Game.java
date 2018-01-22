@@ -355,22 +355,16 @@ public class Game {
 						"-------------------------";
 				printer.println("Round " + newRound.getRoundCount() + ". " + "Cards in play:-");
 				printer.println(" ");
-				
-
 				{
-				for (Player p: listOfPlayers) {
+					for (Player p: listOfPlayers) {
 					
 					
 					printer.print(p.getName() + ":" + " ");
 					printer.println(p.getTopCard().toString());
-					
+
 				}
-				
-				
-				printer.println(logSeparator);
-			}
-
-
+					printer.println(logSeparator);
+				}
 			}
 			finally {
 
