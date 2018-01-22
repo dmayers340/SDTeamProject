@@ -33,12 +33,12 @@ public class Game {
 	 */
 
 	public Game (Deck d)
-	{	
-		
-		
+	{	boolean deckOutputToLog = false;
+		logDeck(d,deckOutputToLog);
 		d.shuffleDeck();
+		deckOutputToLog = true;
 		currentDeck = d;
-		logShuffledDeck(); //prints shuffled deck to log file
+		logDeck(currentDeck, deckOutputToLog); //prints shuffled deck to log file
 		
 		int p = TopTrumpsCLIApplication.howManyPlayers();
 		numberOfPlayers = p+1;
@@ -252,37 +252,51 @@ public class Game {
 
 
 
-	private void logShuffledDeck()	{ //for printing to output log
+	private void logDeck(Deck d, boolean deckOutput)	{ //for printing to output log
 
-	PrintWriter printer = null;
+		PrintWriter printer = null;
 
-	try {
 		try {
-			FileWriter fw = new FileWriter(logFile, true);
-			BufferedWriter bw = new BufferedWriter(fw);
-			printer = new PrintWriter(bw);
+			try {
+				FileWriter fw = new FileWriter(logFile, true);
+				BufferedWriter bw = new BufferedWriter(fw);
+				printer = new PrintWriter(bw);
+				String deck = "";
+				String deckDescriptor = "";
+				String logSeparator = "----------------------------------------------------------------"+
+						"-------------------------";
+				{
 
-		{
-			String logSeparator = "----------------------------------------------------------------"+
-					"-------------------------";
-			String shuffledDeck = currentDeck.dString();
-			printer.println(logSeparator);
-			printer.println("Shuffled deck\n");
-			printer.println(shuffledDeck);
-			printer.println(logSeparator);
-		}
+					if (deckOutput == true) {
+						deck = currentDeck.dString();
+						deckDescriptor = "Shuffled deck\n";
+
+					}
+
+					else {
+						fw = new FileWriter(logFile, false); //overwrite log contents if new game
+						deck = d.dString();
+						deckDescriptor = "Deck as read from file\n";
+					}
 
 
-		}
-		finally {
+					printer.println(logSeparator);	
+					printer.println(deckDescriptor);
+					printer.println(deck);
+					printer.println(logSeparator);
+				}
 
-			if (printer != null) {
-				printer.close();
+
 			}
-		} 	
-	}
-	catch (IOException ioe) {
-		JOptionPane.showMessageDialog(null, "File not found",
+			finally {
+
+				if (printer != null) {
+					printer.close();
+				}
+			} 	
+		}
+		catch (IOException ioe) {
+			JOptionPane.showMessageDialog(null, "File not found",
 				"Error", JOptionPane.ERROR_MESSAGE);
 
 	}				
@@ -339,22 +353,16 @@ public class Game {
 						"-------------------------";
 				printer.println("Round " + newRound.getRoundCount() + ". " + "Cards in play:-");
 				printer.println(" ");
-				
-
 				{
-				for (Player p: listOfPlayers) {
+					for (Player p: listOfPlayers) {
 					
 					
 					printer.print(p.getName() + ":" + " ");
 					printer.println(p.getTopCard().toString());
-					
+
 				}
-				
-				
-				printer.println(logSeparator);
-			}
-
-
+					printer.println(logSeparator);
+				}
 			}
 			finally {
 

@@ -199,8 +199,14 @@ public class TopTrumpsCLIApplication implements ActionListener{
 
 		System.out.print("How many opponents would you like? Maximum is 4.");
 		int numberOfPlayers = Integer.parseInt(getInput());
+		
+		if (numberOfPlayers > 4 || numberOfPlayers < 1) {
+			System.err.print("Number of opponents must be between 1 and 4!");
+			return -1; //quit program in this case????????
+		}
+		else 
 		return numberOfPlayers;
-
+		
 	}
 	
 	public static String getUsername()
