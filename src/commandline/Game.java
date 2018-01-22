@@ -24,7 +24,7 @@ public class Game {
 	private int remainingPlayers;
 	private int activePlayerIndex;
 	private Player activePlayer;
-	private final String logFile = "/Users/Lauren/MScSoftwareDev/toptrumps.log";
+	private final String logFile = "toptrumps.log";
 
 
 	/**
@@ -35,12 +35,14 @@ public class Game {
 
 	public Game (Deck d)
 	{	
+		
+		
 		d.shuffleDeck();
 		currentDeck = d;
 		logShuffledDeck(); //prints shuffled deck to log file
 		
 		int p = TopTrumpsCLIApplication.howManyPlayers();
-		numberOfPlayers = p;
+		numberOfPlayers = p+1;
 		
 		// each game starts with all players active
 		remainingPlayers = numberOfPlayers;

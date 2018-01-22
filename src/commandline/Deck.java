@@ -84,12 +84,14 @@ public class Deck {
 
 		{
 			// generates a random integer
-			int random = (int)Math.random() * (listLength);
+			int random = (int)Math.floor(Math.random() * listLength);
+			
+			System.out.println("The random shuffle number is " + random);
 
 			// swaps cards at indexes 'i' and 'random'
 			temp = cardsInDeck.get(i);
 			cardsInDeck.set(i, cardsInDeck.get(random));
-			cardsInDeck.set(random, temp);
+			cardsInDeck.set(random,temp);
 		}
 	}
 

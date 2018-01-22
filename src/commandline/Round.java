@@ -58,7 +58,6 @@ public class Round {
 
 		}
 
-		String topCard = players.get(0).getTopCard().toString();
 		chooseCategory();
 		compareCards();
 		addRound();
@@ -160,6 +159,8 @@ public class Round {
 			
 		{
 			// adds all top cards to the communal pile
+			System.out.println(players.get(i).toString() + " = player");
+			System.out.println(players.get(i).getTopCard().toString() + " = card");
 			communalPile.add(players.get(i).getTopCard());
 			players.get(i).removeCard();
 		}
