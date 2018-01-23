@@ -144,6 +144,18 @@ public class Round {
 
 	{
 		System.out.println("It's a draw!");
+		
+		if (players.get(0).isHuman())
+
+		{
+			System.out.println("Your card details are printed below:");
+			System.out.println();
+
+			// print current card
+			System.out.println(players.get(0).getTopCard().cString());
+			System.out.println(players.get(0).getTopCard().toString());
+			System.out.println();
+		}
 
 		// adds cards to communal pile 
 		for (int i = 0; i < players.size(); i++)
