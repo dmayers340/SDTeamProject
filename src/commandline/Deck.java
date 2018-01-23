@@ -85,8 +85,6 @@ public class Deck {
 		{
 			// generates a random integer
 			int random = (int)Math.floor(Math.random() * listLength);
-			
-			System.out.println("The random shuffle number is " + random);
 
 			// swaps cards at indexes 'i' and 'random'
 			temp = cardsInDeck.get(i);
