@@ -1,6 +1,4 @@
 package commandline;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Card {
@@ -10,17 +8,18 @@ public class Card {
 	 * all the attributes are stored in one array
 	 */
 
-	private String [] cardAttributes;
-
+	private ArrayList<String> cardAttributes;
+	private static ArrayList<String> categories;
 
 	/**
 	 * constructor
 	 * @param cA = array containing attributes
 	 */
 
-	public Card(String [] cA)
+	public Card(ArrayList<String> c, ArrayList<String> cA)
 
 	{ 
+		categories = c;
 		cardAttributes = cA;
 	}
 
@@ -34,7 +33,7 @@ public class Card {
 	public String getAttribute(int index) 
 
 	{
-		return cardAttributes[index];
+		return cardAttributes.get(index);
 	}
 
 
@@ -48,20 +47,48 @@ public class Card {
 	{
 		String cardString = "";
 
-		for (int i = 0; i<cardAttributes.length; i++)
+		for (int i = 0; i<cardAttributes.size(); i++)
 		{
-			cardString = cardString + String.format ("%s ", cardAttributes[i]); 
+			cardString = cardString + String.format ("%s ", cardAttributes.get(i)); 
 		}
 
 		cardString = String.format ("%s ", cardString);
 		return cardString;
+	}
+	
+	/**
+	 * @return categories;
+	 */
+	
+	public ArrayList<String> getCategories ()
+	{
+		return categories;
+	}
+	
+	
+	/**
+	 * writes categories to String
+	 * @return
+	 */
+	
+	public String cString ()
+	{
+		String cString = "";
+
+		// print categories
+		for (int i = 0; i < categories.size(); i++)
+		{
+			cString = cString + String.format( "%s ", categories.get(i));
+		}
+
+		return cString; 	
 	}
 
 	/**
 	 * return array 
 	 */
 	
-	public String [] getCard () 
+	public ArrayList<String> getCard () 
 	
 	{
 		return cardAttributes;

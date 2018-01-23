@@ -12,24 +12,23 @@ public class Round {
 	private Player activePlayer;
 	private ArrayList<Player> players;
 
-	private int currentCategory;
-	private ArrayList<Card> communalPile = new ArrayList<Card>();
+	private int c; // category
+	private Player winner;
+	private ArrayList<Card> communalPile;
+	private boolean draw; 
 
 	private static int roundCount = 1;
-	private static Deck currentDeck;
-	private static Player winner;
-
 
 	/**
 	 * constructor method 
 	 */
 
-	public Round (ArrayList <Player> p, Player ap, Deck cd)
+	public Round (ArrayList <Player> p, Player ap)
 
 	{
 		players = p;  
 		activePlayer = ap;
-		currentDeck = cd;
+		communalPile = new ArrayList<Card>();
 	}
 
 
@@ -47,7 +46,7 @@ public class Round {
 			System.out.println();
 
 			// print current card
-			System.out.println(currentDeck.cString());
+			System.out.println(players.get(0).getTopCard().cString());
 			System.out.println(players.get(0).getTopCard().toString());
 			System.out.println();
 		}
@@ -67,23 +66,25 @@ public class Round {
 	private void distributeCards() 
 
 	{
-		// winner receives cards from other players
-		for (int i = 0; i<players.size()-1; i++)
-		{
-			if (players.get(i)!=winner)
-			{
-				winner.receiveCard(players.get(i).getTopCard());
-				players.get(i).removeCard();
-			}
-		}	
-
-		// from communal pile (if not empty)
+		// from communal pile 
 		if (communalPile.size()>0)
 
 		{
 			winner.receiveCards(communalPile);
+			communalPile.removeAll(communalPile); // empties pile
 		}
 
+		// winner receives cards from other players
+		for (int i = 0; i<players.size(); i++)
+		{
+			Player p = players.get(i); // for readability
+
+			if (p.hasCards())
+			{
+				winner.receiveCard(p.getTopCard());
+				p.removeCard();
+			}
+		}	
 	}
 
 
@@ -96,41 +97,41 @@ public class Round {
 	{
 		int i; // temp index
 		int j = 0; // winner's index
-		int w = 0; // top score
+		int w = 0; // highest value
 		int t = 0; // temp score
 
-		for (i = 0; i<players.size()-1; i++)
+		// finds the highest value
+		for (i = 0; i<players.size(); i++)
 
 		{
-			// takes an attribute and compares it with temp
-			String playerName = (players.get(i).getName());
-			String topCard = (players.get(i).getTopCard().toString());
-			System.out.println("player's uppermost card is: " + topCard);
+			if (players.get(i).hasCards()) 
 
-			t = Integer.valueOf(players.get(i).getTopCard().getAttribute(currentCategory));
+			{
+				t = Integer.valueOf(players.get(i).getTopCard().getAttribute(c));
 
-			if (t>w)
+				if (t>w)
 
-			{	
-				w = t; // stores top score
-				j = i; // stores index 
+				{	
+					w = t; // stores highest value
+					j = i; // stores player index
+					draw = false; 
+				}
+
+				else if (t==w)
+
+				{
+					draw = true;
+				}
+
 			}
 
-			System.out.println("Loop finished");
 		}
 
-		if (t==w)
-		{ 
+		if (draw==true)
 			draw();
-			winner.receiveCards(communalPile);
-			System.out.println("The winner received cards from the communal pile;");
-			communalPile.removeAll(communalPile);
-			System.out.println("Deleting communal pile... ");
-			System.out.println("The draw has ended");
-		}
 
 		else 
-			winner = players.get(j);
+			winner = players.get(j); // sets winner and returns
 
 	}
 
@@ -144,25 +145,20 @@ public class Round {
 	{
 		System.out.println("It's a draw!");
 
-		// all cards go into the communal pile (add top card)
-
+		// adds cards to communal pile 
 		for (int i = 0; i < players.size(); i++)
 
 		{
-			// adds all top cards to the communal pile
-			// System.out.println(players.get(i).toString() + " = player");
-			// System.out.println(players.get(i).getTopCard().toString() + " = card");
-			communalPile.add(players.get(i).getTopCard());
-
+			if (players.get(i).hasCards())
+			{	
+				communalPile.add(players.get(i).getTopCard());
+				players.get(i).removeCard();
+			}
 		}
-
-		System.out.println("There are currently " + communalPile.size() + " cards in the communal pile");
-		System.out.println();
 
 		chooseCategory();
 		compareCards();
 
-		// winner receives all cards in the communal pile
 	}
 
 
@@ -174,8 +170,14 @@ public class Round {
 	private void chooseCategory ()
 
 	{
-		// if active player is human
-		if (activePlayer.isHuman())
+
+		if (!activePlayer.hasCards())
+		{ 
+			return; // category stays unchanged
+		}
+
+
+		else if (activePlayer.isHuman()) 
 
 		{
 			System.out.println("It's your turn! Please enter the name of the category.");
@@ -183,12 +185,21 @@ public class Round {
 			// enter category name
 			Scanner in = new Scanner (System.in);
 			String category;
-
-			System.out.print("You selected: ");
 			category = in.next();
 
+			if (category==null)
+			{
+				System.out.println("Please enter the name of the category");
+				chooseCategory();
+			}
+
 			// update variable
-			findCategoryIndex(category);
+			else
+
+			{ 
+				System.out.print("You selected: " + category);
+				findCategoryIndex(category);
+			}
 		}
 
 		else 
@@ -196,11 +207,6 @@ public class Round {
 		{	
 			// update variable
 			findBestCategory();
-
-			// print out the choice
-			System.out.println();
-			System.out.println(activePlayer.getName() + " has selected "  
-					+ currentDeck.getCategories().get(currentCategory));
 		}
 	}
 
@@ -208,7 +214,7 @@ public class Round {
 	/**
 	 * searches active user's top card 
 	 * finds the category with the highest value
-	 * sets it to currentCategory
+	 * sets it to c
 	 */
 
 	private void findBestCategory () 
@@ -216,7 +222,8 @@ public class Round {
 	{
 		int temp1;
 		int temp2 = 0;
-		for (int i = 1; i < currentDeck.getCategories().size(); i++)
+
+		for (int i = 1; i < activePlayer.getTopCard().getCategories().size(); i++)
 
 		{
 			// finds the category with the highest value
@@ -225,8 +232,7 @@ public class Round {
 			if (temp1>temp2)
 			{	
 				temp2=temp1;
-				currentCategory = i;
-				System.out.println(activePlayer.getTopCard().getAttribute(0)); // description
+				c = i;  
 			}
 		}
 
@@ -235,19 +241,19 @@ public class Round {
 
 	/**
 	 * @param category name
-	 * sets currentCategory (index)
+	 * sets c (index)
 	 */
 
 	private void findCategoryIndex (String category)
 
 	{
-		for (int i = 0; i < currentDeck.getCategories().size(); i++)
+		for (int i = 1; i < activePlayer.getTopCard().getCategories().size(); i++)
 
 		{
-			if (category.equals(currentDeck.getCategories().get(i))) 
+			if (category.equals(activePlayer.getTopCard().getCategories().get(i))) 
 
 				// set category
-				currentCategory = i;
+				c = i;
 		}
 
 	}
@@ -265,7 +271,7 @@ public class Round {
 
 		return winner;
 	}
-	
+
 	/**
 	 * accessor method
 	 * @return int

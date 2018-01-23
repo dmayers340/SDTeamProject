@@ -1,5 +1,8 @@
 package commandline; 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class Deck {
 
@@ -11,6 +14,11 @@ public class Deck {
 	private ArrayList<Card> cardsInDeck;
 	private int numberOfCards;
 	private int numPlayers;
+	
+	/**
+	 * class constants
+	 */
+	private static final int maxAttributes = 6;
 
 	/**
 	 * constructor
@@ -28,11 +36,33 @@ public class Deck {
 	 * @param String c = a category name
 	 */
 
-	public void addCategory (String c)	
+	public void setCategories (String line)	
 	{
-		categories.add(c);
+		String [] split = new String [maxAttributes];
+		split = line.split(" ");
+		Collections.addAll(categories, split);
 	}
+	
 
+	/**
+	 * adds a new card to the deck
+	 * @param String line
+	 */
+
+	public void addCard(String line) 
+	{
+	
+		String [] split = new String [maxAttributes];
+		split = line.split(" ");
+		
+		ArrayList<String> card = new ArrayList<String>();
+		Collections.addAll(card, split);
+		
+		Card newCard = new Card(categories, card);
+		cardsInDeck.add(newCard);
+		numberOfCards++; 
+	}
+	
 
 	public int getNumberOfCards() {
 
@@ -53,17 +83,6 @@ public class Deck {
 
 	public int getNumPlayers() {
 		return numPlayers;
-	}
-
-	/**
-	 * adds a new card to the deck
-	 * @param String [] cAttributes 
-	 */
-
-	public void addCard(String [] cAttributes) 
-	{
-		cardsInDeck.add(new Card(cAttributes));
-		numberOfCards++; 
 	}
 
 

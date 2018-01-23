@@ -9,6 +9,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 import javax.swing.JOptionPane;
@@ -16,12 +17,7 @@ import javax.swing.JOptionPane;
 /**
  * Top Trumps command line application
  */
-public class TopTrumpsCLIApplication implements ActionListener{
-
-	/**
-	 * class constants
-	 */
-	private static final int maxAttributes = 6;
+public class TopTrumpsCLIApplication {
 
 	/**
 	 * instance variables
@@ -86,32 +82,13 @@ public class TopTrumpsCLIApplication implements ActionListener{
 			System.out.println();
 		}
 
-
-		// if letter G was entered - creates a new game object
-		// passes the current deck (newDeck) as a variable
+		// reads the deck from a .txt file and starts a new game
 		else if (choice.charAt(0) == 'G')
 		{
-			String readDeck =" ";
-			if (numberOfGames < 0)
-			{
-				// not sure if needed... 
-				System.out.println("Read from a new deck? (Y/N)"); 
-				readDeck = getInput();
-			}
+			readIn();  
 
-			// reads from new deck at first round or if asked
-			if (readDeck.charAt(0) == 'Y' || numberOfGames == 0)
-			{	
-				System.out.println();
-				readIn();
-			}
-
-
-			// play time! 
 			Game newGame = new Game(newDeck);
 			numberOfGames++;
-			
-
 		}
 
 		// if Q or QUIT was entered
@@ -156,32 +133,23 @@ public class TopTrumpsCLIApplication implements ActionListener{
 	private static void readIn()
 	{
 		newDeck = new Deck();
+
 		FileReader reader;
 		try 
 		{
-			String [] split = new String [maxAttributes];
 			reader = new FileReader(FILE_NAME);
 
 			Scanner in = new Scanner (reader);
 			String line = in.nextLine();
+			
+			// sets categories 
+			newDeck.setCategories(line);
 
-			// splits the first line (categories)
-			split = line.split(" ");
-
-			// sets category names
-			for (int i = 0; i < maxAttributes; i++)	
-			{
-				newDeck.addCategory(split[i]); 
-			}
-
-			// reads remaining lines
 			// adds cards to the deck
 			while (in.hasNextLine())
 			{
-				line = in.nextLine();
-				split = line.split(" ");
-
-				newDeck.addCard(split);
+				line = in.nextLine();	
+				newDeck.addCard(line);
 			}
 
 		} 
@@ -199,51 +167,17 @@ public class TopTrumpsCLIApplication implements ActionListener{
 
 		System.out.print("How many opponents would you like? Maximum is 4.");
 		int numberOfPlayers = Integer.parseInt(getInput());
-		
+
 		if (numberOfPlayers > 4 || numberOfPlayers < 1) {
 			System.err.print("Number of opponents must be between 1 and 4!");
 			return -1; //quit program in this case????????
 		}
 		else 
-		return numberOfPlayers;
-		
+			return numberOfPlayers;
+
 	}
-	
-	public static String getUsername()
 
-	{
-		System.out.println();
-		System.out.println("Please enter your username: ");
-
-		String username = getInput();
-		return username;
-	}
-	
-	
-
-	/**
-	 * need this to be able to close the program at any time
-	 */
-	public void actionPerformed(ActionEvent i) 
-
-	{
-		if (i.getSource().equals(System.in))
-		{
-			String string = getInput();
-			{
-				if (string.charAt(0)=='Q')
-
-				System.out.println ("You exited the program");
-				System.out.println();
-				System.exit(0);
-
-			}
-		}
-	}
 }
-	
-
-
 
 //	public static void logShuffledDeck()	{
 //
@@ -279,12 +213,3 @@ public class TopTrumpsCLIApplication implements ActionListener{
 //	
 //	}
 //}
-	
-	
-
-
-
-
-
-
-
