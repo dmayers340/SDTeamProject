@@ -68,15 +68,6 @@ public class Game {
 			
 			logCardsInPlay(); //prints each player's top card to log
 			newRound.playRound();
-			
-			if (newRound.isDraw())
-				
-			{
-				String communalPile = newRound.getCommunalPile();
-				System.out.println ("The previous round was a draw, printing the contents of the communal pile now");
-				logCommunalPile(communalPile);
-			}
-			
 			updatePlayers(); // removes "losers"
 		}
 
@@ -85,12 +76,13 @@ public class Game {
 
 	}
 	
-
+<<<<<<< HEAD
 	public Deck getCurrentDeck()
 	{
 		return currentDeck;
 	}
-
+=======
+>>>>>>> bfb71963ea4610aa6ce1477c632a10eac1abd2e0
 
 	/**
 	 * removes players with no cards 
@@ -103,7 +95,7 @@ public class Game {
 
 		{
 			Player p = listOfPlayers.get(i);
-			if (!p.hasCards() && listOfPlayers.size()>0)
+			if (!p.hasCards())
 
 			{
 				listOfPlayers.remove(p);
@@ -304,47 +296,6 @@ public class Game {
 			JOptionPane.showMessageDialog(null, "File not found",
 					"Error", JOptionPane.ERROR_MESSAGE);
 		}
-	}
-		
-		private void logCommunalPile(String cP) {
-
-			PrintWriter printer = null;
-
-			try {
-				try {
-					FileWriter fw = new FileWriter(logFile, true);
-					BufferedWriter bw = new BufferedWriter(fw);
-					printer = new PrintWriter(bw);
-
-					{ 
-						printer.println("Communal pile");
-						printer.println("");
-						printer.println(cP); 
-						printer.println("");
-					}
-
-					String logSeparator = "-------------------------------------------------------------"+
-							"-------------------------";
-					printer.println(logSeparator);
-
-				}
-
-				finally {
-
-					if (printer != null) {
-						printer.close();
-					}
-				} 	
-			}
-			catch (IOException ioe) {
-				JOptionPane.showMessageDialog(null, "File not found",
-						"Error", JOptionPane.ERROR_MESSAGE);
-			}
-
-		
-		
-		
-		
 
 	}
 
