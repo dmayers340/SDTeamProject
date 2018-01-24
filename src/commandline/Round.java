@@ -14,8 +14,8 @@ public class Round {
 
 	private int c; // category
 	private Player winner;
-	private ArrayList<Card> communalPile;
-	private boolean draw; 
+	private static ArrayList<Card> communalPile;
+	public static boolean draw = false; // the first round starts with no draw
 
 	private static int roundCount = 1;
 
@@ -26,6 +26,8 @@ public class Round {
 	public Round (ArrayList <Player> p, Player ap)
 
 	{
+		System.out.println("Round number " + (roundCount+1) + " is starting");
+
 		players = p;  
 		activePlayer = ap;
 		communalPile = new ArrayList<Card>();
@@ -53,7 +55,13 @@ public class Round {
 
 		chooseCategory();
 		compareCards();
-		distributeCards();
+
+		if (!draw)
+
+		{
+			distributeCards();
+		}
+
 		addRound();
 
 	}
@@ -67,12 +75,8 @@ public class Round {
 
 	{
 		// from communal pile 
-		if (communalPile.size()>0)
-
-		{
-			winner.receiveCards(communalPile);
-			communalPile.removeAll(communalPile); // empties pile
-		}
+		winner.receiveCards(communalPile);
+		communalPile.removeAll(communalPile); // empties pile
 
 		// winner receives cards from other players
 		for (int i = 0; i<players.size(); i++)
@@ -83,10 +87,9 @@ public class Round {
 			{
 				winner.receiveCard(p.getTopCard());
 				p.removeCard();
-			}
-		}	
+			}	
+		}
 	}
-
 
 	/**
 	 * sets round winner
@@ -114,25 +117,25 @@ public class Round {
 				{	
 					w = t; // stores highest value
 					j = i; // stores player index
-					draw = false; 
+					draw = false;
+					winner = players.get(j); // sets winner 
 				}
 
 				else if (t==w)
 
 				{
+					winner = activePlayer;
 					draw = true;
+					draw();
+
+					System.out.println("The round was a draw");
+					System.out.println("This should start a new round now");
+					System.out.println();
 				}
 
 			}
 
 		}
-
-		if (draw==true)
-			draw();
-
-		else 
-			winner = players.get(j); // sets winner and returns
-
 	}
 
 
@@ -144,12 +147,11 @@ public class Round {
 
 	{
 		System.out.println("It's a draw!");
-		
+
 		if (players.get(0).isHuman())
 
 		{
 			System.out.println("Your card details are printed below:");
-			System.out.println();
 
 			// print current card
 			System.out.println(players.get(0).getTopCard().cString());
@@ -167,9 +169,6 @@ public class Round {
 				players.get(i).removeCard();
 			}
 		}
-
-		chooseCategory();
-		compareCards();
 
 	}
 
@@ -210,6 +209,7 @@ public class Round {
 
 			{ 
 				System.out.print("You selected: " + category);
+				System.out.println();
 				findCategoryIndex(category);
 			}
 		}
@@ -259,15 +259,24 @@ public class Round {
 	private void findCategoryIndex (String category)
 
 	{
-		for (int i = 1; i < activePlayer.getTopCard().getCategories().size(); i++)
+		int i;
+		int temp = 0;
+
+		for (i = 0; i < activePlayer.getTopCard().getCategories().size(); i++)
 
 		{
-			if (category.equals(activePlayer.getTopCard().getCategories().get(i))) 
-
-				// set category
-				c = i;
+			if (category.equals(activePlayer.getTopCard().getCategories().get(i)));
+			temp = i;
 		}
 
+		if (temp==0) 
+
+		{
+			chooseCategory();
+		}
+
+		else
+			c=temp;
 	}
 
 
@@ -282,6 +291,42 @@ public class Round {
 		System.out.println();
 
 		return winner;
+	}
+
+
+	/**
+	 * accessor method 
+	 * @return the contents of the communal pile as String
+	 * if empty, @return a message stating that
+	 */
+
+	public String getCommunalPile()
+
+	{
+		if (communalPile.size()>0)
+
+		{
+			return communalPile.toString();
+		}
+
+		else 
+
+		{
+			String noCards = ("There are currently no cards in the communal pile");
+			return noCards;
+		}
+	}
+
+
+	/**
+	 * accessor method
+	 * @return if draw or not (boolean)
+	 */
+
+	public boolean isDraw()
+
+	{
+		return draw;
 	}
 
 	/**
