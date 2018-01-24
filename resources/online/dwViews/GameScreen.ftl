@@ -20,40 +20,48 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 	
 	<style>
-		.nav{
-			 	padding-left:10px;
-  				padding-right:10px;
-  				margin-left:0px;
-  				margin-right:0px;
-  				margin-bottom:20px;
-			}
+	.nav li {
+      display: inline-block;
+      color: black;
+
+    
+  	  }
+  	  .navbar-default .navbar-nav > li > a {
+    color: black;
+}
+	    .navbar-default {
+    background-color: black;
+    border-color: #E7E7E7;
+    padding-left:10px;
+  	padding-right:10px;
+  	margin-left:0px;
+  	margin-right:0px;
+  	margin-bottom:20px;
+}
+
+	.color {
+	color:White;
+	font-size:1.2em;
+ 	font-weight: bold;	
+ 	}
 			
 		body{
 		background-image: url("http://kb4images.com/images/pictures-of-outer-space/37759075-pictures-of-outer-space.jpg")
 			}
-		background-image{
-						opacity: 0.5;
-						}
-	</style
 	
-    <body onload="initalize()"> <!-- Call the initalize method when the page loads -->
-    	<div class = "nav">
-    	<nav class="navbar navbar-inverse navbar-fixed-top">
-	      	<div class="container">
-	        	<div class="navbar-header">
-	          		<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-			            <span class="sr-only">Toggle navigation</span>
-			            <span class="icon-bar"></span>
-			            <span class="icon-bar"></span>
-			            <span class="icon-bar"></span>
-	          		</button>
-	          	<a class="navbar-brand" href="http://localhost:7777/toptrumps/">Top Trumps</a>
-	        </div>
-	        <div id="navbar" class="collapse navbar-collapse">
-	       </div><!--/.nav-collapse -->
-	      </div>
-	    </nav>
+	</style
+	<body onload="initalize()"> <!-- Call the initalize method when the page loads -->
+    
+     <nav class="navbar navbar-default">
+	  <div class="container-fluid">
+	    <div class="navbar-header">
+	     <li class="pull-left"><a href="http://localhost:7777/toptrumps/" class="color">Top Trumps</a></li>
+	     <li class="pull-left"><a href="http://localhost:7777/toptrumps/game" class="color">Play Game</a</li>	
+	     <li class="pull-left"><a href="http://localhost:7777/toptrumps/stats" class="color">Statistics</a></li>
+	    </div>
 	  </div>
+	</nav> 
+	
 	  	<div class="container">
   							<div class="main">
   								<img src="http://www.hearthstonetopdecks.com/wp-content/uploads/2014/06/card-back-gold-open-202x300.png";  style="width:140px; height:250px; position:absolute; left:300px; top:200px; ">
@@ -95,7 +103,7 @@
                             
                             <div class="btn btn-primary">
                             
-                            <div style="left: 120px; position: absolute; top: 510px"><a href="http://localhost:7777/toptrumps/"><button style="width:200px;height:60px; ">New Game</button></a></div>
+                            <div style="left: 120px; position: absolute; top: 510px"><a href="http://localhost:7777/toptrumps/game"><button style="width:200px;height:60px; ">New Game</button></a></div>
                             <div style="left: 120px; position: absolute; top: 610px"><a href="http://localhost:7777/toptrumps/stats"><button style="width:200px;height:60px;">Statistics</button></a></div>
                    
 						</div>
