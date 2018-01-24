@@ -18,10 +18,95 @@
     	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
-		<link rel="../../resources/css/gameview.css" rel="stylesheet" />
+		<!-- link rel="../../resources/css/gameview.css" rel="stylesheet" /> -->
 
 	</head>
 	
+	<style>
+	    .navbar-default {
+    background-color: black;
+    border-color: #E7E7E7;
+    padding-left:10px;
+  	padding-right:10px;
+  	margin-left:0px;
+  	margin-right:0px;
+  	margin-bottom:20px;
+}
+
+	.color {
+	color:White;
+	font-size:1.2em;
+ 	font-weight: bold;	
+ 	}
+		.nav{
+			 	padding-left:10px;
+  				padding-right:10px;
+  				margin-left:0px;
+  				margin-right:0px;
+  				margin-bottom:20px;
+			}
+			
+		body{
+			background-image: url("http://kb4images.com/images/pictures-of-outer-space/37759075-pictures-of-outer-space.jpg");	
+			}
+			
+		h1{
+			color: White
+		}
+		
+		background-image{
+						opacity: 0.5;
+						}
+			
+		.numGames{
+		position:absolute;
+		left: 0px;
+		margin-left:150px;
+		margin-right:150px;
+		}
+		
+		.computerWin{
+		position:absolute;
+		right: 0px;
+		margin-left:150px;
+		margin-right:150px;
+		}
+		
+		.playerWin{
+		position: absolute;
+        top: 37%;
+        left: 50%;
+        margin-right: -50%;
+       	transform: translate(-50%, -50%)
+			}
+		
+		.draws{
+		position:absolute;
+		left: 0px;
+		margin-top: 400px;
+		margin-left:400px;
+		margin-right:150px;
+		
+		}
+		
+		.rounds{
+		position:absolute;
+		right: 0px;
+		margin-top: 400px;
+		margin-left:150px;
+		margin-right:400px;
+		}
+
+	
+		
+		.left{
+		position: left;
+		}
+		
+		.right{
+			position: right;
+			}
+	</style
 	
     <body onload="initalize()"> <!-- Call the initalize method when the page loads -->
   <nav class="navbar navbar-default">
