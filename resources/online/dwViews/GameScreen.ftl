@@ -18,38 +18,10 @@
     	<link rel="stylesheet" href="http://dcs.gla.ac.uk/~richardm/assets/stylesheets/vex-theme-os.css"/>
     	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+		
+		<link rel="../../resources/css/gameview.css" rel="stylesheet" />
 	
-	<style>
-	.nav li {
-      display: inline-block;
-      color: black;
 
-    
-  	  }
-  	  .navbar-default .navbar-nav > li > a {
-    color: black;
-}
-	    .navbar-default {
-    background-color: black;
-    border-color: #E7E7E7;
-    padding-left:10px;
-  	padding-right:10px;
-  	margin-left:0px;
-  	margin-right:0px;
-  	margin-bottom:20px;
-}
-
-	.color {
-	color:White;
-	font-size:1.2em;
- 	font-weight: bold;	
- 	}
-			
-		body{
-		background-image: url("http://kb4images.com/images/pictures-of-outer-space/37759075-pictures-of-outer-space.jpg")
-			}
-	
-	</style
 	<body onload="initalize()"> <!-- Call the initalize method when the page loads -->
     
      <nav class="navbar navbar-default">
