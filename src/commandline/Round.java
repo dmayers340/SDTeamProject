@@ -17,9 +17,8 @@ public class Round {
 	private static ArrayList<Card> communalPile;
 	public static boolean draw = false; // the first round starts with no draw
 	
-	private String roundLog = "ROUND LOG BELOW";
+	private String roundLog = "ROUND LOG FOR ROUND " + roundCount;
 	
-
 	private static int roundCount = 1;
 
 	
@@ -352,7 +351,7 @@ public class Round {
 	private void updateRoundLog(String s)
 	
 	{
-		roundLog = roundLog + s; 
+		roundLog = String.format("%s \n%s", roundLog, s); 
 	}
 
 	/**
