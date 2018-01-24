@@ -18,13 +18,13 @@
     	<link rel="stylesheet" href="http://dcs.gla.ac.uk/~richardm/assets/stylesheets/vex-theme-os.css"/>
     	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+		
+		<!--link href="../../resources/css/gameview.css" rel="stylesheet" />-->
 	
 	<style>
 	.nav li {
-      display: inline-block;
       color: black;
-
-    
+      display: inline-block;
   	  }
   	  .navbar-default .navbar-nav > li > a {
     color: black;
@@ -45,11 +45,24 @@
  	font-weight: bold;	
  	}
 			
-		body{
-		background-image: url("http://kb4images.com/images/pictures-of-outer-space/37759075-pictures-of-outer-space.jpg")
-			}
+	body{
+	background-image: url("http://kb4images.com/images/pictures-of-outer-space/37759075-pictures-of-outer-space.jpg")
+	}
 	
-	</style
+	.text{
+	color:White;
+	font-size:1.2em;
+ 	font-weight: bold;
+	position:absolute;
+	left: 0px;
+	margin-top:10px;
+	margin-left:10px;
+	margin-right:150px;
+	max-width: 400px; 
+	height: 15rem;
+	}
+	
+	</style>
 	<body onload="initalize()"> <!-- Call the initalize method when the page loads -->
     
      <nav class="navbar navbar-default">
@@ -63,48 +76,58 @@
 	</nav> 
 	
 	  	<div class="container">
+	  		<div class="text">
+  					<div class="card-block">
+    					<center>
+    						<h4><b>Active Player:</b></h4><br />
+    						<h4><b>Winner of last round:</b></h4><br />
+    						<h4><b>Category Selected:</b></h4><br />
+						</center>
+  					</div>
+				</div>
+			</div>
+		
   							<div class="main">
-  								<img src="http://www.hearthstonetopdecks.com/wp-content/uploads/2014/06/card-back-gold-open-202x300.png";  style="width:140px; height:250px; position:absolute; left:300px; top:200px; ">
+  								<img src="http://www.hearthstonetopdecks.com/wp-content/uploads/2014/06/card-back-gold-open-202x300.png";  style="width:140px; height:250px; position:absolute; left:400px; top:275px; ">
                                
-                                <div style="left: 150px; position: absolute; top: 200px;"> <font size=12px; font  face="Impact"; color="White">Player</font></div>
-                                <div style="left: 70px; position: absolute; top: 280px;"> <font size=5px; font  face="Arial" ; color="White">Card in Hands: </font></div>
-                                <div style="left: 70px; position: absolute; top: 360px;"> <font size=5px; font  face="Arial" ; color="White">Round wins: </font></div>
+                                <div style="left: 170px; position: absolute; top: 275px;"> <font size=12px; font  face="Impact"; color="White">Player</font></div>
+                                <div style="left: 170px; position: absolute; top: 355px;"> <font size=5px; font  face="Arial" ; color="White">Card in Hands: </font></div>
+                                <div style="left: 170px; position: absolute; top: 425px;"> <font size=5px; font  face="Arial" ; color="White">Round wins: </font></div>
                             </div>
                             
                             <div class="main1">
-                           <img src="http://www.hearthstonetopdecks.com/wp-content/uploads/2014/06/card-back-gold-open-202x300.png"; style="width:140px; height:250px;  position:absolute;left:800px; top:200px; ">
+                           <img src="http://www.hearthstonetopdecks.com/wp-content/uploads/2014/06/card-back-gold-open-202x300.png"; style="width:140px; height:250px; position:absolute; right:600px; top:50px; ">
                             	
-                                <div style="left: 700px; position: absolute; top: 200px;"> <font size="16";font  face="Impact" color="White">AI1</font></div>
-                                <div style="left: 560px; position: absolute; top: 280px;"> <font size=5px; font  face="Arial" ; color="White">Card in Hands: </font></div>
-								<div style="left: 560px; position: absolute; top: 350px;"> <font size=5px; font  face="Arial" ; color="White">Round wins: </font></div>
+                                <div style="left: 600px; position: absolute; top: 50px;"> <font size="16";font  face="Impact" color="White">AI1</font></div>
+                                <div style="left: 600px; position: absolute; top: 130px;"> <font size=5px; font  face="Arial" ; color="White">Card in Hands: </font></div>
+								<div style="left: 600px; position: absolute; top: 200px;"> <font size=5px; font  face="Arial" ; color="White">Round wins: </font></div>
                             </div>
                             
                            <div class="main2">
-                            <img src="http://www.hearthstonetopdecks.com/wp-content/uploads/2014/06/card-back-gold-open-202x300.png"; style="width:140px; height:250px; position:absolute; left:1300px; top:200px; ">
+                            <img src="http://www.hearthstonetopdecks.com/wp-content/uploads/2014/06/card-back-gold-open-202x300.png"; style="width:140px; height:250px; position:absolute; right:20px; top:50px; ">
                             
-                                <div style="left: 1200px; position: absolute; top: 200px;"> <font size="16";font  face="Impact" color="White">AI2</font></div>
-								<div style="left: 1080px; position: absolute; top: 280px;"> <font size=5px; font  face="Arial" ; color="White">Card in Hands: </font></div>
-								<div style="left: 1080px; position: absolute; top: 350px;"> <font size=5px; font  face="Arial" ; color="White">Round wins: </font></div>
+                                <div style="left: 1150px; position: absolute; top: 50px;"> <font size="16";font  face="Impact" color="White">AI2</font></div>
+								<div style="left: 1150px; position: absolute; top: 130px;"> <font size=5px; font  face="Arial" ; color="White">Card in Hands: </font></div>
+								<div style="left: 1150px; position: absolute; top: 200px;"> <font size=5px; font  face="Arial" ; color="White">Round wins: </font></div>
                             </div>
                             
                             <div class="main3">
-                             <img src="http://www.hearthstonetopdecks.com/wp-content/uploads/2014/06/card-back-gold-open-202x300.png"; style="width:140px; height:250px; position:absolute; left:800px; top:500px; ">
-                            <div style="left: 700px; position: absolute; top: 500px;"> <font size="16";font  face="Impact" color="White">AI3</font></div>
-                            <div style="left: 560px; position: absolute; top: 580px;"> <font size=5px; font  face="Arial" ; color="White">Card in Hands: </font></div>
-								<div style="left: 560px; position: absolute; top: 650px;"> <font size=5px; font  face="Arial" ; color="White">Round wins: </font></div>
+                             <img src="http://www.hearthstonetopdecks.com/wp-content/uploads/2014/06/card-back-gold-open-202x300.png"; style="width:140px; height:250px; position:absolute; right:600px; top:500px; ">
+                            <div style="left: 600px; position: absolute; top: 500px;"> <font size="16";font  face="Impact" color="White">AI3</font></div>
+                            <div style="left: 600px; position: absolute; top: 580px;"> <font size=5px; font  face="Arial" ; color="White">Card in Hands: </font></div>
+								<div style="left: 600px; position: absolute; top: 650px;"> <font size=5px; font  face="Arial" ; color="White">Round wins: </font></div>
                             </div>
                             
                             <div class="main4">
-                  			 <img src="http://www.hearthstonetopdecks.com/wp-content/uploads/2014/06/card-back-gold-open-202x300.png"; style="width:140px; height:250px; position:absolute; left:1300px; top:500px; ">
-                               <div style="left: 1200px; position: absolute; top: 500px;"> <font size="16";font  face="Impact" color="White">AI4</font></div>
-                            <div style="left: 1080px; position: absolute; top: 580px;"> <font size=5px; font  face="Arial" ; color="White">Card in Hands: </font></div>
-								<div style="left: 1080px; position: absolute; top: 650px;"> <font size=5px; font  face="Arial" ; color="White">Round wins: </font></div>
+                  			 <img src="http://www.hearthstonetopdecks.com/wp-content/uploads/2014/06/card-back-gold-open-202x300.png"; style="width:140px; height:250px; position:absolute; right:20px; top:500px; ">
+                               <div style="left: 1150px; position: absolute; top: 500px;"> <font size="16";font  face="Impact" color="White">AI4</font></div>
+                            <div style="left: 1150px; position: absolute; top: 580px;"> <font size=5px; font  face="Arial" ; color="White">Card in Hands: </font></div>
+								<div style="left: 1150px; position: absolute; top: 650px;"> <font size=5px; font  face="Arial" ; color="White">Round wins: </font></div>
                             </div>
                             
                             <div class="btn btn-primary">
-                            
-                            <div style="left: 120px; position: absolute; top: 510px"><a href="http://localhost:7777/toptrumps/game"><button style="width:200px;height:60px; ">New Game</button></a></div>
-                            <div style="left: 120px; position: absolute; top: 610px"><a href="http://localhost:7777/toptrumps/stats"><button style="width:200px;height:60px;">Statistics</button></a></div>
+                            <div style="left: 10px; position: absolute; top: 700px"><a href="http://localhost:7777/toptrumps/game"><button style="width:200px;height:60px; font-size:1.4em; font-family: Arial; font-weight: bold;">New Game</button></a></div>
+                            <div style="left: 300px; position: absolute; top: 700px"><a href="http://localhost:7777/toptrumps/stats"><button style="width:200px;height:60px; font-size:1.4em; font-family: Arial; font-weight: bold;">Statistics</button></a></div>
                    
 						</div>
 

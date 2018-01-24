@@ -18,26 +18,20 @@
     	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 		
-		<link href="../css/gameview.css" rel="stylesheet" />		
+	<--!	<link rel="../../resources/css/gameview.css" rel="stylesheet" /> -->
 	</head>
 	
 	<!-- Haven't been able to get CSS or a BASE HTML properly referenced. HOW to do this so we don't repeat so much? --> 
 	<style>
 
-		h1{
-			color: White
-			}
-		background-image{
-						opacity: 0.5;
-						}
 		.column2{
 		position:absolute;
 		right: 0px;
 		margin-top:150px;
 		margin-left:150px;
 		margin-right:350px;
-		
 		}
+		
 		.column{
 		position:absolute;
 		left: 0px;
@@ -46,37 +40,37 @@
 		margin-right:150px;
 		}
 		
-.nav li {
-      display: inline-block;
-      color: black;
+		.nav li {
+      	color: black;
+      	display: inline-block;
+  	  	}
+  	  
+  	  	.navbar-default .navbar-nav > li > a {
+    	color: black;
+		}
+	    
+	    .navbar-default {
+    	background-color: black;
+    	border-color: #E7E7E7;
+    	padding-left:10px;
+  		padding-right:10px;
+  		margin-left:0px;
+  		margin-right:0px;
+  		margin-bottom:20px;
+		}
 
-    
-  	  }
-  	  .navbar-default li {
-    text-color: White;
-}
-    .navbar-default {
-    background-color: black;
-    border-color: #E7E7E7;
-    padding-left:10px;
-  	padding-right:10px;
-  	margin-left:0px;
-  	margin-right:0px;
-  	margin-bottom:20px;
-}
-
-	.color {
-	color:White;
-	font-size:1.2em;
- 	font-weight: bold;	
- 	}
-		
-			
+		.color {
+		color:White;
+		font-size:1.2em;
+ 		font-weight: bold;	
+ 		}
+	
 		body{
 		background-image: url("http://kb4images.com/images/pictures-of-outer-space/37759075-pictures-of-outer-space.jpg")
-			}
+		}
 	
-	</style
+	</style>
+	
 	<body onload="initalize()"> <!-- Call the initalize method when the page loads -->
     
     <nav class="navbar navbar-default">
@@ -88,7 +82,7 @@
 	    </div>
 	  </div>
 	</nav> 
-	  
+	
 	  <div class="container">
 
 	  <div class="column">

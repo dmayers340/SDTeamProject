@@ -1,0 +1,112 @@
+
+  	.navbar-default .navbar-nav > li > a {
+    color: black;
+	}
+
+	.nav li {
+      display: inline-block;
+      color: black;
+      text-color: White;
+
+  	  }
+
+	.navbar-default {
+    background-color: black;
+    border-color: #E7E7E7;
+    padding-left:10px;
+  	padding-right:10px;
+  	margin-left:0px;
+  	margin-right:0px;
+  	margin-bottom:20px;
+}
+
+	.nav{
+			 	padding-left:10px;
+  				padding-right:10px;
+  				margin-left:0px;
+  				margin-right:0px;
+  				margin-bottom:20px;
+			}
+
+	.color {
+	color:White;
+	font-size:1.2em;
+ 	font-weight: bold;	
+ 	}
+
+		body{
+		background-image: url("http://kb4images.com/images/pictures-of-outer-space/37759075-pictures-of-outer-space.jpg")
+			}
+
+
+		h1{
+			color: White
+		}
+
+		.numGames{
+		position:absolute;
+		left: 0px;
+		margin-left:150px;
+		margin-right:150px;
+		}
+		
+		.computerWin{
+		position:absolute;
+		right: 0px;
+		margin-left:150px;
+		margin-right:150px;
+		}
+		
+		.playerWin{
+		position: absolute;
+        top: 37%;
+        left: 50%;
+        margin-right: -50%;
+       	transform: translate(-50%, -50%)
+			}
+		
+		.draws{
+		position:absolute;
+		left: 0px;
+		margin-top: 400px;
+		margin-left:400px;
+		margin-right:150px;
+		
+		}
+		
+		.rounds{
+		position:absolute;
+		right: 0px;
+		margin-top: 400px;
+		margin-left:150px;
+		margin-right:400px;
+		}
+
+	
+		
+		.left{
+		position: left;
+		}
+		
+		.right{
+			position: right;
+			}
+
+		.column2{
+		position:absolute;
+		right: 0px;
+		margin-top:150px;
+		margin-left:150px;
+		margin-right:350px;
+		
+		}
+		.column{
+		position:absolute;
+		left: 0px;
+		margin-top:150px;
+		margin-left:350px;
+		margin-right:150px;
+		}
+		
+
+			
