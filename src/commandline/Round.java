@@ -16,12 +16,12 @@ public class Round {
 	private Player winner;
 	private static ArrayList<Card> communalPile;
 	public static boolean draw = false; // the first round starts with no draw
-	
-	private String roundLog = "ROUND LOG FOR ROUND " + roundCount;
-	
-	private static int roundCount = 1;
 
-	
+	private String roundLog;
+
+	private static int roundCount = 0;
+
+
 	/**
 	 * constructor method 
 	 */
@@ -29,11 +29,24 @@ public class Round {
 	public Round (ArrayList <Player> p, Player ap)
 
 	{
-		System.out.println("Round number " + (roundCount+1) + " is starting");
+		addRound();
+		roundLog = "ROUND LOG FOR ROUND " + roundCount;
+		
+		System.out.println("Round number " + (roundCount) + " is starting");
 
 		players = p;  
 		activePlayer = ap;
-		communalPile = new ArrayList<Card>();
+		
+		if (!draw)
+			
+		{
+			communalPile = new ArrayList<Card>();
+		}
+		
+		System.out.println();
+		System.out.println("Printing contents of the communal pile");
+		System.out.println(getCommunalPile());
+		System.out.println();
 	}
 
 
@@ -59,13 +72,16 @@ public class Round {
 		chooseCategory();
 		compareCards();
 
-		if (!draw)
+		if (draw == false)
 
 		{
+			System.out.println("The winner is " + winner.getName());
+			System.out.println();
+			
 			distributeCards();
+			communalPile = new ArrayList<Card>(); // resets communal pile
+	
 		}
-
-		addRound();
 
 	}
 
@@ -77,15 +93,25 @@ public class Round {
 	private void distributeCards() 
 
 	{
-		// from communal pile 
-		winner.receiveCards(communalPile);
-		communalPile.removeAll(communalPile); // empties pile
+		
+		System.out.println("the size of the communal pile is" + communalPile.size());
+		if (communalPile.size()>0)
+
+		{
+			// from communal pile 
+			winner.receiveCards(communalPile);
+			communalPile.removeAll(communalPile); // empties pile
+			
+			updateRoundLog(winner + " took all cards from the communal pile");
+
+		}
 
 		// winner receives cards from other players
 		for (int i = 0; i<players.size(); i++)
 		{
 			Player p = players.get(i); // for readability
 
+			System.out.println(winner.getName() + " took cards");
 			if (p.hasCards())
 			{
 				winner.receiveCard(p.getTopCard());
@@ -93,7 +119,7 @@ public class Round {
 			}	
 		}
 	}
-	
+
 
 	/**
 	 * sets round winner
@@ -121,8 +147,8 @@ public class Round {
 				{	
 					w = t; // stores highest value
 					j = i; // stores player index
-					draw = false;
 					winner = players.get(j); // sets winner 
+					draw = false;
 				}
 
 				else if (t==w)
@@ -133,8 +159,7 @@ public class Round {
 					draw();
 
 					System.out.println("The round was a draw");
-					System.out.println("This should start a new round now");
-					System.out.println();
+					
 				}
 
 			}
@@ -152,17 +177,6 @@ public class Round {
 	{
 		System.out.println("It's a draw!");
 
-		if (players.get(0).isHuman())
-
-		{
-			System.out.println("Your card details are printed below:");
-
-			// print current card
-			System.out.println(players.get(0).getTopCard().cString());
-			System.out.println(players.get(0).getTopCard().toString());
-			System.out.println();
-		}
-
 		// adds cards to communal pile 
 		for (int i = 0; i < players.size(); i++)
 
@@ -172,8 +186,12 @@ public class Round {
 				communalPile.add(players.get(i).getTopCard());
 				players.get(i).removeCard();
 			}
+			
+
 		}
 
+		updateRoundLog(communalPile.size() + 
+				" cards have been added to the communal pile");
 	}
 
 
@@ -224,7 +242,7 @@ public class Round {
 			// update variable
 			findBestCategory();
 		}
-		
+
 		updateRoundLog("The current category is: " + c);
 	}
 
@@ -293,9 +311,6 @@ public class Round {
 	public Player getWinner()
 
 	{
-		System.out.println("The winner is " + winner.getName());
-		System.out.println();
-
 		return winner;
 	}
 
@@ -343,28 +358,32 @@ public class Round {
 	public int getRoundCount() {
 		return roundCount;
 	}
-	
+
 	/**
 	 * adds more stuff to log
 	 */
-	
+
 	private void updateRoundLog(String s)
-	
+
 	{
 		roundLog = String.format("%s \n%s", roundLog, s); 
 	}
 
+	
 	/**
 	 * String 
 	 * stores round info
 	 * @return all info about round
 	 */
 	
+
 	public String getRoundLog() 
-	
+
 	{
+		roundLog = String.format("%s \n %s ", roundLog, "END OF ROUND LOG");
 		return roundLog; 
 	}
+	
 
 	/**
 	 * round counter
@@ -373,7 +392,5 @@ public class Round {
 	private static void addRound() {
 
 		roundCount++;
-		System.out.println();
-		System.out.println("Round " + roundCount + " has finished");
 	}
 }
