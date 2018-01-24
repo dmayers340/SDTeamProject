@@ -69,6 +69,7 @@ public class Game {
 			logCardsInPlay(); //prints each player's top card to log
 			newRound.playRound();
 			
+			// for testing
 			if (newRound.isDraw())
 				
 			{
@@ -76,6 +77,9 @@ public class Game {
 				System.out.println ("The previous round was a draw, printing the contents of the communal pile now");
 				logCommunalPile(communalPile);
 			}
+			
+			String log = newRound.getRoundLog(); 
+			System.out.println(log);
 			
 			updatePlayers(); // removes "losers"
 		}

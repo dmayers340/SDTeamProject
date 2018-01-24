@@ -16,9 +16,12 @@ public class Round {
 	private Player winner;
 	private static ArrayList<Card> communalPile;
 	public static boolean draw = false; // the first round starts with no draw
-
+	
+	private String roundLog = "ROUND LOG FOR ROUND " + roundCount;
+	
 	private static int roundCount = 1;
 
+	
 	/**
 	 * constructor method 
 	 */
@@ -90,6 +93,7 @@ public class Round {
 			}	
 		}
 	}
+	
 
 	/**
 	 * sets round winner
@@ -220,6 +224,8 @@ public class Round {
 			// update variable
 			findBestCategory();
 		}
+		
+		updateRoundLog("The current category is: " + c);
 	}
 
 
@@ -336,6 +342,28 @@ public class Round {
 
 	public int getRoundCount() {
 		return roundCount;
+	}
+	
+	/**
+	 * adds more stuff to log
+	 */
+	
+	private void updateRoundLog(String s)
+	
+	{
+		roundLog = String.format("%s \n%s", roundLog, s); 
+	}
+
+	/**
+	 * String 
+	 * stores round info
+	 * @return all info about round
+	 */
+	
+	public String getRoundLog() 
+	
+	{
+		return roundLog; 
 	}
 
 	/**
