@@ -17,24 +17,13 @@
     	<link rel="stylesheet" href="http://dcs.gla.ac.uk/~richardm/assets/stylesheets/vex-theme-os.css"/>
     	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-
+		
+		<link href="../css/gameview.css" rel="stylesheet" />		
 	</head>
 	
 	<!-- Haven't been able to get CSS or a BASE HTML properly referenced. HOW to do this so we don't repeat so much? --> 
 	<style>
-		.nav{
-				color: White;
-			 	padding-left:10px;
-  				padding-right:10px;
-  				margin-left:0px;
-  				margin-right:0px;
-  				margin-bottom:20px;
-			}
-			
-		body{
-			background-image: url("http://kb4images.com/images/pictures-of-outer-space/37759075-pictures-of-outer-space.jpg");	
-			
-			}
+
 		h1{
 			color: White
 			}
@@ -44,45 +33,63 @@
 		.column2{
 		position:absolute;
 		right: 0px;
+		margin-top:150px;
 		margin-left:150px;
-		margin-right:150px;
+		margin-right:350px;
 		
 		}
 		.column{
 		position:absolute;
 		left: 0px;
-		margin-left:150px;
+		margin-top:150px;
+		margin-left:350px;
 		margin-right:150px;
 		}
 		
+.nav li {
+      display: inline-block;
+      color: black;
+
+    
+  	  }
+  	  .navbar-default li {
+    text-color: White;
+}
+    .navbar-default {
+    background-color: black;
+    border-color: #E7E7E7;
+    padding-left:10px;
+  	padding-right:10px;
+  	margin-left:0px;
+  	margin-right:0px;
+  	margin-bottom:20px;
+}
+
+	.color {
+	color:White;
+	font-size:1.2em;
+ 	font-weight: bold;	
+ 	}
+		
+			
+		body{
+		background-image: url("http://kb4images.com/images/pictures-of-outer-space/37759075-pictures-of-outer-space.jpg")
+			}
+	
 	</style
-	<div class= "container">
-    <body onload="initalize()"> <!-- Call the initalize method when the page loads -->
-    	<div class = "nav">
-    	<nav class="navbar navbar-inverse navbar-fixed-top">
-	      	<div class="container">
-	        	<div class="navbar-header">
-	          		<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-			            <span class="sr-only">Toggle navigation</span>
-			            <span class="icon-bar"></span>
-			            <span class="icon-bar"></span>
-			            <span class="icon-bar"></span>
-	          		</button>
-	          	<a class="navbar-brand" href="http://localhost:7777/toptrumps/">Top Trumps</a>
-	          	<ul>
-	          		<li class="nav-item">
-              			<a class="nav-link" href="http://localhost:7777/toptrumps/stats">Statistics</a>
-            		</li>	          			
-	        </div>
-	        <div id="navbar" class="collapse navbar-collapse">
-	       </div><!--/.nav-collapse -->
-	      </div>
-	    </nav>
+	<body onload="initalize()"> <!-- Call the initalize method when the page loads -->
+    
+    <nav class="navbar navbar-default">
+	  <div class="container-fluid">
+	    <div class="navbar-header">
+	     <li class="pull-left"><a href="http://localhost:7777/toptrumps/" class="color">Top Trumps</a></li>
+	     <li class="pull-left"><a href="http://localhost:7777/toptrumps/game" class="color">Play Game</a</li>	
+	     <li class="pull-left"><a href="http://localhost:7777/toptrumps/stats" class="color">Statistics</a></li>
+	    </div>
 	  </div>
-	  </div>
+	</nav> 
 	  
 	  <div class="container">
-	  	  <center><h1><b>Please make a selection</b></h1></center>
 
 	  <div class="column">
 		<div class="card border-dark mb-3" style="max-width: 18rem; height: 27rem;">  		
@@ -100,17 +107,19 @@
 
 		<div class="column2">
 		<div class="card border-dark mb-3" style="max-width: 18rem; height: 27rem;"> 
-  		<img class="card-img-top" src="https://i.kinja-img.com/gawker-media/image/upload/t_original/othklnrkmmln2e8vv3ug.jpg" alt="Card image">
+  		<img class="card-img-top" src="https://i.kinja-img.com/gawker-media/image/upload/t_original/othklnrkmmln2e8vv3ug.jpg" alt="Card image" style="height:220px">
   		<br />
   		<div class="card-block">
     		<center><h4><b>View Statistics</b></h4>
-    		<br/>
-    		<p class="card-text">If you would like to view the statistics press the button below.</p><br />
-    		<a href="http://localhost:7777/toptrumps/stats" class="btn btn-primary">View Statistics</a></center>
+    		<br />
+    		<p class="card-text">If you would like to view the statistics select the button below.</p>
+    		<br />
+    		<a href="http://localhost:7777/toptrumps/stats" class="btn btn-primary">View Stats</a></center>
   		</div>
 		</div>
 		</div>
     	
+
 			<!-- Add your HTML Here -->
 		
 		</div>
@@ -126,7 +135,7 @@
 				
 				// For example, lets call our sample methods
 				helloJSONList();
-				helloWord("Student");
+				helloWord("UGH");
 				
 			}
 			
