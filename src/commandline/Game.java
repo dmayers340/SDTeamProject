@@ -68,6 +68,15 @@ public class Game {
 			
 			logCardsInPlay(); //prints each player's top card to log
 			newRound.playRound();
+			
+			if (newRound.isDraw())
+				
+			{
+				String communalPile = newRound.getCommunalPile();
+				System.out.println ("The previous round was a draw, printing the contents of the communal pile now");
+				System.out.println (communalPile);
+			}
+			
 			updatePlayers(); // removes "losers"
 		}
 
@@ -88,7 +97,7 @@ public class Game {
 
 		{
 			Player p = listOfPlayers.get(i);
-			if (!p.hasCards())
+			if (!p.hasCards() && listOfPlayers.size()>0)
 
 			{
 				listOfPlayers.remove(p);
