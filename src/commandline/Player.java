@@ -106,7 +106,7 @@ public class Player {
 	
 		else 
 		{
-			h = String.format("%s %s \n", h, (this.getName() + "has no cards"));
+			h = String.format("%s %s \n", h, (this.getName() + " has no cards"));
 		}
 
 		return h;

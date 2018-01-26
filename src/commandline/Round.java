@@ -87,7 +87,9 @@ public class Round {
 		else 
 		{	
 			findBestCategory();  
-			System.out.println(activePlayer.getName() + " is choosing the category... ");
+			String s = (activePlayer.getName() + " is choosing the category for round "+ roundCount + "...");
+			System.out.println(s);
+			roundLog = roundLog + s;
 		}
 
 		// system out
@@ -171,7 +173,10 @@ public class Round {
 		int j = 0; // winner's index
 		int w = 0; // highest value
 		int t = 0; // temp score
-
+		
+		String s = ("Comparing cards for round " + roundCount);
+		s = s + "The corresponding values of players' cards are printed below: "; 
+	
 		// finds the highest value
 		for (int i = 0; i<players.size(); i++)
 
@@ -180,7 +185,9 @@ public class Round {
 
 			{
 				t = Integer.valueOf(players.get(i).getTopCard().getAttribute(c));
-
+				
+				s = String.format("%s \n %s %s %d \n", s, players.get(i).getName(), ": ", t);
+				
 				if (t>w)
 
 				{	
@@ -197,6 +204,9 @@ public class Round {
 				}
 			}
 		}
+		
+		roundLog = roundLog + s; 
+
 	}
 
 
@@ -236,6 +246,9 @@ public class Round {
 	{
 		System.out.println("It's your turn to choose! Please enter the name of the category.");
 
+		String s = ("The human player " + activePlayer.getName() + " chose the category for round " + roundCount);
+		roundLog = roundLog + s;
+		
 		// enter category name
 		Scanner in = new Scanner (System.in);
 		String category = "";
@@ -313,15 +326,16 @@ public class Round {
 		if (communalPile.size()>0)
 
 		{
-			System.out.println("There are currently " + communalPile.size() + 
+			String cPile = ("There are currently " + communalPile.size() + 
 					" cards in the communal pile: ");
 			
-			String cPile = String.format("%s \n", activePlayer.getTopCard().cString());
+			cPile = String.format("\n %s \n %s \n", cPile, activePlayer.getTopCard().cString());
 			for (int i = 0; i<communalPile.size(); i++)
 			{
 				cPile = String.format("%s %s \n", cPile, communalPile.get(i));
 			}
 			
+			roundLog = roundLog + cPile;
 			return cPile;
 		}
 
@@ -329,6 +343,7 @@ public class Round {
 
 		{
 			String noCards = ("There are currently no cards in the communal pile");
+			roundLog = roundLog + noCards;
 			return noCards;
 		}
 
