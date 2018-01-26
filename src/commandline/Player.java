@@ -90,7 +90,7 @@ public class Player {
 
 	{
 		String h = String.format("%s \n", this.getName());
-		h = String.format("%s %s \n ", h, this.getTopCard().cString());
+		h = String.format("%s %s \n", h, this.getTopCard().cString());
 
 
 		for (int i = 0; i<hand.size(); i++)
@@ -98,12 +98,12 @@ public class Player {
 		{
 			if (hand.size() == 0)
 			{
-				System.out.println(this.getName() + "has no cards" );
+				h = String.format("%s %s \n", h, (this.getName() + "has no cards"));
 			}
 
 			else 
 			{
-				h = String.format("%s %s \n ", h, hand.get(i));
+				h = String.format("%s %s \n", h, hand.get(i));
 			}
 		}
 
