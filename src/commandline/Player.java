@@ -90,21 +90,23 @@ public class Player {
 
 	{
 		String h = String.format("\n %s \n", this.getName());
-		h = String.format("%s %s \n", h, this.getTopCard().cString());
-
-
-		for (int i = 0; i<hand.size(); i++)
-
+		
+		if (this.isInGame)
+			
 		{
-			if (hand.size() == 0)
-			{
-				h = String.format("%s %s \n", h, (this.getName() + "has no cards"));
-			}
+			h = String.format("%s %s \n", h, this.getTopCard().cString());
+			
+			for (int i = 0; i<hand.size(); i++)
 
-			else 
 			{
-				h = String.format("%s %s \n", h, hand.get(i));
+					h = String.format("%s %s \n", h, hand.get(i));
 			}
+		}
+		
+	
+		else 
+		{
+			h = String.format("%s %s \n", h, (this.getName() + "has no cards"));
 		}
 
 		return h;
