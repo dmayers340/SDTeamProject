@@ -138,13 +138,11 @@ public class Round {
 	private void distributeCards() 
 
 	{
-
-		System.out.println("The size of the communal pile is " + communalPile.size());
 		if (communalPile.size()>0)
 
 		{
 			// from communal pile 
-			winner.receiveCards(communalPile);
+			winner.receiveExtraCards(communalPile);
 			communalPile.removeAll(communalPile); // empties pile
 
 			updateRoundLog(winner.getName() + " took all cards from the communal pile");
@@ -157,7 +155,6 @@ public class Round {
 			Player p = players.get(i); // for readability
 			if (p.isInGame())
 			{
-				System.out.println(p.getName() + " has " + p.getHand().size() + " cards");
 				winner.receiveCard(p.getTopCard());
 				p.removeCard();
 			}	
@@ -224,8 +221,9 @@ public class Round {
 
 		}
 
-		updateRoundLog(communalPile.size() + 
-				" cards have been added to the communal pile");
+		updateRoundLog("New cards have been added to the communal pile!"
+				+ "\nThere are currently " + communalPile.size() + 
+				" cards in the communal pile.");
 
 	}
 
@@ -272,22 +270,24 @@ public class Round {
 
 	private void findBestCategory () 
 
-	{
-		int temp1;
-		int temp2 = 0;
+	{ 
+		int curr; // current value
+		int temp = 0; // temp highest value
+		int index = 0; // index of the highest value
 
-		for (int i = 1; i < players.get(0).getTopCard().getCategories().size(); i++)
-
+		for (int i = 1; i < activePlayer.getTopCard().getCategories().size(); i++)
 		{
 			// finds the category with the highest value
-			temp1 = Integer.valueOf(players.get(0).getTopCard().getAttribute(i)); // looks horrendous
+			curr = Integer.valueOf(activePlayer.getTopCard().getAttribute(i)); // looks horrendous
 
-			if (temp1>temp2)
+			if (curr>temp)
 			{	
-				temp2=temp1;
-				c = i;  
+				temp=curr;
+				index = i;
 			}
 		}
+
+		c = index;
 	}
 
 
@@ -383,4 +383,6 @@ public class Round {
 
 		roundCount++;
 	}
+	
+	
 }

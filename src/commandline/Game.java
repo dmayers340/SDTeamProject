@@ -21,9 +21,10 @@ public class Game {
 	private Round newRound;
 	private Player activePlayer;
 	private String username;
+	private Player gameWinner;
 
 	private static ArrayList <Player> listOfPlayers;
-	
+
 	private final String logFile = "toptrumps.log";
 
 	/**
@@ -37,7 +38,7 @@ public class Game {
 
 		boolean deckOutputToLog = false;
 		logDeck(d,deckOutputToLog);
-		
+
 		d.shuffleDeck();
 		deckOutputToLog = true;
 		currentDeck = d;
@@ -52,11 +53,11 @@ public class Game {
 		System.out.println();
 		System.out.println("Current deck printed below:");
 		System.out.println(currentDeck.dString());
-		*/
+		 */
 
 		createPlayers();
 		dealCards();
-		
+
 		/**
 		 * rounds continue until there is only 1 player left
 		 * the last remaining player is the winner 
@@ -67,16 +68,16 @@ public class Game {
 		{
 			setActivePlayer(); // set deciding player 
 			newRound = new Round(listOfPlayers, activePlayer);
-			
+
 			// logCardsInPlay(); 
 			//prints each player's top card to log
 			newRound.playRound();
 
 			String log = newRound.getRoundLog(); 
 			System.out.println(log);
-			
+
 			System.out.println("================================================");
-			
+
 			updatePlayers(); // updates number of remaining players
 		}
 
@@ -84,7 +85,7 @@ public class Game {
 		showWinner();
 
 	}
-	
+
 
 	public Deck getCurrentDeck()
 	{
@@ -103,7 +104,7 @@ public class Game {
 
 		{
 			Player p = listOfPlayers.get(i);
-			
+
 			if (p.isInGame() && p.getHand().size()<1)
 
 			{
@@ -113,7 +114,7 @@ public class Game {
 			}
 		}
 	}
-	
+
 
 
 	/**
@@ -128,13 +129,13 @@ public class Game {
 		{
 			activePlayer = listOfPlayers.get(pickRandomPlayer());
 		}
-		
+
 		else if (newRound.getWinner() == null) // if draw
-			
+
 		{
 			return;  
 		}
-		
+
 		else 
 
 		{
@@ -151,9 +152,37 @@ public class Game {
 	private void showWinner ()
 
 	{
-		System.out.println();
-		System.out.println("The winner of the game is " + newRound.getWinner().getName());
-		System.out.println();
+		// if only one player is left with cards after a draw
+		// they automatically become the winner
+		if (newRound.isDraw())		
+		{
+			for (int i=0; i<listOfPlayers.size(); i++)
+			{
+				if (listOfPlayers.get(i).isInGame())
+					gameWinner = listOfPlayers.get(i); 
+			}
+		}
+		
+		else 
+		{
+			gameWinner = newRound.getWinner();
+		}
+
+		System.out.println("The winner of the game is " + gameWinner.getName());
+
+		if (gameWinner == listOfPlayers.get(0))
+		{
+			System.out.print ("\n" + 
+					"╔═══╗─────────────╔╗───╔╗───╔╗\n" + 
+					"║╔═╗║────────────╔╝╚╗──║║──╔╝╚╗\n" + 
+					"║║─╚╬══╦═╗╔══╦═╦═╩╗╔╬╗╔╣║╔═╩╗╔╬╦══╦═╗╔══╗\n" + 
+					"║║─╔╣╔╗║╔╗╣╔╗║╔╣╔╗║║║║║║║║╔╗║║╠╣╔╗║╔╗╣══╣\n" + 
+					"║╚═╝║╚╝║║║║╚╝║║║╔╗║╚╣╚╝║╚╣╔╗║╚╣║╚╝║║║╠══║\n" + 
+					"╚═══╩══╩╝╚╩═╗╠╝╚╝╚╩═╩══╩═╩╝╚╩═╩╩══╩╝╚╩══╝\n" + 
+					"──────────╔═╝║\n" + 
+					"──────────╚══╝");
+		}
+
 	}
 
 	/**
@@ -167,9 +196,9 @@ public class Game {
 		listOfPlayers = new ArrayList<Player>();
 
 		int i = 0;
-		
+
 		System.out.println("Please enter your username: ");
-		
+
 		Scanner in = new Scanner (System.in);
 		username = in.next();
 
@@ -311,46 +340,46 @@ public class Game {
 					"Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
-		
-		private void logCommunalPile(String cP) {
 
-			PrintWriter printer = null;
+	private void logCommunalPile(String cP) {
 
+		PrintWriter printer = null;
+
+		try {
 			try {
-				try {
-					FileWriter fw = new FileWriter(logFile, true);
-					BufferedWriter bw = new BufferedWriter(fw);
-					printer = new PrintWriter(bw);
+				FileWriter fw = new FileWriter(logFile, true);
+				BufferedWriter bw = new BufferedWriter(fw);
+				printer = new PrintWriter(bw);
 
-					{ 
-						printer.println("Communal pile");
-						printer.println("");
-						printer.println(cP); 
-						printer.println("");
-					}
-
-					String logSeparator = "-------------------------------------------------------------"+
-							"-------------------------";
-					printer.println(logSeparator);
-
+				{ 
+					printer.println("Communal pile");
+					printer.println("");
+					printer.println(cP); 
+					printer.println("");
 				}
 
-				finally {
+				String logSeparator = "-------------------------------------------------------------"+
+						"-------------------------";
+				printer.println(logSeparator);
 
-					if (printer != null) {
-						printer.close();
-					}
-				} 	
-			}
-			catch (IOException ioe) {
-				JOptionPane.showMessageDialog(null, "File not found",
-						"Error", JOptionPane.ERROR_MESSAGE);
 			}
 
-		
-		
-		
-		
+			finally {
+
+				if (printer != null) {
+					printer.close();
+				}
+			} 	
+		}
+		catch (IOException ioe) {
+			JOptionPane.showMessageDialog(null, "File not found",
+					"Error", JOptionPane.ERROR_MESSAGE);
+		}
+
+
+
+
+
 
 	}
 
@@ -369,7 +398,7 @@ public class Game {
 				printer.println(" ");
 				{
 					for (Player p: listOfPlayers) {
-						
+
 						printer.print(p.getName() + ":" + " ");
 						printer.println(p.getTopCard().toString());
 
