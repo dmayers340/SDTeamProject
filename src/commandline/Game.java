@@ -69,7 +69,7 @@ public class Game {
 			setActivePlayer(); // set deciding player 
 			newRound = new Round(listOfPlayers, activePlayer);
 
-			dealtCards(); 
+			logDealtCards(); 
 			//prints each player's top card to log
 			newRound.playRound();
 
