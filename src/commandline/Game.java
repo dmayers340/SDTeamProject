@@ -57,6 +57,8 @@ public class Game {
 
 		createPlayers();
 		dealCards();
+		
+		logDealtCards(); // right after they have been deal 
 
 		/**
 		 * rounds continue until there is only 1 player left
@@ -70,13 +72,15 @@ public class Game {
 			newRound = new Round(listOfPlayers, activePlayer);
 
 			logDealtCards(); 
-			//prints each player's top card to log
+			 
 			newRound.playRound();
 
 			String log = newRound.getRoundLog(); 
 			System.out.println(log);
 
-			System.out.println("================================================");
+			System.out.println("----------------------------------------------------------------"+
+					"-------------------------");
+			
 
 			updatePlayers(); // updates number of remaining players
 		}

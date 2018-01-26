@@ -19,6 +19,7 @@ public class Round {
 	private static ArrayList<Card> communalPile = new ArrayList<Card>(); 
 
 	private String roundLog;
+	private String logSeparator = "--------------------------------------------------------------------------------------";
 	private static int roundCount = 0;
 
 
@@ -30,7 +31,7 @@ public class Round {
 
 	{
 		addRound();
-		roundLog = " ROUND LOG FOR ROUND " + roundCount; // sets top line for round log
+		roundLog = String.format("%s%d\n", "ROUND LOG FOR ROUND ", roundCount); // sets top line for round log
 		System.out.println();
 
 		players = p;  
@@ -46,9 +47,12 @@ public class Round {
 
 	{	
 		System.out.println("ROUND NUMBER " + (roundCount)); 
-		System.out.println("The active player is " + activePlayer.getName());
+		String a = "The active player is " + activePlayer.getName();
+
+		updateRoundLog(a);
+		System.out.println(a);
 		System.out.println(" + + + ");
-		System.out.println(getCommunalPile()); // prints contents of communal pile
+		System.out.print(getCommunalPile()); // prints contents of communal pile
 		System.out.println(" + + + ");
 
 		// print human player's current card
@@ -87,13 +91,14 @@ public class Round {
 		else 
 		{	
 			findBestCategory();  
-			String s = (activePlayer.getName() + " is choosing the category for round "+ roundCount + "...");
+			String s = String.format("%s%s%d%s\n", 
+					activePlayer.getName(), " is choosing the category for round ", roundCount, "...");
 			System.out.println(s);
 			roundLog = roundLog + s;
 		}
 
 		// system out
-		String cat = ("The category for round " + roundCount + " is " + 
+		String cat = String.format("%s%d%s%s", "The category for round ", roundCount," is ", 
 				activePlayer.getTopCard().getCategories().get(c));
 		System.out.println(cat);
 		System.out.println("+ + + ");
@@ -111,7 +116,9 @@ public class Round {
 		if (draw == false)
 
 		{
-			System.out.println("The winner is " + winner.getName());
+			String w = "The winner is " + winner.getName();
+			updateRoundLog(w);
+			System.out.println(w);
 			System.out.println("The winning card for round " + roundCount + " was: ");
 			System.out.println(winner.getTopCard().cString());
 			System.out.println(winner.getTopCard().toString());
@@ -124,11 +131,10 @@ public class Round {
 
 		{
 			draw();
-			System.out.println("Round " + roundCount + " was a draw");
 			winner = null; // no winner
 		}
 
-		System.out.println("================================================");
+		System.out.println(logSeparator);
 	}
 
 
@@ -147,6 +153,7 @@ public class Round {
 			communalPile.removeAll(communalPile); // empties pile
 
 			updateRoundLog(winner.getName() + " took all cards from the communal pile");
+			updateRoundLog(getCommunalPile());
 
 		}
 
@@ -173,10 +180,12 @@ public class Round {
 		int j = 0; // winner's index
 		int w = 0; // highest value
 		int t = 0; // temp score
-		
-		String s = ("Comparing cards for round " + roundCount);
-		s = s + "The corresponding values of players' cards are printed below: "; 
-	
+
+		String cards = String.format("%s%d%s\n\n%s\n%-15s%s", 
+				"Comparing cards for round ", roundCount, "...", 
+				"The contents of cards in game are printed below:", " ", activePlayer.getTopCard().cString());
+		String values = String.format("%s", "The competing values are printed below:");
+
 		// finds the highest value
 		for (int i = 0; i<players.size(); i++)
 
@@ -185,9 +194,11 @@ public class Round {
 
 			{
 				t = Integer.valueOf(players.get(i).getTopCard().getAttribute(c));
-				
-				s = String.format("%s \n %s %s %d \n", s, players.get(i).getName(), ": ", t);
-				
+
+				cards = String.format("%s\n%-15s%s", cards, players.get(i).getName(),
+						players.get(i).getTopCard().toString());
+				values = String.format("%s\n%s%s%d", values, players.get(i).getName(), ": ", t);
+
 				if (t>w)
 
 				{	
@@ -204,8 +215,9 @@ public class Round {
 				}
 			}
 		}
-		
-		roundLog = roundLog + s; 
+
+		updateRoundLog(cards);
+		updateRoundLog(values);
 
 	}
 
@@ -229,10 +241,13 @@ public class Round {
 
 
 		}
-
-		updateRoundLog("New cards have been added to the communal pile!"
-				+ "\nThere are currently " + communalPile.size() + 
-				" cards in the communal pile.");
+		
+		String d = "Round " + roundCount + " was a draw";
+		System.out.println(d);
+		
+		updateRoundLog(d);
+		updateRoundLog("New cards have been added to the communal pile!");
+		updateRoundLog(getCommunalPile());
 
 	}
 
@@ -248,7 +263,7 @@ public class Round {
 
 		String s = ("The human player " + activePlayer.getName() + " chose the category for round " + roundCount);
 		roundLog = roundLog + s;
-		
+
 		// enter category name
 		Scanner in = new Scanner (System.in);
 		String category = "";
@@ -326,23 +341,22 @@ public class Round {
 		if (communalPile.size()>0)
 
 		{
-			String cPile = ("There are currently " + communalPile.size() + 
+			String cPile = ("There are " + communalPile.size() + 
 					" cards in the communal pile: ");
-			
-			cPile = String.format("\n %s \n %s \n", cPile, activePlayer.getTopCard().cString());
+
+			cPile = String.format("%s\n%s\n", cPile, activePlayer.getTopCard().cString());
 			for (int i = 0; i<communalPile.size(); i++)
 			{
-				cPile = String.format("%s %s \n", cPile, communalPile.get(i));
+				cPile = String.format("%s%s\n", cPile, communalPile.get(i));
 			}
-			
-			roundLog = roundLog + cPile;
+
 			return cPile;
 		}
 
 		else 
 
 		{
-			String noCards = ("There are currently no cards in the communal pile");
+			String noCards = String.format("%s\n", "There are currently no cards in the communal pile");
 			roundLog = roundLog + noCards;
 			return noCards;
 		}
@@ -377,7 +391,7 @@ public class Round {
 	private void updateRoundLog(String s)
 
 	{
-		roundLog = String.format("%s \n%s", roundLog, s); 
+		roundLog = String.format("%s\n%s\n", roundLog, s); 
 	}
 
 
@@ -391,7 +405,7 @@ public class Round {
 	public String getRoundLog() 
 
 	{
-		roundLog = String.format("%s \n %s %d ", roundLog, "END OF LOG FOR ROUND ", roundCount);
+		roundLog = String.format("%s\n%s%d", roundLog, "END OF LOG FOR ROUND ", roundCount);
 		return roundLog; 
 	}
 
@@ -404,6 +418,6 @@ public class Round {
 
 		roundCount++;
 	}
-	
-	
+
+
 }
