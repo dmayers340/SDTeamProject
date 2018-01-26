@@ -399,6 +399,10 @@ public class Game {
 				{
 					for (Player p: listOfPlayers) {
 
+<<<<<<< HEAD
+=======
+//						printer.print(p.getName() + ":" + " ");
+>>>>>>> 02ea26e1c8aa9ae8942bb1f9fe2c01ef6fc81b4c
 						printer.println(p.getHand());
 
 					}
