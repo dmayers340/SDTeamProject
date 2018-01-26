@@ -228,7 +228,7 @@ public class Game {
 
 			ArrayList<Card> cardsForEachPlayer = new ArrayList<Card>(currentDeck.getDeck().subList(0, numCardsEach));
 			String playerName = listOfPlayers.get(i).getName();
-			logPlayerCards(cardsForEachPlayer, playerName);
+			// logPlayerCards(cardsForEachPlayer, playerName);
 			listOfPlayers.get(i).receiveCards(cardsForEachPlayer);
 			currentDeck.getDeck().removeAll(cardsForEachPlayer);
 
@@ -239,7 +239,7 @@ public class Game {
 			listOfPlayers.get(pickRandomPlayer()).receiveExtraCards(currentDeck.getDeck());
 
 		}
-		
+
 		System.out.println("Dealing cards...");
 		System.out.println();
 
@@ -247,6 +247,7 @@ public class Game {
 
 		{	
 			System.out.println(p.handToString());
+			
 		}
 
 
@@ -396,18 +397,14 @@ public class Game {
 						"-------------------------";
 				printer.println("Round " + newRound.getRoundCount() + ". " + "Cards in play:-");
 				printer.println(" ");
-				{
-					for (Player p: listOfPlayers) {
 
-<<<<<<< HEAD
-=======
-//						printer.print(p.getName() + ":" + " ");
->>>>>>> 02ea26e1c8aa9ae8942bb1f9fe2c01ef6fc81b4c
-						printer.println(p.getHand());
+				for (Player p: listOfPlayers) {
 
-					}
-					printer.println(logSeparator);
+					printer.println(p.getTopCard().toString());
+
 				}
+				
+				printer.println(logSeparator);
 			}
 			finally {
 
