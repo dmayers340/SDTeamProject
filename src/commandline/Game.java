@@ -69,7 +69,7 @@ public class Game {
 			setActivePlayer(); // set deciding player 
 			newRound = new Round(listOfPlayers, activePlayer);
 
-			logCardsInPlay(); 
+			dealtCards(); 
 			//prints each player's top card to log
 			newRound.playRound();
 
@@ -242,7 +242,7 @@ public class Game {
 		System.out.println("Dealing cards...");
 		System.out.println();
 
-			logDealtCards();
+		logDealtCards();
 
 	}
 
@@ -298,6 +298,8 @@ public class Game {
 		}				
 
 	}
+	
+	
 
 	private void logDealtCards() {
 
@@ -323,7 +325,6 @@ public class Game {
 
 				}
 
-				System.out.println(" test test test");
 				System.out.println(playerCards);
 				printer.println(playerCards);
 
@@ -341,6 +342,11 @@ public class Game {
 					"Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
+	
+	
+	
+	
+	
 
 	private void logCommunalPile(String cP) {
 
@@ -378,59 +384,7 @@ public class Game {
 		}
 
 
-
-
-
-
 	}
-
-	private void logCardsInPlay() { //prints to log each players top cards in each round
-
-		PrintWriter printer = null;
-
-		try {
-			try {
-				FileWriter fw = new FileWriter(logFile, true);
-				BufferedWriter bw = new BufferedWriter(fw);
-				printer = new PrintWriter(bw);
-				String logSeparator = "-----------------------------------------------------"+
-						"-------------------------";
-				printer.println("Round " + newRound.getRoundCount() + ". " + "Cards in play:-");
-				printer.println(" ");
-
-				for (Player p: listOfPlayers) {
-
-					if (!p.isInGame())
-					{
-						printer.println(p.getName() + " is out of cards");
-					}
-
-					else 
-					{	
-						printer.println(p.getName() + "'s top card: ");
-						printer.println(p.getTopCard().toString());
-					}
-				}
-
-				printer.println(logSeparator);
-			}
-			finally {
-
-				if (printer != null) {
-					printer.close();
-				}
-			} 	
-		}
-		catch (IOException ioe) {
-			JOptionPane.showMessageDialog(null, "File not found",
-					"Error", JOptionPane.ERROR_MESSAGE);
-		}
-
-
-
-	}
-
-
 
 	private int pickRandomPlayer() { //returns random index number
 
