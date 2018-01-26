@@ -128,8 +128,8 @@
 				// --------------------------------------------------------------------------
 				
 				// For example, lets call our sample methods
-				helloJSONList();
 				helloWord("UGH");
+				getDeckStuff();
 				
 			}
 			
@@ -138,6 +138,7 @@
 			// -----------------------------------------
 		
 			// This is a reusable method for creating a CORS request. Do not edit this.
+			
 			function createCORSRequest(method, url) {
   				var xhr = new XMLHttpRequest();
   				if ("withCredentials" in xhr) {
@@ -167,6 +168,24 @@
 		<!-- Here are examples of how to call REST API Methods -->
 		<script type="text/javascript">
 		
+			function getDeckStuff()
+			{
+				var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getDeckStuff");
+				
+				if(!xhr)
+				{
+					alert("CORS not supported");
+				}
+				
+				xhr.onload = function(e)
+				{
+					var responseText = xhr.response;
+					alert(responseText);
+				};
+				xhr.send();
+			}
+			
+			
 			// This calls the helloJSONList REST method from TopTrumpsRESTAPI
 			function helloJSONList() {
 			

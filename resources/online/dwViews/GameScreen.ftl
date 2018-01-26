@@ -75,7 +75,6 @@
 	  </div>
 	</nav> 
 	
-	  	<div class="container">
 	  		<div class="text">
   					<div class="card-block">
     					<center>
@@ -146,6 +145,7 @@
 				// For example, lets call our sample methods
 				helloJSONList();
 				helloWord("Student");
+				getDeckStuff();
 				
 			}
 			

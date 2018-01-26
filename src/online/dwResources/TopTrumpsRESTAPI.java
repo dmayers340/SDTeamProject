@@ -1,6 +1,7 @@
 package online.dwResources;
 
-import java.io.IOException;
+import java.util.*;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +31,8 @@ import com.fasterxml.jackson.databind.ObjectWriter;
  * methods that allow a TopTrumps game to be controled from a Web page.
  */
 public class TopTrumpsRESTAPI {
+	String deck;
+	String line;
 
 	/** A Jackson Object writer. It allows us to turn Java objects
 	 * into JSON strings easily. */
@@ -43,6 +46,11 @@ public class TopTrumpsRESTAPI {
 	 */
 	public TopTrumpsRESTAPI(TopTrumpsJSONConfiguration conf) 
 	{
+		
+		this.deck = conf.getDeckFile();
+		
+		
+		conf.getNumAIPlayers();
 		//methods that calls to
 		
 		// ----------------------------------------------------
@@ -53,7 +61,31 @@ public class TopTrumpsRESTAPI {
 	// ----------------------------------------------------
 	// Add relevant API methods here
 	// ----------------------------------------------------
-	
+	@GET
+	@Path("/getDeckStuff")
+	public String getDeckStuff() throws IOException
+	{	
+		BufferedReader reader = null;
+		reader = new BufferedReader(new FileReader(deck));
+		while((line = reader.readLine()) != null)
+		{
+			// create new fitnessclass object based on line
+			String[] newLine = line.split(" ");
+			return Arrays.toString(newLine);
+
+		}
+		return null;
+	}
+
+		//Scanner s = new Scanner(new File(deck));
+		//ArrayList<String> list = new ArrayList<String>();
+		//while (s.hasNext())
+		//{
+		//    list.add(s.next());
+		//}
+		//s.close();
+		
+		//return list.toString();
 	@GET
 	@Path("/helloJSONList")
 	/**
