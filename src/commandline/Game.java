@@ -247,7 +247,9 @@ public class Game {
 
 		{	
 			System.out.println(p.handToString());
-			
+
+			logPlayerCards();
+
 		}
 
 
@@ -306,7 +308,7 @@ public class Game {
 
 	}
 
-	private void logPlayerCards(ArrayList<Card>eachPlayersCards, String pName) {
+	private void logPlayerCards() {
 
 		PrintWriter printer = null;
 
@@ -316,16 +318,22 @@ public class Game {
 				BufferedWriter bw = new BufferedWriter(fw);
 				printer = new PrintWriter(bw);
 
-				{ 
-					printer.println(pName + "'s cards");
-					printer.println("");
-					printer.println(eachPlayersCards.toString()); 
-					printer.println("");
-				}
-
 				String logSeparator = "-------------------------------------------------------------"+
 						"-------------------------";
-				printer.println(logSeparator);
+				String playerCards = "";
+
+				{ 
+
+					for (Player p: listOfPlayers)
+
+					{
+						playerCards = p + p.handToString() + logSeparator;
+
+					}
+
+				}
+
+				printer.println(playerCards);
 
 			}
 
@@ -400,10 +408,18 @@ public class Game {
 
 				for (Player p: listOfPlayers) {
 
-					printer.println(p.getTopCard().toString());
+					if (!p.isInGame())
+					{
+						printer.println(p.getName() + " is out of cards");
+					}
 
+					else 
+					{	
+						printer.println(p.getName() + "'s cards: ");
+						printer.println(p.getTopCard().toString());
+					}
 				}
-				
+
 				printer.println(logSeparator);
 			}
 			finally {
