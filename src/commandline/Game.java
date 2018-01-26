@@ -69,7 +69,7 @@ public class Game {
 			setActivePlayer(); // set deciding player 
 			newRound = new Round(listOfPlayers, activePlayer);
 
-			// logCardsInPlay(); 
+			logCardsInPlay(); 
 			//prints each player's top card to log
 			newRound.playRound();
 
@@ -400,7 +400,7 @@ public class Game {
 					for (Player p: listOfPlayers) {
 
 						printer.print(p.getName() + ":" + " ");
-						printer.println(p.getTopCard().toString());
+						printer.println(p.getHand());
 
 					}
 					printer.println(logSeparator);
