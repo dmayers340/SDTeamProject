@@ -89,7 +89,7 @@ public class Player {
 	public String handToString()
 
 	{
-		String h = String.format("%s \n", this.getName());
+		String h = String.format("\n %s \n", this.getName());
 		h = String.format("%s %s \n", h, this.getTopCard().cString());
 
 
