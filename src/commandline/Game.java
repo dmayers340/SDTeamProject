@@ -16,13 +16,15 @@ public class Game {
 	 */
 
 	private int numberOfPlayers; //we should assume there will always be 4 AI players
+	private int remainingPlayers; // players still in game
 	private Deck currentDeck;
 	private Round newRound;
 	private Player activePlayer;
 	private String username;
+	private Player gameWinner;
 
 	private static ArrayList <Player> listOfPlayers;
-	
+
 	private final String logFile = "toptrumps.log";
 
 	/**
@@ -36,59 +38,54 @@ public class Game {
 
 		boolean deckOutputToLog = false;
 		logDeck(d,deckOutputToLog);
-		
+
 		d.shuffleDeck();
 		deckOutputToLog = true;
 		currentDeck = d;
 		logDeck(currentDeck, deckOutputToLog); //prints shuffled deck to log file
 
-		int p = TopTrumpsCLIApplication.howManyPlayers();
-		numberOfPlayers = p+1;
+		int p = TopTrumpsCLIApplication.howManyPlayers(); // user picks number of players
+		numberOfPlayers = p+1; // AI players + human player
+		remainingPlayers = p+1; // starts with all players still in game
 
 		/**
 		 * for testing 
 		System.out.println();
 		System.out.println("Current deck printed below:");
 		System.out.println(currentDeck.dString());
-		*/
+		 */
 
 		createPlayers();
 		dealCards();
-		
+
 		/**
 		 * rounds continue until there is only 1 player left
 		 * the last remaining player is the winner 
 		 */
 
-		while (listOfPlayers.size() > 1)
+		while (remainingPlayers > 1)
 
 		{
-			setActivePlayer(); // deciding player 
+			setActivePlayer(); // set deciding player 
 			newRound = new Round(listOfPlayers, activePlayer);
-			
-			logCardsInPlay(); //prints each player's top card to log
+
+			logCardsInPlay(); 
+			//prints each player's top card to log
 			newRound.playRound();
-			
-			// for testing
-			if (newRound.isDraw())
-				
-			{
-				String communalPile = newRound.getCommunalPile();
-				System.out.println ("The previous round was a draw, printing the contents of the communal pile now");
-				logCommunalPile(communalPile);
-			}
-			
+
 			String log = newRound.getRoundLog(); 
 			System.out.println(log);
-			
-			updatePlayers(); // removes "losers"
+
+			System.out.println("================================================");
+
+			updatePlayers(); // updates number of remaining players
 		}
 
 		newRound.getWinner();
 		showWinner();
 
 	}
-	
+
 
 	public Deck getCurrentDeck()
 	{
@@ -97,7 +94,7 @@ public class Game {
 
 
 	/**
-	 * removes players with no cards 
+	 * updates number of remaining players
 	 */
 
 	private void updatePlayers ()
@@ -107,16 +104,17 @@ public class Game {
 
 		{
 			Player p = listOfPlayers.get(i);
-			if (!p.hasCards() && listOfPlayers.size()>0)
+
+			if (p.isInGame() && p.getHand().size()<1)
 
 			{
-				listOfPlayers.remove(p);
-				System.out.println(p.getName() + " HAS BEEN REMOVED FROM THE GAME");
-				i--; //  resets index 
+				System.out.println(p.getName() + " HAS NO CARDS LEFT");
+				p.setStatus(false);
+				remainingPlayers--;
 			}
 		}
 	}
-	
+
 
 
 	/**
@@ -126,11 +124,16 @@ public class Game {
 	private void setActivePlayer()
 
 	{
-		// if new game
-		if (newRound==null )
+		if (newRound==null) // if new game
 
 		{
 			activePlayer = listOfPlayers.get(pickRandomPlayer());
+		}
+
+		else if (newRound.getWinner() == null) // if draw
+
+		{
+			return;  
 		}
 
 		else 
@@ -149,9 +152,37 @@ public class Game {
 	private void showWinner ()
 
 	{
-		System.out.println();
-		System.out.println("The winner of the game is " + listOfPlayers.get(0).getName());
-		System.out.println();
+		// if only one player is left with cards after a draw
+		// they automatically become the winner
+		if (newRound.isDraw())		
+		{
+			for (int i=0; i<listOfPlayers.size(); i++)
+			{
+				if (listOfPlayers.get(i).isInGame())
+					gameWinner = listOfPlayers.get(i); 
+			}
+		}
+
+		else 
+		{
+			gameWinner = newRound.getWinner();
+		}
+
+		System.out.println("The winner of the game is " + gameWinner.getName());
+
+		if (gameWinner == listOfPlayers.get(0))
+		{
+			System.out.print ("\n" + 
+					"╔═══╗─────────────╔╗───╔╗───╔╗\n" + 
+					"║╔═╗║────────────╔╝╚╗──║║──╔╝╚╗\n" + 
+					"║║─╚╬══╦═╗╔══╦═╦═╩╗╔╬╗╔╣║╔═╩╗╔╬╦══╦═╗╔══╗\n" + 
+					"║║─╔╣╔╗║╔╗╣╔╗║╔╣╔╗║║║║║║║║╔╗║║╠╣╔╗║╔╗╣══╣\n" + 
+					"║╚═╝║╚╝║║║║╚╝║║║╔╗║╚╣╚╝║╚╣╔╗║╚╣║╚╝║║║╠══║\n" + 
+					"╚═══╩══╩╝╚╩═╗╠╝╚╝╚╩═╩══╩═╩╝╚╩═╩╩══╩╝╚╩══╝\n" + 
+					"──────────╔═╝║\n" + 
+					"──────────╚══╝");
+		}
+
 	}
 
 	/**
@@ -165,9 +196,9 @@ public class Game {
 		listOfPlayers = new ArrayList<Player>();
 
 		int i = 0;
-		
+
 		System.out.println("Please enter your username: ");
-		
+
 		Scanner in = new Scanner (System.in);
 		username = in.next();
 
@@ -195,10 +226,9 @@ public class Game {
 		int i;
 		for (i = 0; i < numberOfPlayers; i++) {
 
-			System.out.println("Dealing once");
 			ArrayList<Card> cardsForEachPlayer = new ArrayList<Card>(currentDeck.getDeck().subList(0, numCardsEach));
 			String playerName = listOfPlayers.get(i).getName();
-			logPlayerCards(cardsForEachPlayer, playerName);
+			// logPlayerCards(cardsForEachPlayer, playerName);
 			listOfPlayers.get(i).receiveCards(cardsForEachPlayer);
 			currentDeck.getDeck().removeAll(cardsForEachPlayer);
 
@@ -210,12 +240,14 @@ public class Game {
 
 		}
 
-
+		System.out.println("Dealing cards...");
+		System.out.println();
 
 		for (Player p: listOfPlayers)
 
 		{	
-			System.out.println(p.getHand().toString());
+			System.out.println(p.handToString());
+			
 		}
 
 
@@ -309,46 +341,46 @@ public class Game {
 					"Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
-		
-		private void logCommunalPile(String cP) {
 
-			PrintWriter printer = null;
+	private void logCommunalPile(String cP) {
 
+		PrintWriter printer = null;
+
+		try {
 			try {
-				try {
-					FileWriter fw = new FileWriter(logFile, true);
-					BufferedWriter bw = new BufferedWriter(fw);
-					printer = new PrintWriter(bw);
+				FileWriter fw = new FileWriter(logFile, true);
+				BufferedWriter bw = new BufferedWriter(fw);
+				printer = new PrintWriter(bw);
 
-					{ 
-						printer.println("Communal pile");
-						printer.println("");
-						printer.println(cP); 
-						printer.println("");
-					}
-
-					String logSeparator = "-------------------------------------------------------------"+
-							"-------------------------";
-					printer.println(logSeparator);
-
+				{ 
+					printer.println("Communal pile");
+					printer.println("");
+					printer.println(cP); 
+					printer.println("");
 				}
 
-				finally {
+				String logSeparator = "-------------------------------------------------------------"+
+						"-------------------------";
+				printer.println(logSeparator);
 
-					if (printer != null) {
-						printer.close();
-					}
-				} 	
-			}
-			catch (IOException ioe) {
-				JOptionPane.showMessageDialog(null, "File not found",
-						"Error", JOptionPane.ERROR_MESSAGE);
 			}
 
-		
-		
-		
-		
+			finally {
+
+				if (printer != null) {
+					printer.close();
+				}
+			} 	
+		}
+		catch (IOException ioe) {
+			JOptionPane.showMessageDialog(null, "File not found",
+					"Error", JOptionPane.ERROR_MESSAGE);
+		}
+
+
+
+
+
 
 	}
 
@@ -365,17 +397,14 @@ public class Game {
 						"-------------------------";
 				printer.println("Round " + newRound.getRoundCount() + ". " + "Cards in play:-");
 				printer.println(" ");
-				{
-					for (Player p: listOfPlayers) {
 
-						printer.print(p.getName() + ":" + " ");
+				for (Player p: listOfPlayers) {
 
-						printer.println(p.getTopCard().toString());
+					printer.println(p.getTopCard().toString());
 
-
-					}
-					printer.println(logSeparator);
 				}
+				
+				printer.println(logSeparator);
 			}
 			finally {
 

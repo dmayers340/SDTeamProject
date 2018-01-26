@@ -8,16 +8,16 @@ public class Player {
 	private Card card;
 	private int numberOfCardsEach;
 	private boolean human; 
-	private boolean hasCards;
+	private boolean isInGame;
 
 	public Player(String pName) { 
 
 		this.playerName = pName;
-		hasCards = true;
+		isInGame = true;
 	}
 
 	public void setUsername (String username) 
-	
+
 	{
 		this.playerName = username;
 	}
@@ -73,16 +73,42 @@ public class Player {
 	}
 
 
+
+
 	/**
 	 * @return top card in hand
 	 */
 
 	public Card getTopCard() 
 
-	{
+	{	
 		return hand.get(0);
+
 	}
 
+	public String handToString()
+
+	{
+		String h = String.format("\n %s \n", this.getName());
+		h = String.format("%s %s \n", h, this.getTopCard().cString());
+
+
+		for (int i = 0; i<hand.size(); i++)
+
+		{
+			if (hand.size() == 0)
+			{
+				h = String.format("%s %s \n", h, (this.getName() + "has no cards"));
+			}
+
+			else 
+			{
+				h = String.format("%s %s \n", h, hand.get(i));
+			}
+		}
+
+		return h;
+	}
 
 	/**
 	 * @return player name
@@ -118,22 +144,15 @@ public class Player {
 	}
 
 
-	/**
-	 * checks if the user has cards
-	 * @return true / false
-	 */
-
-
-	public boolean hasCards ()
+	public boolean isInGame ()
 
 	{
-		if (hand.size()<1 || hand == null)
-
-		{ 
-			hasCards = false;
-		}
-
-		return hasCards;
+		return isInGame; 
 	}
 
+	public void setStatus (boolean inGame)
+
+	{
+		isInGame = inGame;
+	}
 }

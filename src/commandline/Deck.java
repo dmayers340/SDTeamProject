@@ -159,7 +159,7 @@ public class Deck {
 		// print categories
 		for (int i = 0; i < categories.size(); i++)
 		{
-			cString = cString + String.format( "%s ", categories.get(i));
+			cString = cString + String.format( "%-15s ", categories.get(i));
 		}
 
 		return cString; 	
