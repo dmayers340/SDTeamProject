@@ -8,12 +8,14 @@ public class Player {
 	private Card card;
 	private int numberOfCardsEach;
 	private boolean human; 
+	private boolean isInGame;
 	private boolean hasCards;
 
 	public Player(String pName) { 
 
 		this.playerName = pName;
 		hasCards = true;
+		isInGame = true;
 	}
 
 	public void setUsername (String username) 
@@ -79,8 +81,9 @@ public class Player {
 
 	public Card getTopCard() 
 
-	{
+	{	
 		return hand.get(0);
+		
 	}
 
 
@@ -136,4 +139,15 @@ public class Player {
 		return hasCards;
 	}
 
+	public boolean isInGame ()
+	
+	{
+		return isInGame; 
+	}
+	
+	public void setStatus (boolean inGame)
+	
+	{
+		isInGame = inGame;
+	}
 }

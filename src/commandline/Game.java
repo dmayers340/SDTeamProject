@@ -16,6 +16,7 @@ public class Game {
 	 */
 
 	private int numberOfPlayers; //we should assume there will always be 4 AI players
+	private int remainingPlayers; // players still in game
 	private Deck currentDeck;
 	private Round newRound;
 	private Player activePlayer;
@@ -42,8 +43,9 @@ public class Game {
 		currentDeck = d;
 		logDeck(currentDeck, deckOutputToLog); //prints shuffled deck to log file
 
-		int p = TopTrumpsCLIApplication.howManyPlayers();
-		numberOfPlayers = p+1;
+		int p = TopTrumpsCLIApplication.howManyPlayers(); // user picks number of players
+		numberOfPlayers = p+1; // AI players + human player
+		remainingPlayers = p+1; // starts with all players still in game
 
 		/**
 		 * for testing 
@@ -60,28 +62,22 @@ public class Game {
 		 * the last remaining player is the winner 
 		 */
 
-		while (listOfPlayers.size() > 1)
+		while (remainingPlayers > 1)
 
 		{
-			setActivePlayer(); // deciding player 
+			setActivePlayer(); // set deciding player 
 			newRound = new Round(listOfPlayers, activePlayer);
 			
-			logCardsInPlay(); //prints each player's top card to log
+			// logCardsInPlay(); 
+			//prints each player's top card to log
 			newRound.playRound();
-			
-			// for testing
-			if (newRound.isDraw())
-				
-			{
-				String communalPile = newRound.getCommunalPile();
-				System.out.println ("The previous round was a draw, printing the contents of the communal pile now");
-				logCommunalPile(communalPile);
-			}
-			
+
 			String log = newRound.getRoundLog(); 
 			System.out.println(log);
 			
-			updatePlayers(); // removes "losers"
+			System.out.println("================================================");
+			
+			updatePlayers(); // updates number of remaining players
 		}
 
 		newRound.getWinner();
@@ -97,7 +93,7 @@ public class Game {
 
 
 	/**
-	 * removes players with no cards 
+	 * updates number of remaining players
 	 */
 
 	private void updatePlayers ()
@@ -107,12 +103,13 @@ public class Game {
 
 		{
 			Player p = listOfPlayers.get(i);
-			if (!p.hasCards() && listOfPlayers.size()>0)
+			
+			if (p.isInGame() && p.getHand().size()<1)
 
 			{
-				listOfPlayers.remove(p);
-				System.out.println(p.getName() + " HAS BEEN REMOVED FROM THE GAME");
-				i--; //  resets index 
+				System.out.println(p.getName() + " HAS NO CARDS LEFT");
+				p.setStatus(false);
+				remainingPlayers--;
 			}
 		}
 	}
@@ -126,13 +123,18 @@ public class Game {
 	private void setActivePlayer()
 
 	{
-		// if new game
-		if (newRound==null )
+		if (newRound==null) // if new game
 
 		{
 			activePlayer = listOfPlayers.get(pickRandomPlayer());
 		}
-
+		
+		else if (newRound.getWinner() == null) // if draw
+			
+		{
+			return;  
+		}
+		
 		else 
 
 		{
@@ -150,7 +152,7 @@ public class Game {
 
 	{
 		System.out.println();
-		System.out.println("The winner of the game is " + listOfPlayers.get(0).getName());
+		System.out.println("The winner of the game is " + newRound.getWinner().getName());
 		System.out.println();
 	}
 
@@ -367,11 +369,9 @@ public class Game {
 				printer.println(" ");
 				{
 					for (Player p: listOfPlayers) {
-
+						
 						printer.print(p.getName() + ":" + " ");
-
 						printer.println(p.getTopCard().toString());
-
 
 					}
 					printer.println(logSeparator);
