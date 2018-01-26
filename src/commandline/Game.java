@@ -162,7 +162,7 @@ public class Game {
 					gameWinner = listOfPlayers.get(i); 
 			}
 		}
-		
+
 		else 
 		{
 			gameWinner = newRound.getWinner();
@@ -222,8 +222,6 @@ public class Game {
 	public void dealCards() {
 
 		int numCardsEach = currentDeck.getNumberOfCards() / numberOfPlayers;
-		
-		System.out.println("Dealing cards...");
 
 		int i;
 		for (i = 0; i < numberOfPlayers; i++) {
@@ -241,14 +239,14 @@ public class Game {
 			listOfPlayers.get(pickRandomPlayer()).receiveExtraCards(currentDeck.getDeck());
 
 		}
-
-
+		
+		System.out.println("Dealing cards...");
+		System.out.println();
 
 		for (Player p: listOfPlayers)
 
 		{	
-			System.out.println(p.getName());
-			System.out.println(p.getHand().toString());
+			System.out.println(p.handToString());
 		}
 
 

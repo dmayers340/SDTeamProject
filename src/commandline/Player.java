@@ -9,12 +9,10 @@ public class Player {
 	private int numberOfCardsEach;
 	private boolean human; 
 	private boolean isInGame;
-	private boolean hasCards;
 
 	public Player(String pName) { 
 
 		this.playerName = pName;
-		hasCards = true;
 		isInGame = true;
 	}
 
@@ -91,12 +89,14 @@ public class Player {
 	public String handToString()
 	
 	{
-		String h = "";
+		String h = String.format("%s \n", this.getName());
+		h = String.format("%s %s \n ", h, this.getTopCard().cString());
+		
 		
 		for (int i = 0; i<hand.size(); i++)
 			
 		{
-			h = String.format("\n %s %s", h, hand.get(i));
+			h = String.format("%s %s \n ", h, hand.get(i));
 		}
 		
 		return h;
@@ -135,24 +135,6 @@ public class Player {
 		return human;
 	}
 
-
-	/**
-	 * checks if the user has cards
-	 * @return true / false
-	 */
-
-
-	public boolean hasCards ()
-
-	{
-		if (hand.size()<1 || hand == null)
-
-		{ 
-			hasCards = false;
-		}
-
-		return hasCards;
-	}
 
 	public boolean isInGame ()
 	

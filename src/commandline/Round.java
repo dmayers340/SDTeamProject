@@ -316,7 +316,7 @@ public class Round {
 			System.out.println("There are currently " + communalPile.size() + 
 					" cards in the communal pile: ");
 			
-			String cPile = players.get(0).getTopCard().cString();
+			String cPile = String.format("%s \n", activePlayer.getTopCard().cString());
 			for (int i = 0; i<communalPile.size(); i++)
 			{
 				cPile = String.format("%s %s \n", cPile, communalPile.get(i));
