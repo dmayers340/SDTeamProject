@@ -399,7 +399,7 @@ public class Game {
 				{
 					for (Player p: listOfPlayers) {
 
-						printer.print(p.getName() + ":" + " ");
+//						printer.print(p.getName() + ":" + " ");
 						printer.println(p.getHand());
 
 					}
