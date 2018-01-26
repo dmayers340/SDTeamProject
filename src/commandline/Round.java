@@ -113,7 +113,6 @@ public class Round {
 			System.out.println("The winning card for round " + roundCount + " was: ");
 			System.out.println(winner.getTopCard().cString());
 			System.out.println(winner.getTopCard().toString());
-			System.out.println(" + + + ");
 
 			distributeCards();
 			communalPile = new ArrayList<Card>(); // resets communal pile
@@ -316,7 +315,14 @@ public class Round {
 		{
 			System.out.println("There are currently " + communalPile.size() + 
 					" cards in the communal pile: ");
-			return communalPile.toString();
+			
+			String cPile = players.get(0).getTopCard().cString();
+			for (int i = 0; i<communalPile.size(); i++)
+			{
+				cPile = String.format("%s %s \n", cPile, communalPile.get(i));
+			}
+			
+			return cPile;
 		}
 
 		else 

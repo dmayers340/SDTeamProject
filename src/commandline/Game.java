@@ -222,11 +222,12 @@ public class Game {
 	public void dealCards() {
 
 		int numCardsEach = currentDeck.getNumberOfCards() / numberOfPlayers;
+		
+		System.out.println("Dealing cards...");
 
 		int i;
 		for (i = 0; i < numberOfPlayers; i++) {
 
-			System.out.println("Dealing once");
 			ArrayList<Card> cardsForEachPlayer = new ArrayList<Card>(currentDeck.getDeck().subList(0, numCardsEach));
 			String playerName = listOfPlayers.get(i).getName();
 			logPlayerCards(cardsForEachPlayer, playerName);
@@ -246,6 +247,7 @@ public class Game {
 		for (Player p: listOfPlayers)
 
 		{	
+			System.out.println(p.getName());
 			System.out.println(p.getHand().toString());
 		}
 

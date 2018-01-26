@@ -75,6 +75,8 @@ public class Player {
 	}
 
 
+	
+	
 	/**
 	 * @return top card in hand
 	 */
@@ -86,6 +88,19 @@ public class Player {
 		
 	}
 
+	public String handToString()
+	
+	{
+		String h = "";
+		
+		for (int i = 0; i<hand.size(); i++)
+			
+		{
+			h = String.format("\n %s %s", h, hand.get(i));
+		}
+		
+		return h;
+	}
 
 	/**
 	 * @return player name
