@@ -19,7 +19,7 @@ public class Player {
 	public void setUsername (String username) 
 
 	{
-		this.playerName = username;
+		this.playerName = username.toUpperCase();
 	}
 
 	public void setNumberOfCardsEach(int numC) {

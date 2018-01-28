@@ -213,7 +213,7 @@ public class Game {
 		for (i = 1; i < numberOfPlayers; i++) 
 
 		{
-			Player p = new Player("AI-Player" + i);
+			Player p = new Player("AI_Player" + i);
 			listOfPlayers.add(p);
 		}
 
@@ -386,7 +386,7 @@ public class Game {
 						printer = new PrintWriter(bw);
 
 						{ 
-							printer.println(gameWinner.getName() + "WON THE GAME!");
+							printer.println(gameWinner.getName() + " WON THE GAME!");
 						}
 					}
 
