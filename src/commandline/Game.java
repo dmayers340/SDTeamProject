@@ -48,13 +48,6 @@ public class Game {
 		numberOfPlayers = p+1; // AI players + human player
 		remainingPlayers = p+1; // starts with all players still in game
 
-		/**
-		 * for testing 
-		System.out.println();
-		System.out.println("Current deck printed below:");
-		System.out.println(currentDeck.dString());
-		 */
-
 		createPlayers();
 		dealCards();
 		
@@ -206,7 +199,7 @@ public class Game {
 		System.out.println("Please enter your username: ");
 
 		Scanner in = new Scanner (System.in);
-		username = in.next();
+		username = String.format("%-10s", in.next());
 
 		// creates the human player
 		Player h = new Player(username);

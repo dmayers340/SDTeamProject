@@ -81,7 +81,7 @@ public class Card {
 			cString = cString + String.format( "%-15s", categories.get(i));
 		}
 
-		return cString; 	
+		return cString.toUpperCase(); 	
 	}
 
 	/**

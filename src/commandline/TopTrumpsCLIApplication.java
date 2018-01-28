@@ -178,38 +178,3 @@ public class TopTrumpsCLIApplication {
 	}
 
 }
-
-//	public static void logShuffledDeck()	{
-//
-//
-//
-//		PrintWriter printer = null;
-//		try {
-//			try {
-//				FileWriter fw = new FileWriter("logFile", true);
-//				BufferedWriter bw = new BufferedWriter(fw);
-//				printer = new PrintWriter(bw);
-//
-//				{
-//					String shuffledDeck = game.getCurrentDeck().dString();
-//					printer.println(shuffledDeck); //deck before shuffled
-//				}
-//
-//
-//			}
-//			finally {
-//
-//				if (printer != null) {
-//					printer.close();
-//				}
-//			} 	
-//		}
-//		catch (IOException ioe) {
-//			JOptionPane.showMessageDialog(null, "File not found",
-//					"Error", JOptionPane.ERROR_MESSAGE);
-//
-//		}				
-//	
-//	
-//	}
-//}

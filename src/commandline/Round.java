@@ -50,7 +50,7 @@ public class Round {
 
 	{	
 		System.out.println("ROUND NUMBER " + (roundCount)); 
-		String a = "The active player is " + activePlayer.getName();
+		String a = "The active player is " + activePlayer.getName().toUpperCase();
 
 		roundLog.append(a);
 		roundLog.append("\n");
@@ -104,7 +104,7 @@ public class Round {
 
 		// system out
 		String cat = String.format("%s%d%s%s", "The category for round ", roundCount," is ", 
-				activePlayer.getTopCard().getCategories().get(c));
+				activePlayer.getTopCard().getCategories().get(c).toUpperCase());
 		System.out.println(cat);
 		System.out.println("+ + + ");
 		roundLog.append(cat);
