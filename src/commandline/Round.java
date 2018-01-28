@@ -18,7 +18,6 @@ public class Round {
 	public static boolean draw = false; // 1st round starts with no draw
 	private static ArrayList<Card> communalPile = new ArrayList<Card>(); 
 
-//	private String roundLog;
 	private StringBuilder roundLog = new StringBuilder();
 	private String logSeparator = "--------------------------------------------------------------------------------------";
 	private static int roundCount = 0;
@@ -32,6 +31,7 @@ public class Round {
 
 	{
 		addRound();
+		roundLog.append(logSeparator);
 		String roundLog1 = String.format("%s%d\n", "ROUND ", roundCount); // sets top line for round log
 		roundLog.append("\n");
 		roundLog.append(roundLog1);
@@ -256,7 +256,7 @@ public class Round {
 
 		}
 		
-		String d = "Round " + roundCount + " was a draw";
+		String d = "\nRound " + roundCount + " was a draw";
 		System.out.println(d);
 		
 		
@@ -280,7 +280,7 @@ public class Round {
 	{
 		System.out.println("It's your turn to choose! Please enter the name of the category.");
 
-		String s = ("The human player " + activePlayer.getName() + " chose the category for round " + roundCount);
+		String s = ("\nThe human player " + activePlayer.getName() + " chose the category for round " + roundCount);
 		roundLog.append(s);
 		roundLog.append("\n");
 
@@ -361,7 +361,7 @@ public class Round {
 		if (communalPile.size()>0)
 
 		{
-			String cPile = ("There are " + communalPile.size() + 
+			String cPile = ("\nThere are " + communalPile.size() + 
 					" cards in the communal pile: ");
 
 			cPile = String.format("%s\n%s\n", cPile, activePlayer.getTopCard().cString());
@@ -405,17 +405,6 @@ public class Round {
 		return roundCount;
 	}
 
-	/**
-	 * adds more stuff to log
-	 */
-
-//	private void updateRoundLog(String s)
-//
-//	{	roundLog = String.format("%s\n%s\n", roundLog, s); 
-//		StringBuilder log = new StringBuilder(roundLog);
-//		log.append(roundLog);
-//	}
-
 
 	/**
 	 * String 
@@ -427,9 +416,9 @@ public class Round {
 	public String getRoundLog() 
 
 	{
-		String endOfRound = String.format("%s\n%s%d", roundLog, "END OF LOG FOR ROUND ", roundCount);
-		roundLog.append(endOfRound);
-		roundLog.append("\n" + logSeparator);
+//		String endOfRound = String.format("%s\n%s%d", roundLog, "END OF LOG FOR ROUND ", roundCount);
+//		roundLog.append(endOfRound);
+//		roundLog.append("\n");
 		return roundLog.toString();
 	}
 

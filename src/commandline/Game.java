@@ -58,7 +58,7 @@ public class Game {
 		createPlayers();
 		dealCards();
 		
-		logDealtCards(); // right after they have been deal 
+		logDealtCards(); // right after they have been dealt
 
 		/**
 		 * rounds continue until there is only 1 player left
@@ -71,12 +71,13 @@ public class Game {
 			setActivePlayer(); // set deciding player 
 			newRound = new Round(listOfPlayers, activePlayer);
 
-//			logDealtCards(); 
+			if (newRound.getRoundCount() > 1) {
+				logDealtCards(); 
+			}
+			
 			 
 			newRound.playRound();
 
-//			String log = newRound.getRoundLog(); 
-//			System.out.println(log);
 			roundLog();
 
 			System.out.println("----------------------------------------------------------------"+
@@ -216,7 +217,7 @@ public class Game {
 		for (i = 1; i < numberOfPlayers; i++) 
 
 		{
-			Player p = new Player("Player" + "" + i);
+			Player p = new Player("AI-Player" + i);
 			listOfPlayers.add(p);
 		}
 
@@ -247,7 +248,6 @@ public class Game {
 		System.out.println("Dealing cards...");
 		System.out.println();
 
-//		logDealtCards();
 
 	}
 
@@ -278,10 +278,11 @@ public class Game {
 						fw = new FileWriter(logFile, false); //overwrite log contents if new game
 						deck = d.dString();
 						deckDescriptor = "Deck as read from file\n";
+						printer.println(logSeparator);	
 					}
 
 
-					printer.println(logSeparator);	
+					
 					printer.println(deckDescriptor);
 					printer.println(deck);
 					printer.println(logSeparator);
@@ -353,41 +354,41 @@ public class Game {
 	
 	
 
-	private void logCommunalPile(String cP) {
-
-		PrintWriter printer = null;
-
-		try {
-			try {
-				FileWriter fw = new FileWriter(logFile, true);
-				BufferedWriter bw = new BufferedWriter(fw);
-				printer = new PrintWriter(bw);
-
-				{ 
-					printer.println("Communal pile");
-					printer.println("");
-					printer.println(cP); 
-					printer.println("");
-				}
-
-				String logSeparator = "-------------------------------------------------------------"+
-						"-------------------------";
-				printer.println(logSeparator);
-
-			}
-
-			finally {
-
-				if (printer != null) {
-					printer.close();
-				}
-			} 	
-		}
-		catch (IOException ioe) {
-			JOptionPane.showMessageDialog(null, "File not found",
-					"Error", JOptionPane.ERROR_MESSAGE);
-		}
-	}
+//	private void logCommunalPile(String cP) {
+//
+//		PrintWriter printer = null;
+//
+//		try {
+//			try {
+//				FileWriter fw = new FileWriter(logFile, true);
+//				BufferedWriter bw = new BufferedWriter(fw);
+//				printer = new PrintWriter(bw);
+//
+//				{ 
+//					printer.println("Communal pile");
+//					printer.println("");
+//					printer.println(cP); 
+//					printer.println("");
+//				}
+//
+//				String logSeparator = "-------------------------------------------------------------"+
+//						"-------------------------";
+//				printer.println(logSeparator);
+//
+//			}
+//
+//			finally {
+//
+//				if (printer != null) {
+//					printer.close();
+//				}
+//			} 	
+//		}
+//		catch (IOException ioe) {
+//			JOptionPane.showMessageDialog(null, "File not found",
+//					"Error", JOptionPane.ERROR_MESSAGE);
+//		}
+//	}
 
 		private void roundLog() {
 
@@ -404,9 +405,6 @@ public class Game {
 						printer.println(newRound.getRoundLog());
 					}
 
-					String logSeparator = "-------------------------------------------------------------"+
-							"-------------------------";
-					printer.println(logSeparator);
 
 				}
 
