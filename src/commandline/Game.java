@@ -165,6 +165,7 @@ public class Game {
 		else 
 		{
 			gameWinner = newRound.getWinner();
+			logGameWinner();
 		}
 
 		System.out.println("The winner of the game is " + gameWinner.getName());
@@ -180,6 +181,8 @@ public class Game {
 					"╚═══╩══╩╝╚╩═╗╠╝╚╝╚╩═╩══╩═╩╝╚╩═╩╩══╩╝╚╩══╝\n" + 
 					"──────────╔═╝║\n" + 
 					"──────────╚══╝");
+			
+			
 		}
 
 	}
@@ -342,46 +345,6 @@ public class Game {
 		}
 	}
 	
-	
-	
-	
-	
-
-//	private void logCommunalPile(String cP) {
-//
-//		PrintWriter printer = null;
-//
-//		try {
-//			try {
-//				FileWriter fw = new FileWriter(logFile, true);
-//				BufferedWriter bw = new BufferedWriter(fw);
-//				printer = new PrintWriter(bw);
-//
-//				{ 
-//					printer.println("Communal pile");
-//					printer.println("");
-//					printer.println(cP); 
-//					printer.println("");
-//				}
-//
-//				String logSeparator = "-------------------------------------------------------------"+
-//						"-------------------------";
-//				printer.println(logSeparator);
-//
-//			}
-//
-//			finally {
-//
-//				if (printer != null) {
-//					printer.close();
-//				}
-//			} 	
-//		}
-//		catch (IOException ioe) {
-//			JOptionPane.showMessageDialog(null, "File not found",
-//					"Error", JOptionPane.ERROR_MESSAGE);
-//		}
-//	}
 
 		private void roundLog() {
 
@@ -397,8 +360,6 @@ public class Game {
 						printer.println();
 						printer.println(newRound.getRoundLog());
 					}
-
-
 				}
 
 				finally {
@@ -412,8 +373,34 @@ public class Game {
 				JOptionPane.showMessageDialog(null, "File not found",
 						"Error", JOptionPane.ERROR_MESSAGE);
 			}
+		}
 
-		
+			private void logGameWinner() {
+
+				PrintWriter printer = null;
+
+				try {
+					try {
+						FileWriter fw = new FileWriter(logFile, true);
+						BufferedWriter bw = new BufferedWriter(fw);
+						printer = new PrintWriter(bw);
+
+						{ 
+							printer.println(gameWinner.getName() + "WON THE GAME!");
+						}
+					}
+
+					finally {
+
+						if (printer != null) {
+							printer.close();
+						}
+					} 	
+				}
+				catch (IOException ioe) {
+					JOptionPane.showMessageDialog(null, "File not found",
+							"Error", JOptionPane.ERROR_MESSAGE);
+				}
 		
 		
 		
