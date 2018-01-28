@@ -71,12 +71,13 @@ public class Game {
 			setActivePlayer(); // set deciding player 
 			newRound = new Round(listOfPlayers, activePlayer);
 
-			logDealtCards(); 
+//			logDealtCards(); 
 			 
 			newRound.playRound();
 
-			String log = newRound.getRoundLog(); 
-			System.out.println(log);
+//			String log = newRound.getRoundLog(); 
+//			System.out.println(log);
+			roundLog();
 
 			System.out.println("----------------------------------------------------------------"+
 					"-------------------------");
@@ -84,7 +85,7 @@ public class Game {
 
 			updatePlayers(); // updates number of remaining players
 		}
-
+		
 		newRound.getWinner();
 		showWinner();
 
@@ -246,7 +247,7 @@ public class Game {
 		System.out.println("Dealing cards...");
 		System.out.println();
 
-		logDealtCards();
+//		logDealtCards();
 
 	}
 
@@ -386,7 +387,45 @@ public class Game {
 			JOptionPane.showMessageDialog(null, "File not found",
 					"Error", JOptionPane.ERROR_MESSAGE);
 		}
+	}
 
+		private void roundLog() {
+
+			PrintWriter printer = null;
+
+			try {
+				try {
+					FileWriter fw = new FileWriter(logFile, true);
+					BufferedWriter bw = new BufferedWriter(fw);
+					printer = new PrintWriter(bw);
+
+					{ 
+						printer.println();
+						printer.println(newRound.getRoundLog());
+					}
+
+					String logSeparator = "-------------------------------------------------------------"+
+							"-------------------------";
+					printer.println(logSeparator);
+
+				}
+
+				finally {
+
+					if (printer != null) {
+						printer.close();
+					}
+				} 	
+			}
+			catch (IOException ioe) {
+				JOptionPane.showMessageDialog(null, "File not found",
+						"Error", JOptionPane.ERROR_MESSAGE);
+			}
+
+		
+		
+		
+		
 
 	}
 
