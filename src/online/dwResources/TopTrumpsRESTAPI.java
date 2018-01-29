@@ -43,7 +43,7 @@ import commandline.TopTrumpsCLIApplication;
  * methods that allow a TopTrumps game to be controled from a Web page.
  */
 public class TopTrumpsRESTAPI {
-	String deck;
+	private Deck deck;
 	String line;
 	String am;
 	private Card topcard;
@@ -52,7 +52,7 @@ public class TopTrumpsRESTAPI {
 	private ArrayList<Card> cardsInDeck;
 	private int numberOfCards;
 	private final int maxAttributes = 6;
-	private  Deck newDeck;
+	
 	private Round newRound;
 	
 	
@@ -70,66 +70,80 @@ public class TopTrumpsRESTAPI {
 		// ----------------------------------------------------
 		// Add relevant initalization here
 		// ----------------------------------------------------
-		
+		Deck newdeck=new Deck();
 		deck=conf.getDeckFile();
-		//String FILE_NAME = deck;
-		int n=conf.getNumAIPlayers();
-	//	TopTrumpsCLIApplication.readIn();
-		categories = new ArrayList<String>();
-		cardsInDeck = new ArrayList<Card>();
-		newDeck = new Deck();
+		TopTrumpsCLIApplication top=new TopTrumpsCLIApplication();
+		top.writeGameLogsToFile=false;
+		top.userWantsToQuit=false;
+		top.FILE_NAME = deck;
 		
-			FileReader reader;
-			try 
-			{
-				reader = new FileReader(deck);
-
-				Scanner in = new Scanner (reader);
-				String line = in.nextLine();
-				
-				// sets categories 
-				String [] split = new String [maxAttributes];
-				split = line.split(" ");
-				Collections.addAll(categories, split);
-				// adds cards to the deck
-				while (in.hasNextLine())
-				{
-					line = in.nextLine();	
-					ArrayList<String> card = new ArrayList<String>();
-					Collections.addAll(card, split);
-					
-					Card newCard = new Card(categories, card);
-					cardsInDeck.add(newCard);
-					numberOfCards++;
-				}
-			}
-				catch (FileNotFoundException e) 
-				{
-					
-				}
-				
-			Game newGame = new Game(newDeck);
-			newDeck.shuffleDeck();
-			int numberOfPlayers = n+1; // AI players + human player
-			int remainingPlayers = n+1; // starts with all players still in game
-			
-			while (remainingPlayers > 1)
-
-			{
-				ArrayList <Player> listOfPlayers = null;
-				Player activePlayer = null;
-				newGame.setActivePlayer(); // set deciding player 
-				newRound = new Round(listOfPlayers, activePlayer);
-
-				
-				 
-				newRound.playRound();
-
-				 // updates number of remaining players
-			}
-
-			newRound.getWinner();
+		//top.setInput("G");
+		top.readIn();
+		for(;;){
+		Game g=new Game(newdeck);
+		int numberofgame=0;
+		numberofgame++;
+		int n=conf.getNumAIPlayers();
+		g.numberOfPlayers=4;
+		g.username="Online Player";
 	}
+	}
+	//	TopTrumpsCLIApplication.readIn();
+//		categories = new ArrayList<String>();
+//		cardsInDeck = new ArrayList<Card>();
+//		newDeck = new Deck();
+//		
+//			FileReader reader;
+//			try 
+//			{
+//				reader = new FileReader(deck);
+//
+//				Scanner in = new Scanner (reader);
+//				String line = in.nextLine();
+//				
+//				// sets categories 
+//				String [] split = new String [maxAttributes];
+//				split = line.split(" ");
+//				Collections.addAll(categories, split);
+//				// adds cards to the deck
+//				while (in.hasNextLine())
+//				{
+//					line = in.nextLine();	
+//					ArrayList<String> card = new ArrayList<String>();
+//					Collections.addAll(card, split);
+//					
+//					Card newCard = new Card(categories, card);
+//					cardsInDeck.add(newCard);
+//					numberOfCards++;
+//				}
+//			}
+//				catch (FileNotFoundException e) 
+//				{
+//					
+//				}
+//				
+//			Game newGame = new Game(newDeck);
+//			newDeck.shuffleDeck();
+//			int numberOfPlayers = n+1; // AI players + human player
+//			int remainingPlayers = n+1; // starts with all players still in game
+//			
+//			while (remainingPlayers > 1)
+//
+//			{
+//				ArrayList <Player> listOfPlayers = null;
+//				Player activePlayer = null;
+//				newGame.setActivePlayer(); // set deciding player 
+//				newRound = new Round(listOfPlayers, activePlayer);
+//
+//				
+//				 
+//				newRound.playRound();
+//
+//				 // updates number of remaining players
+//			}
+//
+//			newRound.getWinner();
+//	}
 //
 //		}
 			// shuffle
