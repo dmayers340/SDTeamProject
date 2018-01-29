@@ -15,12 +15,12 @@ public class Game {
 	 *  instance variables
 	 */
 
-	private int numberOfPlayers; //we should assume there will always be 4 AI players
+	public int numberOfPlayers; //we should assume there will always be 4 AI players
 	private int remainingPlayers; // players still in game
 	private Deck currentDeck;
 	private Round newRound;
 	private Player activePlayer;
-	private String username;
+	public String username;
 	private Player gameWinner;
 
 	private static ArrayList <Player> listOfPlayers;
@@ -35,6 +35,8 @@ public class Game {
 
 	public Game (Deck d)
 	{	
+		System.out.println("running game class ; should print from deck");
+		System.out.print(d.dString());
 
 		boolean deckOutputToLog = false;
 		logDeck(d,deckOutputToLog);
