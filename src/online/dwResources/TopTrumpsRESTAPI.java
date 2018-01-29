@@ -43,7 +43,7 @@ import commandline.TopTrumpsCLIApplication;
  * methods that allow a TopTrumps game to be controled from a Web page.
  */
 public class TopTrumpsRESTAPI {
-	private Deck deck;
+	String deck; 
 	String line;
 	String am;
 	private Card topcard;
@@ -70,63 +70,65 @@ public class TopTrumpsRESTAPI {
 		// ----------------------------------------------------
 		// Add relevant initalization here
 		// ----------------------------------------------------
-		Deck newdeck=new Deck();
+		//Deck newdeck=new Deck();
 		deck=conf.getDeckFile();
-		TopTrumpsCLIApplication top=new TopTrumpsCLIApplication();
-		top.writeGameLogsToFile=false;
-		top.userWantsToQuit=false;
-		top.FILE_NAME = deck;
-		
-		//top.setInput("G");
-		top.readIn();
-		for(;;){
-		Game g=new Game(newdeck);
-		int numberofgame=0;
-		numberofgame++;
-		int n=conf.getNumAIPlayers();
-		g.numberOfPlayers=4;
-		g.username="Online Player";
-	}
-	}
-	//	TopTrumpsCLIApplication.readIn();
-//		categories = new ArrayList<String>();
-//		cardsInDeck = new ArrayList<Card>();
-//		newDeck = new Deck();
+//		TopTrumpsCLIApplication top=new TopTrumpsCLIApplication();
+//		top.writeGameLogsToFile=false;
+//		top.userWantsToQuit=false;
+//		top.FILE_NAME = deck;
 //		
-//			FileReader reader;
-//			try 
-//			{
-//				reader = new FileReader(deck);
-//
-//				Scanner in = new Scanner (reader);
-//				String line = in.nextLine();
-//				
-//				// sets categories 
-//				String [] split = new String [maxAttributes];
-//				split = line.split(" ");
-//				Collections.addAll(categories, split);
-//				// adds cards to the deck
-//				while (in.hasNextLine())
-//				{
-//					line = in.nextLine();	
-//					ArrayList<String> card = new ArrayList<String>();
-//					Collections.addAll(card, split);
-//					
-//					Card newCard = new Card(categories, card);
-//					cardsInDeck.add(newCard);
-//					numberOfCards++;
-//				}
-//			}
-//				catch (FileNotFoundException e) 
-//				{
-//					
-//				}
-//				
-//			Game newGame = new Game(newDeck);
-//			newDeck.shuffleDeck();
+//		//top.setInput("G");
+//		top.readIn();
+//		for(;;){
+//		Game g=new Game(newdeck);
+//		int numberofgame=0;
+//		numberofgame++;
+//		
+//	}
+	
+		TopTrumpsCLIApplication.readIn();
+		categories = new ArrayList<String>();
+		cardsInDeck = new ArrayList<Card>();
+       
+		
+			FileReader reader;
+			try 
+			{
+				reader = new FileReader(deck);
+
+				Scanner in = new Scanner (reader);
+				String line = in.nextLine();
+				
+				// sets categories 
+				String [] split = new String [maxAttributes];
+				split = line.split(" ");
+				Collections.addAll(categories, split);
+				// adds cards to the deck
+				while (in.hasNextLine())
+				{
+					line = in.nextLine();	
+					ArrayList<String> card = new ArrayList<String>();
+					Collections.addAll(card, split);
+					
+					Card newCard = new Card(categories, card);
+					cardsInDeck.add(newCard);
+					numberOfCards++;
+				}
+			}
+				catch (FileNotFoundException e) 
+				{
+					
+				}
+			 Deck newDeck = new Deck();		
+			Game g = new Game(newDeck);
+			newDeck.shuffleDeck();
+			int n=conf.getNumAIPlayers();
+			g.numberOfPlayers=4;
+			g.username="Online Player";
+			
 //			int numberOfPlayers = n+1; // AI players + human player
-//			int remainingPlayers = n+1; // starts with all players still in game
-//			
+	//		int remainingPlayers = n+1; // starts with all players still in game
+			
 //			while (remainingPlayers > 1)
 //
 //			{
@@ -146,7 +148,7 @@ public class TopTrumpsRESTAPI {
 //	}
 //
 //		}
-			// shuffle
+//			 shuffle
 //			
 //			int listLength = cardsInDeck.size();
 //			Card temp; 
@@ -165,9 +167,9 @@ public class TopTrumpsRESTAPI {
 //				cardsInDeck.set(random,temp);
 //			}
 //	
-	
-	
-
+//	
+//	
+	}
 		
 			
 			
