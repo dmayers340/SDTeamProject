@@ -4,7 +4,7 @@ import java.util.ArrayList;
 public class Player { 
 
 	private String playerName;
-	private static ArrayList<Card> hand;
+	private ArrayList<Card> hand;
 	private Card card;
 	private int numberOfCardsEach;
 	private boolean human; 
@@ -55,10 +55,10 @@ public class Player {
 	 * removes the player if needed
 	 */
 
-	public static void removeCard ()
+	public void removeCard ()
 
 	{
-		this.hand.remove(getTopCard());
+		hand.remove(getTopCard());
 	}
 
 
@@ -79,7 +79,7 @@ public class Player {
 	 * @return top card in hand
 	 */
 
-	public static Card getTopCard() 
+	public Card getTopCard() 
 
 	{	
 		return hand.get(0);

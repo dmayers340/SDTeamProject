@@ -35,8 +35,10 @@ public class Game {
 
 	public Game (Deck d)
 	{	
+		// this is all for testing
 		System.out.println("running game class ; should print from deck");
 		System.out.print(d.dString());
+		System.out.println();
 
 		boolean deckOutputToLog = false;
 		logDeck(d,deckOutputToLog);
