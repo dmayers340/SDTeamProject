@@ -70,11 +70,10 @@ public class TopTrumpsRESTAPI {
 		// ----------------------------------------------------
 		// Add relevant initalization here
 		// ----------------------------------------------------
-		//Deck newdeck=new Deck();
 		deck=conf.getDeckFile();
 		numPlayers = conf.getNumAIPlayers();
-	// 	System.out.println(deck);
-//		TopTrumpsCLIApplication top=new TopTrumpsCLIApplication();
+
+		//		TopTrumpsCLIApplication top=new TopTrumpsCLIApplication();
 //		top.writeGameLogsToFile=false;
 //		top.userWantsToQuit=false;
 //		top.FILE_NAME = deck;
@@ -189,17 +188,28 @@ public class TopTrumpsRESTAPI {
 	 * @return - List of words as JSON
 	 * @throws IOException
 	 */
-	public String cateJSONList() throws IOException {
-		
 	
+	public String cateJSONList() throws IOException 
+	{
 		ArrayList<String> listOfCate = new ArrayList<String>();
 		listOfCate=Card.getCategories();
-		String a="";
-		for (int i=0;i<listOfCate.size();i++){
+		String a=""; //meaningful name--is this list of cards?
+		for (int i=0;i<listOfCate.size();i++)
+		{
 			a=String.format("%s \n %s",a,listOfCate.get(i));
 		}
 		String listAsJSONString = oWriter.writeValueAsString(listOfCate);
 		return listAsJSONString;
+	}
+	
+	@GET
+	@Path("/numGames")
+	public int numGames() throws IOException 
+	{
+		
+		int numberOfGames = 7; //meaningful name--is this list of cards?
+		
+		return numberOfGames;
 	}
 //		
 		
@@ -214,8 +224,6 @@ public class TopTrumpsRESTAPI {
 		// We can turn arbatory Java objects directly into JSON strings using
 		// Jackson seralization, assuming that the Java objects are not too complex.
 		
-	
-	
 	
 	@GET
 	@Path("/helloWord")
