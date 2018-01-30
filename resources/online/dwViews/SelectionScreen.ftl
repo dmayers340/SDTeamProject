@@ -157,21 +157,8 @@
     		<br />
     		<p class="card-text">If you would like to play the game select the button below.</p>
     		<br />
-    		<a href="http://localhost:7777/toptrumps/game" class="btn btn-primary">Play Game</a></center>
-  		</div>
-		</div>
-		</div>
-
-		<div class="column2">
-		<div class="card border-dark mb-3" style="max-width: 18rem; height: 27rem;"> 
-  		<img class="card-img-top" src="https://i.kinja-img.com/gawker-media/image/upload/t_original/othklnrkmmln2e8vv3ug.jpg" alt="Card image" style="height:220px">
-  		<br />
-  		<div class="card-block">
-    		<center><h4><b>View Statistics</b></h4>
-    		<br />
-    		<p class="card-text">If you would like to view the statistics select the button below.</p>
-    		<br />
-    		<button id="myBtn">Play Game</button>
+    		
+		<button id="myBtn">Play Game</button>
     		<div id="myModal" class="modal">
 
   			<div class="modal-content">
@@ -202,6 +189,20 @@
 			</script>
 			</div>
 			</center>
+  		</div>
+		</div>
+		</div>
+
+		<div class="column2">
+		<div class="card border-dark mb-3" style="max-width: 18rem; height: 27rem;"> 
+  		<img class="card-img-top" src="https://i.kinja-img.com/gawker-media/image/upload/t_original/othklnrkmmln2e8vv3ug.jpg" alt="Card image" style="height:220px">
+  		<br />
+  		<div class="card-block">
+    		<center><h4><b>View Statistics</b></h4>
+    		<br />
+    		<p class="card-text">If you would like to view the statistics select the button below.</p>
+    		<br />
+    		<a href="http://localhost:7777/toptrumps/stats" class="btn btn-primary">View Statistics</a></center>
   		</div>
 		</div>
 		</div>
