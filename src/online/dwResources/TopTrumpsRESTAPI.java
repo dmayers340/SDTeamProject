@@ -47,9 +47,15 @@ public class TopTrumpsRESTAPI {
 	// private String line;
 //	private String am;
 	private Card topcard;
+<<<<<<< HEAD
 
 	 private static  ArrayList<String> categories;
 	 private ArrayList<Card> cardsInDeck;
+=======
+	private int numPlayers;
+	private static  ArrayList<String> categories;
+	private ArrayList<Card> cardsInDeck;
+>>>>>>> f118a784605c104b476adee32e999d4569706751
 	private int numberOfCards;
 	private final int maxAttributes = 6;
 	
@@ -72,6 +78,7 @@ public class TopTrumpsRESTAPI {
 		// ----------------------------------------------------
 		//Deck newdeck=new Deck();
 		deck=conf.getDeckFile();
+<<<<<<< HEAD
 	// 	System.out.println(deck);
 //		TopTrumpsCLIApplication top=new TopTrumpsCLIApplication();
 //		top.writeGameLogsToFile=false;
@@ -94,6 +101,43 @@ public class TopTrumpsRESTAPI {
 		
 			FileReader reader;
 			try 
+=======
+		numPlayers = conf.getNumAIPlayers();
+		
+		//		TopTrumpsCLIApplication top=new TopTrumpsCLIApplication();
+		//		top.writeGameLogsToFile=false;
+		//		top.userWantsToQuit=false;
+		//		top.FILE_NAME = deck;
+		//		
+		//		//top.setInput("G");
+		//		top.readIn();
+		//		for(;;){
+		//		Game g=new Game(newdeck);
+		//		int numberofgame=0;
+		//		numberofgame++;
+		//		
+		//	}
+
+		//	TopTrumpsCLIApplication.readIn();
+		categories = new ArrayList<String>();
+		cardsInDeck = new ArrayList<Card>();
+		Deck newDeck = new Deck();
+
+
+		FileReader reader;
+		try 
+		{
+			reader = new FileReader(deck);
+
+			Scanner in = new Scanner (reader);
+			String line = in.nextLine();
+
+			// sets categories 
+			newDeck.setCategories(line);
+
+			// adds cards to the deck
+			while (in.hasNextLine())
+>>>>>>> f118a784605c104b476adee32e999d4569706751
 			{
 				reader = new FileReader(deck);
 
@@ -101,12 +145,20 @@ public class TopTrumpsRESTAPI {
 				String line = in.nextLine();
 				newDeck.setCategories(line);
 
+<<<<<<< HEAD
 				// adds cards to the deck
 				while (in.hasNextLine())
 				{
 					line = in.nextLine();	
 					newDeck.addCard(line);
 				}
+=======
+		Game g = new Game(newDeck);
+		newDeck.shuffleDeck();
+		int n=conf.getNumAIPlayers();
+		g.numberOfPlayers= numPlayers; //This way it can be easily changed through the one variable rathern than changing JSON and this
+		g.username="Online Player";
+>>>>>>> f118a784605c104b476adee32e999d4569706751
 
 			}
 				catch (FileNotFoundException e) 
@@ -225,7 +277,7 @@ public class TopTrumpsRESTAPI {
 	 * @throws IOException
 	 */
 	public String helloWord(@QueryParam("Word") String Word) throws IOException {
-		return "Hello "+Word;
+		return "Hello "+ Word;
 	}
 	
 	
