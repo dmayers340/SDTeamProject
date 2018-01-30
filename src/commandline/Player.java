@@ -4,7 +4,7 @@ import java.util.ArrayList;
 public class Player { 
 
 	private String playerName;
-	private ArrayList<Card> hand;
+	private static ArrayList<Card> hand;
 	private Card card;
 	private int numberOfCardsEach;
 	private boolean human; 
@@ -79,7 +79,7 @@ public class Player {
 	 * @return top card in hand
 	 */
 
-	public Card getTopCard() 
+	public static Card getTopCard() 
 
 	{	
 		return hand.get(0);
