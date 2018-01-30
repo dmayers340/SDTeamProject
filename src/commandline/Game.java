@@ -16,6 +16,9 @@ public class Game {
 	 */
 
 	public int numberOfPlayers; //we should assume there will always be 4 AI players
+	
+	
+
 	private int remainingPlayers; // players still in game
 	private Deck currentDeck;
 	private Round newRound;
@@ -74,6 +77,7 @@ public class Game {
 			
 			 
 			newRound.playRound();
+			
 
 			roundLog();
 
@@ -89,11 +93,20 @@ public class Game {
 
 	}
 
-
-	public Deck getCurrentDeck()
-	{
-		return currentDeck;
+	public int getNumberOfPlayers() {
+		numberOfPlayers=TopTrumpsCLIApplication.howManyPlayers();
+		return numberOfPlayers;
 	}
+
+
+//	public void setNumberOfPlayers(int numberOfPlayers) {
+//		this.numberOfPlayers = numberOfPlayers;
+//	}
+//	
+//	public Deck getCurrentDeck()
+//	{
+//		return currentDeck;
+//	}
 
 
 	/**
@@ -177,14 +190,14 @@ public class Game {
 		if (gameWinner == listOfPlayers.get(0))
 		{
 			System.out.print ("\n" + 
-					"â•”â•â•â•â•—â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â•”â•—â”€â”€â”€â•”â•—â”€â”€â”€â•”â•—\n" + 
-					"â•‘â•”â•â•—â•‘â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â•”â•â•šâ•—â”€â”€â•‘â•‘â”€â”€â•”â•â•šâ•—\n" + 
-					"â•‘â•‘â”€â•šâ•¬â•â•â•¦â•â•—â•”â•â•â•¦â•â•¦â•â•©â•—â•”â•¬â•—â•”â•£â•‘â•”â•â•©â•—â•”â•¬â•¦â•â•â•¦â•â•—â•”â•â•â•—\n" + 
-					"â•‘â•‘â”€â•”â•£â•”â•—â•‘â•”â•—â•£â•”â•—â•‘â•”â•£â•”â•—â•‘â•‘â•‘â•‘â•‘â•‘â•‘â•‘â•”â•—â•‘â•‘â• â•£â•”â•—â•‘â•”â•—â•£â•â•â•£\n" + 
-					"â•‘â•šâ•â•â•‘â•šâ•â•‘â•‘â•‘â•‘â•šâ•â•‘â•‘â•‘â•”â•—â•‘â•šâ•£â•šâ•â•‘â•šâ•£â•”â•—â•‘â•šâ•£â•‘â•šâ•â•‘â•‘â•‘â• â•â•â•‘\n" + 
-					"â•šâ•â•â•â•©â•â•â•©â•â•šâ•©â•â•—â• â•â•šâ•â•šâ•©â•â•©â•â•â•©â•â•©â•â•šâ•©â•â•©â•©â•â•â•©â•â•šâ•©â•â•â•\n" + 
-					"â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â•”â•â•â•‘\n" + 
-					"â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â•šâ•â•â•");
+					"¨X¨T¨T¨T¨[©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤¨X¨[©¤©¤©¤¨X¨[©¤©¤©¤¨X¨[\n" + 
+					"¨U¨X¨T¨[¨U©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤¨X¨a¨^¨[©¤©¤¨U¨U©¤©¤¨X¨a¨^¨[\n" + 
+					"¨U¨U©¤¨^¨p¨T¨T¨j¨T¨[¨X¨T¨T¨j¨T¨j¨T¨m¨[¨X¨p¨[¨X¨g¨U¨X¨T¨m¨[¨X¨p¨j¨T¨T¨j¨T¨[¨X¨T¨T¨[\n" + 
+					"¨U¨U©¤¨X¨g¨X¨[¨U¨X¨[¨g¨X¨[¨U¨X¨g¨X¨[¨U¨U¨U¨U¨U¨U¨U¨U¨X¨[¨U¨U¨d¨g¨X¨[¨U¨X¨[¨g¨T¨T¨g\n" + 
+					"¨U¨^¨T¨a¨U¨^¨a¨U¨U¨U¨U¨^¨a¨U¨U¨U¨X¨[¨U¨^¨g¨^¨a¨U¨^¨g¨X¨[¨U¨^¨g¨U¨^¨a¨U¨U¨U¨d¨T¨T¨U\n" + 
+					"¨^¨T¨T¨T¨m¨T¨T¨m¨a¨^¨m¨T¨[¨d¨a¨^¨a¨^¨m¨T¨m¨T¨T¨m¨T¨m¨a¨^¨m¨T¨m¨m¨T¨T¨m¨a¨^¨m¨T¨T¨a\n" + 
+					"©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤¨X¨T¨a¨U\n" + 
+					"©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤¨^¨T¨T¨a");
 			
 			
 		}

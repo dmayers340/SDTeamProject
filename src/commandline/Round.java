@@ -12,7 +12,8 @@ public class Round {
 	private Player activePlayer;
 	private ArrayList<Player> players;
 
-	private int c; // category
+	private int c; // categoryG
+
 	private Player winner;
 
 	public static boolean draw = false; // 1st round starts with no draw
@@ -418,7 +419,12 @@ public class Round {
 	 */
 
 	private static void addRound() {
-
+		try{
+			Thread.sleep(10000);
+			
+		}catch(InterruptedException e){
+			
+		}
 		roundCount++;
 	}
 

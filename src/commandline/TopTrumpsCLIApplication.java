@@ -25,6 +25,11 @@ public class TopTrumpsCLIApplication {
 	private static String FILE_NAME = "StarCitizenDeck.txt"; 
 	private static int numberOfGames = 0;
 	private static Deck newDeck;
+	public static int players;
+
+	
+
+	
 
 	/**
 	 * This main method is called by TopTrumps.java when the user specifies that they want to run in
@@ -124,7 +129,10 @@ public class TopTrumpsCLIApplication {
 		return input;
 	}
 
-
+	public  void setPlayers(int players) {
+		this.players = players;
+	}
+	
 	/**
 	 * reads from the .txt file
 	 * adds categories to the deck
@@ -166,14 +174,14 @@ public class TopTrumpsCLIApplication {
 	public static int howManyPlayers() { //add validation of input
 
 		System.out.print("How many opponents would you like? Maximum is 4.");
-		int numberOfPlayers = Integer.parseInt(getInput());
+		players = Integer.parseInt(getInput());
 
-		if (numberOfPlayers > 4 || numberOfPlayers < 1) {
+		if (players > 4 || players < 1) {
 			System.err.print("Number of opponents must be between 1 and 4!");
 			return -1; //quit program in this case????????
 		}
 		else 
-			return numberOfPlayers;
+			return players;
 
 	}
 
