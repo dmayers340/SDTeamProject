@@ -46,7 +46,7 @@ public class TopTrumpsRESTAPI {
 	private String deck; 
 	private String am;
 	private Card topcard;
-
+	private int numPlayers;
 	private static  ArrayList<String> categories;
 	private ArrayList<Card> cardsInDeck;
 	private int numberOfCards;
@@ -71,6 +71,8 @@ public class TopTrumpsRESTAPI {
 		// ----------------------------------------------------
 		//Deck newdeck=new Deck();
 		deck=conf.getDeckFile();
+		numPlayers = conf.getNumAIPlayers();
+		
 		//		TopTrumpsCLIApplication top=new TopTrumpsCLIApplication();
 		//		top.writeGameLogsToFile=false;
 		//		top.userWantsToQuit=false;
@@ -117,7 +119,7 @@ public class TopTrumpsRESTAPI {
 		Game g = new Game(newDeck);
 		newDeck.shuffleDeck();
 		int n=conf.getNumAIPlayers();
-		g.numberOfPlayers=4;
+		g.numberOfPlayers= numPlayers; //This way it can be easily changed through the one variable rathern than changing JSON and this
 		g.username="Online Player";
 
 		//			int numberOfPlayers = n+1; // AI players + human player
@@ -219,7 +221,7 @@ public class TopTrumpsRESTAPI {
 	 * @throws IOException
 	 */
 	public String helloWord(@QueryParam("Word") String Word) throws IOException {
-		return "Hello "+Word;
+		return "Hello "+ Word;
 	}
 
 
