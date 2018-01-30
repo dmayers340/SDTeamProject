@@ -47,12 +47,11 @@ public class TopTrumpsRESTAPI {
 	// private String line;
 //	private String am;
 	private Card topcard;
-
-	 private static  ArrayList<String> categories;
-	 private ArrayList<Card> cardsInDeck;
+	private static  ArrayList<String> categories;
+	private ArrayList<Card> cardsInDeck;
 	private int numberOfCards;
-	private final int maxAttributes = 6;
-	
+	private final int MAXATTRIBUTES = 6;
+	private int numPlayers;
 	private Round newRound;
 	
 	
@@ -66,12 +65,14 @@ public class TopTrumpsRESTAPI {
 	 * the deck file and the number of AI players.
 	 * @param conf
 	 */
-	public TopTrumpsRESTAPI(TopTrumpsJSONConfiguration conf) {
+	public TopTrumpsRESTAPI(TopTrumpsJSONConfiguration conf) 
+	{
 		// ----------------------------------------------------
 		// Add relevant initalization here
 		// ----------------------------------------------------
 		//Deck newdeck=new Deck();
 		deck=conf.getDeckFile();
+		numPlayers = conf.getNumAIPlayers();
 	// 	System.out.println(deck);
 //		TopTrumpsCLIApplication top=new TopTrumpsCLIApplication();
 //		top.writeGameLogsToFile=false;
@@ -89,41 +90,41 @@ public class TopTrumpsRESTAPI {
 	
 		//TopTrumpsCLIApplication.readIn();
 	 	categories = new ArrayList<String>();
-		 cardsInDeck = new ArrayList<Card>();
+		cardsInDeck = new ArrayList<Card>();
 		Deck newDeck = new Deck();	
 		
-			FileReader reader;
-			try 
+		FileReader reader;
+		try 
+		{
+			reader = new FileReader(deck);
+			Scanner in = new Scanner (reader);
+			String line = in.nextLine();
+			newDeck.setCategories(line);
+
+			// adds cards to the deck
+			while (in.hasNextLine())
 			{
-				reader = new FileReader(deck);
-
-				Scanner in = new Scanner (reader);
-				String line = in.nextLine();
-				newDeck.setCategories(line);
-
-				// adds cards to the deck
-				while (in.hasNextLine())
-				{
-					line = in.nextLine();	
-					newDeck.addCard(line);
-				}
-
+				line = in.nextLine();	
+				newDeck.addCard(line);
 			}
-				catch (FileNotFoundException e) 
-				{
-					
-				}
-			 //TopTrumpsCLIApplication.setPlayers(4);
-			//System.out.print(newDeck); 
-			Game g = new Game(newDeck);
-			//newDeck.shuffleDeck();
-			int n=conf.getNumAIPlayers();
-			System.out.println(n);
+		}
+		catch (FileNotFoundException e) 
+		{
+			e.printStackTrace();
+		}
 		
-			g.username="Online Player";
+		//TopTrumpsCLIApplication.setPlayers(4);
+		//System.out.print(newDeck); 
+		Game g = new Game(newDeck);
+		//newDeck.shuffleDeck();
 			
-//			int numberOfPlayers = n+1; // AI players + human player
-	//		int remainingPlayers = n+1; // starts with all players still in game
+		//n is numPlayers;
+		//int n=conf.getNumAIPlayers();
+		System.out.println(numPlayers);
+		g.username="Online Player";
+			
+//			int numberOfPlayers = numPlayers+1; // AI players + human player
+	//		int remainingPlayers = numPlayers+1; // starts with all players still in game
 			
 //			while (remainingPlayers > 1)
 //
