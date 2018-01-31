@@ -13,7 +13,6 @@ public class Deck {
 	private ArrayList<String> categories;
 	private ArrayList<Card> cardsInDeck;
 	private int numberOfCards;
-	private int numPlayers;
 	
 	/**
 	 * class constants
@@ -73,18 +72,6 @@ public class Deck {
 
 		return cardsInDeck.get(i);
 	}
-
-
-	public void setNumPlayers(int nP) {
-
-		this.numPlayers = nP;
-	}
-
-
-	public int getNumPlayers() {
-		return numPlayers;
-	}
-
 
 	/**
 	 * shuffles current deck
