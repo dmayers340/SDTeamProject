@@ -144,6 +144,7 @@
 		<div class="card border-dark mb-3" style="max-width: 10rem; height: 20rem;">  		
 		<img class="card-img-top" src="https://img.purch.com/h/1000/aHR0cDovL3d3dy5zcGFjZS5jb20vaW1hZ2VzL2kvMDAwLzA2Ni8yODcvb3JpZ2luYWwveHMtMS1zcGFjZS1wbGFuZS1ib2Vpbmctb3JiaXRhcnQuanBn" alt="Card Image">
   		<br />
+  		
   		<div class="carddisplay">
     		
     		<br />
