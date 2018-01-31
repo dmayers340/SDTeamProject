@@ -18,8 +18,6 @@
     	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
-		<!-- link rel="../../resources/css/gameview.css" rel="stylesheet" /> -->
-
 	</head>
 	
 	<style>
@@ -105,9 +103,11 @@
 		position: right;
 		}
 		
-	</style
+	</style>
 	
     <body onload="initalize()"> <!-- Call the initalize method when the page loads -->
+    
+    
   	<nav class="navbar navbar-default">
 	  <div class="container-fluid">
 	    <div class="navbar-header">
@@ -141,7 +141,7 @@
   			<div class="card-block">
     			<center><h4><b>Number of Times Computer Has Won:</b></h4>
     			<br />
-    			<p class="card-text">Link from db</p>
+    			<p id ="timesComputerWon"><Computer</p>
     			<br />
   			</div>
 		</div>
@@ -154,7 +154,7 @@
   			<div class="card-block">
     			<center><h4><b>Number of Games Player Has Won:</b></h4>
     			<br />
-    			<p class="card-text">Link from db</p>
+    			<p id = "humanWin">Human Win</p>
     			<br />
   			</div>
 		</div>
@@ -167,7 +167,7 @@
   			<div class="card-block">
     			<center><h4><b>Average Number of Draws:</b></h4>
     			<br />
-    			<p class="card-text">Link from db</p>
+    			<p id = "numDraws">Num Draws</p>
     			<br />
   			</div>
 		</div>
@@ -175,12 +175,12 @@
 		
 	<div class="rounds">
 		<div class="card border-dark mb-3" style="max-width: 15rem; height: 23rem;">  		
-			<img class="card-img-top" src="https://i.kinja-img.com/gawker-media/image/upload/t_original/othklnrkmmln2e8vv3ug.jpg" alt="Card Image">
+			<img class="card-img-top" src="https://img.purch.com/h/1000/aHR0cDovL3d3dy5zcGFjZS5jb20vaW1hZ2VzL2kvMDAwLzA2Ni8yODcvb3JpZ2luYWwveHMtMS1zcGFjZS1wbGFuZS1ib2Vpbmctb3JiaXRhcnQuanBn" alt="Card Image">
   			<br />
   			<div class="card-block">
-    			<center><h4><b>Highest Number of Rounds in a Single Game:</b></h4>
+    			<center><h4><b>Total Number of Rounds:</b></h4>
     			<br />
-    			<p class="card-text">Link from db</p>
+    			<p id="numberOfRounds">Rounds</p>
     			<br />
   			</div>
 		</div>
@@ -198,8 +198,10 @@
 				
 				// For example, lets call our sample methods
 				numberOfGames();
-				helloJSONList();
-				helloWord("Student");
+				timesComputerWon();
+				timesPersonWon();
+				numDraws();
+				numRounds();
 				
 			}
 			
@@ -232,10 +234,8 @@
   				 return xhr;
 			}
 		
-		</script>
 		
 		<!-- Here are examples of how to call REST API Methods -->
-		<script type="text/javascript">
 		
 			// This calls the helloJSONList REST method from TopTrumpsRESTAPI
 			function numberOfGames() {
@@ -258,6 +258,88 @@
 				// We have done everything we need to prepare the CORS request, so send it
 				xhr.send();		
 			}
+			
+			function timesComputerWon()
+			{
+				var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/timescomputerwon");
+				
+				if (!xhr)
+				{
+					alert("CORS not supported");
+				}
+				
+				xhr.onload = function(e)
+				{
+					var compWinResponse = xhr.response;
+					document.getElementById('timesComputerWon').innerHTML= compWinResponse;
+				};
+				
+				xhr.send();
+			}
+			
+				function timesPersonWon() {
+			
+				// First create a CORS request, this is the message we are going to send (a get request in this case)
+				var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/humanwin"); // Request type and URL
+				
+				// Message is not sent yet, but we can check that the browser supports CORS
+				if (!xhr) {
+  					alert("CORS not supported");
+				}
+
+				// CORS requests are Asynchronous, i.e. we do not wait for a response, instead we define an action
+				// to do when the response arrives 
+				xhr.onload = function(e) {
+ 					var responseText = xhr.response; // the text of the response
+					document.getElementById('humanWin').innerHTML=responseText;
+				};
+				
+				// We have done everything we need to prepare the CORS request, so send it
+				xhr.send();		
+			}
+			
+			function numDraws() {
+			
+				// First create a CORS request, this is the message we are going to send (a get request in this case)
+				var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/numDraws"); // Request type and URL
+				
+				// Message is not sent yet, but we can check that the browser supports CORS
+				if (!xhr) {
+  					alert("CORS not supported");
+				}
+
+				// CORS requests are Asynchronous, i.e. we do not wait for a response, instead we define an action
+				// to do when the response arrives 
+				xhr.onload = function(e) {
+ 					var numDraws = xhr.response; // the text of the response
+					document.getElementById('numDraws').innerHTML=numDraws;
+				};
+				
+				// We have done everything we need to prepare the CORS request, so send it
+				xhr.send();		
+			}
+			
+				function numRounds() {
+			
+				// First create a CORS request, this is the message we are going to send (a get request in this case)
+				var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/numRounds"); // Request type and URL
+				
+				// Message is not sent yet, but we can check that the browser supports CORS
+				if (!xhr) {
+  					alert("CORS not supported");
+				}
+
+				// CORS requests are Asynchronous, i.e. we do not wait for a response, instead we define an action
+				// to do when the response arrives 
+				xhr.onload = function(e) {
+ 					var roundsResponseText = xhr.response; // the text of the response
+					document.getElementById('numberOfRounds').innerHTML=roundsResponseText;
+				};
+				
+				// We have done everything we need to prepare the CORS request, so send it
+				xhr.send();		
+			}
+					
 			</script>
 		
 		

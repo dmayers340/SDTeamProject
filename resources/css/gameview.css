@@ -1,5 +1,6 @@
 
-  	.navbar-default .navbar-nav > li > a {
+  	.navbar-default .navbar-nav > li > a 
+  	{
     color: black;
 	}
 
@@ -7,7 +8,6 @@
       display: inline-block;
       color: black;
       text-color: White;
-
   	  }
 
 	.navbar-default {
@@ -21,12 +21,12 @@
 }
 
 	.nav{
-			 	padding-left:10px;
-  				padding-right:10px;
-  				margin-left:0px;
-  				margin-right:0px;
-  				margin-bottom:20px;
-			}
+	padding-left:10px;
+  	padding-right:10px;
+  	margin-left:0px;
+  	margin-right:0px;
+  	margin-bottom:20px;
+	}
 
 	.color {
 	color:White;
@@ -34,79 +34,88 @@
  	font-weight: bold;	
  	}
 
-		body{
-		background-image: url("http://kb4images.com/images/pictures-of-outer-space/37759075-pictures-of-outer-space.jpg")
-			}
+	body{
+	background-image: url("http://kb4images.com/images/pictures-of-outer-space/37759075-pictures-of-outer-space.jpg")
+	}
 
 
-		h1{
-			color: White
-		}
+	h1{
+	color: White
+	}
 
-		.numGames{
-		position:absolute;
-		left: 0px;
-		margin-left:150px;
-		margin-right:150px;
+	.numGames{
+	position:absolute;
+	left: 0px;
+	margin-left:150px;
+	margin-right:150px;
+	}
+		
+	.computerWin{
+	position:absolute;
+	right: 0px;
+	margin-left:150px;
+	margin-right:150px;
+	}
+		
+	.playerWin{
+	position: absolute;
+    top: 37%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%)
 		}
 		
-		.computerWin{
-		position:absolute;
-		right: 0px;
-		margin-left:150px;
-		margin-right:150px;
-		}
+	.draws{
+	position:absolute;
+	left: 0px;
+	margin-top: 400px;
+	margin-left:400px;
+	margin-right:150px;	
+	}
 		
-		.playerWin{
-		position: absolute;
-        top: 37%;
-        left: 50%;
-        margin-right: -50%;
-       	transform: translate(-50%, -50%)
-			}
-		
-		.draws{
-		position:absolute;
-		left: 0px;
-		margin-top: 400px;
-		margin-left:400px;
-		margin-right:150px;
-		
-		}
-		
-		.rounds{
-		position:absolute;
-		right: 0px;
-		margin-top: 400px;
-		margin-left:150px;
-		margin-right:400px;
-		}
-
+	.rounds{
+	position:absolute;
+	right: 0px;
+	margin-top: 400px;
+	margin-left:150px;
+	margin-right:400px;
+	}
 	
+	.left{
+	position: left;
+	}
 		
-		.left{
-		position: left;
-		}
-		
-		.right{
-			position: right;
-			}
+	.right{
+	position: right;
+	}
 
-		.column2{
-		position:absolute;
-		right: 0px;
-		margin-top:150px;
-		margin-left:150px;
-		margin-right:350px;
-		
-		}
-		.column{
-		position:absolute;
-		left: 0px;
-		margin-top:150px;
-		margin-left:350px;
-		margin-right:150px;
-		}
+	.column2{
+	position:absolute;
+	right: 0px;
+	margin-top:150px;
+	margin-left:150px;
+	margin-right:350px;	
+	}
+	.column{
+	position:absolute;
+	left: 0px;
+	margin-top:150px;
+	margin-left:350px;
+	margin-right:150px;
+	}
+	
+	.text{
+	color:White;
+	font-size:1.2em;
+ 	font-weight: bold;
+	position:absolute;
+	left: 0px;
+	margin-top:10px;
+	margin-left:10px;
+	margin-right:150px;
+	max-width: 400px; 
+	height: 15rem;
+	}	
 		
 
 			

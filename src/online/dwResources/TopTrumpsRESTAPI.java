@@ -191,7 +191,6 @@ public class TopTrumpsRESTAPI {
 
 		ArrayList<String> listOfCate = new ArrayList<String>();
 		listOfCate=Card.getCategories();
-		
 		String stringWithLines = "";
 		for (int i=0; i<listOfCate.size(); i++)
 		{	
@@ -199,12 +198,59 @@ public class TopTrumpsRESTAPI {
 		}
 				
 		String listAsJSONString = oWriter.writeValueAsString(listOfCate);
-		return listAsJSONString;
-		
+		return listAsJSONString;	
 	}
 	//		
 
 	@GET
+	@Path("/numGames")
+	public String numGames() throws IOException 
+	{
+		//return the number of games from database, from java
+		String numGames = "7"; 
+		numGames = oWriter.writeValueAsString(numGames);
+		return numGames;
+	}
+
+	@GET 
+	@Path("/timescomputerwon")
+	public String timesComputerWon() throws IOException
+	{
+		//get from db
+		String compWins = "8";
+		compWins = oWriter.writeValueAsString(compWins);
+		return compWins;
+	}
+	
+	@GET 
+	@Path("/humanwin")
+	public String timesPersonWon() throws IOException
+	{
+		//get from db
+		String humanwin = "10";
+		humanwin = oWriter.writeValueAsString(humanwin);
+
+		return humanwin;
+	}
+	@GET
+	@Path("/numDraws")
+	public String numDraws() throws IOException 
+	{
+		//return the number of games from database, from java
+		String numDraws = "7"; 
+		numDraws = oWriter.writeValueAsString(numDraws);
+		return numDraws;
+	}
+	@GET
+	@Path("/numRounds")
+	public String numRounds() throws IOException 
+	{
+		//return the number of games from database, from java
+		String numRounds = "7"; 
+		numRounds = oWriter.writeValueAsString(numRounds);
+		return numRounds;
+	}
+  
 	@Path("/topcard")
 	public String topcard() throws IOException {
 		String listAsJSONString = oWriter.writeValueAsString(Player.getTopCard());
@@ -214,8 +260,6 @@ public class TopTrumpsRESTAPI {
 
 	// We can turn arbatory Java objects directly into JSON strings using
 	// Jackson seralization, assuming that the Java objects are not too complex.
-
-
 
 
 	@GET
@@ -229,7 +273,4 @@ public class TopTrumpsRESTAPI {
 	public String helloWord(@QueryParam("Word") String Word) throws IOException {
 		return "Hello "+Word;
 	}
-
-
-
 }

@@ -18,7 +18,7 @@
     	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 		
-	<--!	<link rel="../../resources/css/gameview.css" rel="stylesheet" /> -->
+	]<link rel="../../resources/css/gameview.css" rel="stylesheet" />
 	</head>
 	
 	<!-- Haven't been able to get CSS or a BASE HTML properly referenced. HOW to do this so we don't repeat so much? --> 
