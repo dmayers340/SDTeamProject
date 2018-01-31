@@ -44,61 +44,62 @@ import commandline.TopTrumpsCLIApplication;
  */
 public class TopTrumpsRESTAPI {
 	private String deck; 
-	// private String line;
-//	private String am;
+	private String am;
 	private Card topcard;
+
 	private static  ArrayList<String> categories;
 	private ArrayList<Card> cardsInDeck;
 	private int numberOfCards;
-	private final int MAXATTRIBUTES = 6;
-	private int numPlayers;
+	private final int maxAttributes = 6;
+
 	private Round newRound;
-	
-	
+
+
 	/** A Jackson Object writer. It allows us to turn Java objects
 	 * into JSON strings easily. */
 	ObjectWriter oWriter = new ObjectMapper().writerWithDefaultPrettyPrinter();
-	
+
 	/**
 	 * Contructor method for the REST API. This is called first. It provides
 	 * a TopTrumpsJSONConfiguration from which you can get the location of
 	 * the deck file and the number of AI players.
 	 * @param conf
 	 */
-	public TopTrumpsRESTAPI(TopTrumpsJSONConfiguration conf) 
-	{
+	public TopTrumpsRESTAPI(TopTrumpsJSONConfiguration conf) {
 		// ----------------------------------------------------
 		// Add relevant initalization here
 		// ----------------------------------------------------
 		//Deck newdeck=new Deck();
 		deck=conf.getDeckFile();
-		numPlayers = conf.getNumAIPlayers();
-	// 	System.out.println(deck);
-//		TopTrumpsCLIApplication top=new TopTrumpsCLIApplication();
-//		top.writeGameLogsToFile=false;
-//		top.userWantsToQuit=false;
-//		top.FILE_NAME = deck;
-//		
-//		//top.setInput("G");
-//		top.readIn();
-//		for(;;){
-//		Game g=new Game(newdeck);
-//		int numberofgame=0;
-//		numberofgame++;
-//		
-//	}
-	
-		//TopTrumpsCLIApplication.readIn();
-	 	categories = new ArrayList<String>();
+		//		TopTrumpsCLIApplication top=new TopTrumpsCLIApplication();
+		//		top.writeGameLogsToFile=false;
+		//		top.userWantsToQuit=false;
+		//		top.FILE_NAME = deck;
+		//		
+		//		//top.setInput("G");
+		//		top.readIn();
+		//		for(;;){
+		//		Game g=new Game(newdeck);
+		//		int numberofgame=0;
+		//		numberofgame++;
+		//		
+		//	}
+
+		//	TopTrumpsCLIApplication.readIn();
+		categories = new ArrayList<String>();
 		cardsInDeck = new ArrayList<Card>();
-		Deck newDeck = new Deck();	
-		
+		Deck newDeck = new Deck();
+
+
 		FileReader reader;
 		try 
 		{
 			reader = new FileReader(deck);
+
 			Scanner in = new Scanner (reader);
 			String line = in.nextLine();
+
+			// sets categories 
 			newDeck.setCategories(line);
 
 			// adds cards to the deck
@@ -110,77 +111,73 @@ public class TopTrumpsRESTAPI {
 		}
 		catch (FileNotFoundException e) 
 		{
-			e.printStackTrace();
+
 		}
-		
-		//TopTrumpsCLIApplication.setPlayers(4);
-		//System.out.print(newDeck); 
+
 		Game g = new Game(newDeck);
-		//newDeck.shuffleDeck();
-			
-		//n is numPlayers;
-		//int n=conf.getNumAIPlayers();
-		System.out.println(numPlayers);
+		newDeck.shuffleDeck();
+		int n=conf.getNumAIPlayers();
+		g.numberOfPlayers=4;
 		g.username="Online Player";
-			
-//			int numberOfPlayers = numPlayers+1; // AI players + human player
-	//		int remainingPlayers = numPlayers+1; // starts with all players still in game
-			
-//			while (remainingPlayers > 1)
-//
-//			{
-//				ArrayList <Player> listOfPlayers = null;
-//				Player activePlayer = null;
-//				newGame.setActivePlayer(); // set deciding player 
-//				newRound = new Round(listOfPlayers, activePlayer);
-//
-//				
-//				 
-//				newRound.playRound();
-//
-//				 // updates number of remaining players
-//			}
-//
-//			newRound.getWinner();
-//	}
-//
-//		}
-//			 shuffle
-//			
-//			int listLength = cardsInDeck.size();
-//			Card temp; 
-//
-//			for (int i = 0; i < listLength; i++)
-//
-//			
-//
-//			{
-//				// generates a random integer
-//				int random = (int)Math.floor(Math.random() * listLength);
-//
-//				// swaps cards at indexes 'i' and 'random'
-//				temp = cardsInDeck.get(i);
-//				cardsInDeck.set(i, cardsInDeck.get(random));
-//				cardsInDeck.set(random,temp);
-//			}
-//	
-//	
-//	
+
+		//			int numberOfPlayers = n+1; // AI players + human player
+		//		int remainingPlayers = n+1; // starts with all players still in game
+
+		//			while (remainingPlayers > 1)
+		//
+		//			{
+		//				ArrayList <Player> listOfPlayers = null;
+		//				Player activePlayer = null;
+		//				newGame.setActivePlayer(); // set deciding player 
+		//				newRound = new Round(listOfPlayers, activePlayer);
+		//
+		//				
+		//				 
+		//				newRound.playRound();
+		//
+		//				 // updates number of remaining players
+		//			}
+		//
+		//			newRound.getWinner();
+		//	}
+		//
+		//		}
+		//			 shuffle
+		//			
+		//			int listLength = cardsInDeck.size();
+		//			Card temp; 
+		//
+		//			for (int i = 0; i < listLength; i++)
+		//
+		//			
+		//
+		//			{
+		//				// generates a random integer
+		//				int random = (int)Math.floor(Math.random() * listLength);
+		//
+		//				// swaps cards at indexes 'i' and 'random'
+		//				temp = cardsInDeck.get(i);
+		//				cardsInDeck.set(i, cardsInDeck.get(random));
+		//				cardsInDeck.set(random,temp);
+		//			}
+		//	
+		//	
+		//	
 	}
-		
-			
-			
-			// sets categories 
-			
-			
-			// Shuffle
-			
-	
-	
+
+
+
+	// sets categories 
+
+
+	// Shuffle
+
+
+
 	// ----------------------------------------------------
 	// Add relevant API methods here
 	// ----------------------------------------------------
-	
+
 	@GET
 	@Path("/cateJSONList")
 	/**
@@ -190,33 +187,37 @@ public class TopTrumpsRESTAPI {
 	 * @throws IOException
 	 */
 	public String cateJSONList() throws IOException {
-		
-	
+
+
 		ArrayList<String> listOfCate = new ArrayList<String>();
 		listOfCate=Card.getCategories();
-		String a="";
-		for (int i=0;i<listOfCate.size();i++){
-			a=String.format("%s \n %s",a,listOfCate.get(i));
+		
+		String stringWithLines = "";
+		for (int i=0; i<listOfCate.size(); i++)
+		{	
+		stringWithLines = String.format("%s \n %s", stringWithLines, listOfCate.get(i));
 		}
+				
 		String listAsJSONString = oWriter.writeValueAsString(listOfCate);
 		return listAsJSONString;
+		
 	}
-//		
-		
-//	@GET
-//	@Path("/topcard")
-//	public String topcard() throws IOException {
-//		String am = oWriter.writeValueAsString();
-//		return listAsJSONString;
-//		
-//	}
-		
-		// We can turn arbatory Java objects directly into JSON strings using
-		// Jackson seralization, assuming that the Java objects are not too complex.
-		
-	
-	
-	
+	//		
+
+	@GET
+	@Path("/topcard")
+	public String topcard() throws IOException {
+		String listAsJSONString = oWriter.writeValueAsString(Player.getTopCard());
+		return listAsJSONString;
+
+	}
+
+	// We can turn arbatory Java objects directly into JSON strings using
+	// Jackson seralization, assuming that the Java objects are not too complex.
+
+
+
+
 	@GET
 	@Path("/helloWord")
 	/**
@@ -228,7 +229,7 @@ public class TopTrumpsRESTAPI {
 	public String helloWord(@QueryParam("Word") String Word) throws IOException {
 		return "Hello "+Word;
 	}
-	
-	
-	
+
+
+
 }
