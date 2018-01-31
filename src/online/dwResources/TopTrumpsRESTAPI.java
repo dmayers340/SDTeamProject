@@ -115,10 +115,7 @@ public class TopTrumpsRESTAPI {
 		//TopTrumpsCLIApplication.setPlayers(4);
 		//System.out.print(newDeck); 
 		Game g = new Game(newDeck);
-		//newDeck.shuffleDeck();
-			
-		//n is numPlayers;
-		//int n=conf.getNumAIPlayers();
+
 		System.out.println(numPlayers);
 		g.username="Online Player";
 			
@@ -193,7 +190,7 @@ public class TopTrumpsRESTAPI {
 	{
 		ArrayList<String> listOfCate = new ArrayList<String>();
 		listOfCate=Card.getCategories();
-		String a=""; //meaningful name--is this list of cards?
+		String a=""; 
 		for (int i=0;i<listOfCate.size();i++)
 		{
 			a=String.format("%s \n %s",a,listOfCate.get(i));
@@ -204,15 +201,52 @@ public class TopTrumpsRESTAPI {
 	
 	@GET
 	@Path("/numGames")
-	public int numGames() throws IOException 
+	public String numGames() throws IOException 
 	{
-		
-		int numberOfGames = 7; //meaningful name--is this list of cards?
-		
-		return numberOfGames;
+		//return the number of games from database, from java
+		String numGames = "7"; 
+		numGames = oWriter.writeValueAsString(numGames);
+		return numGames;
 	}
-//		
-		
+
+	@GET 
+	@Path("/timescomputerwon")
+	public String timesComputerWon() throws IOException
+	{
+		//get from db
+		String compWins = "8";
+		compWins = oWriter.writeValueAsString(compWins);
+		return compWins;
+	}
+	
+	@GET 
+	@Path("/humanwin")
+	public String timesPersonWon() throws IOException
+	{
+		//get from db
+		String humanwin = "10";
+		humanwin = oWriter.writeValueAsString(humanwin);
+
+		return humanwin;
+	}
+	@GET
+	@Path("/numDraws")
+	public String numDraws() throws IOException 
+	{
+		//return the number of games from database, from java
+		String numDraws = "7"; 
+		numDraws = oWriter.writeValueAsString(numDraws);
+		return numDraws;
+	}
+	@GET
+	@Path("/numRounds")
+	public String numRounds() throws IOException 
+	{
+		//return the number of games from database, from java
+		String numRounds = "7"; 
+		numRounds = oWriter.writeValueAsString(numRounds);
+		return numRounds;
+	}
 //	@GET
 //	@Path("/topcard")
 //	public String topcard() throws IOException {
@@ -236,6 +270,9 @@ public class TopTrumpsRESTAPI {
 	public String helloWord(@QueryParam("Word") String Word) throws IOException {
 		return "Hello "+Word;
 	}
+	
+	
+	
 	
 	
 	
