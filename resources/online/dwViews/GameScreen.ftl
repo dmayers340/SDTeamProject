@@ -45,12 +45,21 @@
 		margin-left:350px;
 		margin-right:150px;
 		}
-	
+	.button{
+	position:absolute;
+		left: 10px;
+		margin-top:500px;
+	}
 	.color {
 	color:White;
 	font-size:1.2em;
  	font-weight: bold;	
  	}
+ 	
+ 	h5,li,ol,strong{
+			margin:0;
+			padding:0;
+		}
 			
 	body{
 	background-image: url("http://kb4images.com/images/pictures-of-outer-space/37759075-pictures-of-outer-space.jpg")
@@ -70,6 +79,7 @@
 	}
 	
 	</style>
+	
 	<body onload="initalize()"> <!-- Call the initalize method when the page loads --> 
     
      <nav class="navbar navbar-default">
@@ -85,20 +95,26 @@
 	  	<div class="container">
 	  		<div class="text">
   					<div class="card-block">
-    					<center>
-    						<h4><b>Active Player:</b></h4><br />
-    						<h4><b>Winner of last round:</b></h4><br />
-    						<h4><b>Category Selected:</b></h4><br />
-						</center>
+  
+    						<p id="head"><h4><b>Active Player:--------Round Winner-------Category Selected</b></h4><br /></p>
+    						<p id="act"></p>
+						
   					</div>
 				</div>
 			</div>
 		
   							<div class="main">
-  								<img src="http://www.hearthstonetopdecks.com/wp-content/uploads/2014/06/card-back-gold-open-202x300.png";  style="width:140px; height:250px; position:absolute; left:400px; top:275px; ">
-                               
-                                <div style="left: 170px; position: absolute; top: 275px;"> <font size=12px; font  face="Impact"; color="White">Player</font></div>
-                                <div style="left: 170px; position: absolute; top: 355px;"> <font size=5px; font  face="Arial" ; color="White">Card in Hands: </font></div>
+  								<div class="card border-dark mb-3" style="width:150px; height:280px; position:absolute; left:400px; top:275px ">  		
+								<img class="card-img-top" src="https://img.purch.com/h/1000/aHR0cDovL3d3dy5zcGFjZS5jb20vaW1hZ2VzL2kvMDAwLzA2Ni8yODcvb3JpZ2luYWwveHMtMS1zcGFjZS1wbGFuZS1ib2Vpbmctb3JiaXRhcnQuanBn" alt="Card Image">
+  								<br />
+    							<div class="category">
+    							<p> Description Size Speed Range Firepower Cargo</p>
+    							<p id="card"></p>
+                               	</div>
+                               	</div>
+                                <div id="na" style="left: 170px; position: absolute; top: 275px;"> <font size=12px; font  face="Impact"; color="White"></font></div>
+                                
+                                <div class="aa" style="left: 170px; position: absolute; top: 355px;"> <font size=5px; font  face="Arial" ; color="White"><p id="handnum">Card in Hands: </p></font></div>
                                 <div style="left: 170px; position: absolute; top: 425px;"> <font size=5px; font  face="Arial" ; color="White">Round wins: </font></div>
                             </div>
                             
@@ -135,23 +151,14 @@
                             <div class="btn btn-primary">
                             <div style="left: 10px; position: absolute; top: 700px"><a href="http://localhost:7777/toptrumps/game"><button style="width:200px;height:60px; font-size:1.4em; font-family: Arial; font-weight: bold;">New Game</button></a></div>
                             <div style="left: 300px; position: absolute; top: 700px"><a href="http://localhost:7777/toptrumps/stats"><button style="width:200px;height:60px; font-size:1.4em; font-family: Arial; font-weight: bold;">Statistics</button></a></div>
-                   
-						</div>
+                   <div class="button">
+                  	<form action=>
+    				<button type="submit" name="button" value="button1" style="width:200px;height:60px; font-size:1.4em; font-family: Arial; font-weight: bold;">Next Round</button>
+					</form></div>
+		</div>
 			
-	 <div class="container">
 
-	  <div class="frame">
-		<div class="card border-dark mb-3" style="max-width: 10rem; height: 20rem;">  		
-		<img class="card-img-top" src="https://img.purch.com/h/1000/aHR0cDovL3d3dy5zcGFjZS5jb20vaW1hZ2VzL2kvMDAwLzA2Ni8yODcvb3JpZ2luYWwveHMtMS1zcGFjZS1wbGFuZS1ib2Vpbmctb3JiaXRhcnQuanBn" alt="Card Image">
-  		<br />
-  		
-  		<div class="carddisplay">
-    		
-    		<br />
-    		<div class="category">
-    		<p id="paragraphWhereMyListWillGo"></p> 
-    		<div id="topcard"></div> 
-    		</div>	
+    			
   		</div>
 		</div>
 		</div>
@@ -161,7 +168,11 @@
 			// Method that is called on page load
 			function initalize() {
 			cateJSONList();
-			//document.getElementById('paragraphWhereMyListWillGo').innerHTML = cateJSONList;
+			ga();
+			playercard();
+			handnum();
+		
+			
 			}	
 				// --------------------------------------------------------------------------
 				// You can call other methods you want to run when the page first loads here
@@ -193,6 +204,77 @@
 				
 			<script type="text/javascript">
 			
+			function ga(){
+			var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/ga");
+			if (!xhr) {
+  					alert("CORS not supported");
+				}
+
+				xhr.onload = function(e) {
+			
+ 					var n =xhr.response; 
+ 					if (n.indexOf('player') > -1){
+ 						document.getElementById('act').innerHTML = "It's your turn!";
+ 						window.questions =  [{questionId:"question", formName:"form1",radioName:"gender",values:["Size", "Speed" , "Range","Firepower","Cargo"]}];
+
+ 					}
+					else{
+					document.getElementById('act').innerHTML = n;
+					}
+				};
+
+				xhr.send();	
+				//window.location.reload();
+			}
+			
+			function handnum(){
+			var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/handnum");
+			if (!xhr) {
+  					alert("CORS not supported");
+				}
+
+				xhr.onload = function(e) {
+			
+ 					var n =xhr.response; 
+					document.getElementById('handnum').innerHTML = "Cards in Hand         "+n;
+				};
+
+				xhr.send();	
+			
+			}
+			
+			function playercard(){
+			var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/playercard");
+			if (!xhr) {
+  					alert("CORS not supported");
+				}
+
+				xhr.onload = function(e) {
+			
+ 					var n =xhr.response; 
+					document.getElementById('card').innerHTML = n;
+				};
+
+				xhr.send();	
+			
+			}
+			
+			function name(){
+			var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/na");
+			if (!xhr) {
+  					alert("CORS not supported");
+				}
+
+				xhr.onload = function(e) {
+			
+ 					var n =xhr.response; 
+					document.getElementById('na').innerHTML = n;
+				};
+
+				xhr.send();	
+			
+			}
+			
 			function cateJSONList() {
 
 				var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/cateJSONList"); // Request type and URL
@@ -204,7 +286,7 @@
 				xhr.onload = function(e) {
 			
  					var Text =xhr.response; 
-					document.getElementById('paragraphWhereMyListWillGo').innerHTML = Text;
+				//	document.getElementById('paragraphWhereMyListWillGo').innerHTML = Text;
 				};
 
 				xhr.send();		
