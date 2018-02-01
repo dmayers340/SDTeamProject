@@ -160,20 +160,21 @@
     		
 		<button id="myBtn">Play Game</button>
     		<div id="myModal" class="modal">
-
-  			<div class="modal-content">
+			<div class="modal-content">
  				   <span class="close">&times;</span>
   				   <ol>
                      <li><h5>Please enter your information</h5></li><br>
-                     <form>
-                     <li><strong>Please enter your name£º</strong><input class="ipt" type="text" name="log" size="20" /></li><br>
-                     <li><strong>Please choose your opponent numbers (1-4)£º<br>
+  				     <form name="input" action="check" method="get">
+  				     <li><strong>Please enter your name</strong><input type="text" name="log" id="log" size="20" /></li><br>
+                      <li><strong>Please choose your opponent numbers (1-4)</strong><br>
                        <input type="radio" name="num" value="1" checked> 1<br>
   						<input type="radio" name="num" value="2"> 2<br>
   						<input type="radio" name="num" value="3"> 3<br>
   						<input type="radio" name="num" value="4"> 4</li><br>
   						
-                     <li><input class="btn-primary" type="submit" name="submit" formaction="http://localhost:7777/toptrumps/game" value=" Start Game " ></li></form>
+                	 <li><input type="submit" name="submit"  formaction="http://localhost:7777/toptrumps/game" value="Start Game" ></li>
+                     </form>
+                     
                 </ol>
  		 	</div>
  		 	<script>
@@ -189,6 +190,7 @@
 			</script>
 			</div>
 			</center>
+             
   		</div>
 		</div>
 		</div>
@@ -214,6 +216,16 @@
 		
 		<script type="text/javascript">
 		
+	//	var name = document.getElementByName("log").value
+	//	var number = document.getElementByName("num").value
+	//	submitOK = "true";
+	//	if (name.length ==0) {
+  	//	alert("Must have a name");
+  	//	submitOK = "false";
+	//		}
+		
+		
+		
 			// Method that is called on page load
 			function initalize() {
 			
@@ -222,8 +234,7 @@
 				// --------------------------------------------------------------------------
 				
 				// For example, lets call our sample methods
-				helloWord("UGH");
-				getDeckStuff();
+			
 				
 			}
 			
