@@ -124,7 +124,7 @@ public class TopTrumpsRESTAPI {
 
 		createPlayers();
 		dealCards();
-
+		
 	}
 	
 	private static void setActivePlayer()
@@ -274,9 +274,25 @@ public class TopTrumpsRESTAPI {
 	
 	public String ga() throws IOException {
 		run();
-		String aa=activePlayer.getName()+"--------"+gameWinner.getName()+"--------"+newRound.getCate();
+		String aa=activePlayer.getName()+"-----------------"+gameWinner.getName()+"-----------------"+newRound.getCate();
 		String d = oWriter.writeValueAsString(aa);
 		return d;
+	}
+	
+	@GET
+	@Path("/draw")
+	
+	public String draw() throws IOException {
+		String dr = oWriter.writeValueAsString(newRound.isDraw());
+		return dr;
+	}
+	
+	@GET
+	@Path("/com")
+	
+	public String com() throws IOException {
+		String dr = oWriter.writeValueAsString(newRound.communalPile.size());
+		return dr;
 	}
 	
 	@GET
@@ -297,6 +313,16 @@ public class TopTrumpsRESTAPI {
 		
 		String pc = oWriter.writeValueAsString(h.getTopCard());
 		return pc;
+	}
+	
+	@GET
+	@Path("/ai1")
+	
+	public String ai1() throws IOException {
+	
+		
+		String m = oWriter.writeValueAsString(h.getTopCard());
+		return m;
 	}
 //	@GET
 //	@Path("/wina")
