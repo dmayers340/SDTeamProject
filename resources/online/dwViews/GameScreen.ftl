@@ -94,58 +94,59 @@
 	
 	  	<div class="container">
 	  		<div class="text">
-  					<div class="card-block">
+  					<div class="card-block" style="width:550px; height:50px; position:absolute; left:10px; top:30px ">
   
-    						<p id="head"><h4><b>Active Player:--------Round Winner-------Category Selected</b></h4><br /></p>
-    						<p id="act"></p>
+    						<p id="head"><h4>Active Player:--------Round Winner-------Category Selected</h4></p><br>
+    						<p id="act"><h4></h4></p>
+    						<p id="draw"></p>
+    						<p id="com"></p>
 						
   					</div>
 				</div>
 			</div>
 		
   							<div class="main">
-  								<div class="card border-dark mb-3" style="width:150px; height:280px; position:absolute; left:400px; top:275px ">  		
-								<img class="card-img-top" src="https://img.purch.com/h/1000/aHR0cDovL3d3dy5zcGFjZS5jb20vaW1hZ2VzL2kvMDAwLzA2Ni8yODcvb3JpZ2luYWwveHMtMS1zcGFjZS1wbGFuZS1ib2Vpbmctb3JiaXRhcnQuanBn" alt="Card Image">
-  								<br />
+  								<div class="card border-dark mb-3" style="width:150px; height:280px; position:absolute; left:600px; top:275px ">  		
+								<img class="card-img-top" src="https://img.purch.com/h/1000/aHR0cDovL3d3dy5zcGFjZS5jb20vaW1hZ2VzL2kvMDAwLzA2Ni8yODcvb3JpZ2luYWwveHMtMS1zcGFjZS1wbGFuZS1ib2Vpbmctb3JiaXRhcnQuanBn" alt="Card Image"><br />
     							<div class="category">
     							<p> Description Size Speed Range Firepower Cargo</p>
     							<p id="card"></p>
                                	</div>
                                	</div>
-                                <div id="na" style="left: 170px; position: absolute; top: 275px;"> <font size=12px; font  face="Impact"; color="White"></font></div>
+                                <div id="na" style="left: 370px; position: absolute; top: 275px;"> <font size=12px; font  face="Impact"; color="White"></font></div>
                                 
-                                <div class="aa" style="left: 170px; position: absolute; top: 355px;"> <font size=5px; font  face="Arial" ; color="White"><p id="handnum">Card in Hands: </p></font></div>
-                                <div style="left: 170px; position: absolute; top: 425px;"> <font size=5px; font  face="Arial" ; color="White">Round wins: </font></div>
+                                <div class="aa" style="left: 370px; position: absolute; top: 355px;"> <font size=5px; font  face="Arial" ; color="White"><p id="handnum">Card in Hands: </p></font></div>
+                                <div style="left: 370px; position: absolute; top: 425px;"> <font size=5px; font  face="Arial" ; color="White">Round wins: </font></div>
                             </div>
                             
                             <div class="main1">
-                           <img src="http://www.hearthstonetopdecks.com/wp-content/uploads/2014/06/card-back-gold-open-202x300.png"; style="width:140px; height:250px; position:absolute; right:600px; top:50px; ">
-                            	
-                                <div style="left: 600px; position: absolute; top: 50px;"> <font size="16";font  face="Impact" color="White">AI1</font></div>
-                                <div style="left: 600px; position: absolute; top: 130px;"> <font size=5px; font  face="Arial" ; color="White">Card in Hands: </font></div>
-								<div style="left: 600px; position: absolute; top: 200px;"> <font size=5px; font  face="Arial" ; color="White">Round wins: </font></div>
+                              		
+								 <img src="http://www.hearthstonetopdecks.com/wp-content/uploads/2014/06/card-back-gold-open-202x300.png"; style="width:140px; height:250px; position:absolute; right:480px; top:100px">
+								 <div style="left: 850px; position: absolute; top:100px;"> <font size="16";font  face="Impact" color="White">AI1</font></div>
+                                <div style="left: 850px; position: absolute; top: 180px;"> <font size=5px; font  face="Arial" ; color="White">Card in Hands: </font></div>
+								<div style="left: 850px; position: absolute; top: 250px;"> <font size=5px; font  face="Arial" ; color="White">Round wins: </font></div>
                             </div>
                             
                            <div class="main2">
-                            <img src="http://www.hearthstonetopdecks.com/wp-content/uploads/2014/06/card-back-gold-open-202x300.png"; style="width:140px; height:250px; position:absolute; right:20px; top:50px; ">
+                            <img src="http://www.hearthstonetopdecks.com/wp-content/uploads/2014/06/card-back-gold-open-202x300.png"; style="width:140px; height:250px; position:absolute; right:20px; top:100px ">
                             
-                                <div style="left: 1150px; position: absolute; top: 50px;"> <font size="16";font  face="Impact" color="White">AI2</font></div>
-								<div style="left: 1150px; position: absolute; top: 130px;"> <font size=5px; font  face="Arial" ; color="White">Card in Hands: </font></div>
-								<div style="left: 1150px; position: absolute; top: 200px;"> <font size=5px; font  face="Arial" ; color="White">Round wins: </font></div>
+                                <div style="left: 1300px; position: absolute; top: 100px;"> <font size="16";font  face="Impact" color="White">AI2</font></div>
+								<div style="left: 1300px; position: absolute; top: 180px;"> <font size=5px; font  face="Arial" ; color="White">Card in Hands: </font></div>
+								<div style="left: 1300px; position: absolute; top: 250px;"> <font size=5px; font  face="Arial" ; color="White">Round wins: </font></div>
                             </div>
                             
                             <div class="main3">
-                             <img src="http://www.hearthstonetopdecks.com/wp-content/uploads/2014/06/card-back-gold-open-202x300.png"; style="width:140px; height:250px; position:absolute; right:600px; top:500px; ">
-                            <div style="left: 600px; position: absolute; top: 500px;"> <font size="16";font  face="Impact" color="White">AI3</font></div>
-                            <div style="left: 600px; position: absolute; top: 580px;"> <font size=5px; font  face="Arial" ; color="White">Card in Hands: </font></div>
-								<div style="left: 600px; position: absolute; top: 650px;"> <font size=5px; font  face="Arial" ; color="White">Round wins: </font></div>
+                             <img src="http://www.hearthstonetopdecks.com/wp-content/uploads/2014/06/card-back-gold-open-202x300.png"; style="width:140px; height:250px; position:absolute; right:480px; top:500px ">
+                            <div style="left: 850px; position: absolute; top: 500px;"> <font size="16";font  face="Impact" color="White">AI3</font></div>
+                            <div style="left: 850px; position: absolute; top: 580px;"> <font size=5px; font  face="Arial" ; color="White">Card in Hands: </font></div>
+								<div style="left: 850px; position: absolute; top: 650px;"> <font size=5px; font  face="Arial" ; color="White">Round wins: </font></div>
                             </div>
                             
                             <div class="main4">
                   			 <img src="http://www.hearthstonetopdecks.com/wp-content/uploads/2014/06/card-back-gold-open-202x300.png"; style="width:140px; height:250px; position:absolute; right:20px; top:500px; ">
-                               <div style="left: 1150px; position: absolute; top: 500px;"> <font size="16";font  face="Impact" color="White">AI4</font></div>
-                            <div style="left: 1150px; position: absolute; top: 580px;"> <font size=5px; font  face="Arial" ; color="White">Card in Hands: </font></div>
-								<div style="left: 1150px; position: absolute; top: 650px;"> <font size=5px; font  face="Arial" ; color="White">Round wins: </font></div>
+                               <div style="left: 1300px; position: absolute; top: 500px;"> <font size="16";font  face="Impact" color="White">AI4</font></div>
+                            <div style="left: 1300px; position: absolute; top: 580px;"> <font size=5px; font  face="Arial" ; color="White">Card in Hands: </font></div>
+								<div style="left: 1300px; position: absolute; top: 650px;"> <font size=5px; font  face="Arial" ; color="White">Round wins: </font></div>
                             </div>
                             
                             <div class="btn btn-primary">
@@ -171,8 +172,9 @@
 			ga();
 			playercard();
 			handnum();
-		
-			
+			ai1();
+			draw();
+			com();
 			}	
 				// --------------------------------------------------------------------------
 				// You can call other methods you want to run when the page first loads here
@@ -224,7 +226,6 @@
 				};
 
 				xhr.send();	
-				//window.location.reload();
 			}
 			
 			function handnum(){
@@ -236,7 +237,43 @@
 				xhr.onload = function(e) {
 			
  					var n =xhr.response; 
-					document.getElementById('handnum').innerHTML = "Cards in Hand         "+n;
+					document.getElementById('handnum').innerHTML = "Cards in Hand:         "+n;
+				};
+
+				xhr.send();	
+			
+			}
+			
+			function draw(){
+			var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/draw");
+			if (!xhr) {
+  					alert("CORS not supported");
+				}
+
+				xhr.onload = function(e) {
+			
+ 					var n =xhr.response; 
+ 					if (n.indexOf('1') > -1){
+ 						document.getElementById('draw').innerHTML = "Not a draw";
+ 					}
+					else{
+					document.getElementById('draw').innerHTML = "It's a draw";
+					}
+				};
+
+				xhr.send();	
+			}
+			
+			function com(){
+			var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/com");
+			if (!xhr) {
+  					alert("CORS not supported");
+				}
+
+				xhr.onload = function(e) {
+			
+ 					var n =xhr.response; 
+					document.getElementById('com').innerHTML = "Communal pile has "+n+" cards";
 				};
 
 				xhr.send();	
@@ -253,6 +290,22 @@
 			
  					var n =xhr.response; 
 					document.getElementById('card').innerHTML = n;
+				};
+
+				xhr.send();	
+			
+			}
+			
+			function ai1(){
+			var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/playercard");
+			if (!xhr) {
+  					alert("CORS not supported");
+				}
+
+				xhr.onload = function(e) {
+			
+ 					var n =xhr.response; 
+					document.getElementById('ai1').innerHTML = n;
 				};
 
 				xhr.send();	
