@@ -9,26 +9,28 @@ import java.util.Scanner;
 
 import javax.swing.JOptionPane;
 
-public class Game {
+public class Game extends Thread
+
+{
 
 	/**
 	 *  instance variables
 	 */
 
-	public int numberOfPlayers; //we should assume there will always be 4 AI players
-	
-	
+	private Controller controller;
 
-	private int remainingPlayers; // players still in game
-	private Deck currentDeck;
-	private Round newRound;
-	private Player activePlayer;
-	public String username;
-	private Player gameWinner;
+	public static int numberOfPlayers; //we should assume there will always be 4 AI players
+	private static int remainingPlayers; // players still in game
+
+	private static Deck currentDeck;
+	private static Round newRound;
+	private static Player activePlayer;
+	public static String username;
+	private static Player gameWinner;
 
 	private static ArrayList <Player> listOfPlayers;
 
-	private final String logFile = "toptrumps.log";
+	private final static String logFile = "toptrumps.log";
 
 	/**
 	 * constructor method;
@@ -36,30 +38,38 @@ public class Game {
 	 * @param d (current deck)
 	 */
 
-	public Game (Deck d)
+	public Game (Deck d, Controller c)
+
 	{	
-		// this is all for testing
-		System.out.println("running game class ; should print from deck");
-		System.out.print(d.dString());
-		System.out.println();
+		controller = c;
 
 		boolean deckOutputToLog = false;
 		logDeck(d,deckOutputToLog);
-
 		d.shuffleDeck();
 		deckOutputToLog = true;
 		currentDeck = d;
 		logDeck(currentDeck, deckOutputToLog); //prints shuffled deck to log file
 
-		int p = TopTrumpsCLIApplication.howManyPlayers(); // user picks number of players
-		numberOfPlayers = p+1; // AI players + human player
-		remainingPlayers = p+1; // starts with all players still in game
+		numberOfPlayers = controller.howManyPlayers() +1; // user picks number of players
+		remainingPlayers = numberOfPlayers; // starts with all players still in game
 
 		createPlayers();
 		dealCards();
-		
+
 		logDealtCards(); // right after they have been dealt
 
+		run();
+
+	}
+
+
+	/**
+	 * 
+	 */
+
+	public  void run()
+
+	{
 		/**
 		 * rounds continue until there is only 1 player left
 		 * the last remaining player is the winner 
@@ -74,46 +84,32 @@ public class Game {
 			if (newRound.getRoundCount() > 1) {
 				logDealtCards(); 
 			}
-			
-			 
+
+
 			newRound.playRound();
-			
+
 
 			roundLog();
 
 			System.out.println("----------------------------------------------------------------"+
 					"-------------------------");
-			
+
 
 			updatePlayers(); // updates number of remaining players
 		}
-		
+
 		newRound.getWinner();
 		showWinner();
 
 	}
 
-	public int getNumberOfPlayers() {
-		numberOfPlayers=TopTrumpsCLIApplication.howManyPlayers();
-		return numberOfPlayers;
-	}
-
-
-//	public void setNumberOfPlayers(int numberOfPlayers) {
-//		this.numberOfPlayers = numberOfPlayers;
-//	}
-//	
-//	public Deck getCurrentDeck()
-//	{
-//		return currentDeck;
-//	}
 
 
 	/**
 	 * updates number of remaining players
 	 */
 
-	private void updatePlayers ()
+	private static void updatePlayers ()
 
 	{
 		for (int i=0; i<listOfPlayers.size(); i++)
@@ -137,7 +133,7 @@ public class Game {
 	 * selects next active player
 	 */
 
-	private void setActivePlayer()
+	private static void setActivePlayer()
 
 	{
 		if (newRound==null) // if new game
@@ -165,7 +161,7 @@ public class Game {
 	 * method print winnerGame
 	 */
 
-	private void showWinner ()
+	private static void showWinner ()
 
 	{
 		// if only one player is left with cards after a draw
@@ -198,8 +194,8 @@ public class Game {
 					"¨^¨T¨T¨T¨m¨T¨T¨m¨a¨^¨m¨T¨[¨d¨a¨^¨a¨^¨m¨T¨m¨T¨T¨m¨T¨m¨a¨^¨m¨T¨m¨m¨T¨T¨m¨a¨^¨m¨T¨T¨a\n" + 
 					"©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤¨X¨T¨a¨U\n" + 
 					"©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤¨^¨T¨T¨a");
-			
-			
+
+
 		}
 
 	}
@@ -213,13 +209,9 @@ public class Game {
 
 		// numberOfPlayers = currentDeck.getNumPlayers(); 
 		listOfPlayers = new ArrayList<Player>();
+		username = controller.getUsername();
 
 		int i = 0;
-
-		System.out.println("Please enter your username: ");
-
-		Scanner in = new Scanner (System.in);
-		username = String.format("%-10s", in.next());
 
 		// creates the human player
 		Player h = new Player(username);
@@ -238,7 +230,7 @@ public class Game {
 
 
 
-	public void dealCards() {
+	public static void dealCards() {
 
 		int numCardsEach = currentDeck.getNumberOfCards() / numberOfPlayers;
 
@@ -260,8 +252,6 @@ public class Game {
 
 		System.out.println("Dealing cards...");
 		System.out.println();
-
-
 	}
 
 
@@ -295,7 +285,7 @@ public class Game {
 					}
 
 
-					
+
 					printer.println(deckDescriptor);
 					printer.println(deck);
 					printer.println(logSeparator);
@@ -317,10 +307,10 @@ public class Game {
 		}				
 
 	}
-	
-	
 
-	private void logDealtCards() {
+
+
+	private static void logDealtCards() {
 
 		PrintWriter printer = null;
 
@@ -361,74 +351,73 @@ public class Game {
 					"Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
-	
 
-		private void roundLog() {
 
-			PrintWriter printer = null;
+	private static void roundLog() {
 
+		PrintWriter printer = null;
+
+		try {
 			try {
-				try {
-					FileWriter fw = new FileWriter(logFile, true);
-					BufferedWriter bw = new BufferedWriter(fw);
-					printer = new PrintWriter(bw);
+				FileWriter fw = new FileWriter(logFile, true);
+				BufferedWriter bw = new BufferedWriter(fw);
+				printer = new PrintWriter(bw);
 
-					{ 
-						printer.println();
-						printer.println(newRound.getRoundLog());
-					}
+				{ 
+					printer.println();
+					printer.println(newRound.getRoundLog());
 				}
-
-				finally {
-
-					if (printer != null) {
-						printer.close();
-					}
-				} 	
 			}
-			catch (IOException ioe) {
-				JOptionPane.showMessageDialog(null, "File not found",
-						"Error", JOptionPane.ERROR_MESSAGE);
+
+			finally {
+
+				if (printer != null) {
+					printer.close();
+				}
+			} 	
+		}
+		catch (IOException ioe) {
+			JOptionPane.showMessageDialog(null, "File not found",
+					"Error", JOptionPane.ERROR_MESSAGE);
+		}
+	}
+
+	private static void logGameWinner() {
+
+		PrintWriter printer = null;
+
+		try {
+			try {
+				FileWriter fw = new FileWriter(logFile, true);
+				BufferedWriter bw = new BufferedWriter(fw);
+				printer = new PrintWriter(bw);
+
+				{ 
+					printer.println(gameWinner.getName() + " WON THE GAME!");
+				}
 			}
+
+			finally {
+
+				if (printer != null) {
+					printer.close();
+				}
+			} 	
+		}
+		catch (IOException ioe) {
+			JOptionPane.showMessageDialog(null, "File not found",
+					"Error", JOptionPane.ERROR_MESSAGE);
 		}
 
-			private void logGameWinner() {
 
-				PrintWriter printer = null;
 
-				try {
-					try {
-						FileWriter fw = new FileWriter(logFile, true);
-						BufferedWriter bw = new BufferedWriter(fw);
-						printer = new PrintWriter(bw);
-
-						{ 
-							printer.println(gameWinner.getName() + " WON THE GAME!");
-						}
-					}
-
-					finally {
-
-						if (printer != null) {
-							printer.close();
-						}
-					} 	
-				}
-				catch (IOException ioe) {
-					JOptionPane.showMessageDialog(null, "File not found",
-							"Error", JOptionPane.ERROR_MESSAGE);
-				}
-		
-		
-		
 
 	}
 
-	private int pickRandomPlayer() { //returns random index number
+	private static int pickRandomPlayer() { //returns random index number
 
 		int randomIndex = (int)Math.floor(Math.random() * numberOfPlayers);
 		return randomIndex;
 	}
 
 }
-

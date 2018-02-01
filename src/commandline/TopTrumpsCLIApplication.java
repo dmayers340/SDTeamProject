@@ -26,10 +26,9 @@ public class TopTrumpsCLIApplication {
 	private static int numberOfGames = 0;
 	private static Deck newDeck;
 	public static int players;
-
 	
+	private static Controller c; 
 
-	
 
 	/**
 	 * This main method is called by TopTrumps.java when the user specifies that they want to run in
@@ -43,18 +42,50 @@ public class TopTrumpsCLIApplication {
 
 		// State
 		boolean userWantsToQuit = false; // flag to check whether the user wants to quit the application
-
+		
+		c = new Controller();
+		c.start();
+		
 		// Loop until the user wants to exit the game
 		while (!userWantsToQuit) 
 
 		{
 			optionMenu();
 
-			// ----------------------------------------------------
-			// Add your game logic here based on the requirements
-			// ----------------------------------------------------
+			String choice = c.getInput();
 
-			// userWantsToQuit=true; // use this when the user wants to exit the game
+			// if letter S was entered - nothing happens
+			if (choice.charAt(0) == 'S')
+			{
+				System.out.println("No statistics to display ");
+				System.out.println();
+			}
+
+			// reads the deck from a .txt file and starts a new game
+			else if (choice.charAt(0) == 'G')
+			{
+				readIn();
+				Game newGame = new Game(newDeck, c);
+				newGame.start();
+			}
+
+			if (choice.charAt(0)=='Q')
+			{
+				userWantsToQuit=true;
+				System.out.println ("You exited the program");
+				System.out.println();
+				System.exit(0);
+			}
+			
+			// any other  input
+			else 
+			{
+				System.out.println("Please enter valid input");
+				System.out.println();
+				return;
+			}
+
+			numberOfGames++;
 
 		}
 
@@ -77,62 +108,17 @@ public class TopTrumpsCLIApplication {
 		System.out.println("S - view past game statistics ");
 		System.out.println("Q - exit the application ");
 		System.out.println();
-
-		String choice = getInput();
-
-		// if letter S was entered - nothing happens
-		if (choice.charAt(0) == 'S')
-		{
-			System.out.println("No statistics to display ");
-			System.out.println();
-		}
-
-		// reads the deck from a .txt file and starts a new game
-		else if (choice.charAt(0) == 'G')
-		{
-			readIn();  
-
-			Game newGame = new Game(newDeck);
-			numberOfGames++;
-		}
-
-		// if Q or QUIT was entered
-		// not sure how to use the boolean :D 
-		else if (choice.charAt(0)=='Q')
-		{
-			System.out.println ("You exited the program");
-			System.out.println();
-			System.exit(0);
-		}
-
-		// any other  input
-		else 
-		{
-			System.out.println("Please enter valid input");
-			System.out.println();
-			return;
-		}
-
 	}
-
-
+	
+	
 	/**
-	 * reads command line input
-	 * @return String
+	 * 
+	 * @param players
 	 */
-	private static String getInput()
-	{
-		Scanner in = new Scanner (System.in);
-		String input = " ";
-
-		input = in.next();
-		return input;
-	}
-
 	public  void setPlayers(int players) {
 		this.players = players;
 	}
-	
+
 	/**
 	 * reads from the .txt file
 	 * adds categories to the deck
@@ -149,7 +135,7 @@ public class TopTrumpsCLIApplication {
 
 			Scanner in = new Scanner (reader);
 			String line = in.nextLine();
-			
+
 			// sets categories 
 			newDeck.setCategories(line);
 
@@ -174,7 +160,7 @@ public class TopTrumpsCLIApplication {
 	public static int howManyPlayers() { //add validation of input
 
 		System.out.print("How many opponents would you like? Maximum is 4.");
-		players = Integer.parseInt(getInput());
+		players = Integer.parseInt(c.getInput());
 
 		if (players > 4 || players < 1) {
 			System.err.print("Number of opponents must be between 1 and 4!");

@@ -9,10 +9,13 @@ public class Round {
 	 * instance variables
 	 */
 
-	private Player activePlayer;
+	private static Player activePlayer;
 	private ArrayList<Player> players;
+	public static String cate;
+	
 
-	private int c; // categoryG
+
+	private static int c; // categoryG
 
 	private Player winner;
 
@@ -288,7 +291,7 @@ public class Round {
 		// checks if a valid category name was entered
 		for (int i = 0; i < players.get(0).getTopCard().getCategories().size(); i++)
 		{
-			if (category.equalsIgnoreCase(activePlayer.getTopCard().getCategories().get(i)))
+			if (category.equals(activePlayer.getTopCard().getCategories().get(i)))
 				temp = i;
 		}
 
@@ -302,6 +305,10 @@ public class Round {
 			this.c=temp; // sets category
 	}
 
+	public static String getCate() {
+		String cate = activePlayer.getTopCard().getCategories().get(c).toUpperCase();
+		return cate;
+	}
 
 	/**
 	 * searches active user's top card 
@@ -419,12 +426,12 @@ public class Round {
 	 */
 
 	private static void addRound() {
-		try{
-			Thread.sleep(10000);
-			
-		}catch(InterruptedException e){
-			
-		}
+//		try{
+//			Thread.sleep(10000);
+//			
+//		}catch(InterruptedException e){
+//			
+//		}
 		roundCount++;
 	}
 
