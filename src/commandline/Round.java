@@ -20,7 +20,7 @@ public class Round {
 	private Player winner;
 
 	public static boolean draw = false; // 1st round starts with no draw
-	private static ArrayList<Card> communalPile = new ArrayList<Card>(); 
+	public static ArrayList<Card> communalPile = new ArrayList<Card>(); 
 
 	private StringBuilder roundLog = new StringBuilder();
 	private String logSeparator = "-------------------------------------------------------------------------------------------------------";
