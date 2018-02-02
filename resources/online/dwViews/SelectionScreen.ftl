@@ -156,9 +156,11 @@
     		<center><h4><b>Play Game</b></h4>
     		<br />
     		<p class="card-text">If you would like to play the game select the button below.</p>
-    		<br />
-    		
-		<button id="myBtn">Play Game</button>
+    		<br />	
+    		<a href="http://localhost:7777/toptrumps/game" class="btn btn-primary">Play Game</a></center>
+		
+		
+		
     		<div id="myModal" class="modal">
 			<div class="modal-content">
  				   <span class="close">&times;</span>

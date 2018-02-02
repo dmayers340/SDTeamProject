@@ -21,63 +21,66 @@
 		<!--link href="../../resources/css/gameview.css" rel="stylesheet" />-->
 	
 	<style>
-	.nav li {
-      color: black;
-      display: inline-block;
-  	  }
-  	  .navbar-default .navbar-nav > li > a {
-    color: black;
-}
-	    .navbar-default {
-    background-color: black;
-    border-color: #E7E7E7;
-    padding-left:10px;
-  	padding-right:10px;
-  	margin-left:0px;
-  	margin-right:0px;
-  	margin-bottom:20px;
-}
+		.nav li {
+	     color: black;
+	     display: inline-block;
+	  	  }
+  	  
+  		.navbar-default .navbar-nav > li > a {
+    	color: black;
+		}
 	
-	.column{
+		.navbar-default {
+	    background-color: black;
+	    border-color: #E7E7E7;
+	    padding-left:10px;
+	  	padding-right:10px;
+	  	margin-left:0px;
+	  	margin-right:0px;
+	  	margin-bottom:20px;
+		}
+	
+		.column{
 		position:absolute;
 		left: 0px;
 		margin-top:150px;
 		margin-left:350px;
 		margin-right:150px;
 		}
-	.button{
-	position:absolute;
+		
+		.button{
+		position:absolute;
 		left: 10px;
 		margin-top:500px;
-	}
-	.color {
-	color:White;
-	font-size:1.2em;
- 	font-weight: bold;	
- 	}
- 	
- 	h5,li,ol,strong{
-			margin:0;
-			padding:0;
 		}
-			
-	body{
-	background-image: url("http://kb4images.com/images/pictures-of-outer-space/37759075-pictures-of-outer-space.jpg")
-	}
+		
+		.color {
+		color:White;
+		font-size:1.2em;
+	 	font-weight: bold;	
+	 	}
+ 	
+	 	h5,li,ol,strong{
+		margin:0;
+		padding:0;
+		}
+				
+		body{
+		background-image: url("http://kb4images.com/images/pictures-of-outer-space/37759075-pictures-of-outer-space.jpg")
+		}
 	
-	.text{
-	color:White;
-	font-size:1.2em;
- 	font-weight: bold;
-	position:absolute;
-	left: 0px;
-	margin-top:10px;
-	margin-left:10px;
-	margin-right:150px;
-	max-width: 400px; 
-	height: 15rem;
-	}
-	
+		.text{
+		color:White;
+		font-size:1.2em;
+	 	font-weight: bold;
+		position:absolute;
+		left: 0px;
+		margin-top:10px;
+		margin-left:10px;
+		margin-right:150px;
+		max-width: 400px; 
+		height: 15rem;
+		}
 	</style>
 	
 	<body onload="initalize()"> <!-- Call the initalize method when the page loads --> 
@@ -96,8 +99,12 @@
 	  		<div class="text">
   					<div class="card-block" style="width:550px; height:50px; position:absolute; left:10px; top:30px ">
   
-    						<p id="head"><h4>Active Player:--------Round Winner-------Category Selected</h4></p><br>
+    						<p><h4>Active Player:</p>
+    						<p>Round Winner:</p>
+    						<p>Category Selected:</h4></p><br>
+    						
     						<p id="act"><h4></h4></p>
+    						<div class = "
     						<p id="draw"></p>
     						<p id="com"></p>
 						
@@ -113,8 +120,9 @@
     							<p id="card"></p>
                                	</div>
                                	</div>
+                               	
+                               	<div style="left: 370px; position: absolute; top:260px;"> <font size="16";font  face="Impact" color="White">Player</font></div>                               	
                                 <div id="na" style="left: 370px; position: absolute; top: 275px;"> <font size=12px; font  face="Impact"; color="White"></font></div>
-                                
                                 <div class="aa" style="left: 370px; position: absolute; top: 355px;"> <font size=5px; font  face="Arial" ; color="White"><p id="handnum">Card in Hands: </p></font></div>
                                 <div style="left: 370px; position: absolute; top: 425px;"> <font size=5px; font  face="Arial" ; color="White">Round wins: </font></div>
                             </div>
@@ -122,59 +130,59 @@
                             <div class="main1">
                               		
 								 <img src="http://www.hearthstonetopdecks.com/wp-content/uploads/2014/06/card-back-gold-open-202x300.png"; style="width:140px; height:250px; position:absolute; right:480px; top:100px">
-								 <div style="left: 850px; position: absolute; top:100px;"> <font size="16";font  face="Impact" color="White">AI1</font></div>
-                                <div style="left: 850px; position: absolute; top: 180px;"> <font size=5px; font  face="Arial" ; color="White">Card in Hands: </font></div>
-								<div style="left: 850px; position: absolute; top: 250px;"> <font size=5px; font  face="Arial" ; color="White">Round wins: </font></div>
+								 <div style="left: 800px; position: absolute; top:100px;"> <font size="16";font  face="Impact" color="White">AI1</font></div>
+                                <div style="left: 800px; position: absolute; top: 180px;"> <font size=5px; font  face="Arial" ; color="White">Card in Hands: </font></div>
+								<div style="left: 800px; position: absolute; top: 250px;"> <font size=5px; font  face="Arial" ; color="White">Round wins: </font></div>
                             </div>
                             
                            <div class="main2">
                             <img src="http://www.hearthstonetopdecks.com/wp-content/uploads/2014/06/card-back-gold-open-202x300.png"; style="width:140px; height:250px; position:absolute; right:20px; top:100px ">
                             
-                                <div style="left: 1300px; position: absolute; top: 100px;"> <font size="16";font  face="Impact" color="White">AI2</font></div>
-								<div style="left: 1300px; position: absolute; top: 180px;"> <font size=5px; font  face="Arial" ; color="White">Card in Hands: </font></div>
-								<div style="left: 1300px; position: absolute; top: 250px;"> <font size=5px; font  face="Arial" ; color="White">Round wins: </font></div>
+                                <div style="left: 1250px; position: absolute; top: 100px;"> <font size="16";font  face="Impact" color="White">AI2</font></div>
+								<div style="left: 1250px; position: absolute; top: 180px;"> <font size=5px; font  face="Arial" ; color="White">Card in Hands: </font></div>
+								<div style="left: 1250px; position: absolute; top: 250px;"> <font size=5px; font  face="Arial" ; color="White">Round wins: </font></div>
                             </div>
                             
                             <div class="main3">
                              <img src="http://www.hearthstonetopdecks.com/wp-content/uploads/2014/06/card-back-gold-open-202x300.png"; style="width:140px; height:250px; position:absolute; right:480px; top:500px ">
-                            <div style="left: 850px; position: absolute; top: 500px;"> <font size="16";font  face="Impact" color="White">AI3</font></div>
-                            <div style="left: 850px; position: absolute; top: 580px;"> <font size=5px; font  face="Arial" ; color="White">Card in Hands: </font></div>
-								<div style="left: 850px; position: absolute; top: 650px;"> <font size=5px; font  face="Arial" ; color="White">Round wins: </font></div>
+                            <div style="left: 800px; position: absolute; top: 500px;"> <font size="16";font  face="Impact" color="White">AI3</font></div>
+                            <div style="left: 800px; position: absolute; top: 580px;"> <font size=5px; font  face="Arial" ; color="White">Card in Hands: </font></div>
+								<div style="left: 800px; position: absolute; top: 650px;"> <font size=5px; font  face="Arial" ; color="White">Round wins: </font></div>
                             </div>
                             
                             <div class="main4">
                   			 <img src="http://www.hearthstonetopdecks.com/wp-content/uploads/2014/06/card-back-gold-open-202x300.png"; style="width:140px; height:250px; position:absolute; right:20px; top:500px; ">
-                               <div style="left: 1300px; position: absolute; top: 500px;"> <font size="16";font  face="Impact" color="White">AI4</font></div>
-                            <div style="left: 1300px; position: absolute; top: 580px;"> <font size=5px; font  face="Arial" ; color="White">Card in Hands: </font></div>
-								<div style="left: 1300px; position: absolute; top: 650px;"> <font size=5px; font  face="Arial" ; color="White">Round wins: </font></div>
+                               <div style="left: 1250px; position: absolute; top: 500px;"> <font size="16";font  face="Impact" color="White">AI4</font></div>
+                            <div style="left: 1250px; position: absolute; top: 580px;"> <font size=5px; font  face="Arial" ; color="White">Card in Hands: </font></div>
+								<div style="left: 1250px; position: absolute; top: 650px;"> <font size=5px; font  face="Arial" ; color="White">Round wins: </font></div>
                             </div>
                             
                             <div class="btn btn-primary">
                             <div style="left: 10px; position: absolute; top: 700px"><a href="http://localhost:7777/toptrumps/game"><button style="width:200px;height:60px; font-size:1.4em; font-family: Arial; font-weight: bold;">New Game</button></a></div>
                             <div style="left: 300px; position: absolute; top: 700px"><a href="http://localhost:7777/toptrumps/stats"><button style="width:200px;height:60px; font-size:1.4em; font-family: Arial; font-weight: bold;">Statistics</button></a></div>
-                   <div class="button">
-                  	<form action=>
-    				<button type="submit" name="button" value="button1" style="width:200px;height:60px; font-size:1.4em; font-family: Arial; font-weight: bold;">Next Round</button>
-					</form></div>
-		</div>
-			
-
-    			
-  		</div>
-		</div>
-		</div>
+                   			<div class="button">
+                   			<div style= "left: 550px; position: absolute; top: 135px">
+                  				<form action=>
+    							<button type="submit" name="button" value="button1" style="width:200px;height:60px; font-size:1.4em; font-family: Arial; font-weight: bold;">Next Round</button>
+								</form>
+							</div>
+							</div>
+					  		</div>
+							</div>
+							</div>
 
 		<script type="text/javascript">
 		
 			// Method that is called on page load
-			function initalize() {
-			cateJSONList();
-			ga();
-			playercard();
-			handnum();
-			ai1();
-			draw();
-			com();
+			function initalize() 
+			{
+				cateJSONList();
+				ga();
+				playercard();
+				handnum();
+				ai1();
+				draw();
+				com();
 			}	
 				// --------------------------------------------------------------------------
 				// You can call other methods you want to run when the page first loads here
@@ -253,7 +261,7 @@
 				xhr.onload = function(e) {
 			
  					var n =xhr.response; 
- 					if (n.indexOf("false")>-1){
+ 					if (n.indexOf('1') > -1){
  						document.getElementById('draw').innerHTML = "Not a draw";
  					}
 					else{

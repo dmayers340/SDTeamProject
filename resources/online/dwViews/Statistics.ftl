@@ -82,7 +82,7 @@
 		.draws{
 		position:absolute;
 		left: 0px;
-		margin-top: 400px;
+		margin-top: 310px;
 		margin-left:400px;
 		margin-right:150px;
 		}
@@ -90,7 +90,7 @@
 		.rounds{
 		position:absolute;
 		right: 0px;
-		margin-top: 400px;
+		margin-top: 310px;
 		margin-left:150px;
 		margin-right:400px;
 		}

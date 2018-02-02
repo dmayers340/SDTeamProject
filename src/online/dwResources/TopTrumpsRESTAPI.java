@@ -37,7 +37,6 @@ import commandline.Game;
 import commandline.Player;
 import commandline.Round;
 import commandline.TopTrumpsCLIApplication;
-import commandline.TypeServlet;
 
 @Path("/toptrumps") // Resources specified here should be hosted at http://localhost:7777/toptrumps
 @Produces(MediaType.APPLICATION_JSON) // This resource returns JSON content
@@ -94,8 +93,7 @@ public class TopTrumpsRESTAPI {
 		 cardsInDeck = new ArrayList<Card>();
 		 newDeck = new Deck();
 		
-		 System.out.println(TypeServlet.uname + "printing something");
-		 System.out.println(TypeServlet.uname);
+
 			FileReader reader;
 			try 
 			{
@@ -279,7 +277,7 @@ public class TopTrumpsRESTAPI {
 	
 	public String ga() throws IOException {
 		run();
-		String aa=activePlayer.getName()+"-----------------"+gameWinner.getName()+"-----------------"+newRound.getCate();
+		String aa=activePlayer.getName()+"<br>"+gameWinner.getName()+"<br>"+newRound.getCate();
 		String d = oWriter.writeValueAsString(aa);
 		return d;
 	}
@@ -341,22 +339,7 @@ public class TopTrumpsRESTAPI {
 //		return wina;
 //	}
 
-	@GET
-	@Path("/na")
-	/**
-	 * Here is an example of a simple REST get request that returns a String.
-	 * We also illustrate here how we can convert Java objects to JSON strings.
-	 * @return - List of words as JSON
-	 * @throws IOException
-	 */
-	public String name() throws IOException {
-		
-		TypeServlet am=new TypeServlet();
-		String c=am.uname;
-		String m = oWriter.writeValueAsString(c);
-		return m;
-	}
-	
+
 	@GET
 	@Path("/cateJSONList")
 	/**
@@ -379,16 +362,16 @@ public class TopTrumpsRESTAPI {
 	}
 		
 		
-	@POST
-    @Path("/example")
-    public Response testEndpoint(Example example) {
-
-        String intermediate = example.getTest();
-        System.err.println(intermediate);
-
-        // Returns 200 back to the caller, meaning everything was ok.
-        return Response.ok().build();
-    }
+//	@POST
+//    @Path("/example")
+//    public Response testEndpoint(Example example) {
+//
+//        String intermediate = example.getTest();
+//        System.err.println(intermediate);
+//
+//        // Returns 200 back to the caller, meaning everything was ok.
+//        return Response.ok().build();
+//    }
 
     private static class Example {
         String test;
