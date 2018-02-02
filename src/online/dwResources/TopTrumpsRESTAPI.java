@@ -50,13 +50,13 @@ import commandline.TypeServlet;
  */
 public class TopTrumpsRESTAPI {
 	private String deck; 
-	// private String line;
-//	private String am;
+  
 	private Card topcard;
+  
 	private static ArrayList <Player> listOfPlayers;
-
-	 private static  ArrayList<String> categories;
-	 private ArrayList<Card> cardsInDeck;
+	private static  ArrayList<String> categories;
+	private ArrayList<Card> cardsInDeck;
+  
 	private int numberOfCards;
 	private final int maxAttributes = 6;
 	
@@ -69,10 +69,11 @@ public class TopTrumpsRESTAPI {
 	private static Player gameWinner;
 	private static String playername;
 	private Player h;
+
 	/** A Jackson Object writer. It allows us to turn Java objects
 	 * into JSON strings easily. */
 	ObjectWriter oWriter = new ObjectMapper().writerWithDefaultPrettyPrinter();
-	
+
 	/**
 	 * Contructor method for the REST API. This is called first. It provides
 	 * a TopTrumpsJSONConfiguration from which you can get the location of
@@ -83,7 +84,6 @@ public class TopTrumpsRESTAPI {
 		// ----------------------------------------------------
 		// Add relevant initalization here
 		// ----------------------------------------------------
-		//Deck newdeck=new Deck();
 		deck=conf.getDeckFile();
 		categories = new ArrayList<String>();
 		 cardsInDeck = new ArrayList<Card>();
@@ -138,7 +138,7 @@ public class TopTrumpsRESTAPI {
 
 		else if (newRound.getWinner() == null) // if draw
 
-		{
+    {
 			return;  
 		}
 
@@ -149,6 +149,7 @@ public class TopTrumpsRESTAPI {
 		}
 
 	}
+  
 	public  void run()
 
 	{
@@ -164,11 +165,9 @@ public class TopTrumpsRESTAPI {
 
 		newRound.getWinner();
 		showWinner();
-
 	}
 
 	private static void updatePlayers ()
-
 	{
 		for (int i=0; i<listOfPlayers.size(); i++)
 
@@ -184,12 +183,6 @@ public class TopTrumpsRESTAPI {
 		}
 	}
 			
-//	public static int howManyPlayers() { //add validation of input
-//
-//		numberofplayer=Integer.parseInt(TypeServlet.uname);
-//			return numberofplayer;
-//
-//	}
 	
 	private static void showWinner ()
 
@@ -299,8 +292,7 @@ public class TopTrumpsRESTAPI {
 	@Path("/handnum")
 	
 	public String handnum() throws IOException {
-	
-		
+
 		String hn = oWriter.writeValueAsString(h.getHand().size());
 		return hn;
 	}
@@ -324,17 +316,7 @@ public class TopTrumpsRESTAPI {
 		String m = oWriter.writeValueAsString(h.getTopCard());
 		return m;
 	}
-//	@GET
-//	@Path("/wina")
-//	
-//	public String win() throws IOException {
-//		
-//	
-//		Player wine=gameWinner;
-//		String win=wine.getName();
-//		String wina = oWriter.writeValueAsString(win);
-//		return wina;
-//	}
+
 
 	@GET
 	@Path("/na")
@@ -344,14 +326,28 @@ public class TopTrumpsRESTAPI {
 	 * @return - List of words as JSON
 	 * @throws IOException
 	 */
-	public String name() throws IOException {
+	public String name() throws IOException 
+  {
 		
 		TypeServlet am=new TypeServlet();
 		String c=am.uname;
 		String m = oWriter.writeValueAsString(c);
 		return m;
 	}
-	
+
+
+
+	// sets categories 
+
+
+	// Shuffle
+
+
+
+	// ----------------------------------------------------
+	// Add relevant API methods here
+	// ----------------------------------------------------
+
 	@GET
 	@Path("/cateJSONList")
 	/**
@@ -360,46 +356,66 @@ public class TopTrumpsRESTAPI {
 	 * @return - List of words as JSON
 	 * @throws IOException
 	 */
-	public String cateJSONList() throws IOException {
-		
-	
+	public String cateJSONList() throws IOException 
+  {	
 		ArrayList<String> listOfCate = new ArrayList<String>();
 		listOfCate=Card.getCategories();
 		String a="";
 		for (int i=0;i<listOfCate.size();i++){
 			a=String.format("%s \n %s",a,listOfCate.get(i));
 		}
+				
 		String listAsJSONString = oWriter.writeValueAsString(listOfCate);
-		return listAsJSONString;
-	}
-//		
-		
-//	@GET
-//	@Path("/topcard")
-//	public String topcard() throws IOException {
-//		String am = oWriter.writeValueAsString();
-//		return listAsJSONString;
-//		
-//	}
-		
-		// We can turn arbatory Java objects directly into JSON strings using
-		// Jackson seralization, assuming that the Java objects are not too complex.
-		
-	
-	
-	
+		return listAsJSONString;	
+	}  
+
 	@GET
-	@Path("/helloWord")
-	/**
-	 * Here is an example of how to read parameters provided in an HTML Get request.
-	 * @param Word - A word
-	 * @return - A String
-	 * @throws IOException
-	 */
-	public String helloWord(@QueryParam("Word") String Word) throws IOException {
-		return "Hello "+Word;
+	@Path("/numGames")
+	public String numGames() throws IOException 
+	{
+		//return the number of games from database, from java
+		String numGames = "7"; 
+		numGames = oWriter.writeValueAsString(numGames);
+		return numGames;
+	}
+
+	@GET 
+	@Path("/timescomputerwon")
+	public String timesComputerWon() throws IOException
+	{
+		//get from db
+		String compWins = "8";
+		compWins = oWriter.writeValueAsString(compWins);
+		return compWins;
 	}
 	
-	
-	
+	@GET 
+	@Path("/humanwin")
+	public String timesPersonWon() throws IOException
+	{
+		//get from db
+		String humanwin = "10";
+		humanwin = oWriter.writeValueAsString(humanwin);
+
+		return humanwin;
+	}
+	@GET
+	@Path("/numDraws")
+	public String numDraws() throws IOException 
+	{
+		//return the number of games from database, from java
+		String numDraws = "7"; 
+		numDraws = oWriter.writeValueAsString(numDraws);
+		return numDraws;
+	}
+	@GET
+	@Path("/numRounds")
+	public String numRounds() throws IOException 
+	{
+		//return the number of games from database, from java
+		String numRounds = "7"; 
+		numRounds = oWriter.writeValueAsString(numRounds);
+		return numRounds;
+	}
+
 }
