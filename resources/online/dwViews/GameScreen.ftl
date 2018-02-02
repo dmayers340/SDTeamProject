@@ -253,7 +253,7 @@
 				xhr.onload = function(e) {
 			
  					var n =xhr.response; 
- 					if (n.indexOf('1') > -1){
+ 					if (n.indexOf("false")>-1){
  						document.getElementById('draw').innerHTML = "Not a draw";
  					}
 					else{
