@@ -161,25 +161,26 @@
 		
 		
 		
+    		<button id="myBtn">Play Game</button>
     		<div id="myModal" class="modal">
 			<div class="modal-content">
  				   <span class="close">&times;</span>
   				   <ol>
                      <li><h5>Please enter your information</h5></li><br>
-  				     <form name="input" action="check" method="get">
+  				     <form id="qq"  action="example" method="post" >
   				     <li><strong>Please enter your name</strong><input type="text" name="log" id="log" size="20" /></li><br>
                       <li><strong>Please choose your opponent numbers (1-4)</strong><br>
-                       <input type="radio" name="num" value="1" checked> 1<br>
+                     			  <input type="radio" name="num" value="1" checked> 1<br>
   						<input type="radio" name="num" value="2"> 2<br>
   						<input type="radio" name="num" value="3"> 3<br>
   						<input type="radio" name="num" value="4"> 4</li><br>
   						
-                	 <li><input type="submit" name="submit"  formaction="http://localhost:7777/toptrumps/game" value="Start Game" ></li>
+                	 <li><input type="submit" name="submit""value="submit" ></li>
+                	 
                      </form>
-                     
-                </ol>
+			</ol>
  		 	</div>
- 		 	<script>
+ 		     <script>
  		 	var modal = document.getElementById('myModal');
 			var btn = document.getElementById("myBtn");
 			var span = document.getElementsByClassName("close")[0];
@@ -217,34 +218,12 @@
 		</div>
 		
 		<script type="text/javascript">
-		
-	//	var name = document.getElementByName("log").value
-	//	var number = document.getElementByName("num").value
-	//	submitOK = "true";
-	//	if (name.length ==0) {
-  	//	alert("Must have a name");
-  	//	submitOK = "false";
-	//		}
-		
-		
-		
-			// Method that is called on page load
+
 			function initalize() {
-			
-				// --------------------------------------------------------------------------
-				// You can call other methods you want to run when the page first loads here
-				// --------------------------------------------------------------------------
-				
-				// For example, lets call our sample methods
-			
+				//qq();  this is my method to send json. Not same as the last one but not work as well; if you want see how it works
 				
 			}
 			
-			// -----------------------------------------
-			// Add your other Javascript methods Here
-			// -----------------------------------------
-		
-			// This is a reusable method for creating a CORS request. Do not edit this.
 			
 			function createCORSRequest(method, url) {
   				var xhr = new XMLHttpRequest();
@@ -272,70 +251,29 @@
 		
 		</script>
 		
-		<!-- Here are examples of how to call REST API Methods -->
+
 		<script type="text/javascript">
+		  function qq()
+			{
+				var xhr = new XMLHttpRequest();
+				var url = "http://localhost:7777/toptrumps/example";
+				xhr.open("POST", url, true);
+				post.setHeader("Accept", "application/json");
+				post.setHeader("Content-type", "application/json");
+				xhr.setRequestHeader("Content-Type", "application/json");
+				xhr.onreadystatechange = function () {
+   				 if (xhr.readyState === 4 && xhr.status === 200) {
+       				 var json = JSON.parse(xhr.responseText);
+        			
+   				 }
+				};
+				
+			xhr.send(json);
+			
+			}
 		
-			function getDeckStuff()
-			{
-				var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getDeckStuff");
-				
-				if(!xhr)
-				{
-					alert("CORS not supported");
-				}
-				
-				xhr.onload = function(e)
-				{
-					var responseText = xhr.response;
-					alert(responseText);
-				};
-				xhr.send();
-			}
 			
 			
-			// This calls the helloJSONList REST method from TopTrumpsRESTAPI
-			function helloJSONList() {
-			
-				// First create a CORS request, this is the message we are going to send (a get request in this case)
-				var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/helloJSONList"); // Request type and URL
-				
-				// Message is not sent yet, but we can check that the browser supports CORS
-				if (!xhr) {
-  					alert("CORS not supported");
-				}
-
-				// CORS requests are Asynchronous, i.e. we do not wait for a response, instead we define an action
-				// to do when the response arrives 
-				xhr.onload = function(e) {
- 					var responseText = xhr.response; // the text of the response
-					alert(responseText); // lets produce an alert
-				};
-				
-				// We have done everything we need to prepare the CORS request, so send it
-				xhr.send();		
-			}
-			
-			// This calls the helloJSONList REST method from TopTrumpsRESTAPI
-			function helloWord(word) 
-			{
-				// First create a CORS request, this is the message we are going to send (a get request in this case)
-				var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/helloWord?Word="+word); // Request type and URL+parameters
-				
-				// Message is not sent yet, but we can check that the browser supports CORS
-				if (!xhr) {
-  					alert("CORS not supported");
-				}
-
-				// CORS requests are Asynchronous, i.e. we do not wait for a response, instead we define an action
-				// to do when the response arrives 
-				xhr.onload = function(e) {
- 					var responseText = xhr.response; // the text of the response
-					alert(responseText); // lets produce an alert
-				};
-				
-				// We have done everything we need to prepare the CORS request, so send it
-				xhr.send();		
-			}
 
 		</script>
 		
