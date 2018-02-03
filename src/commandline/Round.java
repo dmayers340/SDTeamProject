@@ -9,7 +9,7 @@ public class Round {
 	 * instance variables
 	 */
 
-	private static Player activePlayer;
+	private Player activePlayer;
 	private ArrayList<Player> players;
 	public static String cate;
 	
@@ -305,7 +305,7 @@ public class Round {
 			this.c=temp; // sets category
 	}
 
-	public static String getCate() {
+	public String getCate() {
 		String cate = activePlayer.getTopCard().getCategories().get(c).toUpperCase();
 		return cate;
 	}
