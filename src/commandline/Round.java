@@ -291,7 +291,7 @@ public class Round {
 		// checks if a valid category name was entered
 		for (int i = 0; i < players.get(0).getTopCard().getCategories().size(); i++)
 		{
-			if (category.equals(activePlayer.getTopCard().getCategories().get(i)))
+			if (category.equalsIgnoreCase(activePlayer.getTopCard().getCategories().get(i)))
 				temp = i;
 		}
 
