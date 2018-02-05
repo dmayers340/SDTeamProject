@@ -5,6 +5,10 @@ public class DatabaseConnection
 {
 	
 	private Connection connection = null;
+	//TODO fill these in
+	private final String DBNAME = ""; 
+	private final String USERNAME = "";
+	private final String PASSWORD = "";
 	
 	//do we need a default constructor as we pass values? Probably?
 	public DatabaseConnection()
@@ -12,11 +16,7 @@ public class DatabaseConnection
 	}
 	
 	public void makeConnection()
-	{
-		String DBNAME = ""; //want to make these final at the top?
-		String USERNAME = "";
-		String PASSWORD = "";
-		
+	{	
 		try 
 		{
 			connection= DriverManager.getConnection("jdbc:postgresql://yacata.dcs.gla.ac.uk:5432/" + DBNAME, USERNAME, PASSWORD);

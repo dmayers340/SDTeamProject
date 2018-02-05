@@ -24,7 +24,7 @@
 		.nav li {
 	     color: black;
 	     display: inline-block;
-	  	  }
+	  	 }
   	  
   		.navbar-default .navbar-nav > li > a {
     	color: black;
