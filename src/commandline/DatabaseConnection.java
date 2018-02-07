@@ -6,20 +6,18 @@ public class DatabaseConnection
 	
 	private Connection connection = null;
 	
+	//Jemma's Details for DB
 	private final String DBNAME = "m_17_0806849r"; 
 	private final String USERNAME = "m_17_0806849r";
 	private final String PASSWORD = "0806849r";
 	
+	//Constructor makes connection
 	public DatabaseConnection()
 	{
 		this.makeConnection();
 	}
 	
-	public void createConnection()
-	{
-		this.makeConnection();
-	}
-	
+	//This tries to make a connection, if it fails it should print out
 	public void makeConnection()
 	{	
 		try 
@@ -44,6 +42,9 @@ public class DatabaseConnection
 		}
 	}
 
+	
+	//Close database connection
+	//TODO find place to close
 	public void closeConnection()
 	{
 		try
@@ -59,11 +60,11 @@ public class DatabaseConnection
 		}
 	}
 	
-	
+	//This method connects to the database to return Number of Games played for stat screen
 	public int getNumberOfGames()
 	{
 		Statement numGameStmt = null;
-		String numGamesQuery = "SELECT COUNT (gameNumber) FROM GameStatistics.Game;";
+		String numGamesQuery = "SELECT COUNT (gameNumber) AS gameNumber FROM GameStatistics.Game;";
 		int numberOfGames = 0;
 		
 		try
@@ -86,6 +87,7 @@ public class DatabaseConnection
 		return numberOfGames;
 	}
 	
+	//This method connects to the database to return last Round Winner for game screen
 	public String getWinner()
 	{
 		Statement whoWon = null;
@@ -111,10 +113,11 @@ public class DatabaseConnection
 		return winnerName;
 	}
 	
+	//This method connects to the database to return Number of Games the Player won for stat screen
 	public int getHumanWin()
 	{
 		Statement humanWinStmt = null;
-		String humanWinQuery = "SELECT COUNT (gameNumber) FROM GameStatistics.Game WHERE gameWinner = 'Player0';";
+		String humanWinQuery = "SELECT COUNT (gameNumber) AS gameNumber FROM GameStatistics.Game WHERE gameWinner = 'Player0';";
 		int humanWin = 0;
 		
 		try
@@ -123,7 +126,7 @@ public class DatabaseConnection
 			ResultSet humanWinResults = humanWinStmt.executeQuery(humanWinQuery);
 			while (humanWinResults.next())
 			{
-				humanWin = humanWinResults.getInt("gameNumber"); 			
+				humanWin = humanWinResults.getInt("gameNumber"); 
 			}
 			return humanWin;
 		}
@@ -133,14 +136,14 @@ public class DatabaseConnection
 			noNumber.printStackTrace();
 			System.err.println("Could not execute " + humanWinQuery);
 		}
-		
 		return humanWin;
 	}
 	
+	//This method connects to the database to return Number of Games the Computer won for stat screen
 	public int getComputerWin()
 	{
 		Statement numComputerWinStmt = null;
-		String numCompWinQuery = "SELECT COUNT (gameNumber) FROM GameStatistics.Game WHERE gameWinner <> 'Player0';";
+		String numCompWinQuery = "SELECT COUNT (gameNumber) AS gameNumber FROM GameStatistics.Game WHERE gameWinner <> 'Player0';";
 		int computerWin = 0;
 		
 		try
@@ -149,7 +152,8 @@ public class DatabaseConnection
 			ResultSet compWinResults = numComputerWinStmt.executeQuery(numCompWinQuery);
 			while (compWinResults.next())
 			{
-				computerWin = compWinResults.getInt("gameNumber"); 		
+				computerWin = compWinResults.getInt("gameNumber"); 	
+				this.closeConnection();
 			}
 			return computerWin;
 		}
@@ -163,6 +167,7 @@ public class DatabaseConnection
 		return computerWin;
 	}
 	
+	//This method connects to the database to return the most rounds played for stat screen
 	public int getMaxRounds()
 	{
 		Statement maxRoundStmt = null;
@@ -175,7 +180,6 @@ public class DatabaseConnection
 			ResultSet maxRoundResults = maxRoundStmt.executeQuery(maxRoundsQuery);
 			while (maxRoundResults.next())
 			{
-				//TODO 
 				maxRounds = maxRoundResults.getInt("roundsPlayed"); 			
 			}
 			return maxRounds;
@@ -190,20 +194,20 @@ public class DatabaseConnection
 		return maxRounds;
 	}
 	
-	public int getNumberOfDraws()
+	//This method connects to the database to return the average number of draw for stat screen
+	public double getNumberOfDraws()
 	{
 		Statement numDraws = null;
-		String numDrawsQuery = "SELECT cast(AVG(numberDraws)as decimal (3,2)) FROM GameStatistics.Rounds;";
-		int numberOfDraws = 0;
+		String numDrawsQuery = "SELECT cast(AVG(numberDraws)as decimal (3, 2)) AS numberDraws FROM GameStatistics.Rounds;";
+		double numberOfDraws = 0;
 		
 		try
 		{
 			numDraws = connection.createStatement();
 			ResultSet numDrawResults = numDraws.executeQuery(numDrawsQuery);
 			while (numDrawResults.next())
-			{
-				//TODO 
-				numberOfDraws = numDrawResults.getInt("Number_of_Draws"); 			
+			{ 
+				numberOfDraws = numDrawResults.getDouble("numberDraws");			
 			}
 			return numberOfDraws;
 		}
@@ -213,18 +217,18 @@ public class DatabaseConnection
 			noNumber.printStackTrace();
 			System.err.println("Could not execute " + numDrawsQuery);
 		}
-		
 		return numberOfDraws;
 	}
+
 	
 	//TODO add a game from the online game
 	public void addGame(Game game)
 	{
 		
+		
 	}
 	
 	//TODO Update Database when save/quit--send string into db?
-
 	
 	public String updateDB(int nRounds, int nDraws) {
 		
@@ -241,11 +245,9 @@ public class DatabaseConnection
 			e.printStackTrace();
 			result = "Error, data not inserted";
 		}
-		 
 		return result;
 	}
-	
-	
 }
+
 
 

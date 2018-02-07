@@ -326,7 +326,6 @@ public class TopTrumpsRESTAPI {
 		
 	}
 	
-
 	@GET 
 	@Path("/timescomputerwon")
 	public int timesComputerWon() throws IOException
@@ -347,10 +346,10 @@ public class TopTrumpsRESTAPI {
 	
 	@GET
 	@Path("/numDraws")
-	public int numDraws() throws IOException 
+	public double numDraws() throws IOException 
 	{
 		//return the number of games from database, from java
-		int numDraws = db.getNumberOfDraws(); 
+		double numDraws = db.getNumberOfDraws(); 
 		return numDraws;
 	}
 	@GET
@@ -360,6 +359,12 @@ public class TopTrumpsRESTAPI {
 		//return the number of games from database, from java
 		int numRounds = db.getMaxRounds(); 
 		return numRounds;
+	}
+	@GET
+	@Path("/closedb")
+	public void closedb() throws IOException 
+	{
+		db.closeConnection();
 	}
 
 }

@@ -56,11 +56,7 @@ public class TopTrumpsCLIApplication {
 				System.out.println("No statistics to display ");
 				System.out.println();
 			}
-
-<<<<<<< HEAD
-			setNumberOfGames(getNumberOfGames() + 1);
-		}
-=======
+				
 			// reads the deck from a .txt file and starts a new game
 			else if (choice.charAt(0) == 'G')
 			{
@@ -71,8 +67,7 @@ public class TopTrumpsCLIApplication {
 				newGame.playGame();
 				numberOfGames++;
 			}
->>>>>>> 4acc86a630b0bedb15171bd40d4f8e025139fef2
-
+			
 			// if Q or QUIT was entered
 			else if (choice.charAt(0)=='Q')
 			{
@@ -85,6 +80,9 @@ public class TopTrumpsCLIApplication {
 				System.out.println("Please enter valid input");
 				System.out.println();
 			}
+			
+			setNumberOfGames(getNumberOfGames() + 1);
+
 		}
 
 		System.exit(0);
@@ -184,6 +182,11 @@ public class TopTrumpsCLIApplication {
 		return players;
 	}
 
+	public static void setNumberOfGames(int numGames)
+	{
+		numberOfGames = numGames;
+	}
+	
 	public static int getNumberOfGames() {
 		return numberOfGames;
 	}
