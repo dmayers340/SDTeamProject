@@ -12,16 +12,15 @@ import javax.swing.JOptionPane;
 public class Game 
 
 {
-
 	/**
 	 *  instance variables
 	 */
-	public int numberOfPlayers; //we should assume there will always be 4 AI players
+	public int numberOfPlayers; // number of players in game
 
 	private int remainingPlayers; // players still in game
 	private Deck currentDeck;
 	private Round newRound;
-	private Player activePlayer;
+	private Player activePlayer; // active player makes the category choice
 	public String username;
 	private Player gameWinner;
 
@@ -29,14 +28,16 @@ public class Game
 			"-------------------------";
 
 	private static ArrayList <Player> listOfPlayers;
-	private final String logFile = "toptrumps.log";
+	private final String LOG_FILE = "toptrumps.log";
 
 	/**
-	 * constructor method;
-	 * every new game shuffles the deck
-	 * @param d (current deck)
+	 * Constructor method. 
+	 * Creates a new Game object and shuffles the deck, 
+	 * then writes the deck contents to a log file.
+	 * Called by the TopTrumpsCLIApplication.java class
+	 * (the online version does not use the Game.java class).
+	 * @param Deck d = current deck 
 	 */
-
 	public Game (Deck d)
 	{	
 		// this is all for testing
@@ -47,11 +48,13 @@ public class Game
 		deckOutputToLog = true;
 		currentDeck = d;
 		logDeck(currentDeck, deckOutputToLog); //prints shuffled deck to log file
-
 	}
+	
 
 	/**
-	 * 
+	 * Starts a new game (creates players and deals cards) and 
+	 * executes high-level game logic until the winner is decided.
+	 * Called from the TopTrumpsCLIApplication.java class.
 	 */
 	public void playGame()
 
@@ -254,7 +257,7 @@ public class Game
 
 		try {
 			try {
-				FileWriter fw = new FileWriter(logFile, true);
+				FileWriter fw = new FileWriter(LOG_FILE, true);
 				BufferedWriter bw = new BufferedWriter(fw);
 				printer = new PrintWriter(bw);
 				String deck = "";
@@ -269,7 +272,7 @@ public class Game
 					}
 
 					else {
-						fw = new FileWriter(logFile, false); //overwrite log contents if new game
+						fw = new FileWriter(LOG_FILE, false); //overwrite log contents if new game
 						deck = d.dString();
 						deckDescriptor = "Deck as read from file\n";
 						printer.println(logSeparator);	
@@ -308,7 +311,7 @@ public class Game
 
 		try {
 			try {
-				FileWriter fw = new FileWriter(logFile, true);
+				FileWriter fw = new FileWriter(LOG_FILE, true);
 				BufferedWriter bw = new BufferedWriter(fw);
 				printer = new PrintWriter(bw);
 
@@ -351,7 +354,7 @@ public class Game
 
 		try {
 			try {
-				FileWriter fw = new FileWriter(logFile, true);
+				FileWriter fw = new FileWriter(LOG_FILE, true);
 				BufferedWriter bw = new BufferedWriter(fw);
 				printer = new PrintWriter(bw);
 
@@ -384,7 +387,7 @@ public class Game
 
 		try {
 			try {
-				FileWriter fw = new FileWriter(logFile, true);
+				FileWriter fw = new FileWriter(LOG_FILE, true);
 				BufferedWriter bw = new BufferedWriter(fw);
 				printer = new PrintWriter(bw);
 

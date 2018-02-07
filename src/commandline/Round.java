@@ -12,7 +12,6 @@ public class Round {
 	private Player activePlayer;
 	private ArrayList<Player> players;
 	public static String cate;
-	
 
 
 	private static int c; // categoryG
@@ -426,12 +425,6 @@ public class Round {
 	 */
 
 	private static void addRound() {
-//		try{
-//			Thread.sleep(10000);
-//			
-//		}catch(InterruptedException e){
-//			
-//		}
 		roundCount++;
 	}
 

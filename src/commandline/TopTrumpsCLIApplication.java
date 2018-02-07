@@ -44,7 +44,7 @@ public class TopTrumpsCLIApplication {
 			System.out.println("S - view past game statistics ");
 			System.out.println("Q - exit the application ");
 			System.out.println();
-			
+
 			String choice = getInput();
 
 			// if letter S was entered - nothing happens
@@ -58,11 +58,11 @@ public class TopTrumpsCLIApplication {
 			else if (choice.charAt(0) == 'G')
 			{
 				readIn();  
+				numberOfGames++;
 				Game newGame = new Game(currentDeck);
 				newGame.setNumberOfPlayers(getNumberOfAIPlayers()+1);
 				newGame.setUsername(getInput());
 				newGame.playGame();
-				numberOfGames++;
 			}
 
 			// if Q or QUIT was entered
@@ -82,7 +82,7 @@ public class TopTrumpsCLIApplication {
 		System.exit(0);
 	}
 
-	
+
 	/**
 	 * Reads command line input. 
 	 * @return user input as a String
@@ -145,10 +145,10 @@ public class TopTrumpsCLIApplication {
 	 * 
 	 * @return the selected number of AI players
 	 */
-	public static int getNumberOfAIPlayers() { 
+	public static int getNumberOfAIPlayers() 
 
+	{ 
 		System.out.println("How many opponents would you like? Maximum is 4.");
-		String response; 
 		int players = 0; 
 
 		// attempts to get valid input from the user
@@ -156,10 +156,9 @@ public class TopTrumpsCLIApplication {
 		{
 			try 
 			{
-				response = getInput();
-				players = Integer.parseInt(response); 
+				players = Integer.parseInt(getInput()); 
 
-				if (players > 4 || players <0) 
+				if (players > 4 || players < 0) 
 				{
 					System.err.println("Number of opponents must be between 1 and 4!");
 					players = 0;
@@ -174,6 +173,7 @@ public class TopTrumpsCLIApplication {
 		}
 
 		return players;
+
 	}
 
 }
