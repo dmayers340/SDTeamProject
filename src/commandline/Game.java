@@ -16,8 +16,6 @@ public class Game {
 	 */
 
 	public int numberOfPlayers; //we should assume there will always be 4 AI players
-	
-	
 
 	private int remainingPlayers; // players still in game
 	private Deck currentDeck;
@@ -25,6 +23,9 @@ public class Game {
 	private Player activePlayer;
 	public String username;
 	private Player gameWinner;
+
+	private String logSeparator = "-------------------------------------------------------------"+
+			"-------------------------";
 
 	private static ArrayList <Player> listOfPlayers;
 
@@ -39,10 +40,6 @@ public class Game {
 	public Game (Deck d)
 	{	
 		// this is all for testing
-		System.out.println("running game class ; should print from deck");
-		System.out.print(d.dString());
-		System.out.println();
-
 		boolean deckOutputToLog = false;
 		logDeck(d,deckOutputToLog);
 
@@ -51,13 +48,16 @@ public class Game {
 		currentDeck = d;
 		logDeck(currentDeck, deckOutputToLog); //prints shuffled deck to log file
 
-		int p = TopTrumpsCLIApplication.howManyPlayers(); // user picks number of players
-		numberOfPlayers = p+1; // AI players + human player
-		remainingPlayers = p+1; // starts with all players still in game
+	}
+
+
+	public void playGame()
+
+	{
+		remainingPlayers = numberOfPlayers; // starts with all players still in game
 
 		createPlayers();
 		dealCards();
-		
 		logDealtCards(); // right after they have been dealt
 
 		/**
@@ -74,45 +74,31 @@ public class Game {
 			if (newRound.getRoundCount() > 1) {
 				logDealtCards(); 
 			}
-			
-			 
+
 			newRound.playRound();
-			
-
 			roundLog();
-
-			System.out.println("----------------------------------------------------------------"+
-					"-------------------------");
-			
-
+			System.out.println(logSeparator);
 			updatePlayers(); // updates number of remaining players
 		}
-		
+
 		newRound.getWinner();
 		showWinner();
 
 	}
+	
 
-	public int getNumberOfPlayers() {
-		numberOfPlayers=TopTrumpsCLIApplication.howManyPlayers();
-		return numberOfPlayers;
+	/**
+	setter method
+	 */
+	public void setNumberOfPlayers(int n) 
+	{
+		numberOfPlayers=n;
 	}
-
-
-//	public void setNumberOfPlayers(int numberOfPlayers) {
-//		this.numberOfPlayers = numberOfPlayers;
-//	}
-//	
-//	public Deck getCurrentDeck()
-//	{
-//		return currentDeck;
-//	}
-
+	
 
 	/**
 	 * updates number of remaining players
 	 */
-
 	private void updatePlayers ()
 
 	{
@@ -132,11 +118,9 @@ public class Game {
 	}
 
 
-
 	/**
 	 * selects next active player
 	 */
-
 	private void setActivePlayer()
 
 	{
@@ -164,7 +148,6 @@ public class Game {
 	/**
 	 * method print winnerGame
 	 */
-
 	private void showWinner ()
 
 	{
@@ -189,17 +172,15 @@ public class Game {
 
 		if (gameWinner == listOfPlayers.get(0))
 		{
-//			System.out.print ("\n" + 
-//					"�X�T�T�T�[���������������������������X�[�������X�[�������X�[\n" + 
-//					"�U�X�T�[�U�������������������������X�a�^�[�����U�U�����X�a�^�[\n" + 
-//					"�U�U���^�p�T�T�j�T�[�X�T�T�j�T�j�T�m�[�X�p�[�X�g�U�X�T�m�[�X�p�j�T�T�j�T�[�X�T�T�[\n" + 
-//					"�U�U���X�g�X�[�U�X�[�g�X�[�U�X�g�X�[�U�U�U�U�U�U�U�U�X�[�U�U�d�g�X�[�U�X�[�g�T�T�g\n" + 
-//					"�U�^�T�a�U�^�a�U�U�U�U�^�a�U�U�U�X�[�U�^�g�^�a�U�^�g�X�[�U�^�g�U�^�a�U�U�U�d�T�T�U\n" + 
-//					"�^�T�T�T�m�T�T�m�a�^�m�T�[�d�a�^�a�^�m�T�m�T�T�m�T�m�a�^�m�T�m�m�T�T�m�a�^�m�T�T�a\n" + 
-//					"���������������������X�T�a�U\n" + 
-//					"���������������������^�T�T�a");
-			
-			
+			System.out.print ("\n" + 
+					"╔═══╗─────────────╔╗───╔╗───╔╗" +
+					"║╔═╗║────────────╔╝╚╗──║║──╔╝╚╗" +
+					"║║─╚╬══╦═╗╔══╦═╦═╩╗╔╬╗╔╣║╔═╩╗╔╬╦══╦═╗╔══╗" +
+					"║║─╔╣╔╗║╔╗╣╔╗║╔╣╔╗║║║║║║║║╔╗║║╠╣╔╗║╔╗╣══╣" +
+					"║╚═╝║╚╝║║║║╚╝║║║╔╗║╚╣╚╝║╚╣╔╗║╚╣║╚╝║║║╠══║" +
+					"╚═══╩══╩╝╚╩═╗╠╝╚╝╚╩═╩══╩═╩╝╚╩═╩╩══╩╝╚╩══╝" +
+					"──────────╔═╝║" +
+					"──────────╚══╝");
 		}
 
 	}
@@ -277,8 +258,7 @@ public class Game {
 				printer = new PrintWriter(bw);
 				String deck = "";
 				String deckDescriptor = "";
-				String logSeparator = "----------------------------------------------------------------"+
-						"-------------------------";
+
 				{
 
 					if (deckOutput == true) {
@@ -295,7 +275,7 @@ public class Game {
 					}
 
 
-					
+
 					printer.println(deckDescriptor);
 					printer.println(deck);
 					printer.println(logSeparator);
@@ -317,8 +297,8 @@ public class Game {
 		}				
 
 	}
-	
-	
+
+
 
 	private void logDealtCards() {
 
@@ -330,8 +310,6 @@ public class Game {
 				BufferedWriter bw = new BufferedWriter(fw);
 				printer = new PrintWriter(bw);
 
-				String logSeparator = "-------------------------------------------------------------"+
-						"-------------------------";
 				String playerCards = "";
 
 				{ 
@@ -361,66 +339,66 @@ public class Game {
 					"Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
-	
 
-		private void roundLog() {
 
-			PrintWriter printer = null;
+	private void roundLog() {
 
+		PrintWriter printer = null;
+
+		try {
 			try {
-				try {
-					FileWriter fw = new FileWriter(logFile, true);
-					BufferedWriter bw = new BufferedWriter(fw);
-					printer = new PrintWriter(bw);
+				FileWriter fw = new FileWriter(logFile, true);
+				BufferedWriter bw = new BufferedWriter(fw);
+				printer = new PrintWriter(bw);
 
-					{ 
-						printer.println();
-						printer.println(newRound.getRoundLog());
-					}
+				{ 
+					printer.println();
+					printer.println(newRound.getRoundLog());
 				}
-
-				finally {
-
-					if (printer != null) {
-						printer.close();
-					}
-				} 	
 			}
-			catch (IOException ioe) {
-				JOptionPane.showMessageDialog(null, "File not found",
-						"Error", JOptionPane.ERROR_MESSAGE);
+
+			finally {
+
+				if (printer != null) {
+					printer.close();
+				}
+			} 	
+		}
+		catch (IOException ioe) {
+			JOptionPane.showMessageDialog(null, "File not found",
+					"Error", JOptionPane.ERROR_MESSAGE);
+		}
+	}
+
+	private void logGameWinner() {
+
+		PrintWriter printer = null;
+
+		try {
+			try {
+				FileWriter fw = new FileWriter(logFile, true);
+				BufferedWriter bw = new BufferedWriter(fw);
+				printer = new PrintWriter(bw);
+
+				{ 
+					printer.println(gameWinner.getName() + " WON THE GAME!");
+				}
 			}
+
+			finally {
+
+				if (printer != null) {
+					printer.close();
+				}
+			} 	
+		}
+		catch (IOException ioe) {
+			JOptionPane.showMessageDialog(null, "File not found",
+					"Error", JOptionPane.ERROR_MESSAGE);
 		}
 
-			private void logGameWinner() {
 
-				PrintWriter printer = null;
 
-				try {
-					try {
-						FileWriter fw = new FileWriter(logFile, true);
-						BufferedWriter bw = new BufferedWriter(fw);
-						printer = new PrintWriter(bw);
-
-						{ 
-							printer.println(gameWinner.getName() + " WON THE GAME!");
-						}
-					}
-
-					finally {
-
-						if (printer != null) {
-							printer.close();
-						}
-					} 	
-				}
-				catch (IOException ioe) {
-					JOptionPane.showMessageDialog(null, "File not found",
-							"Error", JOptionPane.ERROR_MESSAGE);
-				}
-		
-		
-		
 
 	}
 

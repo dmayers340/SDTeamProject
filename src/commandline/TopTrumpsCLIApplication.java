@@ -1,6 +1,5 @@
 package commandline;
 
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
@@ -25,11 +24,6 @@ public class TopTrumpsCLIApplication {
 	private static String FILE_NAME = "StarCitizenDeck.txt"; 
 	private static int numberOfGames = 0;
 	private static Deck newDeck;
-	public static int players;
-
-	
-
-	
 
 	/**
 	 * This main method is called by TopTrumps.java when the user specifies that they want to run in
@@ -93,6 +87,8 @@ public class TopTrumpsCLIApplication {
 			readIn();  
 
 			Game newGame = new Game(newDeck);
+			newGame.setNumberOfPlayers(getNumberOfPlayers()+1);
+
 			numberOfGames++;
 		}
 
@@ -116,6 +112,7 @@ public class TopTrumpsCLIApplication {
 	}
 
 
+
 	/**
 	 * reads command line input
 	 * @return String
@@ -129,10 +126,7 @@ public class TopTrumpsCLIApplication {
 		return input;
 	}
 
-	public  void setPlayers(int players) {
-		this.players = players;
-	}
-	
+
 	/**
 	 * reads from the .txt file
 	 * adds categories to the deck
@@ -149,7 +143,7 @@ public class TopTrumpsCLIApplication {
 
 			Scanner in = new Scanner (reader);
 			String line = in.nextLine();
-			
+
 			// sets categories 
 			newDeck.setCategories(line);
 
@@ -169,20 +163,37 @@ public class TopTrumpsCLIApplication {
 			System.out.println();
 		}
 
-	} 
+	}
 
-	public static int howManyPlayers() { //add validation of input
 
-		System.out.print("How many opponents would you like? Maximum is 4.");
-		players = Integer.parseInt(getInput());
+	public static int getNumberOfPlayers() { //add validation of input
 
-		if (players > 4 || players < 1) {
-			System.err.print("Number of opponents must be between 1 and 4!");
-			return -1; //quit program in this case????????
+		System.out.println("How many opponents would you like? Maximum is 4.");
+		String response = getInput();
+		int players = 0;
+
+		while (players==0)
+		{
+			try 
+
+			{
+				players = Integer.parseInt(response);
+				
+				if (players > 4 || players <0) 
+					{
+					System.err.println("Number of opponents must be between 1 and 4!");
+					players = 0;
+					}
+			}
+
+			catch (NumberFormatException notANumber)
+
+			{
+				System.err.println("Please enter a valid number");
+			}
 		}
-		else 
-			return players;
 
+			return players;
 	}
 
 }
