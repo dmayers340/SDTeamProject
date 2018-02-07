@@ -230,33 +230,52 @@ public class DatabaseConnection
 	
 	//TODO Update Database when save/quit--send string into db?
 	
-	public String updateDB(int nRounds, int nDraws, String roundWins) {
+	public String updateDBRounds(int nRounds, int nDraws, String roundWins) {
 		
 		Statement stmt = null;
 		String [] roundWinsPerPlayer = roundWins.split(" ");
-		String draws = "";
+		String round = "";
 		if (roundWinsPerPlayer.length > 2) {
 			
 			switch (roundWinsPerPlayer.length) {
-			case 3: draws = "INSERT INTO GameStatistics.Rounds (gameNumber, roundsPlayed, numberDraws, roundsWonP0, roundsWonP1, roundsWonP2) VALUES ('"+TopTrumpsCLIApplication.getNumberOfGames()+"', '"+nRounds+"','"+nDraws+"', '"+roundWinsPerPlayer[0]+"', '"+roundWinsPerPlayer[1]+"', '"+roundWinsPerPlayer[2]+"')";
-			case 4: draws = "INSERT INTO GameStatistics.Rounds (gameNumber, roundsPlayed, numberDraws, roundsWonP0, roundsWonP1, roundsWonP2) VALUES ('"+TopTrumpsCLIApplication.getNumberOfGames()+"', '"+nRounds+"','"+nDraws+"', '"+roundWinsPerPlayer[0]+"', '"+roundWinsPerPlayer[1]+"', '"+roundWinsPerPlayer[2]+"', '"+roundWinsPerPlayer[3]+"')";
-			case 5: draws = "INSERT INTO GameStatistics.Rounds (gameNumber, roundsPlayed, numberDraws, roundsWonP0, roundsWonP1, roundsWonP2) VALUES ('"+TopTrumpsCLIApplication.getNumberOfGames()+"', '"+nRounds+"','"+nDraws+"', '"+roundWinsPerPlayer[0]+"', '"+roundWinsPerPlayer[1]+"', '"+roundWinsPerPlayer[2]+"', '"+roundWinsPerPlayer[3]+"', '"+roundWinsPerPlayer[4]+"')";
+			case 3: round = "INSERT INTO GameStatistics.Rounds (gameNumber, roundsPlayed, numberDraws, roundsWonP0, roundsWonP1, roundsWonP2) VALUES ('"+TopTrumpsCLIApplication.getNumberOfGames()+"', '"+nRounds+"','"+nDraws+"', '"+roundWinsPerPlayer[0]+"', '"+roundWinsPerPlayer[1]+"', '"+roundWinsPerPlayer[2]+"')";
+			case 4: round = "INSERT INTO GameStatistics.Rounds (gameNumber, roundsPlayed, numberDraws, roundsWonP0, roundsWonP1, roundsWonP2) VALUES ('"+TopTrumpsCLIApplication.getNumberOfGames()+"', '"+nRounds+"','"+nDraws+"', '"+roundWinsPerPlayer[0]+"', '"+roundWinsPerPlayer[1]+"', '"+roundWinsPerPlayer[2]+"', '"+roundWinsPerPlayer[3]+"')";
+			case 5: round = "INSERT INTO GameStatistics.Rounds (gameNumber, roundsPlayed, numberDraws, roundsWonP0, roundsWonP1, roundsWonP2) VALUES ('"+TopTrumpsCLIApplication.getNumberOfGames()+"', '"+nRounds+"','"+nDraws+"', '"+roundWinsPerPlayer[0]+"', '"+roundWinsPerPlayer[1]+"', '"+roundWinsPerPlayer[2]+"', '"+roundWinsPerPlayer[3]+"', '"+roundWinsPerPlayer[4]+"')";
 			}
 		}
 		
 		else {
-		draws = "INSERT INTO GameStatistics.Rounds (gameNumber, roundsPlayed, numberDraws, roundsWonP0, roundsWonP1) VALUES ('"+TopTrumpsCLIApplication.getNumberOfGames()+"', '"+nRounds+"','"+nDraws+"', '"+roundWinsPerPlayer[0]+"', '"+roundWinsPerPlayer[1]+"')";
+		round = "INSERT INTO GameStatistics.Rounds (gameNumber, roundsPlayed, numberDraws, roundsWonP0, roundsWonP1) VALUES ('"+TopTrumpsCLIApplication.getNumberOfGames()+"', '"+nRounds+"','"+nDraws+"', '"+roundWinsPerPlayer[0]+"', '"+roundWinsPerPlayer[1]+"')";
 		}
 		String result = "";
 		
 		try {
 			stmt = connection.createStatement();
-			stmt.executeUpdate(draws);
-			result = "Draw data inserted";
+			stmt.executeUpdate(round);
+			result = "Round data inserted";
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
-			result = "Error, data not inserted";
+			result = "Error, round data not inserted";
+		}
+		return result;
+	}
+	
+	public String updateDBGame(int nPlayers, String winner) {
+		
+		Statement stmt = null;
+		
+		String game = "INSERT INTO GameStatistics.Game (gameNumber, numberPlayers, gameWinner) VALUES ('"+TopTrumpsCLIApplication.getNumberOfGames()+"', '"+nPlayers+"', '"+winner+"',)";
+		String result = "";
+		
+		try {
+			stmt = connection.createStatement();
+			stmt.executeUpdate(game);
+			result = "Game data inserted";
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+			result = "Error, game data not inserted";
 		}
 		return result;
 	}
