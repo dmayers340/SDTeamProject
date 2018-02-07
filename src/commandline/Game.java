@@ -75,7 +75,7 @@ public class Game
 			chooseActivePlayer(); // set deciding player 
 			newRound = new Round(listOfPlayers, activePlayer);
 
-			if (newRound.getRoundCount() > 1) {
+			if (Round.getRoundCount() > 1) {
 				logDealtCards(); 
 			}
 
@@ -87,24 +87,26 @@ public class Game
 
 		newRound.getWinner();
 		showWinner();
-		db.updateDBRounds(newRound.getRoundCount(), newRound.getDrawCount(), getNumberOfRoundWins());
+		db.updateDBRounds(Round.getRoundCount(), newRound.getDrawCount(), getNumberOfRoundWins());
 		db.updateDBGame(numberOfPlayers, gameWinner.getName());
 	}
 	
 	
-	private String getNumberOfRoundWins() {    //number of rounds each player has won
-
+	private String getNumberOfRoundWins() { //makes array with number of rounds each player has won
+	
 		int [] playerRoundWins = new int [numberOfPlayers];
 		for (Player p: listOfPlayers) {
-			if (newRound.getWinner() == p) {
-				int index = listOfPlayers.indexOf(p);
-				playerRoundWins[index]++;
-				
+			for (int i = 0; i < Round.getRoundCount(); i++) {
+				if (newRound.getWinner() == p) {
+					int index = listOfPlayers.indexOf(p);
+					playerRoundWins[index]++;
+				}
 			}
 		}
+		System.out.println(playerRoundWins);
 		return playerRoundWins.toString();
 	}
-	
+
 	
 	
 

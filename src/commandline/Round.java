@@ -413,7 +413,7 @@ public class Round {
 	 * @return int
 	 */
 
-	public int getRoundCount() {
+	public static int getRoundCount() {
 		return roundCount;
 	}
 
