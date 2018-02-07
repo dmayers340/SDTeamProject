@@ -1,17 +1,8 @@
 package commandline;
 
-import java.awt.event.ActionListener;
-import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
-
-import javax.swing.JOptionPane;
 
 /**
  * Top Trumps command line application
@@ -21,13 +12,19 @@ public class TopTrumpsCLIApplication {
 	/**
 	 * instance variables
 	 */
-	private static String FILE_NAME = "StarCitizenDeck.txt"; 
-	private static int numberOfGames = 0;
-	private static Deck newDeck;
+	private static String FILE_NAME = "StarCitizenDeck.txt"; // name of deck file
+	private static int numberOfGames = 0; // counter
+	private static Deck currentDeck; // current deck
 
 	/**
 	 * This main method is called by TopTrumps.java when the user specifies that they want to run in
 	 * command line mode. The contents of args[0] is whether we should write game logs to a file.
+	 * Contains the command line interface for choosing what the user wants to do next.
+	 * 
+	 * S - view statistics
+	 * G - start a new game
+	 * Q - exit
+	 * 
 	 * @param args
 	 */
 	public static void main(String[] args) {
@@ -40,82 +37,55 @@ public class TopTrumpsCLIApplication {
 
 		// Loop until the user wants to exit the game
 		while (!userWantsToQuit) 
-
 		{
-			optionMenu();
+			System.out.println();
+			System.out.println("Options: ");
+			System.out.println("G - play a new game ");
+			System.out.println("S - view past game statistics ");
+			System.out.println("Q - exit the application ");
+			System.out.println();
+			
+			String choice = getInput();
 
-			// ----------------------------------------------------
-			// Add your game logic here based on the requirements
-			// ----------------------------------------------------
+			// if letter S was entered - nothing happens
+			if (choice.charAt(0) == 'S')
+			{
+				System.out.println("No statistics to display ");
+				System.out.println();
+			}
 
-			// userWantsToQuit=true; // use this when the user wants to exit the game
+			// reads the deck from a .txt file and starts a new game
+			else if (choice.charAt(0) == 'G')
+			{
+				readIn();  
+				Game newGame = new Game(currentDeck);
+				newGame.setNumberOfPlayers(getNumberOfAIPlayers()+1);
+				newGame.setUsername(getInput());
+				newGame.playGame();
+				numberOfGames++;
+			}
 
+			// if Q or QUIT was entered
+			else if (choice.charAt(0)=='Q')
+			{
+				userWantsToQuit = true;
+			}
+
+			// any other  input
+			else 
+			{
+				System.out.println("Please enter valid input");
+				System.out.println();
+			}
 		}
 
+		System.exit(0);
 	}
 
+	
 	/**
-	 * Not a final version, wrote this for testing purposes
-	 * 
-	 * Asks for user input
-	 * S - view past stats
-	 * G - start a new game
-	 * Q(uit) - exit
-	 */
-	// play game or view stats?
-	private static void optionMenu() 
-	{
-		System.out.println();
-		System.out.println("Options: ");
-		System.out.println("G - play a new game ");
-		System.out.println("S - view past game statistics ");
-		System.out.println("Q - exit the application ");
-		System.out.println();
-
-		String choice = getInput();
-
-		// if letter S was entered - nothing happens
-		if (choice.charAt(0) == 'S')
-		{
-			System.out.println("No statistics to display ");
-			System.out.println();
-		}
-
-		// reads the deck from a .txt file and starts a new game
-		else if (choice.charAt(0) == 'G')
-		{
-			readIn();  
-
-			Game newGame = new Game(newDeck);
-			newGame.setNumberOfPlayers(getNumberOfPlayers()+1);
-
-			numberOfGames++;
-		}
-
-		// if Q or QUIT was entered
-		// not sure how to use the boolean :D 
-		else if (choice.charAt(0)=='Q')
-		{
-			System.out.println ("You exited the program");
-			System.out.println();
-			System.exit(0);
-		}
-
-		// any other  input
-		else 
-		{
-			System.out.println("Please enter valid input");
-			System.out.println();
-			return;
-		}
-
-	}
-
-
-
-	/**
-	 * reads command line input
-	 * @return String
+	 * Reads command line input. 
+	 * @return user input as a String
 	 */
 	private static String getInput()
 	{
@@ -128,13 +98,14 @@ public class TopTrumpsCLIApplication {
 
 
 	/**
-	 * reads from the .txt file
-	 * adds categories to the deck
-	 * adds all cards to the deck
+	 * Reads deck contents from a file.
+	 * Sets categories for the new deck (contained in the first line of the file).
+	 * Add cards to the deck (each card is a new line).
+	 * Uses FILE_NAME, which is stored as a class constant.
 	 */
 	private static void readIn()
 	{
-		newDeck = new Deck();
+		currentDeck = new Deck();
 
 		FileReader reader;
 		try 
@@ -145,17 +116,18 @@ public class TopTrumpsCLIApplication {
 			String line = in.nextLine();
 
 			// sets categories 
-			newDeck.setCategories(line);
+			currentDeck.setCategories(line);
 
 			// adds cards to the deck
 			while (in.hasNextLine())
 			{
 				line = in.nextLine();	
-				newDeck.addCard(line);
+				currentDeck.addCard(line);
 			}
 
 		} 
 
+		// in case there is no file
 		catch (FileNotFoundException e) 
 		{
 			System.out.println("File not Found");
@@ -165,25 +137,33 @@ public class TopTrumpsCLIApplication {
 
 	}
 
-
-	public static int getNumberOfPlayers() { //add validation of input
+	/**
+	 * This method asks the user to enter the number of AI players.
+	 * Reads command line input by calling this.getInput() method.
+	 * The user must enter an integer that is between 1 and 4,
+	 * otherwise the method will throw an error message.
+	 * 
+	 * @return the selected number of AI players
+	 */
+	public static int getNumberOfAIPlayers() { 
 
 		System.out.println("How many opponents would you like? Maximum is 4.");
-		String response = getInput();
-		int players = 0;
+		String response; 
+		int players = 0; 
 
+		// attempts to get valid input from the user
 		while (players==0)
 		{
 			try 
-
 			{
-				players = Integer.parseInt(response);
-				
+				response = getInput();
+				players = Integer.parseInt(response); 
+
 				if (players > 4 || players <0) 
-					{
+				{
 					System.err.println("Number of opponents must be between 1 and 4!");
 					players = 0;
-					}
+				}
 			}
 
 			catch (NumberFormatException notANumber)
@@ -193,7 +173,7 @@ public class TopTrumpsCLIApplication {
 			}
 		}
 
-			return players;
+		return players;
 	}
 
 }
