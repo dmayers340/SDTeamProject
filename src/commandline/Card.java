@@ -3,13 +3,10 @@ import java.util.ArrayList;
 
 public class Card {
 
-	/**
-	 * the only instance variable
-	 * all the attributes are stored in one array
-	 */
 
-	private ArrayList<String> cardAttributes;
-	private static ArrayList<String> categories;
+	private static ArrayList<String> categories;  //e.g. Speed, Firepower etc
+	private ArrayList<String> cardAttributes;     //numerical value of a category
+	
 
 	/**
 	 * constructor
