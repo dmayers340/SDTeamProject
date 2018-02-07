@@ -5,14 +5,18 @@ public class DatabaseConnection
 {
 	
 	private Connection connection = null;
-	//TODO fill these in
-	private final String DBNAME = ""; 
-	private final String USERNAME = "";
-	private final String PASSWORD = "";
+	private final String DBNAME = "m_17_0806849r"; 
+	private final String USERNAME = "m_17_0806849r";
+	private final String PASSWORD = "0806849r";
 	
-	//do we need a default constructor as we pass values? Probably?
 	public DatabaseConnection()
 	{
+		this.makeConnection();
+	}
+	
+	public void createConnection()
+	{
+		this.makeConnection();
 	}
 	
 	public void makeConnection()
@@ -31,7 +35,7 @@ public class DatabaseConnection
 		
 		if (connection != null)
 		{
-			System.out.println("Database Connection Successful");
+			System.err.println("Database Connection Successful");
 		}
 		else
 		{
@@ -49,16 +53,17 @@ public class DatabaseConnection
 		catch(SQLException exceptSQL)
 		{
 			exceptSQL.printStackTrace();
-			System.out.println("Connection to db could not be closed-SQL Exception");
+			System.err.println("Connection to db could not be closed-SQL Exception");
 			
 		}
 	}
 	
+	
 	public int getNumberOfGames()
 	{
 		Statement numGameStmt = null;
-		String numGamesQuery = "SELECT .......;";
-		int numberOfGames;
+		String numGamesQuery = "SELECT COUNT (gameNumber) FROM GameStatistics.Game;\r\n";
+		int numberOfGames = 0;
 		
 		try
 		{
@@ -67,7 +72,7 @@ public class DatabaseConnection
 			while (numGameResults.next())
 			{
 				//TODO 
-				numberOfGames = numGameResults.getInt(columnLabel); //do we want to do number or column label?				
+				numberOfGames = numGameResults.getInt("gameNumber"); //do we want to do number or column label?				
 			}
 			return numberOfGames;
 		}
@@ -81,11 +86,35 @@ public class DatabaseConnection
 		return numberOfGames;
 	}
 	
+	public String getWinner()
+	{
+		Statement whoWon = null;
+		String whoWonQuery = "SELECT gameNumber, gameWinner FROM GameStatistics.Game;";
+		String winnerName = "";
+		
+		try
+		{
+			whoWon = connection.createStatement();
+			ResultSet winnerResult = whoWon.executeQuery(whoWonQuery);
+			
+			while(winnerResult.next())
+			{
+				winnerName = winnerResult.getString("gameWinner");
+			}
+		}
+		catch (SQLException noWinner)
+		{
+			noWinner.printStackTrace();
+			System.err.println("Could not execute " + whoWonQuery);
+		}
+		return winnerName;
+	}
+	
 	public int getHumanWin()
 	{
 		Statement humanWinStmt = null;
-		String humanWinQuery = "SELECT .......;";
-		int humanWin;
+		String humanWinQuery = "SELECT COUNT (gameNumber) FROM GameStatistics.Game WHERE gameWinner = 'Player0';";
+		int humanWin = 0;
 		
 		try
 		{
@@ -94,7 +123,7 @@ public class DatabaseConnection
 			while (humanWinResults.next())
 			{
 				//TODO 
-				humanWin = humanWinResults.getInt(columnLabel); //do we want to do number or column label?				
+				humanWin = humanWinResults.getInt("gameNumber"); //do we want to do number or column label?				
 			}
 			return humanWin;
 		}
@@ -111,8 +140,8 @@ public class DatabaseConnection
 	public int getComputerWin()
 	{
 		Statement numComputerWinStmt = null;
-		String numCompWinQuery = "SELECT .......;";
-		int computerWin;
+		String numCompWinQuery = "SELECT COUNT (gameNumber) FROM GameStatistics.Game WHERE gameWinner <> 'Player0';";
+		int computerWin = 0;
 		
 		try
 		{
@@ -121,7 +150,7 @@ public class DatabaseConnection
 			while (compWinResults.next())
 			{
 				//TODO 
-				computerWin = compWinResults.getInt(columnLabel); //do we want to do number or column label?				
+				computerWin = compWinResults.getInt("gameNumber"); //do we want to do number or column label?				
 			}
 			return computerWin;
 		}
@@ -138,8 +167,8 @@ public class DatabaseConnection
 	public int getMaxRounds()
 	{
 		Statement maxRoundStmt = null;
-		String maxRoundsQuery = "SELECT .......;";
-		int maxRounds;
+		String maxRoundsQuery = "SELECT gameNumber, roundsPlayed FROM GameStatistics.Rounds WHERE roundsPlayed IN (SELECT MAX (roundsPlayed) FROM GameStatistics.Rounds);";
+		int maxRounds = 0;
 		
 		try
 		{
@@ -148,7 +177,7 @@ public class DatabaseConnection
 			while (maxRoundResults.next())
 			{
 				//TODO 
-				maxRounds = maxRoundResults.getInt(columnLabel); //do we want to do number or column label?				
+				maxRounds = maxRoundResults.getInt("roundsPlayed"); //do we want to do number or column label?				
 			}
 			return maxRounds;
 		}
@@ -165,8 +194,8 @@ public class DatabaseConnection
 	public int getNumberOfDraws()
 	{
 		Statement numDraws = null;
-		String numDrawsQuery = "SELECT .......;";
-		int numberOfDraws;
+		String numDrawsQuery = "SELECT cast(AVG(numberDraws)as decimal (3,2)) FROM GameStatistics.Rounds\r\n";
+		int numberOfDraws = 0;
 		
 		try
 		{
@@ -175,7 +204,7 @@ public class DatabaseConnection
 			while (numDrawResults.next())
 			{
 				//TODO 
-				numberOfDraws = numDrawResults.getInt(columnLabel); //do we want to do number or column label?				
+				numberOfDraws = numDrawResults.getInt("numberDraws"); //do we want to do number or column label?				
 			}
 			return numberOfDraws;
 		}
