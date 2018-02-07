@@ -9,12 +9,13 @@ import java.util.Scanner;
 
 import javax.swing.JOptionPane;
 
-public class Game {
+public class Game 
+
+{
 
 	/**
 	 *  instance variables
 	 */
-
 	public int numberOfPlayers; //we should assume there will always be 4 AI players
 
 	private int remainingPlayers; // players still in game
@@ -29,7 +30,6 @@ public class Game {
 			"-------------------------";
 
 	private static ArrayList <Player> listOfPlayers;
-
 	private final String logFile = "toptrumps.log";
 
 	/**
@@ -51,7 +51,9 @@ public class Game {
 
 	}
 
-
+	/**
+	 * 
+	 */
 	public void playGame()
 
 	{
@@ -69,7 +71,7 @@ public class Game {
 		while (remainingPlayers > 1)
 
 		{
-			setActivePlayer(); // set deciding player 
+			chooseActivePlayer(); // set deciding player 
 			newRound = new Round(listOfPlayers, activePlayer);
 
 			if (newRound.getRoundCount() > 1) {
@@ -84,6 +86,7 @@ public class Game {
 
 		newRound.getWinner();
 		showWinner();
+<<<<<<< HEAD
 		db.updateDB(newRound.getRoundCount(), newRound.getDrawCount());
 
 	}
@@ -95,8 +98,10 @@ public class Game {
 	public void setNumberOfPlayers(int n) 
 	{
 		numberOfPlayers=n;
+=======
+		
+>>>>>>> 4acc86a630b0bedb15171bd40d4f8e025139fef2
 	}
-	
 
 	/**
 	 * updates number of remaining players
@@ -123,7 +128,7 @@ public class Game {
 	/**
 	 * selects next active player
 	 */
-	private void setActivePlayer()
+	private void chooseActivePlayer()
 
 	{
 		if (newRound==null) // if new game
@@ -144,6 +149,16 @@ public class Game {
 			activePlayer = newRound.getWinner();
 		}
 
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	private int pickRandomPlayer() { //returns random index number
+
+		int randomIndex = (int)Math.floor(Math.random() * numberOfPlayers);
+		return randomIndex;
 	}
 
 
@@ -187,22 +202,16 @@ public class Game {
 
 	}
 
-	/**
-	 * human player gets to choose their username
-	 * all other players are assigned automatically generated names
-	 */	
 
+	/**
+	 * 
+	 */	
 	public void createPlayers() {
 
 		// numberOfPlayers = currentDeck.getNumPlayers(); 
 		listOfPlayers = new ArrayList<Player>();
 
 		int i = 0;
-
-		System.out.println("Please enter your username: ");
-
-		Scanner in = new Scanner (System.in);
-		username = String.format("%-10s", in.next());
 
 		// creates the human player
 		Player h = new Player(username);
@@ -219,8 +228,9 @@ public class Game {
 
 	}
 
-
-
+	/**
+	 * 
+	 */
 	public void dealCards() {
 
 		int numCardsEach = currentDeck.getNumberOfCards() / numberOfPlayers;
@@ -247,7 +257,11 @@ public class Game {
 
 	}
 
-
+	/**
+	 * 
+	 * @param d
+	 * @param deckOutput
+	 */
 
 	private void logDeck(Deck d, boolean deckOutput)	{ //for printing to output log
 
@@ -300,8 +314,9 @@ public class Game {
 
 	}
 
-
-
+	/**
+	 * 
+	 */
 	private void logDealtCards() {
 
 		PrintWriter printer = null;
@@ -342,7 +357,9 @@ public class Game {
 		}
 	}
 
-
+	/**
+	 * 
+	 */
 	private void roundLog() {
 
 		PrintWriter printer = null;
@@ -372,6 +389,10 @@ public class Game {
 		}
 	}
 
+
+	/**
+	 * 
+	 */
 	private void logGameWinner() {
 
 		PrintWriter printer = null;
@@ -404,10 +425,21 @@ public class Game {
 
 	}
 
-	private int pickRandomPlayer() { //returns random index number
 
-		int randomIndex = (int)Math.floor(Math.random() * numberOfPlayers);
-		return randomIndex;
+	/**
+	setter methods below
+	accessed from the ToptrumpsCLIApplication.java class
+	 */
+
+	public void setNumberOfPlayers(int n) 
+	{
+		numberOfPlayers=n;
+	}
+
+	public void setUsername(String u)
+
+	{
+		username = u;	
 	}
 
 }

@@ -32,6 +32,7 @@ import com.fasterxml.jackson.databind.ObjectReader;
 import com.fasterxml.jackson.databind.ObjectWriter;
 
 import commandline.Card;
+import commandline.DatabaseConnection;
 import commandline.Deck;
 import commandline.Game;
 import commandline.Player;
@@ -73,7 +74,8 @@ public class TopTrumpsRESTAPI {
 	private static Player gameWinner;
 	private static String playername;
 	private Player h;
-
+	
+	private DatabaseConnection db = new DatabaseConnection();
 	ObjectWriter oWriter = new ObjectMapper().writerWithDefaultPrettyPrinter();
 
 	public TopTrumpsRESTAPI(TopTrumpsJSONConfiguration conf) {
@@ -314,5 +316,51 @@ public class TopTrumpsRESTAPI {
 			this.test = test;
 		}
 	}
+	
+	@GET
+	@Path("/numGames")
+	public int numberOfGames() 
+	{
+		int numGames = db.getNumberOfGames();
+		return numGames;
+		
+	}
+	
+
+	@GET 
+	@Path("/timescomputerwon")
+	public int timesComputerWon() throws IOException
+	{
+		//get from db
+		int compWins = db.getComputerWin();
+		return compWins;
+	}
+	
+	@GET 
+	@Path("/humanwin")
+	public int timesPersonWon() throws IOException
+	{
+		//get from db
+		int humanwin = db.getHumanWin();
+		return humanwin;
+	}
+	
+	@GET
+	@Path("/numDraws")
+	public int numDraws() throws IOException 
+	{
+		//return the number of games from database, from java
+		int numDraws = db.getNumberOfDraws(); 
+		return numDraws;
+	}
+	@GET
+	@Path("/numRounds")
+	public int numRounds() throws IOException 
+	{
+		//return the number of games from database, from java
+		int numRounds = db.getMaxRounds(); 
+		return numRounds;
+	}
 
 }
+
