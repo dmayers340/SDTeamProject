@@ -228,9 +228,13 @@ public class DatabaseConnection
 		
 	}
 	
-	//TODO Update Database when save/quit--send string into db?
+
+	/**
+	 * 
+	 * Inserts values into database GameStatistics.Rounds table at the end of each Game
+	 */
 	
-	public String updateDBRounds(int nRounds, int nDraws, String roundWins) {
+	public String updateDBRounds(int nRounds, int nDraws, String roundWins) { 
 		
 		Statement stmt = null;
 		String [] roundWinsPerPlayer = roundWins.split(" ");
@@ -239,8 +243,8 @@ public class DatabaseConnection
 			
 			switch (roundWinsPerPlayer.length) {
 			case 3: round = "INSERT INTO GameStatistics.Rounds (gameNumber, roundsPlayed, numberDraws, roundsWonP0, roundsWonP1, roundsWonP2) VALUES ('"+TopTrumpsCLIApplication.getNumberOfGames()+"', '"+nRounds+"','"+nDraws+"', '"+roundWinsPerPlayer[0]+"', '"+roundWinsPerPlayer[1]+"', '"+roundWinsPerPlayer[2]+"')";
-			case 4: round = "INSERT INTO GameStatistics.Rounds (gameNumber, roundsPlayed, numberDraws, roundsWonP0, roundsWonP1, roundsWonP2) VALUES ('"+TopTrumpsCLIApplication.getNumberOfGames()+"', '"+nRounds+"','"+nDraws+"', '"+roundWinsPerPlayer[0]+"', '"+roundWinsPerPlayer[1]+"', '"+roundWinsPerPlayer[2]+"', '"+roundWinsPerPlayer[3]+"')";
-			case 5: round = "INSERT INTO GameStatistics.Rounds (gameNumber, roundsPlayed, numberDraws, roundsWonP0, roundsWonP1, roundsWonP2) VALUES ('"+TopTrumpsCLIApplication.getNumberOfGames()+"', '"+nRounds+"','"+nDraws+"', '"+roundWinsPerPlayer[0]+"', '"+roundWinsPerPlayer[1]+"', '"+roundWinsPerPlayer[2]+"', '"+roundWinsPerPlayer[3]+"', '"+roundWinsPerPlayer[4]+"')";
+			case 4: round = "INSERT INTO GameStatistics.Rounds (gameNumber, roundsPlayed, numberDraws, roundsWonP0, roundsWonP1, roundsWonP2, roundsWonP3) VALUES ('"+TopTrumpsCLIApplication.getNumberOfGames()+"', '"+nRounds+"','"+nDraws+"', '"+roundWinsPerPlayer[0]+"', '"+roundWinsPerPlayer[1]+"', '"+roundWinsPerPlayer[2]+"', '"+roundWinsPerPlayer[3]+"')";
+			case 5: round = "INSERT INTO GameStatistics.Rounds (gameNumber, roundsPlayed, numberDraws, roundsWonP0, roundsWonP1, roundsWonP2, roundsWonP3, roundsWonP4) VALUES ('"+TopTrumpsCLIApplication.getNumberOfGames()+"', '"+nRounds+"','"+nDraws+"', '"+roundWinsPerPlayer[0]+"', '"+roundWinsPerPlayer[1]+"', '"+roundWinsPerPlayer[2]+"', '"+roundWinsPerPlayer[3]+"', '"+roundWinsPerPlayer[4]+"')";
 			}
 		}
 		
@@ -260,6 +264,11 @@ public class DatabaseConnection
 		}
 		return result;
 	}
+	
+	/**
+	 * 
+	 * Inserts values into the database GameStatistics.Game table at the end of each Game
+	 */
 	
 	public String updateDBGame(int nPlayers, String winner) {
 		
