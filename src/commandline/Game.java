@@ -87,8 +87,8 @@ public class Game
 
 		newRound.getWinner();
 		showWinner();
-		db.updateDB(newRound.getRoundCount(), newRound.getDrawCount(), getNumberOfRoundWins());
-
+		db.updateDBRounds(newRound.getRoundCount(), newRound.getDrawCount(), getNumberOfRoundWins());
+		db.updateDBGame(numberOfPlayers, gameWinner.getName());
 	}
 	
 	
