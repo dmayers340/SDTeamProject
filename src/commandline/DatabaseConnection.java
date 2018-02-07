@@ -153,7 +153,6 @@ public class DatabaseConnection
 			while (compWinResults.next())
 			{
 				computerWin = compWinResults.getInt("gameNumber"); 	
-				this.closeConnection();
 			}
 			return computerWin;
 		}

@@ -132,7 +132,9 @@
 		}
 		
 		body{
-		background-image: url("http://kb4images.com/images/pictures-of-outer-space/37759075-pictures-of-outer-space.jpg")
+		background-image: url("http://kb4images.com/images/pictures-of-outer-space/37759075-pictures-of-outer-space.jpg");
+		width:100%;
+		height:100%;
 		}
 	
 	</style>
