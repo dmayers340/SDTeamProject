@@ -5,6 +5,7 @@ public class DatabaseConnection
 {
 	
 	private Connection connection = null;
+	
 	private final String DBNAME = "m_17_0806849r"; 
 	private final String USERNAME = "m_17_0806849r";
 	private final String PASSWORD = "0806849r";
@@ -62,7 +63,7 @@ public class DatabaseConnection
 	public int getNumberOfGames()
 	{
 		Statement numGameStmt = null;
-		String numGamesQuery = "SELECT COUNT (gameNumber) FROM GameStatistics.Game;\r\n";
+		String numGamesQuery = "SELECT COUNT (gameNumber) FROM GameStatistics.Game;";
 		int numberOfGames = 0;
 		
 		try
@@ -70,9 +71,8 @@ public class DatabaseConnection
 			numGameStmt = connection.createStatement();
 			ResultSet numGameResults = numGameStmt.executeQuery(numGamesQuery);
 			while (numGameResults.next())
-			{
-				//TODO 
-				numberOfGames = numGameResults.getInt("gameNumber"); //do we want to do number or column label?				
+			{ 
+				numberOfGames = numGameResults.getInt("gameNumber"); 			
 			}
 			return numberOfGames;
 		}
@@ -102,6 +102,7 @@ public class DatabaseConnection
 				winnerName = winnerResult.getString("gameWinner");
 			}
 		}
+		
 		catch (SQLException noWinner)
 		{
 			noWinner.printStackTrace();
@@ -122,8 +123,7 @@ public class DatabaseConnection
 			ResultSet humanWinResults = humanWinStmt.executeQuery(humanWinQuery);
 			while (humanWinResults.next())
 			{
-				//TODO 
-				humanWin = humanWinResults.getInt("gameNumber"); //do we want to do number or column label?				
+				humanWin = humanWinResults.getInt("gameNumber"); 			
 			}
 			return humanWin;
 		}
@@ -149,8 +149,7 @@ public class DatabaseConnection
 			ResultSet compWinResults = numComputerWinStmt.executeQuery(numCompWinQuery);
 			while (compWinResults.next())
 			{
-				//TODO 
-				computerWin = compWinResults.getInt("gameNumber"); //do we want to do number or column label?				
+				computerWin = compWinResults.getInt("gameNumber"); 		
 			}
 			return computerWin;
 		}
@@ -177,7 +176,7 @@ public class DatabaseConnection
 			while (maxRoundResults.next())
 			{
 				//TODO 
-				maxRounds = maxRoundResults.getInt("roundsPlayed"); //do we want to do number or column label?				
+				maxRounds = maxRoundResults.getInt("roundsPlayed"); 			
 			}
 			return maxRounds;
 		}
@@ -194,7 +193,7 @@ public class DatabaseConnection
 	public int getNumberOfDraws()
 	{
 		Statement numDraws = null;
-		String numDrawsQuery = "SELECT cast(AVG(numberDraws)as decimal (3,2)) FROM GameStatistics.Rounds\r\n";
+		String numDrawsQuery = "SELECT cast(AVG(numberDraws)as decimal (3,2)) FROM GameStatistics.Rounds;";
 		int numberOfDraws = 0;
 		
 		try
@@ -204,7 +203,7 @@ public class DatabaseConnection
 			while (numDrawResults.next())
 			{
 				//TODO 
-				numberOfDraws = numDrawResults.getInt("numberDraws"); //do we want to do number or column label?				
+				numberOfDraws = numDrawResults.getInt("Number_of_Draws"); 			
 			}
 			return numberOfDraws;
 		}
