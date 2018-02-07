@@ -56,7 +56,7 @@ public class TopTrumpsCLIApplication {
 				System.out.println("No statistics to display ");
 				System.out.println();
 			}
-				
+
 			// reads the deck from a .txt file and starts a new game
 			else if (choice.charAt(0) == 'G')
 			{
