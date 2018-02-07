@@ -23,6 +23,7 @@ public class Game {
 	private Player activePlayer;
 	public String username;
 	private Player gameWinner;
+	private DatabaseConnection db;
 
 	private String logSeparator = "-------------------------------------------------------------"+
 			"-------------------------";
@@ -83,6 +84,7 @@ public class Game {
 
 		newRound.getWinner();
 		showWinner();
+		db.updateDB(newRound.getRoundCount(), newRound.getDrawCount());
 
 	}
 	

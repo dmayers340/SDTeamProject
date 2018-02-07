@@ -196,10 +196,27 @@ public class DatabaseConnection
 	}
 	
 	//TODO Update Database when save/quit--send string into db?
-	public void updateDB()
-	{
-		//INSERT INTO 
+
+	
+	public String updateDB(int nRounds, int nDraws) {
+		
+		Statement stmt = null;
+		String draws = "INSERT INTO GameStatistics.Rounds (gameNumber, roundsPlayed, numberDraws) VALUES ('"+TopTrumpsCLIApplication.getNumberOfGames()+"', '"+nRounds+"','"+nDraws+"',)";
+		String result = "";
+		
+		try {
+			stmt = connection.createStatement();
+			stmt.executeUpdate(draws);
+			result = "Draw data inserted";
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+			result = "Error, data not inserted";
+		}
+		 
+		return result;
 	}
+	
 	
 }
 
