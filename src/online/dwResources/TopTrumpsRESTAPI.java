@@ -22,7 +22,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
-
 import javax.ws.rs.core.Response;
 
 import online.configuration.TopTrumpsJSONConfiguration;
@@ -32,7 +31,6 @@ import com.fasterxml.jackson.databind.ObjectReader;
 import com.fasterxml.jackson.databind.ObjectWriter;
 
 import commandline.Card;
-import commandline.DatabaseConnection;
 import commandline.Deck;
 import commandline.Game;
 import commandline.Player;
@@ -59,7 +57,7 @@ public class TopTrumpsRESTAPI {
 	private String deck;
 	private Card topcard;
 	private static ArrayList<Player> listOfPlayers;
-
+private int roundCount;
 	private static ArrayList<String> categories;
 	private ArrayList<Card> cardsInDeck;
 	private int numberOfCards;
@@ -68,23 +66,25 @@ public class TopTrumpsRESTAPI {
 	private static Round newRound;
 	private Deck newDeck;
 	private static Deck currentDeck;
-	public static int numberOfPlayers = 4;
-	private static int remainingPlayers = 4;
+	public static int numberOfPlayers ;
+	private static int remainingPlayers ;
 	private static Player activePlayer;
 	private static Player gameWinner;
 	private static String playername;
 	private Player h;
+	private int c; //category
+
 	
-	private DatabaseConnection db = new DatabaseConnection();
 	ObjectWriter oWriter = new ObjectMapper().writerWithDefaultPrettyPrinter();
 
 	public TopTrumpsRESTAPI(TopTrumpsJSONConfiguration conf) {
-
+		
 		deck = conf.getDeckFile();
 		categories = new ArrayList<String>();
 		cardsInDeck = new ArrayList<Card>();
 		newDeck = new Deck();
-
+		numberOfPlayers=conf.getNumAIPlayers()+1;
+		remainingPlayers=numberOfPlayers;
 		FileReader reader;
 		try {
 			reader = new FileReader(deck);
@@ -142,7 +142,7 @@ public class TopTrumpsRESTAPI {
 		{
 			setActivePlayer(); // set deciding player
 			newRound = new Round(listOfPlayers, activePlayer);
-			newRound.playRound();
+			playRound();
 			updatePlayers();
 		}
 
@@ -150,6 +150,44 @@ public class TopTrumpsRESTAPI {
 		showWinner();
 
 	}
+	
+	public void playRound() 
+
+	{	
+		System.out.println("ROUND NUMBER " + (roundCount)); 
+		String a = "The active player is " + activePlayer.getName().toUpperCase();
+
+		setCategory();
+		newRound.compareCards();
+		newRound.setWinner();  
+
+	} 
+	
+	private void chooseCategory () 
+
+	{	
+		this.c=getC();
+		System.err.println(c);	
+		
+	}
+	
+	private void setCategory()
+
+	{
+		// player chooses category
+		if (activePlayer.isHuman()) 
+		{
+			chooseCategory(); // player chooses category
+		}
+
+		// auto-picks category
+		else 
+		{	
+			newRound.findBestCategory();  		
+		}
+	}
+
+	
 
 	private static void updatePlayers()
 
@@ -243,6 +281,7 @@ public class TopTrumpsRESTAPI {
 	@GET
 	@Path("/draw")
 	public String draw() throws IOException {
+	
 		String dr = oWriter.writeValueAsString(newRound.isDraw());
 		return dr;
 	}
@@ -270,102 +309,26 @@ public class TopTrumpsRESTAPI {
 		return pc;
 	}
 
-	@GET
-	@Path("/ai1")
-	public String ai1() throws IOException {
-
-		String m = oWriter.writeValueAsString(h.getTopCard());
-		return m;
-	}
 
 	
-	/**
-	 * Example method of how the POST should look like.
-	 *
-	 * Try sending requests to it via Postman app. A simple JSON request should
-	 * do, i.e.:
-	 *
-	 * {"test": "test string"}
-	 */
-	@POST
-	@Path("/example")
-	public Response testEndpoint(Example example) {
-
-		String intermediate = example.getTest();
-		System.err.println(intermediate);
-
-		// Returns 200 back to the caller, meaning everything was ok.
-		return Response.ok().build();
-	}
-
-	private static class Example {
-		String test;
-
-		// It's important to have at least empty constructor,
-		// otherwise request may not be transformed into an object
-		public Example() {
-		}
-
-		// Both getters/setters need to be provided. That's java beans standard.
-		// It's possible to avoid this, but it's easier not to for now.
-		public String getTest() {
-			return test;
-		}
-
-		public void setTest(String test) {
-			this.test = test;
-		}
-	}
 	
 	@GET
-	@Path("/numGames")
-	public int numberOfGames() 
-	{
-		int numGames = db.getNumberOfGames();
-		return numGames;
+	@Path("/sca")
+
+	public int sca(@QueryParam("num") int a) throws IOException {
 		
-	}
-	
-	@GET 
-	@Path("/timescomputerwon")
-	public int timesComputerWon() throws IOException
-	{
-		//get from db
-		int compWins = db.getComputerWin();
-		return compWins;
-	}
-	
-	@GET 
-	@Path("/humanwin")
-	public int timesPersonWon() throws IOException
-	{
-		//get from db
-		int humanwin = db.getHumanWin();
-		return humanwin;
-	}
-	
-	@GET
-	@Path("/numDraws")
-	public double numDraws() throws IOException 
-	{
-		//return the number of games from database, from java
-		double numDraws = db.getNumberOfDraws(); 
-		return numDraws;
-	}
-	@GET
-	@Path("/numRounds")
-	public int numRounds() throws IOException 
-	{
-		//return the number of games from database, from java
-		int numRounds = db.getMaxRounds(); 
-		return numRounds;
-	}
-	@GET
-	@Path("/closedb")
-	public void closedb() throws IOException 
-	{
-		db.closeConnection();
+		
+		return a;
 	}
 
-}
+	
 
+	public void setC(int c) throws IOException {
+	
+		this.c = sca(c);
+	}
+
+	public int getC() {
+		return c;
+	}
+	}
