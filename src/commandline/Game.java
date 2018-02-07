@@ -51,6 +51,7 @@ public class Game
 
 	}
 
+
 	/**
 	 * 
 	 */
@@ -86,22 +87,29 @@ public class Game
 
 		newRound.getWinner();
 		showWinner();
-<<<<<<< HEAD
-		db.updateDB(newRound.getRoundCount(), newRound.getDrawCount());
+
+		db.updateDB(newRound.getRoundCount(), newRound.getDrawCount(), getNumberOfRoundWins());
 
 	}
 	
+	
+	private String getNumberOfRoundWins() {    //number of rounds each player has won
 
-	/**
-	setter method
-	 */
-	public void setNumberOfPlayers(int n) 
-	{
-		numberOfPlayers=n;
-=======
-		
->>>>>>> 4acc86a630b0bedb15171bd40d4f8e025139fef2
+		int [] playerRoundWins = new int [numberOfPlayers];
+		for (Player p: listOfPlayers) {
+			if (newRound.getWinner() == p) {
+				int index = listOfPlayers.indexOf(p);
+				playerRoundWins[index]++;
+				
+			}
+		}
+		return playerRoundWins.toString();
 	}
+	
+	
+	
+
+
 
 	/**
 	 * updates number of remaining players
