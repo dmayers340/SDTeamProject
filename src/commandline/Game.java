@@ -16,7 +16,7 @@ public class Game
 	/**
 	 *  instance variables
 	 */
-	public int numberOfPlayers; //we should assume there will always be 4 AI players
+	public static int numberOfPlayers; //we should assume there will always be 4 AI players
 
 	private int remainingPlayers; // players still in game
 	private Deck currentDeck;
@@ -25,6 +25,7 @@ public class Game
 	public String username;
 	private Player gameWinner;
 	private DatabaseConnection db;
+	
 
 	private String logSeparator = "-------------------------------------------------------------"+
 			"-------------------------";
@@ -87,29 +88,13 @@ public class Game
 
 		newRound.getWinner();
 		showWinner();
-		db.updateDBRounds(Round.getRoundCount(), newRound.getDrawCount(), getNumberOfRoundWins());
-		db.updateDBGame(numberOfPlayers, gameWinner.getName());
+		db.updateDBRounds();
+//				Round.getRoundCount());
+//		db.updateDBRounds(Round.getRoundCount(), newRound.getDrawCount(), Round.getPlayerRoundWins());
+//		db.updateDBGame(numberOfPlayers, gameWinner.getName());
 	}
 	
 	
-	private String getNumberOfRoundWins() { //makes array with number of rounds each player has won
-	
-		int [] playerRoundWins = new int [numberOfPlayers];
-		for (Player p: listOfPlayers) {
-			for (int i = 0; i < Round.getRoundCount(); i++) {
-				if (newRound.getWinner() == p) {
-					int index = listOfPlayers.indexOf(p);
-					playerRoundWins[index]++;
-				}
-			}
-		}
-		System.out.println(playerRoundWins);
-		return playerRoundWins.toString();
-	}
-
-	
-	
-
 
 
 	/**
@@ -200,16 +185,7 @@ public class Game
 		{
 			System.out.println("Windows doesn't like fancy stuff");
 		}
-//			System.out.print ("\n" + 
-//					"â•”â•�â•�â•�â•—â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â•”â•—â”€â”€â”€â•”â•—â”€â”€â”€â•”â•—" +
-//					"â•‘â•”â•�â•—â•‘â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â•”â•�â•šâ•—â”€â”€â•‘â•‘â”€â”€â•”â•�â•šâ•—" +
-//					"â•‘â•‘â”€â•šâ•¬â•�â•�â•¦â•�â•—â•”â•�â•�â•¦â•�â•¦â•�â•©â•—â•”â•¬â•—â•”â•£â•‘â•”â•�â•©â•—â•”â•¬â•¦â•�â•�â•¦â•�â•—â•”â•�â•�â•—" +
-//					"â•‘â•‘â”€â•”â•£â•”â•—â•‘â•”â•—â•£â•”â•—â•‘â•”â•£â•”â•—â•‘â•‘â•‘â•‘â•‘â•‘â•‘â•‘â•”â•—â•‘â•‘â• â•£â•”â•—â•‘â•”â•—â•£â•�â•�â•£" +
-//					"â•‘â•šâ•�â•�â•‘â•šâ•�â•‘â•‘â•‘â•‘â•šâ•�â•‘â•‘â•‘â•”â•—â•‘â•šâ•£â•šâ•�â•‘â•šâ•£â•”â•—â•‘â•šâ•£â•‘â•šâ•�â•‘â•‘â•‘â• â•�â•�â•‘" +
-//					"â•šâ•�â•�â•�â•©â•�â•�â•©â•�â•šâ•©â•�â•—â• â•�â•šâ•�â•šâ•©â•�â•©â•�â•�â•©â•�â•©â•�â•šâ•©â•�â•©â•©â•�â•�â•©â•�â•šâ•©â•�â•�â•�" +
-//					"â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â•”â•�â•�â•‘" +
-//					"â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â•šâ•�â•�â•�");
-//		}
+
 
 	}
 
