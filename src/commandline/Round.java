@@ -24,8 +24,9 @@ public class Round {
 
 	private StringBuilder roundLog = new StringBuilder();
 	private String logSeparator = "-------------------------------------------------------------------------------------------------------";
-	private static int roundCount = 0;
-	private int drawCount = 0;
+	private static int roundCount;
+	private int drawCount;
+	private static int [] playerRoundWins = new int [Game.numberOfPlayers];
 	
 
 
@@ -76,15 +77,12 @@ public class Round {
 
 		setCategory();
 		compareCards();
-		setWinner();  
+		setWinner();
+	
 		
 
 	} 
 
-		
-	
-	
-	
 	public int getDrawCount() {
 		return drawCount;
 	}
@@ -229,6 +227,7 @@ public class Round {
 					w = t; // stores highest value
 					j = i; // stores player index
 					winner = players.get(j); // sets winner 
+					playerRoundWins[j]++; //increment index in array which keeps track of num of player wins
 					draw = false;
 				}
 
@@ -445,6 +444,9 @@ public class Round {
 //		}
 		roundCount++;
 	}
-
-
+	
+	public static String getPlayerRoundWins() {
+		
+		return playerRoundWins.toString(); //for passing to Game for database update
+	}
 }
