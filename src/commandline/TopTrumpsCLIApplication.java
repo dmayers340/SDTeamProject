@@ -49,7 +49,7 @@ public class TopTrumpsCLIApplication {
 			
 			String choice = getInput();
 
-			// if letter S was entered - nothing happens
+			// if letter S was entered 
 			if (choice.charAt(0) == 'S')
 			{
 				System.out.println(getStats());
