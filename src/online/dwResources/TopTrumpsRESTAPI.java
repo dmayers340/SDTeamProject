@@ -9,7 +9,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -23,19 +22,18 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-
 import online.configuration.TopTrumpsJSONConfiguration;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectReader;
 import com.fasterxml.jackson.databind.ObjectWriter;
-
+//imports from commandline
 import commandline.Card;
 import commandline.Deck;
 import commandline.Game;
 import commandline.Player;
 import commandline.Round;
 import commandline.TopTrumpsCLIApplication;
+import commandline.DatabaseConnection;
 
 @Path("/toptrumps")
 // Resources specified here should be hosted at http://localhost:7777/toptrumps
@@ -53,32 +51,34 @@ import commandline.TopTrumpsCLIApplication;
  * REST API methods in Dropwizard. You will need to replace these with
  * methods that allow a TopTrumps game to be controled from a Web page.
  */
-public class TopTrumpsRESTAPI {
+public class TopTrumpsRESTAPI 
+{
+	private int roundCount, numberOfCards, category;
+	private final int MAXATTRIBUTES = 6;
+	public static int numberOfPlayers;
+	private static int remainingPlayers;
+	
 	private String deck;
-	private Card topcard;
-	private static ArrayList<Player> listOfPlayers;
-private int roundCount;
-	private static ArrayList<String> categories;
-	private ArrayList<Card> cardsInDeck;
-	private int numberOfCards;
-	private final int maxAttributes = 6;
-
-	private static Round newRound;
+	private static String playername;
+	
+	private Card topcard;	
 	private Deck newDeck;
 	private static Deck currentDeck;
-	public static int numberOfPlayers ;
-	private static int remainingPlayers ;
-	private static Player activePlayer;
-	private static Player gameWinner;
-	private static String playername;
-	private Player h;
-	private int c; //category
-
+	private Player player;
+	private static Player activePlayer, gameWinner;
+	private static Round newRound;
+	private static ArrayList<Player> listOfPlayers;
+	private static ArrayList<String> categories;
+	private ArrayList<Card> cardsInDeck;
+	
+	//Database Connection
+	private DatabaseConnection db = new DatabaseConnection();
 	
 	ObjectWriter oWriter = new ObjectMapper().writerWithDefaultPrettyPrinter();
 
-	public TopTrumpsRESTAPI(TopTrumpsJSONConfiguration conf) {
-		
+	//Constructor, sets the deck, categories, cards, number of players
+	public TopTrumpsRESTAPI(TopTrumpsJSONConfiguration conf) 
+	{	
 		deck = conf.getDeckFile();
 		categories = new ArrayList<String>();
 		cardsInDeck = new ArrayList<Card>();
@@ -86,38 +86,41 @@ private int roundCount;
 		numberOfPlayers=conf.getNumAIPlayers()+1;
 		remainingPlayers=numberOfPlayers;
 		FileReader reader;
-		try {
+		
+		//read the deck file in to get cards/categories
+		try 
+		{
 			reader = new FileReader(deck);
-
 			Scanner in = new Scanner(reader);
 			String line = in.nextLine();
 			newDeck.setCategories(line);
 
 			// adds cards to the deck
-			while (in.hasNextLine()) {
+			while (in.hasNextLine()) 
+			{
 				line = in.nextLine();
 				newDeck.addCard(line);
 			}
-
-		} catch (FileNotFoundException e) {
+		} 
+		catch (FileNotFoundException e) 
+		{
+			e.printStackTrace();
 
 		}
+		//start the game based on this information
 		gamestart();
 	}
 
-	public void gamestart() {
-
+	
+	public void gamestart() 
+	{
 		newDeck.shuffleDeck();
-
 		currentDeck = newDeck;
-
 		createPlayers();
 		dealCards();
-
 	}
 
 	private static void setActivePlayer()
-
 	{
 		if (newRound == null) // if new game
 		{
@@ -152,7 +155,6 @@ private int roundCount;
 	}
 	
 	public void playRound() 
-
 	{	
 		System.out.println("ROUND NUMBER " + (roundCount)); 
 		String a = "The active player is " + activePlayer.getName().toUpperCase();
@@ -160,19 +162,15 @@ private int roundCount;
 		setCategory();
 		newRound.compareCards();
 		newRound.setWinner();  
-
 	} 
 	
 	private void chooseCategory () 
-
 	{	
-		this.c=getC();
-		System.err.println(c);	
-		
+		this.category= getCategoryNumber();
+		System.err.println(category);	
 	}
 	
 	private void setCategory()
-
 	{
 		// player chooses category
 		if (activePlayer.isHuman()) 
@@ -186,11 +184,8 @@ private int roundCount;
 			newRound.findBestCategory();  		
 		}
 	}
-
 	
-
 	private static void updatePlayers()
-
 	{
 		for (int i = 0; i < listOfPlayers.size(); i++)
 
@@ -207,27 +202,32 @@ private int roundCount;
 	}
 
 	private static void showWinner()
-
 	{
 		// if only one player is left with cards after a draw
 		// they automatically become the winner
-		if (newRound.isDraw()) {
-			for (int i = 0; i < listOfPlayers.size(); i++) {
+		if (newRound.isDraw()) 
+		{
+			for (int i = 0; i < listOfPlayers.size(); i++) 
+			{
 				if (listOfPlayers.get(i).isInGame())
 					gameWinner = listOfPlayers.get(i);
 			}
 		}
-		else {
+		else 
+		{
 			gameWinner = newRound.getWinner();
 		}
 	}
 
-	public static void dealCards() {
+	public static void dealCards() 
+	{
 		int numCardsEach = currentDeck.getNumberOfCards() / numberOfPlayers;
 		int i;
-		for (i = 0; i < numberOfPlayers; i++) {
+		for (i = 0; i < numberOfPlayers; i++) 
+		{
 			ArrayList<Card> cardsForEachPlayer = new ArrayList<Card>(
 					currentDeck.getDeck().subList(0, numCardsEach));
+			
 			playername = listOfPlayers.get(i).getName();
 			listOfPlayers.get(i).receiveCards(cardsForEachPlayer);
 			currentDeck.getDeck().removeAll(cardsForEachPlayer);
@@ -242,20 +242,22 @@ private int roundCount;
 		System.out.println();
 	}
 
-	private static int pickRandomPlayer() { // returns random index number
+	private static int pickRandomPlayer() 
+	{ // returns random index number
 		int randomIndex = (int) Math.floor(Math.random() * numberOfPlayers);
 		return randomIndex;
 	}
 
-	public void createPlayers() {
+	public void createPlayers() 
+	{
      	// numberOfPlayers = currentDeck.getNumPlayers();
 		listOfPlayers = new ArrayList<Player>();
 		String username = "player";
 		int i = 0;
 		// creates the human player
-		h = new Player(username);
-		h.setHuman();
-		listOfPlayers.add(h);
+		player = new Player(username);
+		player.setHuman();
+		listOfPlayers.add(player);
 		// create AI players
 		for (i = 1; i < numberOfPlayers; i++)
 		{
@@ -264,12 +266,11 @@ private int roundCount;
 		}
 	}
 
-	// ----------------------------------------------------
-	// Add relevant API methods here
-	// ----------------------------------------------------
+	// API Methods 
 	@GET
 	@Path("/ga")
-	public String ga() throws IOException {
+	public String game() throws IOException 
+	{
 		run();
 		String aa = activePlayer.getName() + "-----------------"
 				+ gameWinner.getName() + "-----------------"
@@ -280,8 +281,8 @@ private int roundCount;
 
 	@GET
 	@Path("/draw")
-	public String draw() throws IOException {
-	
+	public String draw() throws IOException 
+	{
 		String dr = oWriter.writeValueAsString(newRound.isDraw());
 		return dr;
 	}
@@ -297,7 +298,7 @@ private int roundCount;
 	@Path("/handnum")
 	public String handnum() throws IOException {
 
-		String hn = oWriter.writeValueAsString(h.getHand().size());
+		String hn = oWriter.writeValueAsString(player.getHand().size());
 		return hn;
 	}
 
@@ -305,13 +306,10 @@ private int roundCount;
 	@Path("/playercard")
 	public String playercard() throws IOException {
 
-		String pc = oWriter.writeValueAsString(h.getTopCard());
+		String pc = oWriter.writeValueAsString(player.getTopCard());
 		return pc;
 	}
 
-
-	
-	
 	@GET
 	@Path("/sca")
 
@@ -321,14 +319,67 @@ private int roundCount;
 		return a;
 	}
 
+	public void setCategory(int c) throws IOException 
+	{
 	
+		this.category = sca(c);
+	}
 
-	public void setC(int c) throws IOException {
+	public int getCategoryNumber() 
+	{
+		return category;
+	}
 	
-		this.c = sca(c);
+	//Get the number of games played from database for statistic screen
+	@GET
+	@Path("/numGames")
+	public int numberOfGames()
+	{
+		int numGames = db.getNumberOfGames();
+		return numGames;
 	}
-
-	public int getC() {
-		return c;
+	
+	//Get number of times computer has won from database for stat screen
+	@GET
+	@Path("/timescomputerwon")
+	public int timesComputerWon() throws IOException
+	{
+		int compWins = db.getComputerWin();
+		return compWins;
 	}
+	
+	//Get number of times human has won from database for stat screen
+	@GET
+	@Path("/humanwin")
+	public int timesPersonWon() throws IOException
+	{
+		int humanwin = db.getHumanWin();
+		return humanwin;
 	}
+	
+	//Get average number of draws from database for stat screen
+	@GET
+	@Path("/numDraws")
+	public double numDraws() throws IOException
+	{
+		double numDraws = db.getNumberOfDraws();
+		return numDraws;
+	}
+	
+	//Get the maximum amount of rounds from database for stat screen
+	@GET 
+	@Path("/numRounds")
+	public int numRounds() throws IOException
+	{
+		int numRounds = db.getMaxRounds();
+		return numRounds;
+	}
+	
+	//Not sure where to close the database, made this as an attempt
+	@GET
+	@Path("/closedb")
+	public void closedb() throws IOException
+	{
+		db.closeConnection();
+	}
+}
