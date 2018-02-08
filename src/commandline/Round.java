@@ -40,7 +40,7 @@ public class Round {
 		System.out.println();
 
 		players = p;  
-		activePlayer = ap;
+		activePlayer = ap;    
 	}
 
 
