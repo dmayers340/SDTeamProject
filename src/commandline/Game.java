@@ -32,15 +32,15 @@ public class Game
 
 	/**
 	 * Constructor method. 
-	 * Creates a new Game object and shuffles the deck, 
-	 * then writes the deck contents to a log file.
-	 * Called by the TopTrumpsCLIApplication.java class
-	 * (the online version does not use the Game.java class).
+	 * Creates a new Game object and shuffles the deck, then writes the deck contents to a log file.
+	 * Called by the TopTrumpsCLIApplication.java class (the online version does not use the Game.java class).
 	 * @param Deck d = current deck 
 	 */
-	public Game (Deck d)
+	
+	public Game (Deck d, DatabaseConnection db)
 	{	
 		// this is all for testing
+		this.db = db;
 		boolean deckOutputToLog = false;
 		logDeck(d,deckOutputToLog);
 
@@ -52,10 +52,11 @@ public class Game
 	
 
 	/**
-	 * Starts a new game (creates players and deals cards) and 
-	 * executes high-level game logic until the winner is decided.
+	 * Starts a new game (creates players and deals cards). 
+	 * Then executes high-level game logic until the winner is decided.
 	 * Called from the TopTrumpsCLIApplication.java class.
 	 */
+	
 	public void playGame()
 
 	{
@@ -87,13 +88,76 @@ public class Game
 		}
 
 		newRound.getWinner();
-		showWinner();
+		displayWinner();
 		
 	}
+	
+	
+	/**
+	 * Called from the playGame() method.
+	 * Generates a number of Player objects and stores them in an ArrayList.
+	 * The first created Player is always the human player.
+	 * Human player has to choose their username, the others are assigned default usernames.
+	 */	
+	
+	private void createPlayers() {
+
+		listOfPlayers = new ArrayList<Player>();
+
+		int i = 0;
+
+		// creates the human player
+		Player h = new Player(username);
+		h.setHuman();
+		listOfPlayers.add(h);
+
+		// create AI players
+		for (i = 1; i < numberOfPlayers; i++) 
+		{
+			Player p = new Player("AI_Player" + i);
+			listOfPlayers.add(p);
+		}
+
+	}
+	
 
 	/**
-	 * updates number of remaining players
+	 * Called from the playGame() method.
+	 * Removes cards from the current deck and adds them to the hands of players.
+	 * At the end the current deck is left empty.
 	 */
+	
+	private void dealCards() {
+
+		int numCardsEach = currentDeck.getNumberOfCards() / numberOfPlayers; // how many cards each player should get
+
+		int i;
+		for (i = 0; i < numberOfPlayers; i++) {
+
+			ArrayList<Card> cardsForEachPlayer = new ArrayList<Card>(currentDeck.getDeck().subList(0, numCardsEach));  
+			listOfPlayers.get(i).receiveCards(cardsForEachPlayer); // gives cards
+			currentDeck.getDeck().removeAll(cardsForEachPlayer); // removes from current deck
+
+		}
+
+		if (!currentDeck.getDeck().isEmpty()) { //if cards remaining in deck
+
+			listOfPlayers.get(pickRandomPlayer()).receiveExtraCards(currentDeck.getDeck());
+
+		}
+
+		System.out.println("Dealing cards...");
+		System.out.println();
+
+	}
+	
+
+	/**
+	 * The method is called after each round.
+	 * If the player has no cards, sets the Player.java isInGame instance variable to false 
+	 * and updates the number of remaining players.
+	 */
+	
 	private void updatePlayers ()
 
 	{
@@ -106,7 +170,7 @@ public class Game
 
 			{
 				System.out.println(p.getName() + " HAS NO CARDS LEFT");
-				p.setStatus(false);
+				p.setStatus(false); // sets the value of isInGame to negative
 				remainingPlayers--;
 			}
 		}
@@ -114,8 +178,12 @@ public class Game
 
 
 	/**
-	 * selects next active player
+	 * Determines the next active player.
+	 * If no rounds have been played, selects a random player.
+	 * If previous round was a draw, the active player stays the same.
+	 * Otherwise, the winner of the previous round becomes the active player.
 	 */
+	
 	private void chooseActivePlayer()
 
 	{
@@ -131,19 +199,22 @@ public class Game
 			return;  
 		}
 
-		else 
+		else // otherwise
 
 		{
 			activePlayer = newRound.getWinner();
 		}
 
 	}
+	
 
 	/**
-	 * 
-	 * @return
+	 * Generates a random number that is then used as index when choosing the first active player. 
+	 * The number cannot be greater than the total number of players.
+	 * @return random integer
 	 */
-	private int pickRandomPlayer() { //returns random index number
+	
+	private int pickRandomPlayer() { 
 
 		int randomIndex = (int)Math.floor(Math.random() * numberOfPlayers);
 		return randomIndex;
@@ -151,9 +222,11 @@ public class Game
 
 
 	/**
-	 * method print winnerGame
+	 *  Called at the end of a game, displays the final winner of the game. 
+	 *  If human player won the game, prints out a "congratulations" message.
 	 */
-	private void showWinner ()
+	
+	private void displayWinner ()
 
 	{
 		// if only one player is left with cards after a draw
@@ -167,7 +240,7 @@ public class Game
 			}
 		}
 
-		else 
+		else // the last "standing" player becomes the winner
 		{
 			gameWinner = newRound.getWinner();
 			logGameWinner();
@@ -175,7 +248,7 @@ public class Game
 
 		System.out.println("The winner of the game is " + gameWinner.getName());
 
-		if (gameWinner == listOfPlayers.get(0))
+		if (gameWinner == listOfPlayers.get(0)) // human player always has index 0
 		{
 			System.out.print ("\n" + 
 					"╔═══╗─────────────╔╗───╔╗───╔╗" +
@@ -185,70 +258,18 @@ public class Game
 					"║╚═╝║╚╝║║║║╚╝║║║╔╗║╚╣╚╝║╚╣╔╗║╚╣║╚╝║║║╠══║" +
 					"╚═══╩══╩╝╚╩═╗╠╝╚╝╚╩═╩══╩═╩╝╚╩═╩╩══╩╝╚╩══╝" +
 					"──────────╔═╝║" +
-					"──────────╚══╝");
+					"──────────╚══╝" + "\n You just won the game!");
 		}
 
 	}
 
 
-	/**
-	 * 
-	 */	
-	public void createPlayers() {
-
-		// numberOfPlayers = currentDeck.getNumPlayers(); 
-		listOfPlayers = new ArrayList<Player>();
-
-		int i = 0;
-
-		// creates the human player
-		Player h = new Player(username);
-		h.setHuman();
-		listOfPlayers.add(h);
-
-		// create AI players
-		for (i = 1; i < numberOfPlayers; i++) 
-
-		{
-			Player p = new Player("AI_Player" + i);
-			listOfPlayers.add(p);
-		}
-
-	}
 
 	/**
 	 * 
-	 */
-	public void dealCards() {
-
-		int numCardsEach = currentDeck.getNumberOfCards() / numberOfPlayers;
-
-		int i;
-		for (i = 0; i < numberOfPlayers; i++) {
-
-			ArrayList<Card> cardsForEachPlayer = new ArrayList<Card>(currentDeck.getDeck().subList(0, numCardsEach));
-			String playerName = listOfPlayers.get(i).getName();
-			listOfPlayers.get(i).receiveCards(cardsForEachPlayer);
-			currentDeck.getDeck().removeAll(cardsForEachPlayer);
-
-		}
-
-		if (!currentDeck.getDeck().isEmpty()) { //if cards remaining in deck
-
-			listOfPlayers.get(pickRandomPlayer()).receiveExtraCards(currentDeck.getDeck());
-
-		}
-
-		System.out.println("Dealing cards...");
-		System.out.println();
-
-
-	}
-
-	/**
 	 * 
-	 * @param d
-	 * @param deckOutput
+	 * @param d = current deck 
+	 * @param deckOutput = whether we should print to deck
 	 */
 
 	private void logDeck(Deck d, boolean deckOutput)	{ //for printing to output log
@@ -305,6 +326,7 @@ public class Game
 	/**
 	 * 
 	 */
+	
 	private void logDealtCards() {
 
 		PrintWriter printer = null;
@@ -348,6 +370,7 @@ public class Game
 	/**
 	 * 
 	 */
+	
 	private void roundLog() {
 
 		PrintWriter printer = null;
@@ -381,6 +404,7 @@ public class Game
 	/**
 	 * 
 	 */
+	
 	private void logGameWinner() {
 
 		PrintWriter printer = null;
