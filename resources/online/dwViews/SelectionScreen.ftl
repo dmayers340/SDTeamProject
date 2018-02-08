@@ -23,124 +23,137 @@
 	<!-- Haven't been able to get CSS or a BASE HTML properly referenced. HOW to do this so we don't repeat so much? --> 
 	<style>
 
-		.column2{
-		position:absolute;
-		right: 0px;
-		margin-top:150px;
-		margin-left:150px;
-		margin-right:350px;
+		.stats
+		{
+			position:absolute;
+			right: 0px;
+			margin:auto;
+			margin-top:150px;
+			margin-left:150px;
+			margin-right:350px;
+			width:auto;
+			height:auto;
 		}
 		
-		.column{
-		position:absolute;
-		left: 0px;
-		margin-top:150px;
-		margin-left:350px;
-		margin-right:150px;
+		.playgame
+		{
+			position:absolute;
+			left: 0px;
+			margin:auto;
+			margin-top:150px;
+			margin-left:350px;
+			margin-right:150px;
+			width:auto;
+			height:auto;
 		}
 		
-		.nav li {
-      	color: black;
-      	display: inline-block;
+		.nav li 
+		{
+      		color: black;
+      		display: inline-block;
   	  	}
   	  
-  	  	.navbar-default .navbar-nav > li > a {
-    	color: black;
+  	  	.navbar-default .navbar-nav > li > a 
+  	  	{
+    		color: black;
 		}
 	    
-	    .navbar-default {
-    	background-color: black;
-    	border-color: #E7E7E7;
-    	padding-left:10px;
-  		padding-right:10px;
-  		margin-left:0px;
-  		margin-right:0px;
-  		margin-bottom:20px;
+	    .navbar-default 
+	    {
+    		background-color: black;
+    		border-color: #E7E7E7;
+    		padding-left:10px;
+  			padding-right:10px;
+  			margin-left:0px;
+  			margin-right:0px;
+  			margin-bottom:20px;
 		}
 
-		.color {
-		color:White;
-		font-size:1.2em;
- 		font-weight: bold;	
+		.color 
+		{
+			color:White;
+			font-size:1.2em;
+ 			font-weight: bold;	
  		}
 	
-		 .modal {
-		 display: none; /* Hidden by default */
-		 position: fixed; /* Stay in place */
-		 z-index: 1; /* Sit on top */
-		 left: 0;
-		 top: 0;
-		 width: 100%; /* Full width */
-		 height: 100%; /* Full height */
-		 overflow: auto; /* Enable scroll if needed */
-		 background-color: rgb(0,0,0); /* Fallback color */
-		 background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+		 .modal 
+		 {
+		 	display: none; /* Hidden by default */
+		 	position: fixed; /* Stay in place */
+		 	z-index: 1; /* Sit on top */
+			left: 0;
+		 	top: 0;
+		 	width: 100%; /* Full width */
+		 	height: 100%; /* Full height */
+		 	overflow: auto; /* Enable scroll if needed */
+		 	background-color: rgb(0,0,0); /* Fallback color */
+		 	background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 		}
 		
 		/* Modal Content/Box */
 		.modal-content {
-		background-color: #fefefe;
-		margin: 15% auto; /* 15% from the top and centered */
-		padding: 20px;
-		border: 1px solid #888;
-		width: 80%; /* Could be more or less, depending on screen size */
+			background-color: #fefefe;
+			margin: 15% auto; /* 15% from the top and centered */
+			padding: 20px;
+			border: 1px solid #888;
+			width: 80%; /* Could be more or less, depending on screen size */
 		}
 		
 	
 		/* The Close Button */
 		.close {
-		color: #aaa;
-		float: right;
-		font-size: 28px;
-		font-weight: bold;
+			color: #aaa;
+			float: right;
+			font-size: 28px;
+			font-weight: bold;
 		}
 			
-		.close:hover,
-		.close:focus {
-		color: black;
-		text-decoration: none;
-		cursor: pointer;
+		.close:hover, .close:focus {
+			color: black;
+			text-decoration: none;
+			cursor: pointer;
 		}
 		
 		.ipt {
-		border: solid 1px #d2d2d2;
-		border-left-color: #ccc;
-		border-top-color: #ccc;
-		border-radius: 2px;
-		box-shadow: inset 0 1px 0 #f8f8f8;
-		background-color: #fff;
-		padding: 4px 6px;
-		height: 21px;
-		line-height: 21px;
-		color: #555;
-		width: 180px;
-		vertical-align: baseline;
+			border: solid 1px #d2d2d2;
+			border-left-color: #ccc;
+			border-top-color: #ccc;
+			border-radius: 2px;
+			box-shadow: inset 0 1px 0 #f8f8f8;
+			background-color: #fff;
+			padding: 4px 6px;
+			height: 21px;
+			line-height: 21px;
+			color: #555;
+			width: 180px;
+			vertical-align: baseline;
 		}
 		
 		h5,li,ol,strong{
-		margin:0;
-		padding:0;
+			margin:0;
+			padding:0;
 		}
 			
 		.btn-primary {
-		border-color: #3079ED;
-		color: #F3F7FC;
-		background-color: #4D90FE;
-		background: -webkit-linear-gradient(top, #4D90FE, #4787ED);
-		background: -moz-linear-gradient(top, #4D90FE, #4787ED);
-		background: linear-gradient(top, #4D90FE, #4787ED);
+			border-color: #3079ED;
+			color: #F3F7FC;
+			background-color: #4D90FE;
+			background: -webkit-linear-gradient(top, #4D90FE, #4787ED);
+			background: -moz-linear-gradient(top, #4D90FE, #4787ED);
+			background: linear-gradient(top, #4D90FE, #4787ED);
 		}
 		
 		body{
-		background-image: url("http://kb4images.com/images/pictures-of-outer-space/37759075-pictures-of-outer-space.jpg");
-		width:100%;
-		height:100%;
+			background-image: url("http://kb4images.com/images/pictures-of-outer-space/37759075-pictures-of-outer-space.jpg");
+			margin: auto;
+			background-repeat: no-repeat;
+			background-size: 100% 100%;
 		}
 	
 	</style>
 	
 	<body onload="initalize()"> <!-- Call the initalize method when the page loads -->
-    
+   
     <nav class="navbar navbar-default">
 	  <div class="container-fluid">
 	    <div class="navbar-header">
@@ -184,7 +197,7 @@
 				}
 			</script>
 
-	  <div class="column">
+	  <div class="playgame">
 		<div class="card border-dark mb-3" style="max-width: 18rem; height: 27rem;">  		
 		<img class="card-img-top" src="https://img.purch.com/h/1000/aHR0cDovL3d3dy5zcGFjZS5jb20vaW1hZ2VzL2kvMDAwLzA2Ni8yODcvb3JpZ2luYWwveHMtMS1zcGFjZS1wbGFuZS1ib2Vpbmctb3JiaXRhcnQuanBn" alt="Card Image">
   		<br />
@@ -200,7 +213,7 @@
 		</div>
 		</div>
 
-		<div class="column2">
+		<div class="stats">
 		<div class="card border-dark mb-3" style="max-width: 18rem; height: 27rem;"> 
   		<img class="card-img-top" src="https://i.kinja-img.com/gawker-media/image/upload/t_original/othklnrkmmln2e8vv3ug.jpg" alt="Card image" style="height:220px">
   		<br />

@@ -120,7 +120,7 @@ public class TopTrumpsRESTAPI
 		dealCards();
 	}
 
-	private static void setActivePlayer()
+	public static void setActivePlayer()
 	{
 		if (newRound == null) // if new game
 		{
@@ -375,7 +375,7 @@ public class TopTrumpsRESTAPI
 		return numRounds;
 	}
 	
-	//Not sure where to close the database, made this as an attempt
+	//Not sure where to close the database, made this an attempt to close
 	@GET
 	@Path("/closedb")
 	public void closedb() throws IOException

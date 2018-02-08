@@ -127,7 +127,7 @@ public class Round {
 	 *  sets winner
 	 */
 
-	private void setWinner() 
+	public void setWinner() 
 
 	{
 		if (draw == false)
@@ -198,7 +198,7 @@ public class Round {
 	 * sets round winner
 	 */
 
-	private void compareCards()
+	public void compareCards()
 
 	{
 		int j = 0; // winner's index
@@ -327,7 +327,7 @@ public class Round {
 	 * sets it to c
 	 */
 
-	private void findBestCategory () 
+	public void findBestCategory () 
 
 	{ 
 		int curr; // current value
