@@ -15,6 +15,7 @@ public class TopTrumpsCLIApplication {
 	private static String FILE_NAME = "StarCitizenDeck.txt"; // name of deck file
 	private static int numberOfGames = 0; // counter
 	private static Deck currentDeck; // current deck
+	private DatabaseConnection db = new DatabaseConnection();
 
 
 	
@@ -61,7 +62,8 @@ public class TopTrumpsCLIApplication {
 			else if (choice.charAt(0) == 'G')
 			{
 				readIn();  
-				Game newGame = new Game(currentDeck);
+				DatabaseConnection db = new DatabaseConnection();
+				Game newGame = new Game(currentDeck, db);
 				newGame.setNumberOfPlayers(getNumberOfAIPlayers()+1);
 				newGame.setUsername(getInput());
 				newGame.playGame();

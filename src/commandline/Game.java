@@ -26,6 +26,7 @@ public class Game
 	private Player gameWinner;
 	private DatabaseConnection db;
 	
+	
 
 	private String logSeparator = "-------------------------------------------------------------"+
 			"-------------------------";
@@ -39,9 +40,10 @@ public class Game
 	 * @param d (current deck)
 	 */
 
-	public Game (Deck d)
+	public Game (Deck d, DatabaseConnection db)
 	{	
 		// this is all for testing
+		this.db = db;
 		boolean deckOutputToLog = false;
 		logDeck(d,deckOutputToLog);
 

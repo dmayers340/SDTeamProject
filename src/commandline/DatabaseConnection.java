@@ -250,9 +250,11 @@ public class DatabaseConnection
 //		}
 //		
 //		else {
-		round = "INSERT INTO GameStatistics.Rounds (gameNumber, roundsPlayed, numberDraws, roundsWonP0, roundsWonP1) VALUES ('"+TopTrumpsCLIApplication.getNumberOfGames()+"',) ";
+		//round = "INSERT INTO GameStatistics.Rounds (gameNumber) VALUES ('"+TopTrumpsCLIApplication.getNumberOfGames()+"',) ";
+//		, roundsPlayed, numberDraws, roundsWonP0, roundsWonP1
 //				+ "'"+nRounds+"',)";
 //		'"+nDraws+"', '"+roundWinsPerPlayer[0]+"', '"+roundWinsPerPlayer[1]+"')";
+		round = "INSERT INTO GameStatistics.Rounds VALUES ('11', '7', '2', '4', '3', '7', '2', '4');";
 //		}
 		String result = "";
 		
