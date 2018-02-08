@@ -16,6 +16,9 @@ public class TopTrumpsCLIApplication {
 	private static int numberOfGames = 0; // counter
 	private static Deck currentDeck; // current deck
 
+
+	
+	
 	/**
 	 * This main method is called by TopTrumps.java when the user specifies that they want to run in
 	 * command line mode. The contents of args[0] is whether we should write game logs to a file.
@@ -64,7 +67,7 @@ public class TopTrumpsCLIApplication {
 				newGame.setUsername(getInput());
 				newGame.playGame();
 			}
-
+			
 			// if Q or QUIT was entered
 			else if (choice.charAt(0)=='Q')
 			{
@@ -77,6 +80,9 @@ public class TopTrumpsCLIApplication {
 				System.out.println("Please enter valid input");
 				System.out.println();
 			}
+			
+			setNumberOfGames(getNumberOfGames() + 1);
+
 		}
 
 		System.exit(0);
@@ -175,5 +181,15 @@ public class TopTrumpsCLIApplication {
 		return players;
 
 	}
+
+	public static void setNumberOfGames(int numGames)
+	{
+		numberOfGames = numGames;
+	}
+	
+	public static int getNumberOfGames() {
+		return numberOfGames;
+	}
+
 
 }

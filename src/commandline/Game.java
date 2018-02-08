@@ -23,6 +23,7 @@ public class Game
 	private Player activePlayer; // active player makes the category choice
 	public String username;
 	private Player gameWinner;
+	private DatabaseConnection db;
 
 	private String logSeparator = "-------------------------------------------------------------"+
 			"-------------------------";
@@ -51,6 +52,7 @@ public class Game
 	}
 	
 
+
 	/**
 	 * Starts a new game (creates players and deals cards) and 
 	 * executes high-level game logic until the winner is decided.
@@ -76,7 +78,7 @@ public class Game
 			chooseActivePlayer(); // set deciding player 
 			newRound = new Round(listOfPlayers, activePlayer);
 
-			if (newRound.getRoundCount() > 1) {
+			if (Round.getRoundCount() > 1) {
 				logDealtCards(); 
 			}
 
@@ -88,8 +90,30 @@ public class Game
 
 		newRound.getWinner();
 		showWinner();
-		
+		db.updateDBRounds(Round.getRoundCount(), newRound.getDrawCount(), getNumberOfRoundWins());
+		db.updateDBGame(numberOfPlayers, gameWinner.getName());
 	}
+	
+	
+	private String getNumberOfRoundWins() { //makes array with number of rounds each player has won
+	
+		int [] playerRoundWins = new int [numberOfPlayers];
+		for (Player p: listOfPlayers) {
+			for (int i = 0; i < Round.getRoundCount(); i++) {
+				if (newRound.getWinner() == p) {
+					int index = listOfPlayers.indexOf(p);
+					playerRoundWins[index]++;
+				}
+			}
+		}
+		System.out.println(playerRoundWins);
+		return playerRoundWins.toString();
+	}
+
+	
+	
+
+
 
 	/**
 	 * updates number of remaining players
@@ -177,16 +201,18 @@ public class Game
 
 		if (gameWinner == listOfPlayers.get(0))
 		{
-			System.out.print ("\n" + 
-					"╔═══╗─────────────╔╗───╔╗───╔╗" +
-					"║╔═╗║────────────╔╝╚╗──║║──╔╝╚╗" +
-					"║║─╚╬══╦═╗╔══╦═╦═╩╗╔╬╗╔╣║╔═╩╗╔╬╦══╦═╗╔══╗" +
-					"║║─╔╣╔╗║╔╗╣╔╗║╔╣╔╗║║║║║║║║╔╗║║╠╣╔╗║╔╗╣══╣" +
-					"║╚═╝║╚╝║║║║╚╝║║║╔╗║╚╣╚╝║╚╣╔╗║╚╣║╚╝║║║╠══║" +
-					"╚═══╩══╩╝╚╩═╗╠╝╚╝╚╩═╩══╩═╩╝╚╩═╩╩══╩╝╚╩══╝" +
-					"──────────╔═╝║" +
-					"──────────╚══╝");
+			System.out.println("Windows doesn't like fancy stuff");
 		}
+//			System.out.print ("\n" + 
+//					"â•”â•�â•�â•�â•—â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â•”â•—â”€â”€â”€â•”â•—â”€â”€â”€â•”â•—" +
+//					"â•‘â•”â•�â•—â•‘â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â•”â•�â•šâ•—â”€â”€â•‘â•‘â”€â”€â•”â•�â•šâ•—" +
+//					"â•‘â•‘â”€â•šâ•¬â•�â•�â•¦â•�â•—â•”â•�â•�â•¦â•�â•¦â•�â•©â•—â•”â•¬â•—â•”â•£â•‘â•”â•�â•©â•—â•”â•¬â•¦â•�â•�â•¦â•�â•—â•”â•�â•�â•—" +
+//					"â•‘â•‘â”€â•”â•£â•”â•—â•‘â•”â•—â•£â•”â•—â•‘â•”â•£â•”â•—â•‘â•‘â•‘â•‘â•‘â•‘â•‘â•‘â•”â•—â•‘â•‘â• â•£â•”â•—â•‘â•”â•—â•£â•�â•�â•£" +
+//					"â•‘â•šâ•�â•�â•‘â•šâ•�â•‘â•‘â•‘â•‘â•šâ•�â•‘â•‘â•‘â•”â•—â•‘â•šâ•£â•šâ•�â•‘â•šâ•£â•”â•—â•‘â•šâ•£â•‘â•šâ•�â•‘â•‘â•‘â• â•�â•�â•‘" +
+//					"â•šâ•�â•�â•�â•©â•�â•�â•©â•�â•šâ•©â•�â•—â• â•�â•šâ•�â•šâ•©â•�â•©â•�â•�â•©â•�â•©â•�â•šâ•©â•�â•©â•©â•�â•�â•©â•�â•šâ•©â•�â•�â•�" +
+//					"â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â•”â•�â•�â•‘" +
+//					"â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â•šâ•�â•�â•�");
+//		}
 
 	}
 
