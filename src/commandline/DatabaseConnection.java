@@ -5,19 +5,20 @@ public class DatabaseConnection
 {
 	
 	private Connection connection = null;
-	
-	//Jemma's Details for DB
 	private final String DBNAME = "m_17_0806849r"; 
 	private final String USERNAME = "m_17_0806849r";
 	private final String PASSWORD = "0806849r";
 	
-	//Constructor makes connection
 	public DatabaseConnection()
 	{
 		this.makeConnection();
 	}
 	
-	//This tries to make a connection, if it fails it should print out
+	public void createConnection()
+	{
+		this.makeConnection();
+	}
+	
 	public void makeConnection()
 	{	
 		try 
@@ -42,9 +43,6 @@ public class DatabaseConnection
 		}
 	}
 
-	
-	//Close database connection
-	//TODO find place to close
 	public void closeConnection()
 	{
 		try
@@ -60,11 +58,11 @@ public class DatabaseConnection
 		}
 	}
 	
-	//This method connects to the database to return Number of Games played for stat screen
+	
 	public int getNumberOfGames()
 	{
 		Statement numGameStmt = null;
-		String numGamesQuery = "SELECT COUNT (gameNumber) AS gameNumber FROM GameStatistics.Game;";
+		String numGamesQuery = "SELECT COUNT (gameNumber) FROM GameStatistics.Game;\r\n";
 		int numberOfGames = 0;
 		
 		try
@@ -72,8 +70,9 @@ public class DatabaseConnection
 			numGameStmt = connection.createStatement();
 			ResultSet numGameResults = numGameStmt.executeQuery(numGamesQuery);
 			while (numGameResults.next())
-			{ 
-				numberOfGames = numGameResults.getInt("gameNumber"); 			
+			{
+				//TODO 
+				numberOfGames = numGameResults.getInt("gameNumber"); //do we want to do number or column label?				
 			}
 			return numberOfGames;
 		}
@@ -87,7 +86,6 @@ public class DatabaseConnection
 		return numberOfGames;
 	}
 	
-	//This method connects to the database to return last Round Winner for game screen
 	public String getWinner()
 	{
 		Statement whoWon = null;
@@ -104,7 +102,6 @@ public class DatabaseConnection
 				winnerName = winnerResult.getString("gameWinner");
 			}
 		}
-		
 		catch (SQLException noWinner)
 		{
 			noWinner.printStackTrace();
@@ -113,11 +110,10 @@ public class DatabaseConnection
 		return winnerName;
 	}
 	
-	//This method connects to the database to return Number of Games the Player won for stat screen
 	public int getHumanWin()
 	{
 		Statement humanWinStmt = null;
-		String humanWinQuery = "SELECT COUNT (gameNumber) AS gameNumber FROM GameStatistics.Game WHERE gameWinner = 'Player0';";
+		String humanWinQuery = "SELECT COUNT (gameNumber) FROM GameStatistics.Game WHERE gameWinner = 'Player0';";
 		int humanWin = 0;
 		
 		try
@@ -126,7 +122,8 @@ public class DatabaseConnection
 			ResultSet humanWinResults = humanWinStmt.executeQuery(humanWinQuery);
 			while (humanWinResults.next())
 			{
-				humanWin = humanWinResults.getInt("gameNumber"); 
+				//TODO 
+				humanWin = humanWinResults.getInt("gameNumber"); //do we want to do number or column label?				
 			}
 			return humanWin;
 		}
@@ -136,14 +133,14 @@ public class DatabaseConnection
 			noNumber.printStackTrace();
 			System.err.println("Could not execute " + humanWinQuery);
 		}
+		
 		return humanWin;
 	}
 	
-	//This method connects to the database to return Number of Games the Computer won for stat screen
 	public int getComputerWin()
 	{
 		Statement numComputerWinStmt = null;
-		String numCompWinQuery = "SELECT COUNT (gameNumber) AS gameNumber FROM GameStatistics.Game WHERE gameWinner <> 'Player0';";
+		String numCompWinQuery = "SELECT COUNT (gameNumber) FROM GameStatistics.Game WHERE gameWinner <> 'Player0';";
 		int computerWin = 0;
 		
 		try
@@ -152,7 +149,8 @@ public class DatabaseConnection
 			ResultSet compWinResults = numComputerWinStmt.executeQuery(numCompWinQuery);
 			while (compWinResults.next())
 			{
-				computerWin = compWinResults.getInt("gameNumber"); 	
+				//TODO 
+				computerWin = compWinResults.getInt("gameNumber"); //do we want to do number or column label?				
 			}
 			return computerWin;
 		}
@@ -166,7 +164,6 @@ public class DatabaseConnection
 		return computerWin;
 	}
 	
-	//This method connects to the database to return the most rounds played for stat screen
 	public int getMaxRounds()
 	{
 		Statement maxRoundStmt = null;
@@ -179,7 +176,8 @@ public class DatabaseConnection
 			ResultSet maxRoundResults = maxRoundStmt.executeQuery(maxRoundsQuery);
 			while (maxRoundResults.next())
 			{
-				maxRounds = maxRoundResults.getInt("roundsPlayed"); 			
+				//TODO 
+				maxRounds = maxRoundResults.getInt("roundsPlayed"); //do we want to do number or column label?				
 			}
 			return maxRounds;
 		}
@@ -193,20 +191,20 @@ public class DatabaseConnection
 		return maxRounds;
 	}
 	
-	//This method connects to the database to return the average number of draw for stat screen
-	public double getNumberOfDraws()
+	public int getNumberOfDraws()
 	{
 		Statement numDraws = null;
-		String numDrawsQuery = "SELECT cast(AVG(numberDraws)as decimal (3, 2)) AS numberDraws FROM GameStatistics.Rounds;";
-		double numberOfDraws = 0;
+		String numDrawsQuery = "SELECT cast(AVG(numberDraws)as decimal (3,2)) FROM GameStatistics.Rounds\r\n";
+		int numberOfDraws = 0;
 		
 		try
 		{
 			numDraws = connection.createStatement();
 			ResultSet numDrawResults = numDraws.executeQuery(numDrawsQuery);
 			while (numDrawResults.next())
-			{ 
-				numberOfDraws = numDrawResults.getDouble("numberDraws");			
+			{
+				//TODO 
+				numberOfDraws = numDrawResults.getInt("numberDraws"); //do we want to do number or column label?				
 			}
 			return numberOfDraws;
 		}
@@ -216,78 +214,22 @@ public class DatabaseConnection
 			noNumber.printStackTrace();
 			System.err.println("Could not execute " + numDrawsQuery);
 		}
+		
 		return numberOfDraws;
 	}
-
 	
 	//TODO add a game from the online game
 	public void addGame(Game game)
 	{
 		
-		
 	}
 	
-
-	/**
-	 * 
-	 * Inserts values into database GameStatistics.Rounds table at the end of each Game
-	 */
-	
-	public String updateDBRounds(int nRounds, int nDraws, String roundWins) { 
-		
-		Statement stmt = null;
-		String [] roundWinsPerPlayer = roundWins.split(" ");
-		String round = "";
-		if (roundWinsPerPlayer.length > 2) {
-			
-			switch (roundWinsPerPlayer.length) {
-			case 3: round = "INSERT INTO GameStatistics.Rounds (gameNumber, roundsPlayed, numberDraws, roundsWonP0, roundsWonP1, roundsWonP2) VALUES ('"+TopTrumpsCLIApplication.getNumberOfGames()+"', '"+nRounds+"','"+nDraws+"', '"+roundWinsPerPlayer[0]+"', '"+roundWinsPerPlayer[1]+"', '"+roundWinsPerPlayer[2]+"')";
-			case 4: round = "INSERT INTO GameStatistics.Rounds (gameNumber, roundsPlayed, numberDraws, roundsWonP0, roundsWonP1, roundsWonP2, roundsWonP3) VALUES ('"+TopTrumpsCLIApplication.getNumberOfGames()+"', '"+nRounds+"','"+nDraws+"', '"+roundWinsPerPlayer[0]+"', '"+roundWinsPerPlayer[1]+"', '"+roundWinsPerPlayer[2]+"', '"+roundWinsPerPlayer[3]+"')";
-			case 5: round = "INSERT INTO GameStatistics.Rounds (gameNumber, roundsPlayed, numberDraws, roundsWonP0, roundsWonP1, roundsWonP2, roundsWonP3, roundsWonP4) VALUES ('"+TopTrumpsCLIApplication.getNumberOfGames()+"', '"+nRounds+"','"+nDraws+"', '"+roundWinsPerPlayer[0]+"', '"+roundWinsPerPlayer[1]+"', '"+roundWinsPerPlayer[2]+"', '"+roundWinsPerPlayer[3]+"', '"+roundWinsPerPlayer[4]+"')";
-			}
-		}
-		
-		else {
-		round = "INSERT INTO GameStatistics.Rounds (gameNumber, roundsPlayed, numberDraws, roundsWonP0, roundsWonP1) VALUES ('"+TopTrumpsCLIApplication.getNumberOfGames()+"', '"+nRounds+"','"+nDraws+"', '"+roundWinsPerPlayer[0]+"', '"+roundWinsPerPlayer[1]+"')";
-		}
-		String result = "";
-		
-		try {
-			stmt = connection.createStatement();
-			stmt.executeUpdate(round);
-			result = "Round data inserted";
-		}
-		catch(SQLException e) {
-			e.printStackTrace();
-			result = "Error, round data not inserted";
-		}
-		return result;
+	//TODO Update Database when save/quit--send string into db?
+	public void updateDB()
+	{
+		//INSERT INTO 
 	}
 	
-	/**
-	 * 
-	 * Inserts values into the database GameStatistics.Game table at the end of each Game
-	 */
-	
-	public String updateDBGame(int nPlayers, String winner) {
-		
-		Statement stmt = null;
-		
-		String game = "INSERT INTO GameStatistics.Game (gameNumber, numberPlayers, gameWinner) VALUES ('"+TopTrumpsCLIApplication.getNumberOfGames()+"', '"+nPlayers+"', '"+winner+"',)";
-		String result = "";
-		
-		try {
-			stmt = connection.createStatement();
-			stmt.executeUpdate(game);
-			result = "Game data inserted";
-		}
-		catch(SQLException e) {
-			e.printStackTrace();
-			result = "Error, game data not inserted";
-		}
-		return result;
-	}
 }
-
 
 

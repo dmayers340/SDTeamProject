@@ -24,8 +24,6 @@ public class Round {
 	private StringBuilder roundLog = new StringBuilder();
 	private String logSeparator = "-------------------------------------------------------------------------------------------------------";
 	private static int roundCount = 0;
-	private int drawCount = 0;
-	
 
 
 	/**
@@ -34,7 +32,8 @@ public class Round {
 
 	public Round (ArrayList <Player> p, Player ap)
 
-	{	addRound();
+	{
+		addRound();
 		roundLog.append(logSeparator);
 		String roundLog1 = String.format("%s%d", "ROUND ", roundCount); // sets top line for round log
 		roundLog.append("\n" + roundLog1 + "\n");
@@ -76,17 +75,8 @@ public class Round {
 		setCategory();
 		compareCards();
 		setWinner();  
-		
 
 	} 
-
-		
-	
-	
-	
-	public int getDrawCount() {
-		return drawCount;
-	}
 
 	/**
 	 * determines which method to call
@@ -149,7 +139,6 @@ public class Round {
 
 		{
 			draw();
-			drawCount++;   //for database statistics
 			winner = null; // no winner
 		}
 
@@ -412,7 +401,7 @@ public class Round {
 	 * @return int
 	 */
 
-	public static int getRoundCount() {
+	public int getRoundCount() {
 		return roundCount;
 	}
 

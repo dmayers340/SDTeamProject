@@ -339,6 +339,7 @@
 				// We have done everything we need to prepare the CORS request, so send it
 				xhr.send();		
 			}
+					
 			</script>
 		
 		

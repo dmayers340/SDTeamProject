@@ -17,7 +17,7 @@ public class Deck {
 	/**
 	 * class constants
 	 */
-	private static final int maxAttributes = 6; 
+	private static final int maxAttributes = 6;
 
 	/**
 	 * constructor
