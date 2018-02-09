@@ -70,7 +70,7 @@ public class TopTrumpsCLIApplication {
 				
 				readIn(); // reads in a deck
 				newGame.playGame(currentDeck);
-				numberOfGames++;
+				numberOfGames++;  
 			}
 			
 			// if Q or QUIT was entered
