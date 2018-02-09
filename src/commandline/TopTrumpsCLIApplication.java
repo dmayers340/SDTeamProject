@@ -58,16 +58,18 @@ public class TopTrumpsCLIApplication {
 			// reads the deck from a .txt file and starts a new game
 			else if (choice.charAt(0) == 'G')
 			{
-				readIn();  
 				DatabaseConnection db = new DatabaseConnection();
-				Game newGame = new Game(currentDeck, db);
-				newGame.setNumberOfPlayers(getNumberOfAIPlayers()+1);
+				Game newGame = new Game(db);
+				
+				// user chooses number of players
+				newGame.setNumberOfPlayers(getNumberOfAIPlayers()+1);  
 				
 				// user enters username
 				System.out.println("Please pick a username: ");	
 				newGame.setUsername(getInput());
 				
-				newGame.playGame();
+				readIn(); // reads in a deck
+				newGame.playGame(currentDeck);
 				numberOfGames++;
 			}
 			

@@ -33,15 +33,26 @@ public class Game
 
 	/**
 	 * Constructor method. 
-	 * Creates a new Game object and shuffles the deck, then writes the deck contents to a log file.
+	 * Creates a new Game object and connects to the database.
 	 * Called by the TopTrumpsCLIApplication.java class (the online version does not use the Game.java class).
 	 * @param Deck d = current deck 
 	 */
 	
-	public Game (Deck d, DatabaseConnection db)
+	public Game (DatabaseConnection db)
 	{	
-		// this is all for testing
 		this.db = db;
+	}
+
+	/**
+	 * Starts a new game (shuffles deck, creates players and deals cards). 
+	 * Then executes high-level game logic until the winner is decided.
+	 * Called from the TopTrumpsCLIApplication.java class.
+	 */
+	
+	public void playGame(Deck d)
+
+	{
+		// this is all for testing
 		boolean deckOutputToLog = false;
 		logDeck(d,deckOutputToLog);
 
@@ -49,18 +60,7 @@ public class Game
 		deckOutputToLog = true;
 		currentDeck = d;
 		logDeck(currentDeck, deckOutputToLog); //prints shuffled deck to log file
-	}
-	
 
-	/**
-	 * Starts a new game (creates players and deals cards). 
-	 * Then executes high-level game logic until the winner is decided.
-	 * Called from the TopTrumpsCLIApplication.java class.
-	 */
-	
-	public void playGame()
-
-	{
 		remainingPlayers = numberOfPlayers; // starts with all players still in game
 
 		createPlayers();
