@@ -15,7 +15,11 @@ public class TopTrumpsCLIApplication {
 	private static int numberOfGames = 0; // counter
 	private static DatabaseConnection db = new DatabaseConnection();
 
-	
+	private static Player winner;
+	private static Game newGame;
+	private static int category;
+
+
 	/**
 	 * This main method is called by TopTrumps.java when the user specifies that they want to run in
 	 * command line mode. The contents of args[0] is whether we should write game logs to a file.
@@ -44,7 +48,7 @@ public class TopTrumpsCLIApplication {
 			System.out.println("S - view past game statistics ");
 			System.out.println("Q - exit the application ");
 			System.out.println();
-			
+
 			String choice = getInput();
 
 			// if letter S was entered - nothing happens
@@ -57,18 +61,38 @@ public class TopTrumpsCLIApplication {
 			else if (choice.charAt(0) == 'G')
 			{  
 				DatabaseConnection db = new DatabaseConnection();
-				Game newGame = new Game(db);
+				newGame = new Game(db);
+				newGame.setOnline(false);
 				newGame.setNumberOfPlayers(getNumberOfAIPlayers()+1);
-				
+
 				// user enters username
 				System.out.println("Please pick a username: ");	
 				newGame.setUsername(getInput());
-				
 				newGame.initialiseGame();
-				newGame.runGame();
-				numberOfGames++;
+
+				while (newGame.getStatus() == false)
+				{
+					newGame.chooseActivePlayer();
+
+					if (newGame.getActivePlayer().isHuman()==true)
+					{
+	
+						newGame.setCurrentCategory(category);
+					}
+
+					else
+					{
+						newGame.findBestCategory();
+					}
+
+					newGame.startRound();
+					numberOfGames++;
+				}
+
+				winner = newGame.getWinner();
+				displayWinner();
 			}
-			
+
 			// if Q or QUIT was entered
 			else if (choice.charAt(0)=='Q')
 			{
@@ -81,7 +105,7 @@ public class TopTrumpsCLIApplication {
 				System.out.println("Please enter valid input");
 				System.out.println();
 			}
-			
+
 			setNumberOfGames(getNumberOfGames() + 1);
 
 		}
@@ -89,7 +113,50 @@ public class TopTrumpsCLIApplication {
 		System.exit(0);
 	}
 
-	
+	/**
+	 * active player chooses category
+	 */
+
+	private void chooseCategory ()
+
+	{
+		System.out.println("It's your turn to choose! Please enter the name of the category.");
+
+		String s = ("\nThe human player " + newGame.getActivePlayer().getName() + " chose the category for the current round");
+		
+	// roundLog.append(s);
+	// 	roundLog.append("\n");
+
+		// enter category name
+		Scanner in = new Scanner (System.in);
+		String categoryString = "";
+		categoryString = in.next();
+
+		int c;
+		int temp = -1;
+
+		newGame.getActivePlayer().getTopCard();
+		// checks if a valid category name was entered
+		for (int i = 0; i < Card.getCategories().size(); i++)
+		{
+			newGame.getActivePlayer().getTopCard();
+			if (categoryString.equalsIgnoreCase(Card.getCategories().get(i)))
+				temp = i;
+		}
+
+		if (temp<1) // if category name not found or "description"
+		{
+			System.out.println("You must enter a valid category name.");
+			chooseCategory();
+		}
+
+		else 
+		{
+			category = temp;
+		}
+
+	}
+
 	/**
 	 * Reads command line input. 
 	 * @return user input as a String
@@ -142,7 +209,7 @@ public class TopTrumpsCLIApplication {
 
 		return players;
 	}
-	
+
 	/**
 	 * This method gets the persistent game statistics from the database
 	 * by calling the relevant methods in the DatabaseConnection.java class.
@@ -159,7 +226,7 @@ public class TopTrumpsCLIApplication {
 	private static String getStats()
 	{
 		StringBuilder stats = new StringBuilder("");
-		
+
 		// ASCII art :) 
 		stats.append(" \n");
 		stats.append("   _____ _______    _______ _____  _____ _______ _____ _____  _____ \n");
@@ -169,16 +236,36 @@ public class TopTrumpsCLIApplication {
 		stats.append("  ____) |  | |/ ____ \\| |   _| |_ ____) |  | |   _| || |____ ____) |\n");
 		stats.append(" |_____/   |_/_/    \\_|_|  |_____|_____/   |_|  |_____\\_____|_____/ \n"); 
 		stats.append(" \n");
-		
+
 		stats.append("Number of games played overall is " + db.getNumberOfGames() + "\n");
 		stats.append("The computer has won " + db.getComputerWin() + " times\n");
 		stats.append("The humen has won " + db.getHumanWin() + " times\n");
 		stats.append("The average number of draws is " + db.getNumberOfDraws() + "\n");
 		stats.append("The largest number of rounds played in a single game is " + db.getMaxRounds() + "\n");
-		
+
 		String statistics = stats.toString();
 		return statistics;
 	}
+
+
+	/**
+	 *  Called at the end of a game, displays the final winner of the game. 
+	 *  If human player won the game, prints out a "congratulations" message.
+	 */
+
+	private static void displayWinner ()
+	{
+
+		System.out.println("The winner of the game is " + winner.getName());
+
+		if (winner.isHuman()==true) // human player always has index 0
+		{
+			System.out.print ("\n CONGRATULATIONS! \n You just won the game!");
+		}
+
+	}
+
+
 
 	/**
 	 * 
@@ -188,7 +275,7 @@ public class TopTrumpsCLIApplication {
 	{
 		numberOfGames = numGames;
 	}
-	
+
 	/**
 	 * 
 	 * @return the number of games played

@@ -197,21 +197,21 @@
 				}
 			</script>
 
-	  <div class="playgame">
+  <div class="playgame">
 		<div class="card border-dark mb-3" style="max-width: 18rem; height: 27rem;">  		
-		<img class="card-img-top" src="https://img.purch.com/h/1000/aHR0cDovL3d3dy5zcGFjZS5jb20vaW1hZ2VzL2kvMDAwLzA2Ni8yODcvb3JpZ2luYWwveHMtMS1zcGFjZS1wbGFuZS1ib2Vpbmctb3JiaXRhcnQuanBn" alt="Card Image">
-  		<br />
-  		<div class="card-block">
-    		<center><h4><b>Play Game</b></h4>
-    		<br />
-    		<p class="card-text">If you would like to play the game select the button below.</p>
-    		<br />	
-    		<a href="http://localhost:7777/toptrumps/game" class="btn btn-primary">Play Game</a></center>
-			</center>
+			<img class="card-img-top" src="https://img.purch.com/h/1000/aHR0cDovL3d3dy5zcGFjZS5jb20vaW1hZ2VzL2kvMDAwLzA2Ni8yODcvb3JpZ2luYWwveHMtMS1zcGFjZS1wbGFuZS1ib2Vpbmctb3JiaXRhcnQuanBn" alt="Card Image">
+  			<br />
+  				<div class="card-block">
+    			<center><h4><b>Play Game</b></h4>
+    			<br />
+    			<p class="card-text">If you would like to play the game select the button below.</p>
+    			<br />	
+    			<a href="http://localhost:7777/toptrumps/game" class="btn btn-primary">Play Game</a></center>
+				</center>
              
-  		</div>
+  				</div>
 		</div>
-		</div>
+	</div>
 
 		<div class="stats">
 		<div class="card border-dark mb-3" style="max-width: 18rem; height: 27rem;"> 
@@ -235,7 +235,6 @@
 		<script type="text/javascript">
 
 			function initalize() {
-				//qq();  this is my method to send json. Not same as the last one but not work as well; if you want see how it works
 				
 			}
 			

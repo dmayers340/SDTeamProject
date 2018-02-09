@@ -24,15 +24,19 @@ public class Game
 	private Round newRound;
 	private Player activePlayer; // active player makes the category choice
 	public String username;
-	private Player gameWinner;
-	private DatabaseConnection db;
+	private Player currentWinner;
+	private int currentCategory;
+
+	private static boolean isFinished;	
+	private static DatabaseConnection db;
+	public boolean isOnline;
 
 	private String logSeparator = "-------------------------------------------------------------"+
 			"-------------------------";
 
 	private static ArrayList <Player> listOfPlayers;
 	private final String LOG_FILE = "toptrumps.log";
-	
+
 	private static String FILE_NAME = "StarCitizenDeck.txt"; // name of deck file
 
 	/**
@@ -41,71 +45,134 @@ public class Game
 	 * Called by the TopTrumpsCLIApplication.java class (the online version does not use the Game.java class).
 	 * @param Deck d = current deck 
 	 */
-	
+
 	public Game (DatabaseConnection db)
 	{	
 		this.db = db;
+		isFinished = false;
 	}
 
 	/**
 	 * Initialises a new game (shuffles deck, creates players and deals cards). 
 	 * Called from the TopTrumpsCLIApplication.java class.
 	 */
-	
+
 	public void initialiseGame()
 
 	{
 		readIn();
-		
+
 		// this is all for testing
 		boolean deckOutputToLog = false;
-		logDeck(currentDeck,deckOutputToLog);
+
+		if (isOnline = false)
+		{
+			logDeck(currentDeck,deckOutputToLog);
+		}
 
 		currentDeck.shuffleDeck();
-		deckOutputToLog = true;
-		logDeck(currentDeck, deckOutputToLog); //prints shuffled deck to log file
+
+		if (isOnline = false)
+		{
+			deckOutputToLog = true;
+			logDeck(currentDeck, deckOutputToLog); //prints shuffled deck to log file
+		}
 
 		remainingPlayers = numberOfPlayers; // starts with all players still in game
 
 		createPlayers();
 		dealCards();
-		logDealtCards(); // right after they have been dealt
-		
+		 // choose the 1st active player
+
 	} 
 
+public void startOnlineRound()
+
+{
+	newRound = new Round(listOfPlayers, activePlayer, currentCategory);
+	 
+	newRound.playRound();
+	
+	finishRound();  
+	
+}
 	/**
 	 * rounds continue until there is only 1 player left
 	 * the last remaining player is the winner 
 	 */
-	public void runGame() 
-	
+	public void startRound() 
+
 	{
-		while (remainingPlayers > 1)
+	
+		newRound = new Round(listOfPlayers, activePlayer, currentCategory);
+		newRound.playRound();
 
-		{
-			chooseActivePlayer(); // set deciding player 
-			newRound = new Round(listOfPlayers, activePlayer);
-
-			if (Round.getRoundCount() > 1) {
-				logDealtCards(); 
-			}
-
-			newRound.playRound();
-			roundLog();
-			System.out.println(logSeparator);
-			updatePlayers(); // updates number of remaining players
-		}
-
-		newRound.getWinner();
-		displayWinner();
-		db.updateDBRounds();
-		//		Round.getRoundCount());
-		//		db.updateDBRounds(Round.getRoundCount(), newRound.getDrawCount(), Round.getPlayerRoundWins());
-		// db.updateDBGame(numberOfPlayers, gameWinner.getName());
+		roundLog();
+		System.out.println(logSeparator);
 		
+		finishRound();
 	}
 	
 	
+	/**
+	 * 
+	 */
+	private void finishRound() 
+	
+	{
+		updatePlayers(); // updates number of remaining players
+
+		if (remainingPlayers <= 1)
+
+		{
+			isFinished = true; 
+		}
+
+		currentWinner = newRound.getWinner();
+
+		db.updateDBRounds();
+		//		Round.getRoundCount());
+		//		db.updateDBRounds(Round.getRoundCount(), newRound.getDrawCount(), Round.getPlayerRoundWins());
+		// db.updateDBGame(numberOfPlayers, currentWinner.getName());
+
+	}
+	
+
+	/**
+	 * searches active user's top card 
+	 * finds the category with the highest value
+	 * sets it to c
+	 */
+
+	public void findBestCategory () 
+
+	{ 
+		int curr; // current value
+		int temp = 0; // temp highest value
+		int index = 0; // index of the highest value
+		
+		String s = String.format("%s%s%d%s\n", 
+				activePlayer.getName(), " is choosing the category for round ", newRound.getRoundCount(), "...");
+		System.out.println(s);
+		
+		// roundLog.append("\n" + s + "\n");
+
+		for (int i = 1; i < activePlayer.getTopCard().getCategories().size(); i++)
+		{
+			// finds the category with the highest value
+			curr = Integer.valueOf(activePlayer.getTopCard().getAttribute(i)); // looks horrendous
+
+			if (curr>temp)
+			{	
+				temp=curr;
+				index = i;
+			}
+		}
+
+		currentCategory = index;
+	}
+
+
 	/**
 	 * Reads deck contents from a file.
 	 * Sets categories for the new deck (contained in the first line of the file).
@@ -145,15 +212,15 @@ public class Game
 		}
 
 	}
-	
-	
+
+
 	/**
 	 * Called from the playGame() method.
 	 * Generates a number of Player objects and stores them in an ArrayList.
 	 * The first created Player is always the human player.
 	 * Human player has to choose their username, the others are assigned default usernames.
 	 */	
-	
+
 	private void createPlayers() {
 
 		listOfPlayers = new ArrayList<Player>();
@@ -173,14 +240,14 @@ public class Game
 		}
 
 	}
-	
+
 
 	/**
 	 * Called from the playGame() method.
 	 * Removes cards from the current deck and adds them to the hands of players.
 	 * At the end the current deck is left empty.
 	 */
-	
+
 	private void dealCards() {
 
 		int numCardsEach = currentDeck.getNumberOfCards() / numberOfPlayers; // how many cards each player should get
@@ -200,18 +267,21 @@ public class Game
 
 		}
 
-		System.out.println("Dealing cards...");
-		System.out.println();
+
+		if (isOnline = false)
+		{
+			logDealtCards(); // right after they have been dealt
+		}
 
 	}
-	
+
 
 	/**
 	 * The method is called after each round.
 	 * If the player has no cards, sets the Player.java isInGame instance variable to false 
 	 * and updates the number of remaining players.
 	 */
-	
+
 	private void updatePlayers ()
 
 	{
@@ -237,8 +307,8 @@ public class Game
 	 * If previous round was a draw, the active player stays the same.
 	 * Otherwise, the winner of the previous round becomes the active player.
 	 */
-	
-	private void chooseActivePlayer()
+
+	public void chooseActivePlayer()
 
 	{
 		if (newRound==null) // if new game
@@ -260,55 +330,19 @@ public class Game
 		}
 
 	}
-	
+
 
 	/**
 	 * Generates a random number that is then used as index when choosing the first active player. 
 	 * The number cannot be greater than the total number of players.
 	 * @return random integer
 	 */
-	
+
 	private int pickRandomPlayer() { 
 
 		int randomIndex = (int)Math.floor(Math.random() * numberOfPlayers);
 		return randomIndex;
 	}
-
-
-	/**
-	 *  Called at the end of a game, displays the final winner of the game. 
-	 *  If human player won the game, prints out a "congratulations" message.
-	 */
-	
-	private void displayWinner ()
-
-	{
-		// if only one player is left with cards after a draw
-		// they automatically become the winner
-		if (newRound.isDraw())		
-		{
-			for (int i=0; i<listOfPlayers.size(); i++)
-			{
-				if (listOfPlayers.get(i).isInGame())
-					gameWinner = listOfPlayers.get(i); 
-			}
-		}
-
-		else // the last "standing" player becomes the winner
-		{
-			gameWinner = newRound.getWinner();
-			logGameWinner();
-		}
-
-		System.out.println("The winner of the game is " + gameWinner.getName());
-
-		if (gameWinner == listOfPlayers.get(0)) // human player always has index 0
-		{
-			System.out.print ("\n CONGRATULATIONS! \n You just won the game!");
-		}
-
-	}
-
 
 
 	/**
@@ -372,7 +406,7 @@ public class Game
 	/**
 	 * 
 	 */
-	
+
 	private void logDealtCards() {
 
 		PrintWriter printer = null;
@@ -416,7 +450,7 @@ public class Game
 	/**
 	 * 
 	 */
-	
+
 	private void roundLog() {
 
 		PrintWriter printer = null;
@@ -450,8 +484,8 @@ public class Game
 	/**
 	 * 
 	 */
-	
-	private void logGameWinner() {
+
+	private void logCurrentWinner() {
 
 		PrintWriter printer = null;
 
@@ -462,7 +496,7 @@ public class Game
 				printer = new PrintWriter(bw);
 
 				{ 
-					printer.println(gameWinner.getName() + " WON THE GAME!");
+					printer.println(currentWinner.getName() + " WON THE GAME!");
 				}
 			}
 
@@ -477,9 +511,6 @@ public class Game
 			JOptionPane.showMessageDialog(null, "File not found",
 					"Error", JOptionPane.ERROR_MESSAGE);
 		}
-
-
-
 
 	}
 
@@ -499,6 +530,67 @@ public class Game
 	{
 		username = u;	
 	}
+	public void setOnline(boolean online)
+	{
+		this.isOnline = online;
+	}
+	
+	public void setCurrentCategory(int c)
+	
+	{
+		currentCategory = c;
+	}
 
+	/**
+	 * getter methods below
+	 */
+
+	// return whether game  is finished
+	public boolean getStatus()
+	{
+		return isFinished;
+	}
+
+	// return the winner of the last round
+	public Player getWinner()
+	{
+		// if only one player is left with cards after a draw
+		// they automatically become the game winner
+		if (newRound.isDraw())		
+		{
+			for (int i=0; i<listOfPlayers.size(); i++)
+			{
+				if (listOfPlayers.get(i).isInGame())
+					currentWinner = listOfPlayers.get(i); 
+			}
+		}
+
+		else // the last "standing" player becomes the winner
+		{
+			currentWinner = newRound.getWinner();
+		}
+		if (isOnline = false)
+		{
+			logCurrentWinner();
+		}
+		return currentWinner;
+	}
+
+	// return current active player
+	public Player getActivePlayer()
+
+	{
+		return activePlayer;
+	}
+	
+	public Player getPlayer(int i)
+	{
+		return listOfPlayers.get(i);
+	}
+	
+	public boolean isDraw ()
+	{
+		return newRound.isDraw();
+	}
 }
 

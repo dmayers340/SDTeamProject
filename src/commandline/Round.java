@@ -31,7 +31,7 @@ public class Round {
 	 * constructor method 
 	 */
 
-	public Round (ArrayList <Player> p, Player ap)
+	public Round (ArrayList <Player> p, Player ap, Integer cat)
 
 	{
 		addRound();
@@ -41,7 +41,17 @@ public class Round {
 		System.out.println();
 
 		players = p;  
-		activePlayer = ap;    
+		activePlayer = ap; 
+		c = cat;
+		
+		// remove later
+		String cate = String.format("%s%d%s%s", "The category for round ", roundCount," is ", 
+				activePlayer.getTopCard().getCategories().get(c).toUpperCase());
+		System.out.println(cat);
+		System.out.println("+ + + ");
+		
+		// wtf
+		roundLog.append("\n" + cat + "\n");
 	}
 
 
@@ -73,7 +83,6 @@ public class Round {
 			System.out.println(" + + + ");
 		}
 
-		setCategory();
 		compareCards();
 
 		setWinner();  
@@ -88,41 +97,8 @@ public class Round {
 	{	
 	return drawCount;
 	}
+	
 
-
-	/**
-	 * determines which method to call
-	 * prints system.out
-	 */
-
-	private void setCategory()
-
-	{
-		// player chooses category
-		if (activePlayer.isHuman()) 
-		{
-			chooseCategory(); // player chooses category
-		}
-
-		// auto-picks category
-		else 
-		{	
-			findBestCategory();  
-			String s = String.format("%s%s%d%s\n", 
-					activePlayer.getName(), " is choosing the category for round ", roundCount, "...");
-			System.out.println(s);
-			roundLog.append("\n" + s + "\n");
-		}
-
-		// system out
-		String cat = String.format("%s%d%s%s", "The category for round ", roundCount," is ", 
-				activePlayer.getTopCard().getCategories().get(c).toUpperCase());
-		System.out.println(cat);
-		System.out.println("+ + + ");
-		roundLog.append("\n" + cat + "\n");
-
-
-	}
 
 	/**
 	 *  sets winner
@@ -276,80 +252,17 @@ public class Round {
 		roundLog.append("\nNew cards have been added to the communal pile!");
 		roundLog.append("\n" + getCommunalPile() + "\n");
 
-
-
 	}
 
 
-	/**
-	 * active player chooses category
-	 */
 
-	private void chooseCategory ()
-
-	{
-		System.out.println("It's your turn to choose! Please enter the name of the category.");
-
-		String s = ("\nThe human player " + activePlayer.getName() + " chose the category for round " + roundCount);
-		roundLog.append(s);
-		roundLog.append("\n");
-
-		// enter category name
-		Scanner in = new Scanner (System.in);
-		String category = "";
-		category = in.next();
-
-		int temp = -1;
-
-		// checks if a valid category name was entered
-		for (int i = 0; i < players.get(0).getTopCard().getCategories().size(); i++)
-		{
-			if (category.equalsIgnoreCase(activePlayer.getTopCard().getCategories().get(i)))
-				temp = i;
-		}
-
-		if (temp<1) // if category name not found or "description"
-		{
-			System.out.println("You must enter a valid category name.");
-			chooseCategory();
-		}
-
-		else
-			this.c=temp; // sets category
-	}
 
 	public String getCate() {
-		String cate = activePlayer.getTopCard().getCategories().get(c).toUpperCase();
+		activePlayer.getTopCard();
+		String cate = Card.getCategories().get(c).toUpperCase();
 		return cate;
 	}
 
-	/**
-	 * searches active user's top card 
-	 * finds the category with the highest value
-	 * sets it to c
-	 */
-
-	public void findBestCategory () 
-
-	{ 
-		int curr; // current value
-		int temp = 0; // temp highest value
-		int index = 0; // index of the highest value
-
-		for (int i = 1; i < activePlayer.getTopCard().getCategories().size(); i++)
-		{
-			// finds the category with the highest value
-			curr = Integer.valueOf(activePlayer.getTopCard().getAttribute(i)); // looks horrendous
-
-			if (curr>temp)
-			{	
-				temp=curr;
-				index = i;
-			}
-		}
-
-		c = index;
-	}
 
 
 	/**
@@ -438,11 +351,13 @@ public class Round {
 	 * round counter
 	 */
 
-	private static void addRound() {
+	private static void addRound() 
+	{
 		roundCount++;
 	}
 
-	public static String getPlayerRoundWins() {
+	public static String getPlayerRoundWins() 
+	{
 	
  	return playerRoundWins.toString(); //for passing to Game for database update
 	}
