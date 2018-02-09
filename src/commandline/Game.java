@@ -15,7 +15,7 @@ public class Game
 	/**
 	 *  instance variables
 	 */
-	public int numberOfPlayers; // number of players in game
+	public static int numberOfPlayers; // number of players in game
 
 	private int remainingPlayers; // players still in game
 	private Deck currentDeck;
