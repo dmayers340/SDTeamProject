@@ -12,22 +12,19 @@ public class Round {
 	private Player activePlayer;
 	private ArrayList<Player> players;
 	public static String cate;
-	
 
-
-	private static int c; // categoryG
-
+	private static int c; // category
 	private Player winner;
+
+	private static int roundCount;
+	private int drawCount;
+	private static int [] playerRoundWins = new int [Game.numberOfPlayers];
 
 	public static boolean draw = false; // 1st round starts with no draw
 	public static ArrayList<Card> communalPile = new ArrayList<Card>(); 
 
 	private StringBuilder roundLog = new StringBuilder();
 	private String logSeparator = "-------------------------------------------------------------------------------------------------------";
-	private static int roundCount;
-	private int drawCount;
-	private static int [] playerRoundWins = new int [Game.numberOfPlayers];
-	
 
 
 	/**
@@ -36,14 +33,15 @@ public class Round {
 
 	public Round (ArrayList <Player> p, Player ap)
 
-	{	addRound();
+	{
+		addRound();
 		roundLog.append(logSeparator);
 		String roundLog1 = String.format("%s%d", "ROUND ", roundCount); // sets top line for round log
 		roundLog.append("\n" + roundLog1 + "\n");
 		System.out.println();
 
 		players = p;  
-		activePlayer = ap;
+		activePlayer = ap;    
 	}
 
 
@@ -77,15 +75,20 @@ public class Round {
 
 		setCategory();
 		compareCards();
-		setWinner();
-	
-		
+
+		setWinner();  
 
 	} 
 
-	public int getDrawCount() {
-		return drawCount;
+
+	/**
+	*/
+
+	public int getDrawCount() 
+	{	
+	return drawCount;
 	}
+
 
 	/**
 	 * determines which method to call
@@ -148,7 +151,7 @@ public class Round {
 
 		{
 			draw();
-			drawCount++;   //for database statistics
+			drawCount++; // for database statistics
 			winner = null; // no winner
 		}
 
@@ -436,17 +439,13 @@ public class Round {
 	 */
 
 	private static void addRound() {
-//		try{
-//			Thread.sleep(10000);
-//			
-//		}catch(InterruptedException e){
-//			
-//		}
 		roundCount++;
 	}
-	
+
 	public static String getPlayerRoundWins() {
-		
-		return playerRoundWins.toString(); //for passing to Game for database update
+	
+ 	return playerRoundWins.toString(); //for passing to Game for database update
 	}
+
+
 }
