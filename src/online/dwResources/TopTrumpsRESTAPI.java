@@ -53,287 +53,60 @@ import commandline.DatabaseConnection;
  */
 public class TopTrumpsRESTAPI 
 {
-	private int roundCount, numberOfCards, category;
-	private final int MAXATTRIBUTES = 6;
-	public static int numberOfPlayers;
-	private static int remainingPlayers;
-	
+
 	private String deck;
-	private static String playername;
-	
-	private Card topcard;	
-	private Deck newDeck;
-	private static Deck currentDeck;
-	private Player player;
-	private static Player activePlayer, gameWinner;
-	private static Round newRound;
-	private static ArrayList<Player> listOfPlayers;
-	private static ArrayList<String> categories;
-	private ArrayList<Card> cardsInDeck;
+	private int numberOfPlayers;
 	
 	//Database Connection
 	private DatabaseConnection db = new DatabaseConnection();
 	
 	ObjectWriter oWriter = new ObjectMapper().writerWithDefaultPrettyPrinter();
 
-	//Constructor, sets the deck, categories, cards, number of players
+	//Constructor, sets the deck, and number of players
 	public TopTrumpsRESTAPI(TopTrumpsJSONConfiguration conf) 
 	{	
+		//THIS IS STRING==need to pass to deck class to make categories
 		deck = conf.getDeckFile();
-		categories = new ArrayList<String>();
-		cardsInDeck = new ArrayList<Card>();
-		newDeck = new Deck();
 		numberOfPlayers=conf.getNumAIPlayers()+1;
-		remainingPlayers=numberOfPlayers;
-		FileReader reader;
+	}
 		
-		//read the deck file in to get cards/categories
-		try 
-		{
-			reader = new FileReader(deck);
-			Scanner in = new Scanner(reader);
-			String line = in.nextLine();
-			newDeck.setCategories(line);
-
-			// adds cards to the deck
-			while (in.hasNextLine()) 
-			{
-				line = in.nextLine();
-				newDeck.addCard(line);
-			}
-		} 
-		catch (FileNotFoundException e) 
-		{
-			e.printStackTrace();
-
-		}
-		//start the game based on this information
-		gamestart();
-	}
-
-	
-	public void gamestart() 
-	{
-		newDeck.shuffleDeck();
-		currentDeck = newDeck;
-		createPlayers();
-		dealCards();
-	}
-
-	public static void setActivePlayer()
-	{
-		if (newRound == null) // if new game
-		{
-			activePlayer = listOfPlayers.get(pickRandomPlayer());
-		}
-
-		else if (newRound.getWinner() == null) // if draw
-		{
-			return;
-		}
-
-		else
-		{
-			activePlayer = newRound.getWinner();
-		}
-	}
-
-	public void run()
-
-	{
-		if (remainingPlayers > 1)
-		{
-			setActivePlayer(); // set deciding player
-			newRound = new Round(listOfPlayers, activePlayer);
-			playRound();
-			updatePlayers();
-		}
-
-		newRound.getWinner();
-		showWinner();
-
-	}
-	
-	public void playRound() 
-	{	
-		System.out.println("ROUND NUMBER " + (roundCount)); 
-		String a = "The active player is " + activePlayer.getName().toUpperCase();
-
-		setCategory();
-		newRound.compareCards();
-		newRound.setWinner();  
-	} 
-	
-	private void chooseCategory () 
-	{	
-		this.category= getCategoryNumber();
-		System.err.println(category);	
-	}
-	
-	private void setCategory()
-	{
-		// player chooses category
-		if (activePlayer.isHuman()) 
-		{
-			chooseCategory(); // player chooses category
-		}
-
-		// auto-picks category
-		else 
-		{	
-			newRound.findBestCategory();  		
-		}
-	}
-	
-	private static void updatePlayers()
-	{
-		for (int i = 0; i < listOfPlayers.size(); i++)
-
-		{
-			Player p = listOfPlayers.get(i);
-
-			if (p.isInGame() && p.getHand().size() < 1)
-
-			{
-				p.setStatus(false);
-				remainingPlayers--;
-			}
-		}
-	}
-
-	private static void showWinner()
-	{
-		// if only one player is left with cards after a draw
-		// they automatically become the winner
-		if (newRound.isDraw()) 
-		{
-			for (int i = 0; i < listOfPlayers.size(); i++) 
-			{
-				if (listOfPlayers.get(i).isInGame())
-					gameWinner = listOfPlayers.get(i);
-			}
-		}
-		else 
-		{
-			gameWinner = newRound.getWinner();
-		}
-	}
-
-	public static void dealCards() 
-	{
-		int numCardsEach = currentDeck.getNumberOfCards() / numberOfPlayers;
-		int i;
-		for (i = 0; i < numberOfPlayers; i++) 
-		{
-			ArrayList<Card> cardsForEachPlayer = new ArrayList<Card>(
-					currentDeck.getDeck().subList(0, numCardsEach));
-			
-			playername = listOfPlayers.get(i).getName();
-			listOfPlayers.get(i).receiveCards(cardsForEachPlayer);
-			currentDeck.getDeck().removeAll(cardsForEachPlayer);
-		}
-
-		if (!currentDeck.getDeck().isEmpty()) { // if cards remaining in deck
-
-			listOfPlayers.get(pickRandomPlayer()).receiveExtraCards(
-					currentDeck.getDeck());
-		}
-		System.out.println("Dealing cards...");
-		System.out.println();
-	}
-
-	private static int pickRandomPlayer() 
-	{ // returns random index number
-		int randomIndex = (int) Math.floor(Math.random() * numberOfPlayers);
-		return randomIndex;
-	}
-
-	public void createPlayers() 
-	{
-     	// numberOfPlayers = currentDeck.getNumPlayers();
-		listOfPlayers = new ArrayList<Player>();
-		String username = "player";
-		int i = 0;
-		// creates the human player
-		player = new Player(username);
-		player.setHuman();
-		listOfPlayers.add(player);
-		// create AI players
-		for (i = 1; i < numberOfPlayers; i++)
-		{
-			Player p = new Player("AI_Player" + i);
-			listOfPlayers.add(p);
-		}
-	}
 
 	// API Methods 
-	@GET
-	@Path("/ga")
-	public String game() throws IOException 
-	{
-		run();
-		String aa = activePlayer.getName() + "-----------------"
-				+ gameWinner.getName() + "-----------------"
-				+ newRound.getCate();
-		String d = oWriter.writeValueAsString(aa);
-		return d;
-	}
-
-	@GET
-	@Path("/draw")
-	public String draw() throws IOException 
-	{
-		String dr = oWriter.writeValueAsString(newRound.isDraw());
-		return dr;
-	}
-
-	@GET
-	@Path("/com")
-	public String com() throws IOException {
-		String dr = oWriter.writeValueAsString(newRound.communalPile.size());
-		return dr;
-	}
-
-	@GET
-	@Path("/handnum")
-	public String handnum() throws IOException {
-
-		String hn = oWriter.writeValueAsString(player.getHand().size());
-		return hn;
-	}
-
-	@GET
-	@Path("/playercard")
-	public String playercard() throws IOException {
-
-		String pc = oWriter.writeValueAsString(player.getTopCard());
-		return pc;
-	}
-
-	@GET
-	@Path("/sca")
-
-	public int sca(@QueryParam("num") int a) throws IOException {
-		
-		
-		return a;
-	}
-
-	public void setCategory(int c) throws IOException 
-	{
 	
-		this.category = sca(c);
-	}
-
-	public int getCategoryNumber() 
+    //This starts the game for game screen
+	@GET
+	@Path("/newgame")
+	public void newGame() throws IOException
 	{
-		return category;
+		//get new game from game.java
+		Game game = new Game(db);
+		
+		//TODO 
+		//get the deck from conf file--pass to the game? Pass to play with--will need to set categories with deck
+		Deck currentDeck = new Deck();
+	
+		//start the game by getting number of players and dealing cards
+		game.playGame(currentDeck);
+	}
+	
+	@GET
+	@Path("/saveandquit")
+	public void saveAndQuit() throws IOException
+	{
+		//save the game data, and send to database
+	}
+	
+	@GET
+	@Path("/nextround")
+	public void nextRound() throws IOException
+	{
+		//get the next round for button press
 	}
 	
 	//Get the number of games played from database for statistic screen
 	@GET
 	@Path("/numGames")
-	public int numberOfGames()
+	public int numberOfGames() throws IOException
 	{
 		int numGames = db.getNumberOfGames();
 		return numGames;
