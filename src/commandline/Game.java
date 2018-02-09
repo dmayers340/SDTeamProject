@@ -1,6 +1,8 @@
 package commandline;
 
 import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -30,6 +32,8 @@ public class Game
 
 	private static ArrayList <Player> listOfPlayers;
 	private final String LOG_FILE = "toptrumps.log";
+	
+	private static String FILE_NAME = "StarCitizenDeck.txt"; // name of deck file
 
 	/**
 	 * Constructor method. 
@@ -44,21 +48,21 @@ public class Game
 	}
 
 	/**
-	 * Starts a new game (shuffles deck, creates players and deals cards). 
-	 * Then executes high-level game logic until the winner is decided.
+	 * Initialises a new game (shuffles deck, creates players and deals cards). 
 	 * Called from the TopTrumpsCLIApplication.java class.
 	 */
 	
-	public void playGame(Deck d)
+	public void initialiseGame()
 
 	{
+		readIn();
+		
 		// this is all for testing
 		boolean deckOutputToLog = false;
-		logDeck(d,deckOutputToLog);
+		logDeck(currentDeck,deckOutputToLog);
 
-		d.shuffleDeck();
+		currentDeck.shuffleDeck();
 		deckOutputToLog = true;
-		currentDeck = d;
 		logDeck(currentDeck, deckOutputToLog); //prints shuffled deck to log file
 
 		remainingPlayers = numberOfPlayers; // starts with all players still in game
@@ -66,12 +70,16 @@ public class Game
 		createPlayers();
 		dealCards();
 		logDealtCards(); // right after they have been dealt
+		
+	} 
 
-		/**
-		 * rounds continue until there is only 1 player left
-		 * the last remaining player is the winner 
-		 */
-
+	/**
+	 * rounds continue until there is only 1 player left
+	 * the last remaining player is the winner 
+	 */
+	public void runGame() 
+	
+	{
 		while (remainingPlayers > 1)
 
 		{
@@ -95,6 +103,47 @@ public class Game
 		//		db.updateDBRounds(Round.getRoundCount(), newRound.getDrawCount(), Round.getPlayerRoundWins());
 		// db.updateDBGame(numberOfPlayers, gameWinner.getName());
 		
+	}
+	
+	
+	/**
+	 * Reads deck contents from a file.
+	 * Sets categories for the new deck (contained in the first line of the file).
+	 * Add cards to the deck (each card is a new line).
+	 * Uses FILE_NAME, which is stored as a class constant.
+	 */
+	private void readIn()
+	{
+		currentDeck = new Deck();
+
+		FileReader reader;
+		try 
+		{
+			reader = new FileReader(FILE_NAME);
+
+			Scanner in = new Scanner (reader);
+			String line = in.nextLine();
+
+			// sets categories 
+			currentDeck.setCategories(line);
+
+			// adds cards to the deck
+			while (in.hasNextLine())
+			{
+				line = in.nextLine();	
+				currentDeck.addCard(line);
+			}
+
+		} 
+
+		// in case there is no file
+		catch (FileNotFoundException e) 
+		{
+			System.out.println("File not Found");
+			System.out.println("Check if file name is correct");
+			System.out.println();
+		}
+
 	}
 	
 	

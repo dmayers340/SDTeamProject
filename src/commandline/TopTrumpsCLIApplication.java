@@ -69,7 +69,7 @@ public class TopTrumpsCLIApplication {
 				newGame.setUsername(getInput());
 				
 				readIn(); // reads in a deck
-				newGame.playGame(currentDeck);
+				newGame.playGame();
 				numberOfGames++;  
 			}
 			

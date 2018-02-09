@@ -12,9 +12,7 @@ public class TopTrumpsCLIApplication {
 	/**
 	 * instance variables
 	 */
-	private static String FILE_NAME = "StarCitizenDeck.txt"; // name of deck file
 	private static int numberOfGames = 0; // counter
-	private static Deck currentDeck; // current deck
 	private static DatabaseConnection db = new DatabaseConnection();
 
 	
@@ -55,19 +53,19 @@ public class TopTrumpsCLIApplication {
 				System.out.println(getStats());
 			}
 
-			// reads the deck from a .txt file and starts a new game
+			// starts a new game
 			else if (choice.charAt(0) == 'G')
-			{
-				readIn();  
+			{  
 				DatabaseConnection db = new DatabaseConnection();
-				Game newGame = new Game(currentDeck, db);
+				Game newGame = new Game(db);
 				newGame.setNumberOfPlayers(getNumberOfAIPlayers()+1);
 				
 				// user enters username
 				System.out.println("Please pick a username: ");	
 				newGame.setUsername(getInput());
 				
-				newGame.playGame();
+				newGame.initialiseGame();
+				newGame.runGame();
 				numberOfGames++;
 			}
 			
@@ -105,46 +103,6 @@ public class TopTrumpsCLIApplication {
 		return input;
 	}
 
-
-	/**
-	 * Reads deck contents from a file.
-	 * Sets categories for the new deck (contained in the first line of the file).
-	 * Add cards to the deck (each card is a new line).
-	 * Uses FILE_NAME, which is stored as a class constant.
-	 */
-	private static void readIn()
-	{
-		currentDeck = new Deck();
-
-		FileReader reader;
-		try 
-		{
-			reader = new FileReader(FILE_NAME);
-
-			Scanner in = new Scanner (reader);
-			String line = in.nextLine();
-
-			// sets categories 
-			currentDeck.setCategories(line);
-
-			// adds cards to the deck
-			while (in.hasNextLine())
-			{
-				line = in.nextLine();	
-				currentDeck.addCard(line);
-			}
-
-		} 
-
-		// in case there is no file
-		catch (FileNotFoundException e) 
-		{
-			System.out.println("File not Found");
-			System.out.println("Check if file name is correct");
-			System.out.println();
-		}
-
-	}
 
 	/**
 	 * This method asks the user to enter the number of AI players.

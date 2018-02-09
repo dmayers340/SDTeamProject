@@ -87,25 +87,36 @@
 	}
 	
 	.player{
-		left:50px;
-		margin-left:50px;
+		float: left;
+		margin-top: 100px;
+		margin-left: 450px;
 	}
 	
 	.aione{
-		left:300px;
-		margin-left:300px;
+		float: left;
+		margin-top: 100px;		
+		margin-left:50px;
 	}
 	
 	.aitwo{
-		left:500px;
+		float: left;
+		margin-top: 100px;	
+		margin-left:50px;
+		
 	}
 	
 	.AI3{
-		left:700px;
+		margin-top: 100px;	
+		float: left;
+		margin-left:50px;
+		
 	}
 	
 	.AI4{
-		left:1000px;
+		margin-top: 100px;	
+		float: left;
+		margin-left:50px;
+
 	}
 
 </style>

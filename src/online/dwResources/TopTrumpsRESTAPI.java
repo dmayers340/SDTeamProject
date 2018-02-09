@@ -71,6 +71,7 @@ public class TopTrumpsRESTAPI
 	}
 		
 
+	
 	// API Methods 
 	
     //This starts the game for game screen
@@ -78,30 +79,38 @@ public class TopTrumpsRESTAPI
 	@Path("/newgame")
 	public void newGame() throws IOException
 	{
+		//display all player cards
+		
 		//get new game from game.java
 		Game game = new Game(db);
+		game.setNumberOfPlayers(numberOfPlayers);
+		game.setUsername("Human");
 		
-		//TODO 
-		//get the deck from conf file--pass to the game? Pass to play with--will need to set categories with deck
-		Deck currentDeck = new Deck();
-	
 		//start the game by getting number of players and dealing cards
-		game.playGame(currentDeck);
+		game.initialiseGame();
+		game.runGame();
 	}
 	
+	//This method saves the data from the game that was just played, and sends to the database
 	@GET
 	@Path("/saveandquit")
 	public void saveAndQuit() throws IOException
 	{
 		//save the game data, and send to database
+		
 	}
 	
+	//Goes to next round
 	@GET
 	@Path("/nextround")
 	public void nextRound() throws IOException
 	{
 		//get the next round for button press
+		//deals another card
+		//Displays card of player
+		//If need to select categories--
 	}
+	
 	
 	//Get the number of games played from database for statistic screen
 	@GET
