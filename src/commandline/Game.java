@@ -23,6 +23,7 @@ public class Game
 	private Player activePlayer; // active player makes the category choice
 	public String username;
 	private Player gameWinner;
+	private DatabaseConnection db;
 
 	private String logSeparator = "-------------------------------------------------------------"+
 			"-------------------------";
