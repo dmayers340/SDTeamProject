@@ -15,8 +15,10 @@ public class TopTrumpsCLIApplication {
 	private static String FILE_NAME = "StarCitizenDeck.txt"; // name of deck file
 	private static int numberOfGames = 0; // counter
 	private static Deck currentDeck; // current deck
-	private static DatabaseConnection db = new DatabaseConnection();
+	private DatabaseConnection db = new DatabaseConnection();
 
+
+	
 	
 	/**
 	 * This main method is called by TopTrumps.java when the user specifies that they want to run in
@@ -49,10 +51,11 @@ public class TopTrumpsCLIApplication {
 			
 			String choice = getInput();
 
-			// if letter S was entered 
+			// if letter S was entered - nothing happens
 			if (choice.charAt(0) == 'S')
 			{
-				System.out.println(getStats());
+				System.out.println("No statistics to display ");
+				System.out.println();
 			}
 
 			// reads the deck from a .txt file and starts a new game
@@ -62,11 +65,7 @@ public class TopTrumpsCLIApplication {
 				DatabaseConnection db = new DatabaseConnection();
 				Game newGame = new Game(currentDeck, db);
 				newGame.setNumberOfPlayers(getNumberOfAIPlayers()+1);
-				
-				// user enters username
-				System.out.println("Please pick a username: ");	
 				newGame.setUsername(getInput());
-				
 				newGame.playGame();
 				numberOfGames++;
 			}
@@ -166,7 +165,7 @@ public class TopTrumpsCLIApplication {
 			try 
 			{
 				response = getInput();
-				players = Integer.parseInt(response);
+				players = Integer.parseInt(response); 
 
 				if (players > 4 || players <0) 
 				{
@@ -184,57 +183,12 @@ public class TopTrumpsCLIApplication {
 
 		return players;
 	}
-	
-	/**
-	 * This method gets the persistent game statistics from the database
-	 * by calling the relevant methods in the DatabaseConnection.java class.
-	 * 
-	 * As per assignment specification, this includes:
-	 * - Number of games player overall
-	 * - How many times the computer has won
-	 * - How many times the human has won
-	 * - The average number of draws
-	 * - The largest number of rounds played in a single game
-	 * 
-	 * 	 @return the above as a nicely formatted String. 
-	 */
-	private static String getStats()
-	{
-		StringBuilder stats = new StringBuilder("");
-		
-		// ASCII art :) 
-		stats.append(" \n");
-		stats.append("   _____ _______    _______ _____  _____ _______ _____ _____  _____ \n");
-		stats.append(" / ____|__   __|/\\|__   __|_   _|/ ____|__   __|_   _/ ____|/ ____|\n");
-		stats.append(" | (___    | |  /  \\  | |    | | | (___    | |    | || |    | (___  \n");
-		stats.append("  \\___ \\   | | / /\\ \\ | |    | |  \\___ \\   | |    | || |     \\___ \\ \n");
-		stats.append("  ____) |  | |/ ____ \\| |   _| |_ ____) |  | |   _| || |____ ____) |\n");
-		stats.append(" |_____/   |_/_/    \\_|_|  |_____|_____/   |_|  |_____\\_____|_____/ \n"); 
-		stats.append(" \n");
-		
-		stats.append("Number of games played overall is " + db.getNumberOfGames() + "\n");
-		stats.append("The computer has won " + db.getComputerWin() + " times\n");
-		stats.append("The humen has won " + db.getHumanWin() + " times\n");
-		stats.append("The average number of draws is " + db.getNumberOfDraws() + "\n");
-		stats.append("The largest number of rounds played in a single game is " + db.getMaxRounds() + "\n");
-		
-		String statistics = stats.toString();
-		return statistics;
-	}
 
-	/**
-	 * 
-	 * @param numGames - 
-	 */
 	public static void setNumberOfGames(int numGames)
 	{
 		numberOfGames = numGames;
 	}
 	
-	/**
-	 * 
-	 * @return the number of games played
-	 */
 	public static int getNumberOfGames() {
 		return numberOfGames;
 	}

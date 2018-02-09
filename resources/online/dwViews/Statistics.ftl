@@ -21,86 +21,85 @@
 	</head>
 	
 	<style>
-		    .navbar-default {
-	    background-color: black;
-	    border-color: #E7E7E7;
-	    padding-left:10px;
-	  	padding-right:10px;
-	  	margin-left:0px;
-	  	margin-right:0px;
-	  	margin-bottom:20px;
+		.navbar-default {
+	   		background-color: black;
+	    	border-color: #E7E7E7;
+	    	padding-left:10px;
+	  		padding-right:10px;
+	  		margin-left:0px;
+	  		margin-right:0px;
+	  		margin-bottom:20px;
 		}
 	
 		.color {
-		color:White;
-		font-size:1.2em;
-	 	font-weight: bold;	
+			color:White;
+			font-size:1.2em;
+	 		font-weight: bold;	
 	 	}
 		
 		.nav{
-		padding-left:10px;
-	  	padding-right:10px;
-	  	margin-left:0px;
-	  	margin-right:0px;
-	  	margin-bottom:20px;
+			padding-left:10px;
+	  		padding-right:10px;
+	  		margin-left:0px;
+	  		margin-right:0px;
+	  		margin-bottom:20px;
 		}
 				
 		body{
-		background-image: url("http://kb4images.com/images/pictures-of-outer-space/37759075-pictures-of-outer-space.jpg");	
+			margin: auto;
+			background-repeat: no-repeat;
+			background-size: 100% 100%;	
+			background-image: url("http://kb4images.com/images/pictures-of-outer-space/37759075-pictures-of-outer-space.jpg");
 		}
 				
 		h1{
-		color: White
-		}
-			
-		background-image{
-		opacity: 0.5;
+			color: White
 		}
 				
 		.numGames{
-		position:absolute;
-		left: 0px;
-		margin-left:150px;
-		margin-right:150px;
+			position:absolute;
+			left: 0px;
+			margin-left:150px;
+			margin-right:150px;
 		}
 			
 		.computerWin{
-		position:absolute;
-		right: 0px;
-		margin-left:150px;
-		margin-right:150px;
+			position:absolute;
+			right: 0px;
+			margin-left:150px;
+			margin-right:150px;
 		}
 			
 		.playerWin{
-		position: absolute;
-	    top: 37%;
-	    left: 50%;
-	    margin-right: -50%;
-	    transform: translate(-50%, -50%)
+			position: absolute;
+	    	top: 37%;
+	    	left: 50%;
+	    	margin-right: -50%;
+	    	transform: translate(-50%, -50%)
 		}
 			
 		.draws{
-		position:absolute;
-		left: 0px;
-		margin-top: 310px;
-		margin-left:400px;
-		margin-right:150px;
+			position:absolute;
+			left: 0px;
+			margin-top: 310px;
+			margin-left:400px;
+			margin-right:150px;
 		}
 			
 		.rounds{
-		position:absolute;
-		right: 0px;
-		margin-top: 310px;
-		margin-left:150px;
-		margin-right:400px;
+			position:absolute;
+			right: 0px;
+			margin-top: 310px;
+			margin-left:150px;
+			margin-right:400px;
 		}
 		
 		.left{
-		position: left;
+			position: left;
 		}
 			
 		.right{
-		position: right;
+			position: right;
 		}
 		
 	</style>
@@ -339,7 +338,6 @@
 				// We have done everything we need to prepare the CORS request, so send it
 				xhr.send();		
 			}
-					
 			</script>
 		
 		

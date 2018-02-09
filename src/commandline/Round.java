@@ -12,6 +12,7 @@ public class Round {
 	private Player activePlayer;
 	private ArrayList<Player> players;
 	public static String cate;
+	
 
 
 	private static int c; // categoryG
@@ -23,7 +24,10 @@ public class Round {
 
 	private StringBuilder roundLog = new StringBuilder();
 	private String logSeparator = "-------------------------------------------------------------------------------------------------------";
-	private static int roundCount = 0;
+	private static int roundCount;
+	private int drawCount;
+	private static int [] playerRoundWins = new int [Game.numberOfPlayers];
+	
 
 
 	/**
@@ -32,15 +36,14 @@ public class Round {
 
 	public Round (ArrayList <Player> p, Player ap)
 
-	{
-		addRound();
+	{	addRound();
 		roundLog.append(logSeparator);
 		String roundLog1 = String.format("%s%d", "ROUND ", roundCount); // sets top line for round log
 		roundLog.append("\n" + roundLog1 + "\n");
 		System.out.println();
 
 		players = p;  
-		activePlayer = ap;    
+		activePlayer = ap;
 	}
 
 
@@ -74,9 +77,15 @@ public class Round {
 
 		setCategory();
 		compareCards();
-		setWinner();  
+		setWinner();
+	
+		
 
 	} 
+
+	public int getDrawCount() {
+		return drawCount;
+	}
 
 	/**
 	 * determines which method to call
@@ -116,7 +125,7 @@ public class Round {
 	 *  sets winner
 	 */
 
-	private void setWinner() 
+	public void setWinner() 
 
 	{
 		if (draw == false)
@@ -139,6 +148,7 @@ public class Round {
 
 		{
 			draw();
+			drawCount++;   //for database statistics
 			winner = null; // no winner
 		}
 
@@ -186,7 +196,7 @@ public class Round {
 	 * sets round winner
 	 */
 
-	private void compareCards()
+	public void compareCards()
 
 	{
 		int j = 0; // winner's index
@@ -217,6 +227,7 @@ public class Round {
 					w = t; // stores highest value
 					j = i; // stores player index
 					winner = players.get(j); // sets winner 
+					playerRoundWins[j]++; //increment index in array which keeps track of num of player wins
 					draw = false;
 				}
 
@@ -315,7 +326,7 @@ public class Round {
 	 * sets it to c
 	 */
 
-	private void findBestCategory () 
+	public void findBestCategory () 
 
 	{ 
 		int curr; // current value
@@ -401,7 +412,7 @@ public class Round {
 	 * @return int
 	 */
 
-	public int getRoundCount() {
+	public static int getRoundCount() {
 		return roundCount;
 	}
 
@@ -425,8 +436,17 @@ public class Round {
 	 */
 
 	private static void addRound() {
+//		try{
+//			Thread.sleep(10000);
+//			
+//		}catch(InterruptedException e){
+//			
+//		}
 		roundCount++;
 	}
-
-
+	
+	public static String getPlayerRoundWins() {
+		
+		return playerRoundWins.toString(); //for passing to Game for database update
+	}
 }
