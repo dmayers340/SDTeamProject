@@ -5,10 +5,13 @@ public class Player {
 
 	private String playerName;
 	private ArrayList<Card> hand;
-	private Card card;
-	private int numberOfCardsEach;
 	private boolean human; 
 	private boolean isInGame;
+	private int roundWins; // number of won rounds
+
+	// what are these?
+	private Card card;
+	private int numberOfCardsEach;
 
 	public Player(String pName) { 
 
@@ -90,20 +93,20 @@ public class Player {
 
 	{
 		String h = String.format("\n %s \n", this.getName() + "'s cards:\n  ");
-		
+
 		if (this.isInGame)
-			
+
 		{
 			h = String.format("%s %s \n", h, this.getTopCard().cString());
-			
+
 			for (int i = 0; i<hand.size(); i++)
 
 			{
-					h = String.format("%s %s \n", h, hand.get(i));
+				h = String.format("%s %s \n", h, hand.get(i));
 			}
 		}
-		
-	
+
+
 		else 
 		{
 			h = String.format("%s %s \n", h, (this.getName() + " has no cards"));
@@ -133,6 +136,20 @@ public class Player {
 	{
 		human = true;
 	}
+
+	// increments the number of rounds the player won
+	public void addWin()
+	{
+		roundWins++;
+	}
+
+	// returns the number of rounds the player has won
+	public int getRoundWins()
+
+	{
+		return roundWins;
+	}
+
 
 	/**
 	 * @return whether the user is human or not

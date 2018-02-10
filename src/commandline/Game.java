@@ -18,18 +18,21 @@ public class Game
 	 *  instance variables
 	 */
 	public static int numberOfPlayers; // number of players in game
+	public boolean isOnline;
+	private int drawCount; // number of draws in game
 
+	public String username;
 	private int remainingPlayers; // players still in game
 	private Deck currentDeck;
 	private Round newRound;
 	private Player activePlayer; // active player makes the category choice
-	public String username;
 	private Player currentWinner;
 	private int currentCategory;
+	private int roundCount;
 
 	private static boolean isFinished;	
 	private static DatabaseConnection db;
-	public boolean isOnline;
+	private static int gameNumber;
 
 	private String logSeparator = "-------------------------------------------------------------"+
 			"-------------------------";
@@ -49,6 +52,10 @@ public class Game
 	public Game (DatabaseConnection db)
 	{	
 		this.db = db;
+		gameNumber = db.getNumberOfGames()+1;
+
+		roundCount = 1;
+		drawCount = 0; 
 		isFinished = false;
 	}
 
@@ -82,20 +89,19 @@ public class Game
 
 		createPlayers();
 		dealCards();
-		 // choose the 1st active player
+		// choose the 1st active player
 
 	} 
 
-public void startOnlineRound()
+	public void startOnlineRound()
 
-{
-	newRound = new Round(listOfPlayers, activePlayer, currentCategory);
-	 
-	newRound.playRound();
-	
-	finishRound();  
-	
-}
+	{
+		newRound = new Round(listOfPlayers, activePlayer, currentCategory);
+		newRound.playRound();
+
+		finishRound();  
+
+	}
 	/**
 	 * rounds continue until there is only 1 player left
 	 * the last remaining player is the winner 
@@ -103,22 +109,22 @@ public void startOnlineRound()
 	public void startRound() 
 
 	{
-	
-		newRound = new Round(listOfPlayers, activePlayer, currentCategory);
+
+		newRound = new Round(listOfPlayers, activePlayer, currentCategory, roundCount);
 		newRound.playRound();
 
 		roundLog();
 		System.out.println(logSeparator);
-		
+
 		finishRound();
 	}
-	
-	
+
+
 	/**
 	 * 
 	 */
 	private void finishRound() 
-	
+
 	{
 		updatePlayers(); // updates number of remaining players
 
@@ -126,17 +132,23 @@ public void startOnlineRound()
 
 		{
 			isFinished = true; 
+			db.updateDB(getGameData(), getRoundData());
 		}
 
-		currentWinner = newRound.getWinner();
+		if (newRound.isDraw() == true)
+		{
+			drawCount++;
+		}
 
-		db.updateDBRounds();
-		//		Round.getRoundCount());
-		//		db.updateDBRounds(Round.getRoundCount(), newRound.getDrawCount(), Round.getPlayerRoundWins());
-		// db.updateDBGame(numberOfPlayers, currentWinner.getName());
+		if (newRound.isDraw() == false)
+		{
+			currentWinner = newRound.getWinner();
+			currentWinner.addWin();
+		}
 
+		roundCount++;
 	}
-	
+
 
 	/**
 	 * searches active user's top card 
@@ -150,11 +162,13 @@ public void startOnlineRound()
 		int curr; // current value
 		int temp = 0; // temp highest value
 		int index = 0; // index of the highest value
-		
+
+		System.out.println("Active player is " + activePlayer.getName());
+
 		String s = String.format("%s%s%d%s\n", 
-				activePlayer.getName(), " is choosing the category for round ", newRound.getRoundCount(), "...");
+				activePlayer.getName(), " is choosing the category for round ", roundCount, "...");
 		System.out.println(s);
-		
+
 		// roundLog.append("\n" + s + "\n");
 
 		for (int i = 1; i < activePlayer.getTopCard().getCategories().size(); i++)
@@ -534,9 +548,9 @@ public void startOnlineRound()
 	{
 		this.isOnline = online;
 	}
-	
+
 	public void setCurrentCategory(int c)
-	
+
 	{
 		currentCategory = c;
 	}
@@ -549,6 +563,7 @@ public void startOnlineRound()
 	public boolean getStatus()
 	{
 		return isFinished;
+
 	}
 
 	// return the winner of the last round
@@ -569,6 +584,7 @@ public void startOnlineRound()
 		{
 			currentWinner = newRound.getWinner();
 		}
+
 		if (isOnline = false)
 		{
 			logCurrentWinner();
@@ -576,21 +592,62 @@ public void startOnlineRound()
 		return currentWinner;
 	}
 
+	private String getGameData()
+	{
+		StringBuilder gData = new StringBuilder("");
+		gData.append("'" + gameNumber + "', ");
+		gData.append("'" + numberOfPlayers + "',");
+		gData.append("'" + currentWinner.getName() + "'");
+
+		String gameData = gData.toString();
+		return gameData;
+	}
+
+	private String getRoundData()
+	{
+		StringBuilder rData = new StringBuilder("");
+		rData.append("'" + gameNumber + "', ");
+		rData.append("'" + roundCount + "', ");
+		rData.append("'" + drawCount + "', ");
+
+		rData.append(getWinsPerPlayer(0) + ", ");
+		rData.append(getWinsPerPlayer(1) + ", ");
+		rData.append(getWinsPerPlayer(2) + ", ");
+		rData.append(getWinsPerPlayer(3) + ", ");
+		rData.append(getWinsPerPlayer(4));
+
+		String roundData = rData.toString();
+		return roundData;
+	}
+
+	private String getWinsPerPlayer(int i)
+	{
+		if (listOfPlayers.size()<=i)
+		{
+			return ("NULL");
+		}
+
+		else
+		{
+			return ("'" + String.valueOf(listOfPlayers.get(i).getRoundWins() + "'"));
+		}
+	}
+
 	// return current active player
 	public Player getActivePlayer()
-
 	{
 		return activePlayer;
 	}
-	
+
 	public Player getPlayer(int i)
 	{
 		return listOfPlayers.get(i);
 	}
-	
+
 	public boolean isDraw ()
 	{
 		return newRound.isDraw();
 	}
+
 }
 

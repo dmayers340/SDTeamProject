@@ -1,7 +1,5 @@
 package commandline;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.util.Scanner;
 
 /**
@@ -12,7 +10,6 @@ public class TopTrumpsCLIApplication {
 	/**
 	 * instance variables
 	 */
-	private static int numberOfGames = 0; // counter
 	private static DatabaseConnection db = new DatabaseConnection();
 
 	private static Player winner;
@@ -72,21 +69,7 @@ public class TopTrumpsCLIApplication {
 
 				while (newGame.getStatus() == false)
 				{
-					newGame.chooseActivePlayer();
-
-					if (newGame.getActivePlayer().isHuman()==true)
-					{
-	
-						newGame.setCurrentCategory(category);
-					}
-
-					else
-					{
-						newGame.findBestCategory();
-					}
-
-					newGame.startRound();
-					numberOfGames++;
+					runGame(); 
 				}
 
 				winner = newGame.getWinner();
@@ -106,37 +89,60 @@ public class TopTrumpsCLIApplication {
 				System.out.println();
 			}
 
-			setNumberOfGames(getNumberOfGames() + 1);
-
 		}
 
 		System.exit(0);
 	}
 
+
 	/**
-	 * active player chooses category
+	 * 
+	 */
+	private static void runGame()
+	{
+		newGame.chooseActivePlayer();
+
+		if (newGame.getActivePlayer().isHuman()==true)
+		{
+
+			chooseCategory();
+			newGame.setCurrentCategory(category);
+		}
+
+		else
+		{
+			newGame.findBestCategory();
+		}
+
+		newGame.startRound();
+
+	}
+
+
+	/**
+	 * The human player is able to choose the category through command line input. 
+	 * The player must enter the category name as a String without any spelling mistakes.
+	 * "Description" is not considered to be a valid category.
 	 */
 
-	private void chooseCategory ()
+	private static void chooseCategory ()
 
 	{
 		System.out.println("It's your turn to choose! Please enter the name of the category.");
 
-		String s = ("\nThe human player " + newGame.getActivePlayer().getName() + " chose the category for the current round");
-		
-	// roundLog.append(s);
-	// 	roundLog.append("\n");
+		String s = ("\n The human player " + newGame.getActivePlayer().getName() + " chose the category for the current round");
+
+		// roundLog.append(s);
+		// 	roundLog.append("\n");
 
 		// enter category name
-		Scanner in = new Scanner (System.in);
-		String categoryString = "";
-		categoryString = in.next();
+		String categoryString = getInput();
 
 		int c;
 		int temp = -1;
 
+		// checks if entered category is valid
 		newGame.getActivePlayer().getTopCard();
-		// checks if a valid category name was entered
 		for (int i = 0; i < Card.getCategories().size(); i++)
 		{
 			newGame.getActivePlayer().getTopCard();
@@ -239,7 +245,7 @@ public class TopTrumpsCLIApplication {
 
 		stats.append("Number of games played overall is " + db.getNumberOfGames() + "\n");
 		stats.append("The computer has won " + db.getComputerWin() + " times\n");
-		stats.append("The humen has won " + db.getHumanWin() + " times\n");
+		stats.append("The hooman has won " + db.getHumanWin() + " times\n");
 		stats.append("The average number of draws is " + db.getNumberOfDraws() + "\n");
 		stats.append("The largest number of rounds played in a single game is " + db.getMaxRounds() + "\n");
 
@@ -264,25 +270,5 @@ public class TopTrumpsCLIApplication {
 		}
 
 	}
-
-
-
-	/**
-	 * 
-	 * @param numGames - 
-	 */
-	public static void setNumberOfGames(int numGames)
-	{
-		numberOfGames = numGames;
-	}
-
-	/**
-	 * 
-	 * @return the number of games played
-	 */
-	public static int getNumberOfGames() {
-		return numberOfGames;
-	}
-
 
 }

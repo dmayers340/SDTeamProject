@@ -16,9 +16,7 @@ public class Round {
 	private static int c; // category
 	private Player winner;
 
-	private static int roundCount;
-	private int drawCount;
-	private static int [] playerRoundWins = new int [Game.numberOfPlayers];
+	public int roundCount;
 
 	public static boolean draw = false; // 1st round starts with no draw
 	public static ArrayList<Card> communalPile = new ArrayList<Card>(); 
@@ -31,10 +29,11 @@ public class Round {
 	 * constructor method 
 	 */
 
-	public Round (ArrayList <Player> p, Player ap, Integer cat)
+	public Round (ArrayList <Player> p, Player ap, Integer cat, int r)
 
 	{
-		addRound();
+		roundCount = r;
+		
 		roundLog.append(logSeparator);
 		String roundLog1 = String.format("%s%d", "ROUND ", roundCount); // sets top line for round log
 		roundLog.append("\n" + roundLog1 + "\n");
@@ -84,20 +83,9 @@ public class Round {
 		}
 
 		compareCards();
-
 		setWinner();  
 
 	} 
-
-
-	/**
-	*/
-
-	public int getDrawCount() 
-	{	
-	return drawCount;
-	}
-	
 
 
 	/**
@@ -127,7 +115,6 @@ public class Round {
 
 		{
 			draw();
-			drawCount++; // for database statistics
 			winner = null; // no winner
 		}
 
@@ -206,7 +193,6 @@ public class Round {
 					w = t; // stores highest value
 					j = i; // stores player index
 					winner = players.get(j); // sets winner 
-					playerRoundWins[j]++; //increment index in array which keeps track of num of player wins
 					draw = false;
 				}
 
@@ -282,6 +268,8 @@ public class Round {
 	 * if empty, @return a message stating that
 	 */
 
+	
+	
 	public String getCommunalPile()
 
 	{
@@ -316,19 +304,18 @@ public class Round {
 	 * accessor method
 	 * @return if draw or not (boolean)
 	 */
-
 	public boolean isDraw()
 
 	{
 		return draw;
 	}
+	
 
 	/**
 	 * accessor method
 	 * @return int
 	 */
-
-	public static int getRoundCount() {
+	public int getRoundCount() {
 		return roundCount;
 	}
 
@@ -338,29 +325,10 @@ public class Round {
 	 * stores round info
 	 * @return all info about round
 	 */
-
-
 	public String getRoundLog() 
 
 	{
 		return roundLog.toString();
 	}
-
-
-	/**
-	 * round counter
-	 */
-
-	private static void addRound() 
-	{
-		roundCount++;
-	}
-
-	public static String getPlayerRoundWins() 
-	{
-	
- 	return playerRoundWins.toString(); //for passing to Game for database update
-	}
-
 
 }
