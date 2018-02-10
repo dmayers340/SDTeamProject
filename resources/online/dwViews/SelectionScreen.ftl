@@ -76,63 +76,7 @@
  			font-weight: bold;	
  		}
 	
-		 .modal 
-		 {
-		 	display: none; /* Hidden by default */
-		 	position: fixed; /* Stay in place */
-		 	z-index: 1; /* Sit on top */
-			left: 0;
-		 	top: 0;
-		 	width: 100%; /* Full width */
-		 	height: 100%; /* Full height */
-		 	overflow: auto; /* Enable scroll if needed */
-		 	background-color: rgb(0,0,0); /* Fallback color */
-		 	background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-		}
 		
-		/* Modal Content/Box */
-		.modal-content {
-			background-color: #fefefe;
-			margin: 15% auto; /* 15% from the top and centered */
-			padding: 20px;
-			border: 1px solid #888;
-			width: 80%; /* Could be more or less, depending on screen size */
-		}
-		
-	
-		/* The Close Button */
-		.close {
-			color: #aaa;
-			float: right;
-			font-size: 28px;
-			font-weight: bold;
-		}
-			
-		.close:hover, .close:focus {
-			color: black;
-			text-decoration: none;
-			cursor: pointer;
-		}
-		
-		.ipt {
-			border: solid 1px #d2d2d2;
-			border-left-color: #ccc;
-			border-top-color: #ccc;
-			border-radius: 2px;
-			box-shadow: inset 0 1px 0 #f8f8f8;
-			background-color: #fff;
-			padding: 4px 6px;
-			height: 21px;
-			line-height: 21px;
-			color: #555;
-			width: 180px;
-			vertical-align: baseline;
-		}
-		
-		h5,li,ol,strong{
-			margin:0;
-			padding:0;
-		}
 			
 		.btn-primary {
 			border-color: #3079ED;
@@ -164,8 +108,7 @@
 	  </div>
 	</nav> 
 	
-	  <div class="container">
-	  	<div class="playgame">
+	<div class="playgame">
 			<div class="card border-dark mb-3" style="max-width: 18rem; height: 27rem;">  		
 				<img class="card-img-top" src="https://img.purch.com/h/1000/aHR0cDovL3d3dy5zcGFjZS5jb20vaW1hZ2VzL2kvMDAwLzA2Ni8yODcvb3JpZ2luYWwveHMtMS1zcGFjZS1wbGFuZS1ib2Vpbmctb3JiaXRhcnQuanBn" alt="Card Image">
   				<br />
@@ -178,7 +121,7 @@
 					</center>    
   				</div>
 			</div>
-		</div>
+	</div>
 
 		<div class="stats">
 			<div class="card border-dark mb-3" style="max-width: 18rem; height: 27rem;"> 
@@ -193,21 +136,19 @@
   				</div>
 			</div>
 		</div>
-    	
 
-			<!-- Add your HTML Here -->
-		
-		</div>
 		
 		<script type="text/javascript">
 
+
 			function initalize() 
-			{
+      {
 				
 			}
 			
 			
-			function createCORSRequest(method, url) {
+			function createCORSRequest(method, url) 
+      {
   				var xhr = new XMLHttpRequest();
   				if ("withCredentials" in xhr) {
 

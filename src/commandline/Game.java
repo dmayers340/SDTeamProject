@@ -18,22 +18,34 @@ public class Game
 	 *  instance variables
 	 */
 	public static int numberOfPlayers; // number of players in game
+	private int drawCount; // number of draws in game
 
+	public String username;
 	private int remainingPlayers; // players still in game
 	private Deck currentDeck;
 	private Round newRound;
 	private Player activePlayer; // active player makes the category choice
-	public String username;
-	private Player gameWinner;
-	private DatabaseConnection db;
-
-	private String logSeparator = "-------------------------------------------------------------"+
-			"-------------------------";
-
+	private Player currentWinner;
+	private int currentCategory;
+	private int roundCount;
 	private static ArrayList <Player> listOfPlayers;
-	private final String LOG_FILE = "toptrumps.log";
+
+	private static boolean isOnline;
+	private static boolean isFinished;	
+	private static DatabaseConnection db;
+	private static int gameNumber;
 	
+	private static final String newLine = (System.getProperty("line.separator"));
+	private static final String logSeparator = newLine + 
+			"------------------------------------------------------------------------------------------------" + newLine;
+	private static final String logSeparator2 = newLine + 
+			"================================================================================================" + newLine;
+
+	private boolean writeToLog = false;
+	private final String LOG_FILE = "toptrumps.log";
+
 	private static String FILE_NAME = "StarCitizenDeck.txt"; // name of deck file
+
 
 	/**
 	 * Constructor method. 
@@ -41,71 +53,149 @@ public class Game
 	 * Called by the TopTrumpsCLIApplication.java class (the online version does not use the Game.java class).
 	 * @param Deck d = current deck 
 	 */
-	
+
 	public Game (DatabaseConnection db)
 	{	
 		this.db = db;
+		gameNumber = db.getNumberOfGames()+1;
+		
+		roundCount = 1;
+		drawCount = 0; 
+		isFinished = false;
 	}
 
 	/**
 	 * Initialises a new game (shuffles deck, creates players and deals cards). 
 	 * Called from the TopTrumpsCLIApplication.java class.
 	 */
-	
+
 	public void initialiseGame()
 
 	{
 		readIn();
-		
-		// this is all for testing
-		boolean deckOutputToLog = false;
-		logDeck(currentDeck,deckOutputToLog);
+	
+		boolean logExists = false;
+		if (writeToLog = true)
+		{
+			logDeck(currentDeck,logExists);
+		}
 
 		currentDeck.shuffleDeck();
-		deckOutputToLog = true;
-		logDeck(currentDeck, deckOutputToLog); //prints shuffled deck to log file
+
+		if (writeToLog = true)
+		{
+			logExists = true;
+			logDeck(currentDeck, logExists); //prints shuffled deck to log file
+		}
 
 		remainingPlayers = numberOfPlayers; // starts with all players still in game
 
 		createPlayers();
 		dealCards();
-		logDealtCards(); // right after they have been dealt
-		
-	} 
+		// choose the 1st active player
 
+	} 
+	
+	public void writeToLog()
+	{
+		writeToLog = true;
+	}
+
+	public void startOnlineRound()
+
+	{
+		newRound = new Round(listOfPlayers, activePlayer, currentCategory, roundCount, writeToLog, isOnline);
+		newRound.addRound();
+		newRound.playRound();
+
+		finishRound();  
+
+	}
+	
+	
 	/**
 	 * rounds continue until there is only 1 player left
 	 * the last remaining player is the winner 
 	 */
-	public void runGame() 
-	
+	public void startRound() 
 	{
-		while (remainingPlayers > 1)
+		
+		newRound = new Round(listOfPlayers, activePlayer, currentCategory, roundCount, writeToLog, isOnline);
+		newRound.playRound();
+		newRound.addRound();
+
+		System.out.println(logSeparator);
+		finishRound();
+	}
+
+
+	/**
+	 * 
+	 */
+	
+	private void finishRound() 
+
+	{
+		updatePlayers(); // updates number of remaining players
+
+		if (remainingPlayers <= 1)
 
 		{
-			chooseActivePlayer(); // set deciding player 
-			newRound = new Round(listOfPlayers, activePlayer);
-
-			if (Round.getRoundCount() > 1) {
-				logDealtCards(); 
-			}
-
-			newRound.playRound();
-			roundLog();
-			System.out.println(logSeparator);
-			updatePlayers(); // updates number of remaining players
+			isFinished = true; 
+			db.updateDB(getGameData(), getRoundData());
 		}
 
-		newRound.getWinner();
-		displayWinner();
-		db.updateDBRounds();
-		//		Round.getRoundCount());
-		//		db.updateDBRounds(Round.getRoundCount(), newRound.getDrawCount(), Round.getPlayerRoundWins());
-		// db.updateDBGame(numberOfPlayers, gameWinner.getName());
+		if (newRound.isDraw() == true)
+		{
+			drawCount++;
+		}
+
+		if (newRound.isDraw() == false)
+		{
+			currentWinner = newRound.getWinner();
+			currentWinner.addWin();
+		}
 		
+		roundLog();
+		logCards();
+		roundCount++;
 	}
-	
-	
+
+
+	/**
+	 * searches active user's top card 
+	 * finds the category with the highest value
+	 * sets it to c
+	 */
+	public void findBestCategory () 
+
+	{ 
+		int curr; // current value
+		int temp = 0; // temp highest value
+		int index = 0; // index of the highest value
+
+		System.out.println("Active player is " + activePlayer.getName());
+
+		String s = String.format("%s%s%d%s\n", 
+				activePlayer.getName(), " is choosing the category for round ", roundCount, "...");
+		System.out.println(s);
+
+		for (int i = 1; i < activePlayer.getTopCard().getCategories().size(); i++)
+		{
+			// finds the category with the highest value
+			curr = Integer.valueOf(activePlayer.getTopCard().getAttribute(i)); // looks horrendous
+
+			if (curr>temp)
+			{	
+				temp=curr;
+				index = i;
+			}
+		}
+
+		currentCategory = index;
+	}
+
+
 	/**
 	 * Reads deck contents from a file.
 	 * Sets categories for the new deck (contained in the first line of the file).
@@ -145,15 +235,14 @@ public class Game
 		}
 
 	}
-	
-	
+
+
 	/**
 	 * Called from the playGame() method.
 	 * Generates a number of Player objects and stores them in an ArrayList.
 	 * The first created Player is always the human player.
 	 * Human player has to choose their username, the others are assigned default usernames.
 	 */	
-	
 	private void createPlayers() {
 
 		listOfPlayers = new ArrayList<Player>();
@@ -168,19 +257,18 @@ public class Game
 		// create AI players
 		for (i = 1; i < numberOfPlayers; i++) 
 		{
-			Player p = new Player("AI_Player" + i);
+			Player p = new Player("Player" + i);
 			listOfPlayers.add(p);
 		}
 
 	}
-	
+
 
 	/**
 	 * Called from the playGame() method.
 	 * Removes cards from the current deck and adds them to the hands of players.
 	 * At the end the current deck is left empty.
 	 */
-	
 	private void dealCards() {
 
 		int numCardsEach = currentDeck.getNumberOfCards() / numberOfPlayers; // how many cards each player should get
@@ -200,18 +288,21 @@ public class Game
 
 		}
 
-		System.out.println("Dealing cards...");
-		System.out.println();
+
+		if (writeToLog == true)
+		{
+			logCards(); // right after they have been dealt
+		}
 
 	}
-	
+
 
 	/**
 	 * The method is called after each round.
 	 * If the player has no cards, sets the Player.java isInGame instance variable to false 
 	 * and updates the number of remaining players.
 	 */
-	
+
 	private void updatePlayers ()
 
 	{
@@ -237,8 +328,8 @@ public class Game
 	 * If previous round was a draw, the active player stays the same.
 	 * Otherwise, the winner of the previous round becomes the active player.
 	 */
-	
-	private void chooseActivePlayer()
+
+	public void chooseActivePlayer()
 
 	{
 		if (newRound==null) // if new game
@@ -260,14 +351,14 @@ public class Game
 		}
 
 	}
-	
+
 
 	/**
 	 * Generates a random number that is then used as index when choosing the first active player. 
 	 * The number cannot be greater than the total number of players.
 	 * @return random integer
 	 */
-	
+
 	private int pickRandomPlayer() { 
 
 		int randomIndex = (int)Math.floor(Math.random() * numberOfPlayers);
@@ -276,49 +367,13 @@ public class Game
 
 
 	/**
-	 *  Called at the end of a game, displays the final winner of the game. 
-	 *  If human player won the game, prints out a "congratulations" message.
-	 */
-	
-	private void displayWinner ()
-
-	{
-		// if only one player is left with cards after a draw
-		// they automatically become the winner
-		if (newRound.isDraw())		
-		{
-			for (int i=0; i<listOfPlayers.size(); i++)
-			{
-				if (listOfPlayers.get(i).isInGame())
-					gameWinner = listOfPlayers.get(i); 
-			}
-		}
-
-		else // the last "standing" player becomes the winner
-		{
-			gameWinner = newRound.getWinner();
-			logGameWinner();
-		}
-
-		System.out.println("The winner of the game is " + gameWinner.getName());
-
-		if (gameWinner == listOfPlayers.get(0)) // human player always has index 0
-		{
-			System.out.print ("\n CONGRATULATIONS! \n You just won the game!");
-		}
-
-	}
-
-
-
-	/**
 	 * 
 	 * 
 	 * @param d = current deck 
-	 * @param deckOutput  
+	 * @param logExists  
 	 */
 
-	private void logDeck(Deck d, boolean deckOutput)	{ //for printing to output log
+	private void logDeck(Deck d, boolean logExists)	{ //for printing to output log
 
 		PrintWriter printer = null;
 
@@ -332,17 +387,16 @@ public class Game
 
 				{
 
-					if (deckOutput == true) {
+					if (logExists == true) {
 						deck = currentDeck.dString();
-						deckDescriptor = "Shuffled deck\n";
+						deckDescriptor = "Shuffled deck " + newLine;
 
 					}
 
 					else {
 						fw = new FileWriter(LOG_FILE, false); //overwrite log contents if new game
 						deck = d.dString();
-						deckDescriptor = "Deck as read from file\n";
-						printer.println(logSeparator);	
+						deckDescriptor = "Deck as read from file" + newLine;	
 					}
 
 
@@ -372,8 +426,8 @@ public class Game
 	/**
 	 * 
 	 */
-	
-	private void logDealtCards() {
+
+	private void logCards() {
 
 		PrintWriter printer = null;
 
@@ -386,11 +440,10 @@ public class Game
 				String playerCards = "";
 
 				{ 
-
 					for (Player p: listOfPlayers)
 
 					{
-						playerCards = playerCards + p.handToString() + logSeparator;
+						playerCards = playerCards + p.handToString();
 					}
 
 				}
@@ -416,7 +469,7 @@ public class Game
 	/**
 	 * 
 	 */
-	
+
 	private void roundLog() {
 
 		PrintWriter printer = null;
@@ -424,12 +477,14 @@ public class Game
 		try {
 			try {
 				FileWriter fw = new FileWriter(LOG_FILE, true);
+				
 				BufferedWriter bw = new BufferedWriter(fw);
 				printer = new PrintWriter(bw);
-
+				
+				 
 				{ 
 					printer.println();
-					printer.println(newRound.getRoundLog());
+					printer.print(newRound.getRoundLog());
 				}
 			}
 
@@ -450,7 +505,7 @@ public class Game
 	/**
 	 * 
 	 */
-	
+
 	private void logGameWinner() {
 
 		PrintWriter printer = null;
@@ -462,7 +517,8 @@ public class Game
 				printer = new PrintWriter(bw);
 
 				{ 
-					printer.println(gameWinner.getName() + " WON THE GAME!");
+					printer.println(newLine + currentWinner.getName() + " WON THE GAME!");
+					
 				}
 			}
 
@@ -477,9 +533,6 @@ public class Game
 			JOptionPane.showMessageDialog(null, "File not found",
 					"Error", JOptionPane.ERROR_MESSAGE);
 		}
-
-
-
 
 	}
 
@@ -503,7 +556,113 @@ public class Game
 	public Player getHumanPlayer ()
 	{
 		return listOfPlayers.get(0);
+  }	
+
+	public void setCurrentCategory(int c)
+
+	{
+		currentCategory = c;
+	}
+
+	/**
+	 * getter methods below
+	 */
+
+	// return whether game  is finished
+	public boolean getStatus()
+	{
+		return isFinished;
+
+	}
+
+	// return the winner of the game
+	public Player getWinner()
+	{
+		// if only one player is left with cards after a draw
+		// they automatically become the game winner
+		if (newRound.isDraw())		
+		{
+			for (int i=0; i<listOfPlayers.size(); i++)
+			{
+				if (listOfPlayers.get(i).isInGame())
+					currentWinner = listOfPlayers.get(i); 
+			}
+		}
+
+		else // the last "standing" player becomes the winner
+		{
+			currentWinner = newRound.getWinner();
+		}
+
+		if (writeToLog == true)
+		{
+			logGameWinner();
+		}
 		
+		return currentWinner;
+	}
+
+	private String getGameData()
+	{
+		StringBuilder gData = new StringBuilder("");
+		gData.append("'" + gameNumber + "', ");
+		gData.append("'" + numberOfPlayers + "',");
+		gData.append("'" + currentWinner.getName() + "'");
+
+		String gameData = gData.toString();
+		return gameData;
+	}
+
+	private String getRoundData()
+	{
+		StringBuilder rData = new StringBuilder("");
+		rData.append("'" + gameNumber + "', ");
+		rData.append("'" + roundCount + "', ");
+		rData.append("'" + drawCount + "', ");
+
+		rData.append(getWinsPerPlayer(0) + ", ");
+		rData.append(getWinsPerPlayer(1) + ", ");
+		rData.append(getWinsPerPlayer(2) + ", ");
+		rData.append(getWinsPerPlayer(3) + ", ");
+		rData.append(getWinsPerPlayer(4));
+
+		String roundData = rData.toString();
+		return roundData;
+	}
+	
+
+	private String getWinsPerPlayer(int i)
+	{
+		if (listOfPlayers.size()<=i)
+		{
+			return ("NULL");
+		}
+
+		else
+		{
+			return ("'" + String.valueOf(listOfPlayers.get(i).getRoundWins() + "'"));
+		}
+	}
+
+	// return current active player
+	public Player getActivePlayer()
+	{
+		return activePlayer;
+	}
+
+	public Player getPlayer(int i)
+	{
+		return listOfPlayers.get(i);
+	}
+
+	public boolean isDraw ()
+	{
+		return newRound.isDraw();
+	}
+	
+	public void setOnline(boolean o)
+	{
+		isOnline = o;
 	}
 
 }

@@ -127,7 +127,7 @@ public class Deck {
 		for (int i = 0; i < numberOfCards; i++)
 		{
 			temp = cardsInDeck.get(i);
-			dString = dString + String.format( "\n%s ", temp.toString());
+			dString = dString + System.getProperty("line.separator") + temp.toString();
 		}
 
 		return dString;
@@ -146,7 +146,7 @@ public class Deck {
 		// print categories
 		for (int i = 0; i < categories.size(); i++)
 		{
-			cString = cString + String.format( "%14s ", categories.get(i));
+			cString = cString + String.format( "%-14s ", categories.get(i));
 		}
 
 		return cString.toUpperCase(); 	

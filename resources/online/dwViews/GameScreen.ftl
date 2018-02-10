@@ -142,6 +142,9 @@
   			<div class="card-block">
     			<center><h4><b>Human</b></h4></center>
   				<div class="left">
+          <p id = "cardDescription"></p></h4>
+    			<br />
+    			<p id="cardCategories1"></p>
   				<p id = "playerCard"></p>
     				<p>Description</p>
     				<p>Size</p>
@@ -161,6 +164,8 @@
   			<br />
   			<div class="card-block">
     			<center><h4><b>AI 1</b></h4></center>
+    			<p id = "cardDescription"></p></h4>    
+    			<p id="cardCategories2"></p>          
     			<div class="left">
     				<p>Description</p>
     				<p>Size</p>
@@ -169,9 +174,6 @@
     				<p>Firepower</p>
     				<p>Cargo</p>
     			</div>
-    			<br />
-    			<p id="cardCategories"></p>
-    			<br />
   			</div>
 		</div>
 	</div>
@@ -182,6 +184,8 @@
   			<br />
   			<div class="card-block">
     			<center><h4><b>AI 2</b></h4></center>
+      		<p id = "cardDescription"></p></h4>  			
+        	<p id="cardCategories3"></p>
     			<div class="left">
     				<p>Description</p>
     				<p>Size</p>
@@ -190,10 +194,6 @@
     				<p>Firepower</p>
     				<p>Cargo</p>
     			</div>
-    			<br />
-    			<p id="cardCategories"></p>
-    			<br />
-  			</div>
 		</div>
 	</div>		
  
@@ -203,6 +203,8 @@
   			<br />
   			<div class="card-block">
 				<center><h4><b>AI 3</b></h4></center>
+          <p id = "cardDescription"></p></h4>
+       		<p id="cardCategories4"></p>
     			<div class="left">
     				<p>Description</p>
     				<p>Size</p>
@@ -211,9 +213,6 @@
     				<p>Firepower</p>
     				<p>Cargo</p>
     			</div>    			
-    			<br />
-    			<p id="cardCategories"></p>
-    			<br />
   			</div>
 		</div>
 	</div>    
@@ -224,7 +223,9 @@
   			<br />
   			<div class="card-block">
 				<center><h4><b>AI 4</b></h4></center>
-    			<div class="left">
+    			<p id = "cardDescription"></p></h4>    			
+     			<p id="cardCategories5"></p>
+   			  <div class="left">
     				<p>Description</p>
     				<p>Size</p>
     				<p>Speed</p>
@@ -232,17 +233,15 @@
     				<p>Firepower</p>
     				<p>Cargo</p>
     			</div>    			
-    			<br />
-    			<p id="cardCategories"></p>
-    			<br />
   			</div>
 		</div>
-	</div>	                   
+	</div>	  
+	                 
   <div class="btn btn-primary">
   		<div style="left: 300px; position: absolute; top: 700px"><a href="http://localhost:7777/toptrumps"><button style="width:200px;height:60px; font-size:1.4em; font-family: Arial; font-weight: bold;">New Game</button></a></div>
     	<div style="left: 300px; position: absolute; top: 800px"><a href="http://localhost:7777/toptrumps/stats"><button style="width:200px;height:60px; font-size:1.4em; font-family: Arial; font-weight: bold;">Statistics</button></a></div>
         <div style="left: 10px; position: absolute; top: 800px"><a href="http://localhost:7777/toptrumps/game"><button style="width:200px;height:60px; font-size:1.4em; font-family: Arial; font-weight: bold;">Save</button></a></div>
-		<div style="left: 10px; position: absolute; top: 700px"><<a href="http://localhost:7777/toptrumps/nextround"><button style="width:200px;height:60px; font-size:1.4em; font-family: Arial; font-weight: bold;">Next Round</button></form></div>		
+		<div style="left: 10px; position: absolute; top: 700px"><button type="submit" value="submit" onclick="next()" style="width:200px;height:60px; font-size:1.4em; font-family: Arial; font-weight: bold;">Next Round</button></div>		
   </div>		
 	</div>
 
@@ -254,6 +253,12 @@
 			newGame();
 			nextRound();
 			saveAndQuit();
+			cardDescription();
+			cardCategories1();
+			cardCategories2();
+			cardCategories3();
+			cardCategories4();
+			cardCategories5();
 		}	
 		
 			// --------------------------------------------------------------------------
@@ -279,21 +284,23 @@
 				 return xhr;
 		}
 		
-		function newGame() {
-			
-				// First create a CORS request, this is the message we are going to send (a get request in this case)
-				var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/newgame"); // Request type and URL
+		function newGame() 
+    {		
+		  // First create a CORS request, this is the message we are going to send (a get request in this case)
+			var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/newgame"); // Request type and URL
 				
-				// Message is not sent yet, but we can check that the browser supports CORS
-				if (!xhr) {
-  					alert("CORS not supported");
-				}
-
-				// CORS requests are Asynchronous, i.e. we do not wait for a response, instead we define an action
-				// to do when the response arrives 
-				xhr.onload = function(e) {
- 					var responseText = xhr.response; // the text of the response
-					document.getElementById('playerCard').innerHTML=responseText;
+			// Message is not sent yet, but we can check that the browser supports CORS
+			if (!xhr) 
+      {
+  		  alert("CORS not supported");
+			}
+			
+      // CORS requests are Asynchronous, i.e. we do not wait for a response, instead we define an action
+			// to do when the response arrives 
+			xhr.onload = function(e) 
+      {
+ 			  var responseText = xhr.response; // the text of the response
+				document.getElementById('playerCard').innerHTML=responseText;
 				};
 				
 				// We have done everything we need to prepare the CORS request, so send it
@@ -302,25 +309,104 @@
 		
 		function nextRound()
 		{
-			// First create a CORS request, this is the message we are going to send (a get request in this case)
 			var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/nextround"); // Request type and URL
-			
-			// Message is not sent yet, but we can check that the browser supports CORS
 			if (!xhr) {
 					alert("CORS not supported");
 			}
 
-			// CORS requests are Asynchronous, i.e. we do not wait for a response, instead we define an action
-			// to do when the response arrives 
 			xhr.onload = function(e) {
-					var roundsResponseText = xhr.response; // the text of the response
-				document.getElementById('nextround').innerHTML=roundsResponseText;
-			};
+					var ResponseText = xhr.response; // the text of the response
 			
-			// We have done everything we need to prepare the CORS request, so send it
+			};
+
 			xhr.send();		
 		}
+		function cardDescription()
+		{
+			var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/cardDescription");
+			if (!xhr) {
+				alert("CORS not supported");
+			}
 
+			xhr.onload = function(e) {
+				var n= xhr.response; // the text of the response
+				document.getElementById('cardDescription').innerHTML=n;
+			};
+
+			xhr.send();	
+		}
+		
+		function cardCategories1()
+		{
+			var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/cardCategories1");
+			if (!xhr) {
+				alert("CORS not supported");
+			}
+
+			xhr.onload = function(e) {
+				var n= xhr.response; // the text of the response
+				document.getElementById('cardCategories1').innerHTML=n;
+			};
+
+			xhr.send();	
+		}
+			function cardCategories2()
+			{
+			var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/cardCategories2");
+			if (!xhr) {
+				alert("CORS not supported");
+			}
+
+			xhr.onload = function(e) {
+				var n= xhr.response; // the text of the response
+				document.getElementById('cardCategories2').innerHTML=n;
+			};
+
+			xhr.send();	
+			}
+			
+			function cardCategories3()
+			{
+			var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/cardCategories3");
+			if (!xhr) {
+				alert("CORS not supported");
+			}
+
+			xhr.onload = function(e) {
+				var n= xhr.response; // the text of the response
+				document.getElementById('cardCategories3').innerHTML=n;
+			};
+
+			xhr.send();	
+			}
+			function cardCategories4()
+			{
+			var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/cardCategories4");
+			if (!xhr) {
+				alert("CORS not supported");
+			}
+
+			xhr.onload = function(e) {
+				var n= xhr.response; // the text of the response
+				document.getElementById('cardCategories4').innerHTML=n;
+			};
+
+			xhr.send();	
+			}
+			function cardCategories5()
+			{
+			var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/cardCategories5");
+			if (!xhr) {
+				alert("CORS not supported");
+			}
+
+			xhr.onload = function(e) {
+				var n= xhr.response; // the text of the response
+				document.getElementById('cardCategories5').innerHTML=n;
+			};
+
+			xhr.send();	
+			}
 
 	</script>	
 	</body>

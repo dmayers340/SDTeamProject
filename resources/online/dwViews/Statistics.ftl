@@ -55,53 +55,41 @@
 		h1{
 			color: White
 		}
-				
+		
 		.numGames{
-			position:absolute;
-			left: 0px;
-			margin-left:150px;
-			margin-right:150px;
+		float: left;
+		margin-left: 200px;
+		margin-top:100px;
 		}
-			
+	
 		.computerWin{
-			position:absolute;
-			right: 0px;
-			margin-left:150px;
-			margin-right:150px;
+		float: left;
+		margin-left:100px;
+		margin-top:100px;
+		
 		}
-			
+	
 		.playerWin{
-			position: absolute;
-	    	top: 37%;
-	    	left: 50%;
-	    	margin-right: -50%;
-	    	transform: translate(-50%, -50%)
+		float: left;
+		margin-left:100px;
+		margin-top:100px;
+	
 		}
-			
-		.draws{
-			position:absolute;
-			left: 0px;
-			margin-top: 310px;
-			margin-left:400px;
-			margin-right:150px;
-		}
-			
-		.rounds{
-			position:absolute;
-			right: 0px;
-			margin-top: 310px;
-			margin-left:150px;
-			margin-right:400px;
-		}
+	
+	.draws{
+		float: left;
+		margin-left:100px;
+		margin-top:100px;
 		
-		.left{
-			position: left;
-		}
-			
-		.right{
-			position: right;
-		}
-		
+	}
+	
+	.rounds{
+		float: left;
+		margin-left:100px;
+		margin-top:100px;
+
+	}	
+
 	</style>
 	
     <body onload="initalize()"> <!-- Call the initalize method when the page loads -->
@@ -117,8 +105,7 @@
 	  </div>
 	</nav> 
 	 	  	
-   	<div class="container">
-    <center><h1><b>Past Statistics</b></h1></center>
+	<center><h1><b>Past Statistics</b></h1></center>
     				
 	<div class="numGames">
 		<div class="card border-dark mb-3" style="max-width: 15rem; height: 23rem;">  		
@@ -148,7 +135,7 @@
 		
 	<div class="playerWin">
 		<div class="card border-dark mb-3" style="max-width: 15rem; height: 23rem;">  		
-			<img class="card-img-top" src="https://i.kinja-img.com/gawker-media/image/upload/t_original/othklnrkmmln2e8vv3ug.jpg" alt="Card Image">
+			<img class="card-img-top" src="https://img.purch.com/h/1000/aHR0cDovL3d3dy5zcGFjZS5jb20vaW1hZ2VzL2kvMDAwLzA2Ni8yODcvb3JpZ2luYWwveHMtMS1zcGFjZS1wbGFuZS1ib2Vpbmctb3JiaXRhcnQuanBn" alt="Card Image">
   			<br />
   			<div class="card-block">
     			<center><h4><b>Number of Games Player Has Won:</b></h4>
@@ -161,7 +148,7 @@
 		
 	<div class="draws">
 		<div class="card border-dark mb-3" style="max-width: 15rem; height: 23rem;">  		
-			<img class="card-img-top" src="https://i.kinja-img.com/gawker-media/image/upload/t_original/othklnrkmmln2e8vv3ug.jpg" alt="Card Image">
+			<img class="card-img-top" src="https://img.purch.com/h/1000/aHR0cDovL3d3dy5zcGFjZS5jb20vaW1hZ2VzL2kvMDAwLzA2Ni8yODcvb3JpZ2luYWwveHMtMS1zcGFjZS1wbGFuZS1ib2Vpbmctb3JiaXRhcnQuanBn" alt="Card Image">
   			<br />
   			<div class="card-block">
     			<center><h4><b>Average Number of Draws:</b></h4>
