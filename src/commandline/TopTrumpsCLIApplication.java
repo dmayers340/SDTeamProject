@@ -16,6 +16,8 @@ public class TopTrumpsCLIApplication {
 	private static Game newGame;
 	private static int category;
 
+	private static final String SEPARATOR = "------------------------------------------------------------------------------------------------";
+
 
 	/**
 	 * This main method is called by TopTrumps.java when the user specifies that they want to run in
@@ -60,7 +62,7 @@ public class TopTrumpsCLIApplication {
 				DatabaseConnection db = new DatabaseConnection();
 				newGame = new Game(db);
 				newGame.setOnline(true);
-				
+
 				newGame.writeToLog();
 				newGame.setNumberOfPlayers(getNumberOfAIPlayers()+1);
 
@@ -71,11 +73,10 @@ public class TopTrumpsCLIApplication {
 
 				while (newGame.getStatus() == false)
 				{
-					runGame(); 
+					runRound(); 
 				}
 
-				winner = newGame.getWinner();
-				displayWinner();
+				displayGameWinner();
 			}
 
 			// if Q or QUIT was entered
@@ -100,70 +101,83 @@ public class TopTrumpsCLIApplication {
 	/**
 	 * 
 	 */
-	private static void runGame()
+	private static void runRound()
 	{
 		newGame.chooseActivePlayer();
+		Player activePlayer = newGame.getActivePlayer();
 
-		if (newGame.getActivePlayer().isHuman()==true)
+		// print to console
+		System.out.println();
+		System.out.println("STARTING ROUND NUMBER " + newGame.getRoundCount());
+		System.out.println();
+
+		// prints user's top card
+		if (newGame.getPlayer(0).isInGame() == true)
 		{
-			
-			chooseCategory();
-			newGame.setCurrentCategory(category);
+			System.out.println("Your card details are printed below:");
+			System.out.println();
+			System.out.println(newGame.getPlayer(0).getTopCard().cString());
+			System.out.println(newGame.getPlayer(0).getTopCard().toString());
+			System.out.println();
 		}
 
+		// if user out of cards
+		else 	
+		{
+			System.out.println("You are currently out of cards");
+			System.out.println();
+		}
+
+		// if it's users turn to choose category
+		if (activePlayer.isHuman()==true)
+		{
+			// print to console
+			System.out.println("It's your turn to choose the category! "
+					+ "Please enter a category.");
+
+			// ask for input
+			int c = activePlayer.chooseCategory();
+			newGame.setCurrentCategory(c);
+		}
+
+		// if it's AI's turn to choose category
 		else
 		{
-			newGame.findBestCategory();
+			int c = activePlayer.findBestCategory();
+			newGame.setCurrentCategory(c);
+
+			// print to console
+			System.out.println("The active player is " + activePlayer.getName());
+			System.out.println(activePlayer.getName() + " is choosing the category...");
+			System.out.println("The category for round " + newGame.getRoundCount() + 
+					" is " + activePlayer.getTopCard().getCategories().get(c));
 		}
 
 		newGame.startRound();
 
+		if (newGame.getPlayer(0).isInGame() == false)
+
+		{
+			System.out.println("You don't have any cards left!");
+		}
+
+		winner = newGame.getWinner();
+
+		System.out.println();
+		
+		System.out.println(winner.getName() + " won this round!");
+		System.out.println();
+		
+		System.out.println("The winning card was:");
+		System.out.println(winner.getTopCard().cString());
+		System.out.println(winner.getTopCard().toString());	
+		System.out.println();
+		
+		System.out.println(SEPARATOR);
+
 	}
 
 
-	/**
-	 * The human player is able to choose the category through command line input. 
-	 * The player must enter the category name as a String without any spelling mistakes.
-	 * "Description" is not considered to be a valid category.
-	 */
-
-	private static void chooseCategory ()
-
-	{
-		System.out.println("It's your turn to choose! Please enter the name of the category.");
-
-		String s = ("\n The human player " + newGame.getActivePlayer().getName() + " chose the category for the current round");
-
-		// roundLog.append(s);
-		// 	roundLog.append("\n");
-
-		// enter category name
-		String categoryString = getInput();
-
-		int c;
-		int temp = -1;
-
-		// checks if entered category is valid
-		Card drawnCard = newGame.getActivePlayer().getTopCard();
-		for (int i = 0; i < drawnCard.getCategories().size(); i++)
-		{
-			newGame.getActivePlayer().getTopCard();
-			if (categoryString.equalsIgnoreCase(drawnCard.getCategories().get(i)))
-				temp = i;
-		}
-
-		if (temp<1) // if category name not found or "description"
-		{
-			System.out.println("You must enter a valid category name.");
-			chooseCategory();
-		}
-
-		else 
-		{
-			category = temp;
-		}
-
-	}
 
 	/**
 	 * Reads command line input. 
@@ -261,7 +275,7 @@ public class TopTrumpsCLIApplication {
 	 *  If human player won the game, prints out a "congratulations" message.
 	 */
 
-	private static void displayWinner ()
+	private static void displayGameWinner ()
 	{
 
 		System.out.println("The winner of the game is " + winner.getName());
