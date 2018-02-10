@@ -61,9 +61,8 @@ public class TopTrumpsCLIApplication {
 			{  
 				DatabaseConnection db = new DatabaseConnection();
 				newGame = new Game(db);
-				newGame.setOnline(true);
 
-				newGame.writeToLog();
+				newGame.writeToLog(writeGameLogsToFile);
 				newGame.setNumberOfPlayers(getNumberOfAIPlayers()+1);
 
 				// user enters username

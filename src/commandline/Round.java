@@ -23,25 +23,21 @@ public class Round {
 
 	private StringBuilder roundLog = new StringBuilder();
 
+	private boolean writeToLog;
 	private static final String newLine = (System.getProperty("line.separator"));
 	private static final String logSeparator = newLine + 
 			"------------------------------------------------------------------------------------------------" + newLine;
 	private static final String logSeparator2 = newLine + 
 			"================================================================================================" + newLine;
-	private boolean writeToLog;
-
-	private boolean online;
-
-
+	 
 	/**
 	 * constructor method 
 	 */
 
-	public Round (ArrayList <Player> p, Player ap, Integer category, int r, boolean w, boolean o)
+	public Round (ArrayList <Player> p, Player ap, Integer category, int r, boolean w)
 	{
 		roundCount = r;
 		writeToLog = w;
-		online = o;
 
 		players = p;  
 		activePlayer = ap; 

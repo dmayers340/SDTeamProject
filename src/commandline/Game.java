@@ -30,7 +30,6 @@ public class Game
 	private int roundCount;
 	private static ArrayList <Player> listOfPlayers;
 
-	private static boolean isOnline;
 	private static boolean isFinished;	
 	private static DatabaseConnection db;
 	private static int gameNumber;
@@ -38,9 +37,7 @@ public class Game
 	private static final String newLine = (System.getProperty("line.separator"));
 	private static final String logSeparator = newLine + 
 			"------------------------------------------------------------------------------------------------" + newLine;
-	private static final String logSeparator2 = newLine + 
-			"================================================================================================" + newLine;
-
+	 
 	private boolean writeToLog = false;
 	private final String LOG_FILE = "toptrumps.log";
 
@@ -96,7 +93,7 @@ public class Game
 
 	} 
 	
-	public void writeToLog()
+	public void writeToLog(boolean w)
 	{
 		writeToLog = true;
 	}
@@ -104,12 +101,11 @@ public class Game
 	public void startOnlineRound()
 
 	{
-		newRound = new Round(listOfPlayers, activePlayer, currentCategory, roundCount, writeToLog, isOnline);
+		newRound = new Round(listOfPlayers, activePlayer, currentCategory, roundCount, writeToLog);
 		newRound.addRound();
 		newRound.playRound();
 
 		finishRound();  
-
 	}
 	
 	
@@ -120,7 +116,7 @@ public class Game
 	public void startRound() 
 	{
 		
-		newRound = new Round(listOfPlayers, activePlayer, currentCategory, roundCount, writeToLog, isOnline);
+		newRound = new Round(listOfPlayers, activePlayer, currentCategory, roundCount, writeToLog);
 		newRound.playRound();
 		newRound.addRound();
 
@@ -621,11 +617,6 @@ public class Game
 	public boolean isDraw ()
 	{
 		return newRound.isDraw();
-	}
-	
-	public void setOnline(boolean o)
-	{
-		isOnline = o;
 	}
 	
 	public int getRoundCount ()
