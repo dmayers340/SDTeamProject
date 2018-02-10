@@ -89,7 +89,7 @@
 	.player{
 		float: left;
 		margin-top: 100px;
-		margin-left: 450px;
+		margin-left: 250px;
 	}
 	
 	.AI1{
@@ -135,6 +135,7 @@
   </div>
 </nav> 
 
+
 	<div class="player">
 		<div class="card border-dark mb-3" style="max-width: 15rem; height: 30rem;">  		
 			<img class="card-img-top" src="https://img.purch.com/h/1000/aHR0cDovL3d3dy5zcGFjZS5jb20vaW1hZ2VzL2kvMDAwLzA2Ni8yODcvb3JpZ2luYWwveHMtMS1zcGFjZS1wbGFuZS1ib2Vpbmctb3JiaXRhcnQuanBn" alt="Card Image">
@@ -142,10 +143,10 @@
   			<div class="card-block">
     			<center><h4><b>Human</b></h4></center>
   				<div class="left">
-          <p id = "cardDescription"></p></h4>
-    			<br />
-    			<p id="cardCategories1"></p>
-  				<p id = "playerCard"></p>
+          			<p id = "cardDescription"></p></h4>
+    				<br />
+    				<p id="cardCategories1"></p>
+  					<p id = "playerCard"></p>
     				<p>Description</p>
     				<p>Size</p>
     				<p>Speed</p>
@@ -153,7 +154,6 @@
     				<p>Firepower</p>
     				<p>Cargo</p>
     			</div>
-    			<br />
   			</div>
 		</div>
 	</div>
@@ -184,8 +184,8 @@
   			<br />
   			<div class="card-block">
     			<center><h4><b>AI 2</b></h4></center>
-      		<p id = "cardDescription"></p></h4>  			
-        	<p id="cardCategories3"></p>
+      			<p id = "cardDescription"></p></h4>  			
+        		<p id="cardCategories3"></p>
     			<div class="left">
     				<p>Description</p>
     				<p>Size</p>
@@ -194,6 +194,7 @@
     				<p>Firepower</p>
     				<p>Cargo</p>
     			</div>
+    		</div>
 		</div>
 	</div>		
  
@@ -203,8 +204,8 @@
   			<br />
   			<div class="card-block">
 				<center><h4><b>AI 3</b></h4></center>
-          <p id = "cardDescription"></p></h4>
-       		<p id="cardCategories4"></p>
+          		<p id = "cardDescription"></p></h4>
+       			<p id="cardCategories4"></p>
     			<div class="left">
     				<p>Description</p>
     				<p>Size</p>
@@ -225,7 +226,7 @@
 				<center><h4><b>AI 4</b></h4></center>
     			<p id = "cardDescription"></p></h4>    			
      			<p id="cardCategories5"></p>
-   			  <div class="left">
+   			  	<div class="left">
     				<p>Description</p>
     				<p>Size</p>
     				<p>Speed</p>
