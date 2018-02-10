@@ -46,18 +46,18 @@ public class Card {
 
 		for (int i = 0; i<cardAttributes.size(); i++)
 		{
-			cardString = cardString + String.format ("%15s", cardAttributes.get(i)); 
+			cardString = cardString + String.format ("%-15s", cardAttributes.get(i)); 
 		}
 
 		cardString = String.format ("%s ", cardString);
 		return cardString;
 	}
 	
+	
 	/**
 	 * @return categories;
 	 */
-	
-	public static ArrayList<String> getCategories ()
+	public ArrayList<String> getCategories ()
 	{
 		return categories;
 	}
@@ -75,7 +75,7 @@ public class Card {
 		// print categories
 		for (int i = 0; i < categories.size(); i++)
 		{
-			cString = cString + String.format( "%15s", categories.get(i));
+			cString = cString + String.format( "%-15s", categories.get(i));
 		}
 
 		return cString.toUpperCase(); 	
