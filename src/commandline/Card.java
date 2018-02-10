@@ -46,7 +46,7 @@ public class Card {
 
 		for (int i = 0; i<cardAttributes.size(); i++)
 		{
-			cardString = cardString + String.format ("%15s", cardAttributes.get(i)); 
+			cardString = cardString + String.format ("%-15s", cardAttributes.get(i)); 
 		}
 
 		cardString = String.format ("%s ", cardString);
@@ -75,7 +75,7 @@ public class Card {
 		// print categories
 		for (int i = 0; i < categories.size(); i++)
 		{
-			cString = cString + String.format( "%15s", categories.get(i));
+			cString = cString + String.format( "%-15s", categories.get(i));
 		}
 
 		return cString.toUpperCase(); 	

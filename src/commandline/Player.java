@@ -92,24 +92,24 @@ public class Player {
 	public String handToString()
 
 	{
-		String h = String.format("\n %s \n", this.getName() + "'s cards:\n  ");
+		String h = System.getProperty("line.separator") + this.getName() + "'s cards: " + System.getProperty("line.separator");
 
 		if (this.isInGame)
 
 		{
-			h = String.format("%s %s \n", h, this.getTopCard().cString());
-
+			h = h + this.getTopCard().cString() + System.getProperty("line.separator");
+			 
 			for (int i = 0; i<hand.size(); i++)
 
 			{
-				h = String.format("%s %s \n", h, hand.get(i));
+				h = h + hand.get(i) + System.getProperty("line.separator");
 			}
 		}
 
 
 		else 
 		{
-			h = String.format("%s %s \n", h, (this.getName() + " has no cards"));
+			h = h + this.getName() + "has no cards" + System.getProperty("line.separator");
 		}
 
 		return h;

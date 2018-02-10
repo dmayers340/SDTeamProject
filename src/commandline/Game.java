@@ -18,7 +18,6 @@ public class Game
 	 *  instance variables
 	 */
 	public static int numberOfPlayers; // number of players in game
-	public boolean isOnline;
 	private int drawCount; // number of draws in game
 
 	public String username;
@@ -31,17 +30,22 @@ public class Game
 	private int roundCount;
 	private static ArrayList <Player> listOfPlayers;
 
+	private static boolean isOnline;
 	private static boolean isFinished;	
 	private static DatabaseConnection db;
 	private static int gameNumber;
+	
+	private static final String newLine = (System.getProperty("line.separator"));
+	private static final String logSeparator = newLine + 
+			"------------------------------------------------------------------------------------------------" + newLine;
+	private static final String logSeparator2 = newLine + 
+			"================================================================================================" + newLine;
 
-	private String logSeparator = "-------------------------------------------------------------"+
-			"-------------------------";
-
-	private boolean writeToLog;
+	private boolean writeToLog = false;
 	private final String LOG_FILE = "toptrumps.log";
 
 	private static String FILE_NAME = "StarCitizenDeck.txt"; // name of deck file
+
 
 	/**
 	 * Constructor method. 
@@ -50,12 +54,11 @@ public class Game
 	 * @param Deck d = current deck 
 	 */
 
-	public Game (DatabaseConnection db, boolean w)
+	public Game (DatabaseConnection db)
 	{	
 		this.db = db;
 		gameNumber = db.getNumberOfGames()+1;
 		
-		writeToLog = w; 
 		roundCount = 1;
 		drawCount = 0; 
 		isFinished = false;
@@ -70,8 +73,7 @@ public class Game
 
 	{
 		readIn();
-
-		 
+	
 		boolean logExists = false;
 		if (writeToLog = true)
 		{
@@ -93,25 +95,34 @@ public class Game
 		// choose the 1st active player
 
 	} 
+	
+	public void writeToLog()
+	{
+		writeToLog = true;
+	}
 
 	public void startOnlineRound()
 
 	{
-		newRound = new Round(listOfPlayers, activePlayer, currentCategory, roundCount, writeToLog);
+		newRound = new Round(listOfPlayers, activePlayer, currentCategory, roundCount, writeToLog, isOnline);
+		newRound.addRound();
 		newRound.playRound();
 
 		finishRound();  
 
 	}
+	
+	
 	/**
 	 * rounds continue until there is only 1 player left
 	 * the last remaining player is the winner 
 	 */
 	public void startRound() 
 	{
-
-		newRound = new Round(listOfPlayers, activePlayer, currentCategory, roundCount, writeToLog);
+		
+		newRound = new Round(listOfPlayers, activePlayer, currentCategory, roundCount, writeToLog, isOnline);
 		newRound.playRound();
+		newRound.addRound();
 
 		System.out.println(logSeparator);
 		finishRound();
@@ -121,6 +132,7 @@ public class Game
 	/**
 	 * 
 	 */
+	
 	private void finishRound() 
 
 	{
@@ -145,6 +157,7 @@ public class Game
 		}
 		
 		roundLog();
+		logCards();
 		roundCount++;
 	}
 
@@ -154,7 +167,6 @@ public class Game
 	 * finds the category with the highest value
 	 * sets it to c
 	 */
-
 	public void findBestCategory () 
 
 	{ 
@@ -231,7 +243,6 @@ public class Game
 	 * The first created Player is always the human player.
 	 * Human player has to choose their username, the others are assigned default usernames.
 	 */	
-
 	private void createPlayers() {
 
 		listOfPlayers = new ArrayList<Player>();
@@ -246,7 +257,7 @@ public class Game
 		// create AI players
 		for (i = 1; i < numberOfPlayers; i++) 
 		{
-			Player p = new Player("AI_Player" + i);
+			Player p = new Player("Player" + i);
 			listOfPlayers.add(p);
 		}
 
@@ -258,7 +269,6 @@ public class Game
 	 * Removes cards from the current deck and adds them to the hands of players.
 	 * At the end the current deck is left empty.
 	 */
-
 	private void dealCards() {
 
 		int numCardsEach = currentDeck.getNumberOfCards() / numberOfPlayers; // how many cards each player should get
@@ -281,7 +291,7 @@ public class Game
 
 		if (writeToLog == true)
 		{
-			logDealtCards(); // right after they have been dealt
+			logCards(); // right after they have been dealt
 		}
 
 	}
@@ -379,15 +389,14 @@ public class Game
 
 					if (logExists == true) {
 						deck = currentDeck.dString();
-						deckDescriptor = "Shuffled deck\n";
+						deckDescriptor = "Shuffled deck " + newLine;
 
 					}
 
 					else {
 						fw = new FileWriter(LOG_FILE, false); //overwrite log contents if new game
 						deck = d.dString();
-						deckDescriptor = "Deck as read from file\n";
-						printer.println(logSeparator);	
+						deckDescriptor = "Deck as read from file" + newLine;	
 					}
 
 
@@ -418,7 +427,7 @@ public class Game
 	 * 
 	 */
 
-	private void logDealtCards() {
+	private void logCards() {
 
 		PrintWriter printer = null;
 
@@ -434,7 +443,7 @@ public class Game
 					for (Player p: listOfPlayers)
 
 					{
-						playerCards = playerCards + p.handToString() + logSeparator;
+						playerCards = playerCards + p.handToString();
 					}
 
 				}
@@ -468,12 +477,14 @@ public class Game
 		try {
 			try {
 				FileWriter fw = new FileWriter(LOG_FILE, true);
+				
 				BufferedWriter bw = new BufferedWriter(fw);
 				printer = new PrintWriter(bw);
-
+				
+				 
 				{ 
 					printer.println();
-					printer.println(newRound.getRoundLog());
+					printer.print(newRound.getRoundLog());
 				}
 			}
 
@@ -506,7 +517,8 @@ public class Game
 				printer = new PrintWriter(bw);
 
 				{ 
-					printer.println(currentWinner.getName() + " WON THE GAME!");
+					printer.println(newLine + currentWinner.getName() + " WON THE GAME!");
+					
 				}
 			}
 
@@ -540,10 +552,7 @@ public class Game
 	{
 		username = u;	
 	}
-	public void setOnline(boolean online)
-	{
-		this.isOnline = online;
-	}
+	
 
 	public void setCurrentCategory(int c)
 
@@ -562,7 +571,7 @@ public class Game
 
 	}
 
-	// return the winner of the last round
+	// return the winner of the game
 	public Player getWinner()
 	{
 		// if only one player is left with cards after a draw
@@ -645,6 +654,11 @@ public class Game
 	public boolean isDraw ()
 	{
 		return newRound.isDraw();
+	}
+	
+	public void setOnline(boolean o)
+	{
+		isOnline = o;
 	}
 
 }

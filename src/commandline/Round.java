@@ -22,19 +22,26 @@ public class Round {
 	public static ArrayList<Card> communalPile = new ArrayList<Card>(); 
 
 	private StringBuilder roundLog = new StringBuilder();
-	private String logSeparator = "-------------------------------------------------------------------------------------------------------";
-	private boolean writeToLog; 
+	
+	private static final String newLine = (System.getProperty("line.separator"));
+	private static final String logSeparator = newLine + 
+			"------------------------------------------------------------------------------------------------" + newLine;
+	private static final String logSeparator2 = newLine + 
+			"================================================================================================" + newLine;
+	private boolean writeToLog;
+
+	private boolean online;
 
 
 	/**
 	 * constructor method 
 	 */
 
-	public Round (ArrayList <Player> p, Player ap, Integer category, int r, boolean w)
-
+	public Round (ArrayList <Player> p, Player ap, Integer category, int r, boolean w, boolean o)
 	{
 		roundCount = r;
 		writeToLog = w;
+		online = o;
 
 		players = p;  
 		activePlayer = ap; 
@@ -47,32 +54,42 @@ public class Round {
 
 	}
 
+	public void addRound() 
+
+	{
+		try{
+			Thread.sleep(2000);
+
+		}
+
+		catch(InterruptedException e){		
+		}
+	}
 
 	/**
-	 * 	
 	 */
 	private void startLog() 
-	{
-		roundLog.append(logSeparator);
-		roundLog.append(String.format("%s%d\n", "ROUND LOG FOR ROUND ", roundCount));
-		roundLog.append(logSeparator);
-		roundLog.append(String.format("%s%d%s%s\n", "The active player for round ", roundCount, " is ", 
+	{	
+		roundLog.append(logSeparator2);
+		roundLog.append(String.format("%s%d", "ROUND LOG FOR ROUND ", roundCount));
+		roundLog.append(logSeparator2 + newLine);
+		roundLog.append(String.format("%s%d%s%s", "The active player for round ", roundCount, " is ", 
 				activePlayer.getName()));
-		roundLog.append(String.format("%s%d%s%s\n", "The category for round ", roundCount, " is ", 
+		roundLog.append(newLine + String.format("%s%d%s%s", "The category for round ", roundCount, " is ", 
 				activePlayer.getTopCard().getCategories().get(c)));
-		roundLog.append(getCommunalPile());
-
+		roundLog.append(newLine + getCommunalPile() + newLine);
+		
 		if (players.get(0).isInGame() == true)
 		{
-			roundLog.append("Your card details are printed below:");
-			roundLog.append("\n");
-			roundLog.append(players.get(0).getTopCard().toString());
+			roundLog.append(newLine + "Your card details are printed below:" + newLine); 
+			roundLog.append(players.get(0).getTopCard().cString()); 
+			roundLog.append(newLine +  players.get(0).getTopCard().toString() + newLine); 
+			roundLog.append(logSeparator);
 		}
 
 		else 
 		{
-			roundLog.append("You are currently  out of cards");
-			roundLog.append("\n");
+			roundLog.append(newLine + "You are currently  out of cards" + newLine + logSeparator + newLine);
 		}
 	}
 
@@ -93,7 +110,7 @@ public class Round {
 		System.out.println(" + + + ");
 
 		// print human player's current card
-		if (players.get(0).isInGame())
+		if (players.get(0).isInGame() == true)
 
 		{	
 			System.out.println("Your card details are printed below:");
@@ -120,10 +137,12 @@ public class Round {
 		if (draw == false)
 
 		{
-			String w = "\nThe winner is " + winner.getName();
+			String w = (newLine + "The winner of round " + roundCount + " was " + winner.getName() + newLine);
+			
+			roundLog.append(w + logSeparator);
 
 			System.out.println(w);
-			System.out.println("\nThe winning card for round " + roundCount + " was: ");
+			System.out.println("\nThe winning card for round " + roundCount + " was ");
 			System.out.println(winner.getTopCard().cString());
 			System.out.println(winner.getTopCard().toString());
 
@@ -159,10 +178,8 @@ public class Round {
 			if (writeToLog == true)
 			{
 				String winnerIs = winner.getName() + " took all cards from the communal pile";			
-				roundLog.append(winnerIs);
-				roundLog.append(System.getProperty("line.separator"));
-				roundLog.append(getCommunalPile());
-				roundLog.append(System.getProperty("line.separator"));
+				roundLog.append(newLine + winnerIs + newLine);
+				roundLog.append(getCommunalPile() + newLine); 
 			}
 
 		}
@@ -190,11 +207,11 @@ public class Round {
 		int j = 0; // winner's index
 		int w = 0; // highest value
 		int t = 0; // temp score
-
-		String cards = String.format("%s%d%s\n\n%s\n%-15s%s", 
-				"Comparing cards for round ", roundCount, "...", 
-				"\nThe cards in play are:\n", " ", activePlayer.getTopCard().cString());
-		String values = String.format("%s", "\n" + "The competing values are printed below:\n");
+		
+		String cards = "Comparing cards for round " + roundCount + newLine + newLine + "The cards in play are:" + 
+		newLine + String.format("\t\t%s", activePlayer.getTopCard().cString()) + newLine;
+		
+		String values = "The competing values are printed below:" + newLine;
 
 		// finds the highest value
 		for (int i = 0; i<players.size(); i++)
@@ -205,9 +222,8 @@ public class Round {
 			{
 				t = Integer.valueOf(players.get(i).getTopCard().getAttribute(c));
 
-				cards = String.format("%s\n%-15s%s", cards, players.get(i).getName(),
-						players.get(i).getTopCard().toString());
-				values = String.format("%s\n%s%s%d", values, players.get(i).getName(), ": ", t);
+				cards = cards + players.get(i).getName() + String.format("\t\t%s", players.get(i).getTopCard().toString()) + newLine;
+				values = values + players.get(i).getName() + ": " + t + newLine;
 
 				if (t>w)
 
@@ -228,9 +244,12 @@ public class Round {
 
 		if (writeToLog == true)
 		{
-			roundLog.append("\n" + cards + "\n");
-			roundLog.append(" ");
+			
+			roundLog.append(newLine);
+			roundLog.append(cards);
+			roundLog.append(newLine);
 			roundLog.append(values);
+			roundLog.append(logSeparator);
 		}
 
 	}
@@ -256,12 +275,11 @@ public class Round {
 
 		}
 
-		String d = "\nRound " + roundCount + " was a draw";
-		System.out.println(d);
+		String d = newLine + "Round " + roundCount + " was a draw" + newLine;
 
 		roundLog.append(d);	
-		roundLog.append("\nNew cards have been added to the communal pile!");
-		roundLog.append("\n" + getCommunalPile() + "\n");
+		roundLog.append(newLine + "New cards have been added to the communal pile!");
+		roundLog.append(newLine + getCommunalPile() + newLine);
 
 	}
 
@@ -291,13 +309,12 @@ public class Round {
 		if (communalPile.size()>0)
 
 		{
-			String cPile = ("\nThere are " + communalPile.size() + 
-					" cards in the communal pile: ");
+			String cPile = "There are " + communalPile.size() +  " cards in the communal pile:" + newLine;
 
-			cPile = String.format("%s\n%s\n", cPile, activePlayer.getTopCard().cString());
+			cPile = cPile + newLine + activePlayer.getTopCard().cString() + newLine;
 			for (int i = 0; i<communalPile.size(); i++)
 			{
-				cPile = String.format("%s%s\n", cPile, communalPile.get(i));
+				cPile = cPile + communalPile.get(i) + newLine;
 			}
 
 			return cPile;
@@ -306,8 +323,7 @@ public class Round {
 		else 
 
 		{
-			String noCards = String.format("%s\n", "There are currently no cards in the communal pile");
-			roundLog.append(noCards);
+			String noCards = "There are no cards in the communal pile";	
 			return noCards;
 		}
 

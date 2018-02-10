@@ -58,8 +58,10 @@ public class TopTrumpsCLIApplication {
 			else if (choice.charAt(0) == 'G')
 			{  
 				DatabaseConnection db = new DatabaseConnection();
-				newGame = new Game(db, writeGameLogsToFile);
-				newGame.setOnline(false);
+				newGame = new Game(db);
+				newGame.setOnline(true);
+				
+				newGame.writeToLog();
 				newGame.setNumberOfPlayers(getNumberOfAIPlayers()+1);
 
 				// user enters username
@@ -104,7 +106,7 @@ public class TopTrumpsCLIApplication {
 
 		if (newGame.getActivePlayer().isHuman()==true)
 		{
-
+			
 			chooseCategory();
 			newGame.setCurrentCategory(category);
 		}
