@@ -22,7 +22,7 @@ public class Round {
 	public static ArrayList<Card> communalPile = new ArrayList<Card>(); 
 
 	private StringBuilder roundLog = new StringBuilder();
-	
+
 	private static final String newLine = (System.getProperty("line.separator"));
 	private static final String logSeparator = newLine + 
 			"------------------------------------------------------------------------------------------------" + newLine;
@@ -78,7 +78,7 @@ public class Round {
 		roundLog.append(newLine + String.format("%s%d%s%s", "The category for round ", roundCount, " is ", 
 				activePlayer.getTopCard().getCategories().get(c)));
 		roundLog.append(newLine + getCommunalPile() + newLine);
-		
+
 		if (players.get(0).isInGame() == true)
 		{
 			roundLog.append(newLine + "Your card details are printed below:" + newLine); 
@@ -101,29 +101,8 @@ public class Round {
 	public void playRound() 
 
 	{	
-		System.out.println("ROUND NUMBER " + (roundCount)); 
-		String a = "The active player is " + activePlayer.getName().toUpperCase();
-
-		System.out.println(a);
-		System.out.println(" + + + ");
-		System.out.print(getCommunalPile()); // prints contents of communal pile
-		System.out.println(" + + + ");
-
-		// print human player's current card
-		if (players.get(0).isInGame() == true)
-
-		{	
-			System.out.println("Your card details are printed below:");
-
-			// print human player's current card
-			System.out.println(players.get(0).getTopCard().cString());
-			System.out.println(players.get(0).getTopCard().toString());
-			System.out.println(" + + + ");
-		}
-
 		compareCards();
 		setWinner();  
-
 	} 
 
 
@@ -132,22 +111,15 @@ public class Round {
 	 */
 
 	public void setWinner() 
-
 	{
 		if (draw == false)
 
 		{
-			String w = (newLine + "The winner of round " + roundCount + " was " + winner.getName() + newLine);
-			
-			roundLog.append(w + logSeparator);
-
-			System.out.println(w);
-			System.out.println("\nThe winning card for round " + roundCount + " was ");
-			System.out.println(winner.getTopCard().cString());
-			System.out.println(winner.getTopCard().toString());
-
-			distributeCards();
+			distributeCards();			
 			communalPile = new ArrayList<Card>(); // resets communal pile
+
+			String w = (newLine + "The winner of round " + roundCount + " was " + winner.getName() + newLine);		
+			roundLog.append(w + logSeparator);
 		}
 
 		if (draw == true)
@@ -155,9 +127,7 @@ public class Round {
 		{
 			draw();
 			winner = null; // no winner
-		}
-
-		System.out.println(logSeparator);
+		} 
 	}
 
 
@@ -207,10 +177,10 @@ public class Round {
 		int j = 0; // winner's index
 		int w = 0; // highest value
 		int t = 0; // temp score
-		
+
 		String cards = "Comparing cards for round " + roundCount + newLine + newLine + "The cards in play are:" + 
-		newLine + String.format("\t\t%s", activePlayer.getTopCard().cString()) + newLine;
-		
+				newLine + String.format("\t\t%s", activePlayer.getTopCard().cString()) + newLine;
+
 		String values = "The competing values are printed below:" + newLine;
 
 		// finds the highest value
@@ -244,7 +214,7 @@ public class Round {
 
 		if (writeToLog == true)
 		{
-			
+
 			roundLog.append(newLine);
 			roundLog.append(cards);
 			roundLog.append(newLine);

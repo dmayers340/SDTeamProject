@@ -124,7 +124,6 @@ public class Game
 		newRound.playRound();
 		newRound.addRound();
 
-		System.out.println(logSeparator);
 		finishRound();
 	}
 
@@ -159,40 +158,6 @@ public class Game
 		roundLog();
 		logCards();
 		roundCount++;
-	}
-
-
-	/**
-	 * searches active user's top card 
-	 * finds the category with the highest value
-	 * sets it to c
-	 */
-	public void findBestCategory () 
-
-	{ 
-		int curr; // current value
-		int temp = 0; // temp highest value
-		int index = 0; // index of the highest value
-
-		System.out.println("Active player is " + activePlayer.getName());
-
-		String s = String.format("%s%s%d%s\n", 
-				activePlayer.getName(), " is choosing the category for round ", roundCount, "...");
-		System.out.println(s);
-
-		for (int i = 1; i < activePlayer.getTopCard().getCategories().size(); i++)
-		{
-			// finds the category with the highest value
-			curr = Integer.valueOf(activePlayer.getTopCard().getAttribute(i)); // looks horrendous
-
-			if (curr>temp)
-			{	
-				temp=curr;
-				index = i;
-			}
-		}
-
-		currentCategory = index;
 	}
 
 
@@ -314,7 +279,6 @@ public class Game
 			if (p.isInGame() && p.getHand().size()<1)
 
 			{
-				System.out.println(p.getName() + " HAS NO CARDS LEFT");
 				p.setStatus(false); // sets the value of isInGame to negative
 				remainingPlayers--;
 			}
@@ -448,7 +412,6 @@ public class Game
 
 				}
 
-				System.out.println(playerCards);
 				printer.println(playerCards);
 
 			}
@@ -664,6 +627,12 @@ public class Game
 	{
 		isOnline = o;
 	}
+	
+	public int getRoundCount ()
+	{
+		return roundCount;
+	}
+
 
 }
 
