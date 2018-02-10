@@ -92,13 +92,13 @@
 		margin-left: 450px;
 	}
 	
-	.aione{
+	.AI1{
 		float: left;
 		margin-top: 100px;		
 		margin-left:50px;
 	}
 	
-	.aitwo{
+	.AI2{
 		float: left;
 		margin-top: 100px;	
 		margin-left:50px;
@@ -118,7 +118,9 @@
 		margin-left:50px;
 
 	}
-
+	.left{
+		float:left;
+	}
 </style>
 
 <body onload="initalize()"> <!-- Call the initalize method when the page loads --> 
@@ -134,11 +136,39 @@
 </nav> 
 
 	<div class="player">
-		<div class="card border-dark mb-3" style="max-width: 15rem; height: 23rem;">  		
+		<div class="card border-dark mb-3" style="max-width: 15rem; height: 30rem;">  		
+			<img class="card-img-top" src="https://img.purch.com/h/1000/aHR0cDovL3d3dy5zcGFjZS5jb20vaW1hZ2VzL2kvMDAwLzA2Ni8yODcvb3JpZ2luYWwveHMtMS1zcGFjZS1wbGFuZS1ib2Vpbmctb3JiaXRhcnQuanBn" alt="Card Image">
+  			<br />	
+  			<div class="card-block">
+    			<center><h4><b>Human</b></h4></center>
+  				<div class="left">
+  				<p id = "playerCard"></p>
+    				<p>Description</p>
+    				<p>Size</p>
+    				<p>Speed</p>
+    				<p>Range</p>
+    				<p>Firepower</p>
+    				<p>Cargo</p>
+    			</div>
+    			<br />
+  			</div>
+		</div>
+	</div>
+
+	<div class="AI1">
+		<div class="card border-dark mb-3" style="max-width: 15rem; height: 30rem;">  		
 			<img class="card-img-top" src="https://img.purch.com/h/1000/aHR0cDovL3d3dy5zcGFjZS5jb20vaW1hZ2VzL2kvMDAwLzA2Ni8yODcvb3JpZ2luYWwveHMtMS1zcGFjZS1wbGFuZS1ib2Vpbmctb3JiaXRhcnQuanBn" alt="Card Image">
   			<br />
   			<div class="card-block">
-    			<center><h4><b><p id = "cardDescription"></p></b></h4>
+    			<center><h4><b>AI 1</b></h4></center>
+    			<div class="left">
+    				<p>Description</p>
+    				<p>Size</p>
+    				<p>Speed</p>
+    				<p>Range</p>
+    				<p>Firepower</p>
+    				<p>Cargo</p>
+    			</div>
     			<br />
     			<p id="cardCategories"></p>
     			<br />
@@ -146,25 +176,20 @@
 		</div>
 	</div>
 
-	<div class="aione">
-		<div class="card border-dark mb-3" style="max-width: 15rem; height: 23rem;">  		
+	<div class="AI2">
+		<div class="card border-dark mb-3" style="max-width: 15rem; height: 30rem;">  		
 			<img class="card-img-top" src="https://img.purch.com/h/1000/aHR0cDovL3d3dy5zcGFjZS5jb20vaW1hZ2VzL2kvMDAwLzA2Ni8yODcvb3JpZ2luYWwveHMtMS1zcGFjZS1wbGFuZS1ib2Vpbmctb3JiaXRhcnQuanBn" alt="Card Image">
   			<br />
   			<div class="card-block">
-    			<center><h4><b><p id = "cardDescription"></p></b></h4>
-    			<br />
-    			<p id="cardCategories"></p>
-    			<br />
-  			</div>
-		</div>
-	</div>
-
-	<div class="aitwo">
-		<div class="card border-dark mb-3" style="max-width: 15rem; height: 23rem;">  		
-			<img class="card-img-top" src="https://img.purch.com/h/1000/aHR0cDovL3d3dy5zcGFjZS5jb20vaW1hZ2VzL2kvMDAwLzA2Ni8yODcvb3JpZ2luYWwveHMtMS1zcGFjZS1wbGFuZS1ib2Vpbmctb3JiaXRhcnQuanBn" alt="Card Image">
-  			<br />
-  			<div class="card-block">
-    			<center><h4><b><p id = "cardDescription"></p></b></h4>
+    			<center><h4><b>AI 2</b></h4></center>
+    			<div class="left">
+    				<p>Description</p>
+    				<p>Size</p>
+    				<p>Speed</p>
+    				<p>Range</p>
+    				<p>Firepower</p>
+    				<p>Cargo</p>
+    			</div>
     			<br />
     			<p id="cardCategories"></p>
     			<br />
@@ -173,11 +198,19 @@
 	</div>		
  
  	<div class="AI3">
-		<div class="card border-dark mb-3" style="max-width: 15rem; height: 23rem;">  		
+		<div class="card border-dark mb-3" style="max-width: 15rem; height: 30rem;">  		
 			<img class="card-img-top" src="https://img.purch.com/h/1000/aHR0cDovL3d3dy5zcGFjZS5jb20vaW1hZ2VzL2kvMDAwLzA2Ni8yODcvb3JpZ2luYWwveHMtMS1zcGFjZS1wbGFuZS1ib2Vpbmctb3JiaXRhcnQuanBn" alt="Card Image">
   			<br />
   			<div class="card-block">
-    			<center><h4><b><p id = "cardDescription"></p></b></h4>
+				<center><h4><b>AI 3</b></h4></center>
+    			<div class="left">
+    				<p>Description</p>
+    				<p>Size</p>
+    				<p>Speed</p>
+    				<p>Range</p>
+    				<p>Firepower</p>
+    				<p>Cargo</p>
+    			</div>    			
     			<br />
     			<p id="cardCategories"></p>
     			<br />
@@ -186,11 +219,19 @@
 	</div>    
 
 	<div class="AI4">
-		<div class="card border-dark mb-3" style="max-width: 15rem; height: 23rem;">  		
+		<div class="card border-dark mb-3" style="max-width: 15rem; height: 30rem;">  		
 			<img class="card-img-top" src="https://img.purch.com/h/1000/aHR0cDovL3d3dy5zcGFjZS5jb20vaW1hZ2VzL2kvMDAwLzA2Ni8yODcvb3JpZ2luYWwveHMtMS1zcGFjZS1wbGFuZS1ib2Vpbmctb3JiaXRhcnQuanBn" alt="Card Image">
   			<br />
   			<div class="card-block">
-    			<center><h4><b><p id = "cardDescription"></p></b></h4>
+				<center><h4><b>AI 4</b></h4></center>
+    			<div class="left">
+    				<p>Description</p>
+    				<p>Size</p>
+    				<p>Speed</p>
+    				<p>Range</p>
+    				<p>Firepower</p>
+    				<p>Cargo</p>
+    			</div>    			
     			<br />
     			<p id="cardCategories"></p>
     			<br />
@@ -238,27 +279,26 @@
 				 return xhr;
 		}
 		
-		function newGame() 
-		{
-		
-			// First create a CORS request, this is the message we are going to send (a get request in this case)
-			var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/newgame"); // Request type and URL
+		function newGame() {
 			
-			// Message is not sent yet, but we can check that the browser supports CORS
-			if (!xhr) {
-					alert("CORS not supported");
-			}
+				// First create a CORS request, this is the message we are going to send (a get request in this case)
+				var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/newgame"); // Request type and URL
+				
+				// Message is not sent yet, but we can check that the browser supports CORS
+				if (!xhr) {
+  					alert("CORS not supported");
+				}
 
-			// CORS requests are Asynchronous, i.e. we do not wait for a response, instead we define an action
-			// to do when the response arrives 
-			xhr.onload = function(e) {
-					var roundsResponseText = xhr.response; // the text of the response
-				document.getElementById('newGame').innerHTML=roundsResponseText;
-			};
-			
-			// We have done everything we need to prepare the CORS request, so send it
-			xhr.send();		
-		}
+				// CORS requests are Asynchronous, i.e. we do not wait for a response, instead we define an action
+				// to do when the response arrives 
+				xhr.onload = function(e) {
+ 					var responseText = xhr.response; // the text of the response
+					document.getElementById('playerCard').innerHTML=responseText;
+				};
+				
+				// We have done everything we need to prepare the CORS request, so send it
+				xhr.send();		
+			}
 		
 		function nextRound()
 		{

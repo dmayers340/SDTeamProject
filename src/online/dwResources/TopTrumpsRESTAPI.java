@@ -77,18 +77,29 @@ public class TopTrumpsRESTAPI
     //This starts the game for game screen
 	@GET
 	@Path("/newgame")
-	public void newGame() throws IOException
+	public String newGame() throws IOException
 	{
-		//display all player cards
+		String card = "";	
+		String loser;
 		
-		//get new game from game.java
 		Game game = new Game(db);
 		game.setNumberOfPlayers(numberOfPlayers);
 		game.setUsername("Human");
-		
-		//start the game by getting number of players and dealing cards
 		game.initialiseGame();
+
+		if (game.getHumanPlayer().isInGame() == false)
+		{
+			loser = "You are out of cards";
+		}
+		else
+		{
+			String values = game.getHumanPlayer().getTopCard().toString();
+			card = game.getHumanPlayer().getTopCard().cString();
+
+		}
+		//start the game by getting number of players and dealing cards
 		game.runGame();
+		return card;
 	}
 	
 	//This method saves the data from the game that was just played, and sends to the database

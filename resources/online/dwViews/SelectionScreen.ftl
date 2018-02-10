@@ -165,66 +165,33 @@
 	</nav> 
 	
 	  <div class="container">
-
-    		<div id="myModal" class="modal">
-			<div class="modal-content">
- 				   <span class="close">&times;</span>
-  				   <ol>
-                     <li><h5>Please enter your information</h5></li><br>
-  				     <form id="qq"  action="example" method="post" >
-	  				     <li><strong>Please enter your name</strong><input type="text" name="log" id="log" size="20" /></li><br>
-	                      <li><strong>Please choose your opponent numbers (1-4)</strong><br>
-	                     			  <input type="radio" name="num" value="1" checked> 1<br>
-	  						<input type="radio" name="num" value="2"> 2<br>
-	  						<input type="radio" name="num" value="3"> 3<br>
-	  						<input type="radio" name="num" value="4"> 4</li><br>
-	  						
-	                	 <li><input type="submit" name="submit""value="submit" ></li>
-                     </form>
-					</ol>
- 		 	</div>
- 		 	</div>
-
- 		    <script>
-	 		 	var modal = document.getElementById('myModal');
-				var btn = document.getElementById("myBtn");
-				var span = document.getElementsByClassName("close")[0];
-				btn.onclick = function() {
-	   			 modal.style.display = "block";
-				}
-				span.onclick = function() {
-	  			  modal.style.display = "none";
-				}
-			</script>
-
-	  <div class="playgame">
-		<div class="card border-dark mb-3" style="max-width: 18rem; height: 27rem;">  		
-		<img class="card-img-top" src="https://img.purch.com/h/1000/aHR0cDovL3d3dy5zcGFjZS5jb20vaW1hZ2VzL2kvMDAwLzA2Ni8yODcvb3JpZ2luYWwveHMtMS1zcGFjZS1wbGFuZS1ib2Vpbmctb3JiaXRhcnQuanBn" alt="Card Image">
-  		<br />
-  		<div class="card-block">
-    		<center><h4><b>Play Game</b></h4>
-    		<br />
-    		<p class="card-text">If you would like to play the game select the button below.</p>
-    		<br />	
-    		<a href="http://localhost:7777/toptrumps/game" class="btn btn-primary">Play Game</a></center>
-			</center>
-             
-  		</div>
-		</div>
+	  	<div class="playgame">
+			<div class="card border-dark mb-3" style="max-width: 18rem; height: 27rem;">  		
+				<img class="card-img-top" src="https://img.purch.com/h/1000/aHR0cDovL3d3dy5zcGFjZS5jb20vaW1hZ2VzL2kvMDAwLzA2Ni8yODcvb3JpZ2luYWwveHMtMS1zcGFjZS1wbGFuZS1ib2Vpbmctb3JiaXRhcnQuanBn" alt="Card Image">
+  				<br />
+  				<div class="card-block">
+    				<center><h4><b>Play Game</b></h4>
+    				<br />
+    				<p class="card-text">If you would like to play the game select the button below.</p>
+    				<br />	
+    				<a href="http://localhost:7777/toptrumps/game" class="btn btn-primary">Play Game</a></center>
+					</center>    
+  				</div>
+			</div>
 		</div>
 
 		<div class="stats">
-		<div class="card border-dark mb-3" style="max-width: 18rem; height: 27rem;"> 
-  		<img class="card-img-top" src="https://i.kinja-img.com/gawker-media/image/upload/t_original/othklnrkmmln2e8vv3ug.jpg" alt="Card image" style="height:220px">
-  		<br />
-  		<div class="card-block">
-    		<center><h4><b>View Statistics</b></h4>
-    		<br />
-    		<p class="card-text">If you would like to view the statistics select the button below.</p>
-    		<br />
-    		<a href="http://localhost:7777/toptrumps/stats" class="btn btn-primary">View Statistics</a></center>
-  		</div>
-		</div>
+			<div class="card border-dark mb-3" style="max-width: 18rem; height: 27rem;"> 
+  				<img class="card-img-top" src="https://i.kinja-img.com/gawker-media/image/upload/t_original/othklnrkmmln2e8vv3ug.jpg" alt="Card image" style="height:220px">
+  				<br />
+  				<div class="card-block">
+    				<center><h4><b>View Statistics</b></h4>
+    				<br />
+    				<p class="card-text">If you would like to view the statistics select the button below.</p>
+    				<br />
+    				<a href="http://localhost:7777/toptrumps/stats" class="btn btn-primary">View Statistics</a></center>
+  				</div>
+			</div>
 		</div>
     	
 
@@ -234,8 +201,8 @@
 		
 		<script type="text/javascript">
 
-			function initalize() {
-				//qq();  this is my method to send json. Not same as the last one but not work as well; if you want see how it works
+			function initalize() 
+			{
 				
 			}
 			
@@ -264,32 +231,6 @@
   				 return xhr;
 			}
 		
-		</script>
-		
-
-		<script type="text/javascript">
-		  function qq()
-			{
-				var xhr = new XMLHttpRequest();
-				var url = "http://localhost:7777/toptrumps/example";
-				xhr.open("POST", url, true);
-				post.setHeader("Accept", "application/json");
-				post.setHeader("Content-type", "application/json");
-				xhr.setRequestHeader("Content-Type", "application/json");
-				xhr.onreadystatechange = function () {
-   				 if (xhr.readyState === 4 && xhr.status === 200) {
-       				 var json = JSON.parse(xhr.responseText);
-        			
-   				 }
-				};
-				
-			xhr.send(json);
-			
-			}
-		
-			
-			
-
 		</script>
 		
 		</body>
