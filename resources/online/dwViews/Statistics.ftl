@@ -223,9 +223,9 @@
 		
 		<!-- Here are examples of how to call REST API Methods -->
 		
-			// This calls the helloJSONList REST method from TopTrumpsRESTAPI
-			function numberOfGames() {
-			
+			//Gets the number of game statistic from database
+			function numberOfGames() 
+			{
 				// First create a CORS request, this is the message we are going to send (a get request in this case)
 				var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/numGames"); // Request type and URL
 				
@@ -245,6 +245,7 @@
 				xhr.send();		
 			}
 			
+			//Gets the number of times computer won statistic from database
 			function timesComputerWon()
 			{
 				var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/timescomputerwon");
@@ -263,8 +264,9 @@
 				xhr.send();
 			}
 			
-				function timesPersonWon() {
-			
+			//Gets the number of times a player won from database
+			function timesPersonWon() 
+			{
 				// First create a CORS request, this is the message we are going to send (a get request in this case)
 				var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/humanwin"); // Request type and URL
 				
@@ -284,6 +286,7 @@
 				xhr.send();		
 			}
 			
+			//Gets the average number of draws statistic from database			
 			function numDraws() {
 			
 				// First create a CORS request, this is the message we are going to send (a get request in this case)
@@ -305,7 +308,10 @@
 				xhr.send();		
 			}
 			
-				function numRounds() {
+			//Gets the highest number of rounds statistic from database
+			
+			function numRounds() 
+			{
 			
 				// First create a CORS request, this is the message we are going to send (a get request in this case)
 				var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/numRounds"); // Request type and URL

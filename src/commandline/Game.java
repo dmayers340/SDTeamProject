@@ -553,6 +553,10 @@ public class Game
 		username = u;	
 	}
 	
+	public Player getHumanPlayer ()
+	{
+		return listOfPlayers.get(0);
+  }	
 
 	public void setCurrentCategory(int c)
 
