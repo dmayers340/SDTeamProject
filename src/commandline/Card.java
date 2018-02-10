@@ -53,11 +53,11 @@ public class Card {
 		return cardString;
 	}
 	
+	
 	/**
 	 * @return categories;
 	 */
-	
-	public static ArrayList<String> getCategories ()
+	public ArrayList<String> getCategories ()
 	{
 		return categories;
 	}

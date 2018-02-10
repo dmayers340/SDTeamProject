@@ -58,7 +58,7 @@ public class TopTrumpsCLIApplication {
 			else if (choice.charAt(0) == 'G')
 			{  
 				DatabaseConnection db = new DatabaseConnection();
-				newGame = new Game(db);
+				newGame = new Game(db, writeGameLogsToFile);
 				newGame.setOnline(false);
 				newGame.setNumberOfPlayers(getNumberOfAIPlayers()+1);
 
@@ -142,11 +142,11 @@ public class TopTrumpsCLIApplication {
 		int temp = -1;
 
 		// checks if entered category is valid
-		newGame.getActivePlayer().getTopCard();
-		for (int i = 0; i < Card.getCategories().size(); i++)
+		Card drawnCard = newGame.getActivePlayer().getTopCard();
+		for (int i = 0; i < drawnCard.getCategories().size(); i++)
 		{
 			newGame.getActivePlayer().getTopCard();
-			if (categoryString.equalsIgnoreCase(Card.getCategories().get(i)))
+			if (categoryString.equalsIgnoreCase(drawnCard.getCategories().get(i)))
 				temp = i;
 		}
 

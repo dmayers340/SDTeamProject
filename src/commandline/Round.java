@@ -23,34 +23,57 @@ public class Round {
 
 	private StringBuilder roundLog = new StringBuilder();
 	private String logSeparator = "-------------------------------------------------------------------------------------------------------";
+	private boolean writeToLog; 
 
 
 	/**
 	 * constructor method 
 	 */
 
-	public Round (ArrayList <Player> p, Player ap, Integer cat, int r)
+	public Round (ArrayList <Player> p, Player ap, Integer category, int r, boolean w)
 
 	{
 		roundCount = r;
-		
-		roundLog.append(logSeparator);
-		String roundLog1 = String.format("%s%d", "ROUND ", roundCount); // sets top line for round log
-		roundLog.append("\n" + roundLog1 + "\n");
-		System.out.println();
+		writeToLog = w;
 
 		players = p;  
 		activePlayer = ap; 
-		c = cat;
-		
-		// remove later
-		String cate = String.format("%s%d%s%s", "The category for round ", roundCount," is ", 
-				activePlayer.getTopCard().getCategories().get(c).toUpperCase());
-		System.out.println(cat);
-		System.out.println("+ + + ");
-		
-		// wtf
-		roundLog.append("\n" + cat + "\n");
+		c = category; // sets category
+
+		if ( writeToLog == true)	
+		{ 
+			startLog();
+		}
+
+	}
+
+
+	/**
+	 * 	
+	 */
+	private void startLog() 
+	{
+		roundLog.append(logSeparator);
+		roundLog.append(String.format("%s%d\n", "ROUND LOG FOR ROUND ", roundCount));
+		roundLog.append(logSeparator);
+		roundLog.append(String.format("%s%d%s%s\n", "The active player for round ", roundCount, " is ", 
+				activePlayer.getName()));
+		roundLog.append(String.format("%s%d%s%s\n", "The category for round ", roundCount, " is ", 
+				activePlayer.getTopCard().getCategories().get(c)));
+		roundLog.append(getCommunalPile());
+
+		if (players.get(0).isInGame() == true)
+		{
+			roundLog.append("Your card details are printed below:");
+			roundLog.append("\n");
+			roundLog.append(players.get(0).getTopCard().toString());
+		}
+
+		else 
+		{
+			roundLog.append("You are currently  out of cards");
+			roundLog.append("\n");
+		}
 	}
 
 
@@ -64,7 +87,6 @@ public class Round {
 		System.out.println("ROUND NUMBER " + (roundCount)); 
 		String a = "The active player is " + activePlayer.getName().toUpperCase();
 
-		roundLog.append("\n" + a + "\n");
 		System.out.println(a);
 		System.out.println(" + + + ");
 		System.out.print(getCommunalPile()); // prints contents of communal pile
@@ -99,9 +121,7 @@ public class Round {
 
 		{
 			String w = "\nThe winner is " + winner.getName();
-			roundLog.append("\n");
-			roundLog.append(w);
-			roundLog.append("\n");
+
 			System.out.println(w);
 			System.out.println("\nThe winning card for round " + roundCount + " was: ");
 			System.out.println(winner.getTopCard().cString());
@@ -136,12 +156,14 @@ public class Round {
 			winner.receiveExtraCards(communalPile);
 			communalPile.removeAll(communalPile); // empties pile
 
-			String winnerIs = winner.getName() + " took all cards from the communal pile";
-			roundLog.append(winnerIs);
-			roundLog.append(System.getProperty("line.separator"));
-			roundLog.append(getCommunalPile());
-			roundLog.append(System.getProperty("line.separator"));
-
+			if (writeToLog == true)
+			{
+				String winnerIs = winner.getName() + " took all cards from the communal pile";			
+				roundLog.append(winnerIs);
+				roundLog.append(System.getProperty("line.separator"));
+				roundLog.append(getCommunalPile());
+				roundLog.append(System.getProperty("line.separator"));
+			}
 
 		}
 
@@ -203,10 +225,13 @@ public class Round {
 				}
 			}
 		}
-		roundLog.append("\n" + cards + "\n");
-		roundLog.append(" ");
-		roundLog.append(values);
 
+		if (writeToLog == true)
+		{
+			roundLog.append("\n" + cards + "\n");
+			roundLog.append(" ");
+			roundLog.append(values);
+		}
 
 	}
 
@@ -230,25 +255,15 @@ public class Round {
 
 
 		}
-		
+
 		String d = "\nRound " + roundCount + " was a draw";
 		System.out.println(d);
-		
+
 		roundLog.append(d);	
 		roundLog.append("\nNew cards have been added to the communal pile!");
 		roundLog.append("\n" + getCommunalPile() + "\n");
 
 	}
-
-
-
-
-	public String getCate() {
-		activePlayer.getTopCard();
-		String cate = Card.getCategories().get(c).toUpperCase();
-		return cate;
-	}
-
 
 
 	/**
@@ -268,8 +283,8 @@ public class Round {
 	 * if empty, @return a message stating that
 	 */
 
-	
-	
+
+
 	public String getCommunalPile()
 
 	{
@@ -293,7 +308,6 @@ public class Round {
 		{
 			String noCards = String.format("%s\n", "There are currently no cards in the communal pile");
 			roundLog.append(noCards);
-			roundLog.append(System.getProperty("line.separator"));
 			return noCards;
 		}
 
@@ -309,7 +323,7 @@ public class Round {
 	{
 		return draw;
 	}
-	
+
 
 	/**
 	 * accessor method

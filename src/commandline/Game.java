@@ -29,6 +29,7 @@ public class Game
 	private Player currentWinner;
 	private int currentCategory;
 	private int roundCount;
+	private static ArrayList <Player> listOfPlayers;
 
 	private static boolean isFinished;	
 	private static DatabaseConnection db;
@@ -37,7 +38,7 @@ public class Game
 	private String logSeparator = "-------------------------------------------------------------"+
 			"-------------------------";
 
-	private static ArrayList <Player> listOfPlayers;
+	private boolean writeToLog;
 	private final String LOG_FILE = "toptrumps.log";
 
 	private static String FILE_NAME = "StarCitizenDeck.txt"; // name of deck file
@@ -49,11 +50,12 @@ public class Game
 	 * @param Deck d = current deck 
 	 */
 
-	public Game (DatabaseConnection db)
+	public Game (DatabaseConnection db, boolean w)
 	{	
 		this.db = db;
 		gameNumber = db.getNumberOfGames()+1;
-
+		
+		writeToLog = w; 
 		roundCount = 1;
 		drawCount = 0; 
 		isFinished = false;
@@ -69,20 +71,19 @@ public class Game
 	{
 		readIn();
 
-		// this is all for testing
-		boolean deckOutputToLog = false;
-
-		if (isOnline = false)
+		 
+		boolean logExists = false;
+		if (writeToLog = true)
 		{
-			logDeck(currentDeck,deckOutputToLog);
+			logDeck(currentDeck,logExists);
 		}
 
 		currentDeck.shuffleDeck();
 
-		if (isOnline = false)
+		if (writeToLog = true)
 		{
-			deckOutputToLog = true;
-			logDeck(currentDeck, deckOutputToLog); //prints shuffled deck to log file
+			logExists = true;
+			logDeck(currentDeck, logExists); //prints shuffled deck to log file
 		}
 
 		remainingPlayers = numberOfPlayers; // starts with all players still in game
@@ -96,7 +97,7 @@ public class Game
 	public void startOnlineRound()
 
 	{
-		newRound = new Round(listOfPlayers, activePlayer, currentCategory);
+		newRound = new Round(listOfPlayers, activePlayer, currentCategory, roundCount, writeToLog);
 		newRound.playRound();
 
 		finishRound();  
@@ -107,15 +108,12 @@ public class Game
 	 * the last remaining player is the winner 
 	 */
 	public void startRound() 
-
 	{
 
-		newRound = new Round(listOfPlayers, activePlayer, currentCategory, roundCount);
+		newRound = new Round(listOfPlayers, activePlayer, currentCategory, roundCount, writeToLog);
 		newRound.playRound();
 
-		roundLog();
 		System.out.println(logSeparator);
-
 		finishRound();
 	}
 
@@ -145,7 +143,8 @@ public class Game
 			currentWinner = newRound.getWinner();
 			currentWinner.addWin();
 		}
-
+		
+		roundLog();
 		roundCount++;
 	}
 
@@ -168,8 +167,6 @@ public class Game
 		String s = String.format("%s%s%d%s\n", 
 				activePlayer.getName(), " is choosing the category for round ", roundCount, "...");
 		System.out.println(s);
-
-		// roundLog.append("\n" + s + "\n");
 
 		for (int i = 1; i < activePlayer.getTopCard().getCategories().size(); i++)
 		{
@@ -282,7 +279,7 @@ public class Game
 		}
 
 
-		if (isOnline = false)
+		if (writeToLog == true)
 		{
 			logDealtCards(); // right after they have been dealt
 		}
@@ -363,10 +360,10 @@ public class Game
 	 * 
 	 * 
 	 * @param d = current deck 
-	 * @param deckOutput  
+	 * @param logExists  
 	 */
 
-	private void logDeck(Deck d, boolean deckOutput)	{ //for printing to output log
+	private void logDeck(Deck d, boolean logExists)	{ //for printing to output log
 
 		PrintWriter printer = null;
 
@@ -380,7 +377,7 @@ public class Game
 
 				{
 
-					if (deckOutput == true) {
+					if (logExists == true) {
 						deck = currentDeck.dString();
 						deckDescriptor = "Shuffled deck\n";
 
@@ -434,7 +431,6 @@ public class Game
 				String playerCards = "";
 
 				{ 
-
 					for (Player p: listOfPlayers)
 
 					{
@@ -499,7 +495,7 @@ public class Game
 	 * 
 	 */
 
-	private void logCurrentWinner() {
+	private void logGameWinner() {
 
 		PrintWriter printer = null;
 
@@ -585,10 +581,11 @@ public class Game
 			currentWinner = newRound.getWinner();
 		}
 
-		if (isOnline = false)
+		if (writeToLog == true)
 		{
-			logCurrentWinner();
+			logGameWinner();
 		}
+		
 		return currentWinner;
 	}
 
@@ -619,6 +616,7 @@ public class Game
 		String roundData = rData.toString();
 		return roundData;
 	}
+	
 
 	private String getWinsPerPlayer(int i)
 	{
