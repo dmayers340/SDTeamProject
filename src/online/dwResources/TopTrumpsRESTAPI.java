@@ -83,7 +83,7 @@ public class TopTrumpsRESTAPI
 	{
 		String card = "";
 
-		game = new Game();
+		game = new Game(db);
 		game.setNumberOfPlayers(numberOfPlayers);
 		game.setUsername("Human");
 		game.initialiseGame();
