@@ -113,18 +113,8 @@ public class TopTrumpsRESTAPI
 		
 		else
 		{
-			String values1 = game.getHumanPlayer().getTopCard().toString();
-			
-			card1 = game.getHumanPlayer().getTopCard().cString() + values1;
-			String values2 = game.getPlayer(1).getTopCard().toString();
-			card2 = game.getPlayer(1).getTopCard().cString() + values2;
-			String values3 = game.getPlayer(2).getTopCard().toString();
-			card3 = game.getPlayer(2).getTopCard().cString() + values3;
-			String values4 = game.getPlayer(3).getTopCard().toString();
-			card4 = game.getPlayer(3).getTopCard().cString() + values4;
-			String values5 = game.getPlayer(4).getTopCard().toString();
-			card5 = game.getPlayer(4).getTopCard().cString() + values5;
-			
+			String values1 = game.getHumanPlayer().getTopCard().toString();		
+			card1 = game.getHumanPlayer().getTopCard().cString() + values1;		
 		}
 		
 		
