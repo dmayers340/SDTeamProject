@@ -104,7 +104,7 @@ public class TopTrumpsRESTAPI
 		else
 		{
 			String values = game.getHumanPlayer().getTopCard().toString();
-			card = values + game.getHumanPlayer().getTopCard().cString();
+			card = game.getHumanPlayer().getTopCard().cString() + values;
 		}
 		
 		game.startRound();
