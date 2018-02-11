@@ -98,15 +98,6 @@ public class Game
 		writeToLog = w;
 	}
 
-	public void startOnlineRound()
-
-	{
-		newRound = new Round(listOfPlayers, activePlayer, currentCategory, roundCount, writeToLog);
-		newRound.addRound();
-		newRound.playRound();
-
-		finishRound();  
-	}
 
 
 	/**
