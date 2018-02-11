@@ -10,8 +10,6 @@ public class TopTrumpsCLIApplication {
 	/**
 	 * instance variables
 	 */
-	private static DatabaseConnection db = new DatabaseConnection();
-
 	private static Player winner;
 	private static Game newGame;
 	private static int category;
@@ -59,8 +57,8 @@ public class TopTrumpsCLIApplication {
 			// starts a new game
 			else if (choice.charAt(0) == 'G')
 			{  
-				DatabaseConnection db = new DatabaseConnection();
-				newGame = new Game(db);
+
+				newGame = new Game();
 
 				newGame.writeToLog(writeGameLogsToFile);
 				newGame.setNumberOfPlayers(getNumberOfAIPlayers()+1);
@@ -257,13 +255,6 @@ public class TopTrumpsCLIApplication {
 		stats.append("  ____) |  | |/ ____ \\| |   _| |_ ____) |  | |   _| || |____ ____) |\n");
 		stats.append(" |_____/   |_/_/    \\_|_|  |_____|_____/   |_|  |_____\\_____|_____/ \n"); 
 		stats.append(" \n");
-
-		stats.append("Number of games played overall is " + db.getNumberOfGames() + "\n");
-		stats.append("The computer has won " + db.getComputerWin() + " times\n");
-		stats.append("The hooman has won " + db.getHumanWin() + " times\n");
-		stats.append("The average number of draws is " + db.getNumberOfDraws() + "\n");
-		stats.append("The largest number of rounds played in a single game is " + db.getMaxRounds() + "\n");
-
 		String statistics = stats.toString();
 		return statistics;
 	}

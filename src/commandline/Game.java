@@ -31,8 +31,7 @@ public class Game
 	private static ArrayList <Player> listOfPlayers;
 
 	private static boolean isFinished;	
-	private static DatabaseConnection db;
-	private static int gameNumber;
+		private static int gameNumber;
 	
 	private static final String newLine = (System.getProperty("line.separator"));
 	private static final String logSeparator = newLine + 
@@ -51,10 +50,10 @@ public class Game
 	 * @param Deck d = current deck 
 	 */
 
-	public Game (DatabaseConnection db)
+	public Game ()
 	{	
-		this.db = db;
-		gameNumber = db.getNumberOfGames()+1;
+		
+		gameNumber = 1;
 		
 		roundCount = 1;
 		drawCount = 0; 
@@ -136,8 +135,7 @@ public class Game
 		if (remainingPlayers <= 1)
 
 		{
-			isFinished = true; 
-			db.updateDB(getGameData(), getRoundData());
+			isFinished = true;  
 		}
 
 		if (newRound.isDraw() == true)

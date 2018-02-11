@@ -59,8 +59,7 @@ public class TopTrumpsRESTAPI
 	private int numberOfPlayers;
 
 	//Database Connection
-	private DatabaseConnection db = new DatabaseConnection();
-
+	 
 	ObjectWriter oWriter = new ObjectMapper().writerWithDefaultPrettyPrinter();
 
 	//Constructor, sets the deck, and number of players
@@ -83,7 +82,7 @@ public class TopTrumpsRESTAPI
 		String card = "";	
 		String loser;
 		
-		Game game = new Game(db);
+		Game game = new Game();
 		game.setNumberOfPlayers(numberOfPlayers);
 		game.setUsername("Human");
 		game.initialiseGame();
@@ -99,13 +98,13 @@ public class TopTrumpsRESTAPI
 
 		}
 		//start the game by getting number of players and dealing cards
-		game.runGame();
+		game.initialiseGame();
 		return card;
 		//display all player cards
 
 		//get new game from game.java
-		game = new Game(db);
-		game.setOnline(true);
+		game = new Game();
+		 
 		game.setNumberOfPlayers(numberOfPlayers);
 		game.setUsername("Human");
 
@@ -124,7 +123,7 @@ public class TopTrumpsRESTAPI
 
 			else
 			{
-				game.findBestCategory();
+				game.getActivePlayer().findBestCategory();
 			}
 
 			game.startRound();
@@ -205,7 +204,7 @@ public class TopTrumpsRESTAPI
 	@Path("/numGames")
 	public int numberOfGames() throws IOException
 	{
-		int numGames = db.getNumberOfGames();
+		int numGames = 1;
 		return numGames;
 	}
 
@@ -214,7 +213,7 @@ public class TopTrumpsRESTAPI
 	@Path("/timescomputerwon")
 	public int timesComputerWon() throws IOException
 	{
-		int compWins = db.getComputerWin();
+		int compWins = 1;
 		return compWins;
 	}
 
@@ -223,7 +222,7 @@ public class TopTrumpsRESTAPI
 	@Path("/humanwin")
 	public int timesPersonWon() throws IOException
 	{
-		int humanwin = db.getHumanWin();
+		int humanwin = 1;
 		return humanwin;
 	}
 
@@ -232,7 +231,7 @@ public class TopTrumpsRESTAPI
 	@Path("/numDraws")
 	public double numDraws() throws IOException
 	{
-		double numDraws = db.getNumberOfDraws();
+		double numDraws = 1;
 		return numDraws;
 	}
 
@@ -241,15 +240,8 @@ public class TopTrumpsRESTAPI
 	@Path("/numRounds")
 	public int numRounds() throws IOException
 	{
-		int numRounds = db.getMaxRounds();
+		int numRounds = 1;
 		return numRounds;
 	}
 
-	//Not sure where to close the database, made this an attempt to close
-	@GET
-	@Path("/closedb")
-	public void closedb() throws IOException
-	{
-		db.closeConnection();
-	}
 }
