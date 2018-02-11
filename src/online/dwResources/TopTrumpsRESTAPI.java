@@ -97,7 +97,6 @@ public class TopTrumpsRESTAPI
 	public String newGame() throws IOException
 	
 	{ 
-	
 		game.chooseActivePlayer();
 		activePlayer = game.getActivePlayer();
 		int cm = activePlayer.findBestCategory();
@@ -105,9 +104,7 @@ public class TopTrumpsRESTAPI
 
 		game.startRound();
 		
-	
-		//start the game by getting number of players and dealing cards
-		
+		//start the game by getting number of players and dealing cards	
 		String card = "";
 		if (game.getHumanPlayer().isInGame() == false)
 		{
@@ -135,7 +132,6 @@ public class TopTrumpsRESTAPI
  
 		// here is return the card num but seems not work
 		numcard=game.getHumanPlayer().getHand().size();
-		System.err.println("AT first the number of players cards is   " + numcard);
 		// here is return the card num but seems not work
 
 		return card1;
@@ -209,7 +205,6 @@ public class TopTrumpsRESTAPI
 	public String ndraw() throws IOException
 	{
 		String dr=oWriter.writeValueAsString(game.getDraw());
-		System.err.println("Was the round a draw?  " + dr);
 		return dr;
 	}
 	
@@ -219,7 +214,6 @@ public class TopTrumpsRESTAPI
 	public String getCardNum() throws IOException
 	{
 		String CardNum=oWriter.writeValueAsString(numcard);
-		System.err.println("WThe number of players cards is   " + CardNum);
 		return CardNum;
 	}
 	

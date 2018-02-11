@@ -27,7 +27,7 @@ public class Game
 	private Player activePlayer; // active player makes the category choice
 	private Player currentWinner;
 	private int currentCategory;
-	private int roundCount;
+	private int roundCount = 0;
 	private static ArrayList <Player> listOfPlayers;
 
 	private static boolean isFinished;	
@@ -38,7 +38,7 @@ public class Game
 	private static final String logSeparator = newLine + 
 			"------------------------------------------------------------------------------------------------" + newLine;
 	 
-	private boolean writeToLog = false;
+	private boolean writeToLog = true;
 	private final String LOG_FILE = "toptrumps.log";
 
 	private static String FILE_NAME = "StarCitizenDeck.txt"; // name of deck file
@@ -137,6 +137,12 @@ public class Game
 
 		{
 			isFinished = true; 
+			
+			if (writeToLog == true)
+			{
+				logGameWinner();
+			}
+			
 		//	db.updateDB(getGameData(), getRoundData());
 		}
 
@@ -551,11 +557,6 @@ public class Game
 		else // the last "standing" player becomes the winner
 		{
 			currentWinner = newRound.getWinner();
-		}
-
-		if (writeToLog == true)
-		{
-			logGameWinner();
 		}
 		
 		return currentWinner;
