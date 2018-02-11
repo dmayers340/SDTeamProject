@@ -66,6 +66,8 @@ public class TopTrumpsRESTAPI
 	private String card3="";
 	private String card4="";
 	private String card5="";
+	private String winner;
+	private int numcard;
 	//Database Connection
 //	private DatabaseConnection db = new DatabaseConnection();
 
@@ -113,6 +115,7 @@ public class TopTrumpsRESTAPI
 		else
 		{
 			String values1 = game.getHumanPlayer().getTopCard().toString();
+			
 			card1 = game.getHumanPlayer().getTopCard().cString() + values1;
 			String values2 = game.getPlayer(1).getTopCard().toString();
 			card2 = game.getPlayer(1).getTopCard().cString() + values2;
@@ -122,11 +125,14 @@ public class TopTrumpsRESTAPI
 			card4 = game.getPlayer(3).getTopCard().cString() + values4;
 			String values5 = game.getPlayer(4).getTopCard().toString();
 			card5 = game.getPlayer(4).getTopCard().cString() + values5;
+			
 		}
 		
 		game.startRound();
-
+		winner=game.getWinner().getName();
 		
+		// here is return the card num but seems not work
+		numcard=game.getHumanPlayer().getHand().size();
 		
 		return card1;
 		
@@ -148,18 +154,6 @@ public class TopTrumpsRESTAPI
 
 	}
 
-	//Goes to next round
-	@GET
-	@Path("/nextround")
-	public void nextRound() throws IOException
-	{
-		game.startRound();
-		System.err.println("asdsdada");
-	}
-
-
-
-	
 
 	@GET
 	@Path("/cardCategories3")
@@ -184,7 +178,39 @@ public class TopTrumpsRESTAPI
 		
 		return card5;
 	}
-
+	@GET
+	@Path("/roundwinner")
+	public String showRoundWinner() throws IOException
+	{
+	
+		return winner;
+	}
+	@GET
+	@Path("/activeplayer")
+	public String showActivePlayer() throws IOException
+	{
+		String act=activePlayer.getName();
+		return act;
+	}
+	
+	// send round result of whether is a draw to html but returns not true/false or 0/1
+	@GET
+	@Path("/draw")
+	public String ndraw() throws IOException
+	{
+		String dr=oWriter.writeValueAsString(game.getDraw());
+		return dr;
+	}
+	
+	//send card number of human player hand to html but number not correct
+	@GET
+	@Path("/cardnum")
+	public String getCardNum() throws IOException
+	{
+		String CardNum=oWriter.writeValueAsString(numcard);
+		return CardNum;
+	}
+	
 
 //	//Get the number of games played from database for statistic screen
 //	@GET
