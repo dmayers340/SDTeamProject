@@ -625,7 +625,7 @@ public class Game
 		return roundCount;
 	}
 
-	public boolean getDraw()
+	public boolean wasADraw()
 	{
 		return newRound.isDraw();
 	}
