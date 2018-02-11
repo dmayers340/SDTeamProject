@@ -47,104 +47,104 @@ Avenger        2              5              4              3              2
 Shuffled deck 
 
 DESCRIPTION    SIZE           SPEED          RANGE          FIREPOWER      CARGO           
-Hurricane      2              5              3              5              0               
-Sabre          2              7              2              5              0               
-m50            1              10             2              2              0               
-Sabre          2              7              2              5              0               
-Constellation  4              5              7              3              4               
-Orion          10             1              6              2              9               
-Avenger        2              5              4              3              2               
-Constellation  4              5              7              3              4               
-Orion          10             1              6              2              9               
-Hornet         2              5              3              4              1               
-Orion          10             1              6              2              9               
-350r           1              9              2              3              0               
-m50            1              10             2              2              0               
-Avenger        2              5              4              3              2               
-Hornet         2              5              3              4              1               
-Hawk           1              3              2              4              0               
 Hawk           1              3              2              4              0               
 m50            1              10             2              2              0               
-Hurricane      2              5              3              5              0               
+m50            1              10             2              2              0               
+Sabre          2              7              2              5              0               
+Carrack        6              2              10             4              6               
+Avenger        2              5              4              3              2               
+Constellation  4              5              7              3              4               
+Orion          10             1              6              2              9               
+Hawk           1              3              2              4              0               
+Carrack        6              2              10             4              6               
+m50            1              10             2              2              0               
+Sabre          2              7              2              5              0               
+Hornet         2              5              3              4              1               
+Hawk           1              3              2              4              0               
+Carrack        6              2              10             4              6               
+Avenger        2              5              4              3              2               
 Vanguard       3              4              5              5              2               
+Idris          8              2              7              10             6               
+Constellation  4              5              7              3              4               
+Idris          8              2              7              10             6               
+Avenger        2              5              4              3              2               
 Hurricane      2              5              3              5              0               
 Merchantman    7              3              5              6              8               
-Carrack        6              2              10             4              6               
-Idris          8              2              7              10             6               
-Vanguard       3              4              5              5              2               
 350r           1              9              2              3              0               
-Carrack        6              2              10             4              6               
 Hornet         2              5              3              4              1               
-Constellation  4              5              7              3              4               
-Avenger        2              5              4              3              2               
+Merchantman    7              3              5              6              8               
+Merchantman    7              3              5              6              8               
+350r           1              9              2              3              0               
+Idris          8              2              7              10             6               
+Hornet         2              5              3              4              1               
 Vanguard       3              4              5              5              2               
 Sabre          2              7              2              5              0               
-Hawk           1              3              2              4              0               
-Avenger        2              5              4              3              2               
-Merchantman    7              3              5              6              8               
-Carrack        6              2              10             4              6               
-Idris          8              2              7              10             6               
-Merchantman    7              3              5              6              8               
-Idris          8              2              7              10             6               
+Orion          10             1              6              2              9               
+Hurricane      2              5              3              5              0               
+Orion          10             1              6              2              9               
 350r           1              9              2              3              0               
+Hurricane      2              5              3              5              0               
+Avenger        2              5              4              3              2               
+Vanguard       3              4              5              5              2               
+Constellation  4              5              7              3              4               
 
 ------------------------------------------------------------------------------------------------
 
 
 Human's cards: 
 DESCRIPTION    SIZE           SPEED          RANGE          FIREPOWER      CARGO          
-Hurricane      2              5              3              5              0               
-Sabre          2              7              2              5              0               
+Hawk           1              3              2              4              0               
+m50            1              10             2              2              0               
 m50            1              10             2              2              0               
 Sabre          2              7              2              5              0               
-Constellation  4              5              7              3              4               
-Orion          10             1              6              2              9               
+Carrack        6              2              10             4              6               
 Avenger        2              5              4              3              2               
 Constellation  4              5              7              3              4               
+Orion          10             1              6              2              9               
 
 Player1's cards: 
 DESCRIPTION    SIZE           SPEED          RANGE          FIREPOWER      CARGO          
-Orion          10             1              6              2              9               
-Hornet         2              5              3              4              1               
-Orion          10             1              6              2              9               
-350r           1              9              2              3              0               
+Hawk           1              3              2              4              0               
+Carrack        6              2              10             4              6               
 m50            1              10             2              2              0               
-Avenger        2              5              4              3              2               
+Sabre          2              7              2              5              0               
 Hornet         2              5              3              4              1               
 Hawk           1              3              2              4              0               
+Carrack        6              2              10             4              6               
+Avenger        2              5              4              3              2               
 
 Player2's cards: 
 DESCRIPTION    SIZE           SPEED          RANGE          FIREPOWER      CARGO          
-Hawk           1              3              2              4              0               
-m50            1              10             2              2              0               
-Hurricane      2              5              3              5              0               
 Vanguard       3              4              5              5              2               
+Idris          8              2              7              10             6               
+Constellation  4              5              7              3              4               
+Idris          8              2              7              10             6               
+Avenger        2              5              4              3              2               
 Hurricane      2              5              3              5              0               
 Merchantman    7              3              5              6              8               
-Carrack        6              2              10             4              6               
-Idris          8              2              7              10             6               
+350r           1              9              2              3              0               
 
 Player3's cards: 
 DESCRIPTION    SIZE           SPEED          RANGE          FIREPOWER      CARGO          
-Vanguard       3              4              5              5              2               
-350r           1              9              2              3              0               
-Carrack        6              2              10             4              6               
 Hornet         2              5              3              4              1               
-Constellation  4              5              7              3              4               
-Avenger        2              5              4              3              2               
+Merchantman    7              3              5              6              8               
+Merchantman    7              3              5              6              8               
+350r           1              9              2              3              0               
+Idris          8              2              7              10             6               
+Hornet         2              5              3              4              1               
 Vanguard       3              4              5              5              2               
 Sabre          2              7              2              5              0               
 
 Player4's cards: 
 DESCRIPTION    SIZE           SPEED          RANGE          FIREPOWER      CARGO          
-Hawk           1              3              2              4              0               
-Avenger        2              5              4              3              2               
-Merchantman    7              3              5              6              8               
-Carrack        6              2              10             4              6               
-Idris          8              2              7              10             6               
-Merchantman    7              3              5              6              8               
-Idris          8              2              7              10             6               
+Orion          10             1              6              2              9               
+Hurricane      2              5              3              5              0               
+Orion          10             1              6              2              9               
 350r           1              9              2              3              0               
+Hurricane      2              5              3              5              0               
+Avenger        2              5              4              3              2               
+Vanguard       3              4              5              5              2               
+Constellation  4              5              7              3              4               
 
 
 
@@ -152,13 +152,13 @@ Idris          8              2              7              10             6
 ROUND LOG FOR ROUND 1
 ================================================================================================
 
-The active player for round 1 is Player2
+The active player for round 1 is Human
 The category for round 1 is Firepower
 There are no cards in the communal pile
 
 Your card details are printed below:
 DESCRIPTION    SIZE           SPEED          RANGE          FIREPOWER      CARGO          
-Hurricane      2              5              3              5              0               
+Hawk           1              3              2              4              0               
 
 ------------------------------------------------------------------------------------------------
 
@@ -166,83 +166,79 @@ Comparing cards for round 1
 
 The cards in play are:
 		DESCRIPTION    SIZE           SPEED          RANGE          FIREPOWER      CARGO          
-Human		Hurricane      2              5              3              5              0               
-Player1		Orion          10             1              6              2              9               
-Player2		Hawk           1              3              2              4              0               
-Player3		Vanguard       3              4              5              5              2               
-Player4		Hawk           1              3              2              4              0               
+Human		Hawk           1              3              2              4              0               
+Player1		Hawk           1              3              2              4              0               
+Player2		Vanguard       3              4              5              5              2               
+Player3		Hornet         2              5              3              4              1               
+Player4		Orion          10             1              6              2              9               
 
 The competing values are printed below:
-Human: 5
-Player1: 2
-Player2: 4
-Player3: 5
-Player4: 4
+Human: 4
+Player1: 4
+Player2: 5
+Player3: 4
+Player4: 2
 
 ------------------------------------------------------------------------------------------------
 
-Round 1 was a draw
+The winner of round 1 was Player2
 
-New cards have been added to the communal pile!
-There are 5 cards in the communal pile:
-
-DESCRIPTION    SIZE           SPEED          RANGE          FIREPOWER      CARGO          
-Hurricane      2              5              3              5              0               
-Orion          10             1              6              2              9               
-Hawk           1              3              2              4              0               
-Vanguard       3              4              5              5              2               
-Hawk           1              3              2              4              0               
-
+------------------------------------------------------------------------------------------------
 
 Human's cards: 
 DESCRIPTION    SIZE           SPEED          RANGE          FIREPOWER      CARGO          
-Sabre          2              7              2              5              0               
+m50            1              10             2              2              0               
 m50            1              10             2              2              0               
 Sabre          2              7              2              5              0               
-Constellation  4              5              7              3              4               
-Orion          10             1              6              2              9               
+Carrack        6              2              10             4              6               
 Avenger        2              5              4              3              2               
 Constellation  4              5              7              3              4               
+Orion          10             1              6              2              9               
 
 Player1's cards: 
 DESCRIPTION    SIZE           SPEED          RANGE          FIREPOWER      CARGO          
-Hornet         2              5              3              4              1               
-Orion          10             1              6              2              9               
-350r           1              9              2              3              0               
+Carrack        6              2              10             4              6               
 m50            1              10             2              2              0               
-Avenger        2              5              4              3              2               
+Sabre          2              7              2              5              0               
 Hornet         2              5              3              4              1               
 Hawk           1              3              2              4              0               
+Carrack        6              2              10             4              6               
+Avenger        2              5              4              3              2               
 
 Player2's cards: 
 DESCRIPTION    SIZE           SPEED          RANGE          FIREPOWER      CARGO          
-m50            1              10             2              2              0               
-Hurricane      2              5              3              5              0               
-Vanguard       3              4              5              5              2               
+Idris          8              2              7              10             6               
+Constellation  4              5              7              3              4               
+Idris          8              2              7              10             6               
+Avenger        2              5              4              3              2               
 Hurricane      2              5              3              5              0               
 Merchantman    7              3              5              6              8               
-Carrack        6              2              10             4              6               
-Idris          8              2              7              10             6               
+350r           1              9              2              3              0               
+Hawk           1              3              2              4              0               
+Hawk           1              3              2              4              0               
+Vanguard       3              4              5              5              2               
+Hornet         2              5              3              4              1               
+Orion          10             1              6              2              9               
 
 Player3's cards: 
 DESCRIPTION    SIZE           SPEED          RANGE          FIREPOWER      CARGO          
+Merchantman    7              3              5              6              8               
+Merchantman    7              3              5              6              8               
 350r           1              9              2              3              0               
-Carrack        6              2              10             4              6               
+Idris          8              2              7              10             6               
 Hornet         2              5              3              4              1               
-Constellation  4              5              7              3              4               
-Avenger        2              5              4              3              2               
 Vanguard       3              4              5              5              2               
 Sabre          2              7              2              5              0               
 
 Player4's cards: 
 DESCRIPTION    SIZE           SPEED          RANGE          FIREPOWER      CARGO          
-Avenger        2              5              4              3              2               
-Merchantman    7              3              5              6              8               
-Carrack        6              2              10             4              6               
-Idris          8              2              7              10             6               
-Merchantman    7              3              5              6              8               
-Idris          8              2              7              10             6               
+Hurricane      2              5              3              5              0               
+Orion          10             1              6              2              9               
 350r           1              9              2              3              0               
+Hurricane      2              5              3              5              0               
+Avenger        2              5              4              3              2               
+Vanguard       3              4              5              5              2               
+Constellation  4              5              7              3              4               
 
 
 
@@ -251,20 +247,12 @@ ROUND LOG FOR ROUND 2
 ================================================================================================
 
 The active player for round 2 is Player2
-The category for round 2 is Speed
-There are 5 cards in the communal pile:
-
-DESCRIPTION    SIZE           SPEED          RANGE          FIREPOWER      CARGO          
-Hurricane      2              5              3              5              0               
-Orion          10             1              6              2              9               
-Hawk           1              3              2              4              0               
-Vanguard       3              4              5              5              2               
-Hawk           1              3              2              4              0               
-
+The category for round 2 is Firepower
+There are no cards in the communal pile
 
 Your card details are printed below:
 DESCRIPTION    SIZE           SPEED          RANGE          FIREPOWER      CARGO          
-Sabre          2              7              2              5              0               
+m50            1              10             2              2              0               
 
 ------------------------------------------------------------------------------------------------
 
@@ -272,23 +260,20 @@ Comparing cards for round 2
 
 The cards in play are:
 		DESCRIPTION    SIZE           SPEED          RANGE          FIREPOWER      CARGO          
-Human		Sabre          2              7              2              5              0               
-Player1		Hornet         2              5              3              4              1               
-Player2		m50            1              10             2              2              0               
-Player3		350r           1              9              2              3              0               
-Player4		Avenger        2              5              4              3              2               
+Human		m50            1              10             2              2              0               
+Player1		Carrack        6              2              10             4              6               
+Player2		Idris          8              2              7              10             6               
+Player3		Merchantman    7              3              5              6              8               
+Player4		Hurricane      2              5              3              5              0               
 
 The competing values are printed below:
-Human: 7
-Player1: 5
+Human: 2
+Player1: 4
 Player2: 10
-Player3: 9
+Player3: 6
 Player4: 5
 
 ------------------------------------------------------------------------------------------------
-
-Player2 took all cards from the communal pile
-There are no cards in the communal pile
 
 The winner of round 2 was Player2
 
@@ -298,933 +283,54 @@ Human's cards:
 DESCRIPTION    SIZE           SPEED          RANGE          FIREPOWER      CARGO          
 m50            1              10             2              2              0               
 Sabre          2              7              2              5              0               
-Constellation  4              5              7              3              4               
-Orion          10             1              6              2              9               
+Carrack        6              2              10             4              6               
 Avenger        2              5              4              3              2               
 Constellation  4              5              7              3              4               
+Orion          10             1              6              2              9               
 
 Player1's cards: 
 DESCRIPTION    SIZE           SPEED          RANGE          FIREPOWER      CARGO          
-Orion          10             1              6              2              9               
-350r           1              9              2              3              0               
 m50            1              10             2              2              0               
-Avenger        2              5              4              3              2               
+Sabre          2              7              2              5              0               
 Hornet         2              5              3              4              1               
 Hawk           1              3              2              4              0               
+Carrack        6              2              10             4              6               
+Avenger        2              5              4              3              2               
 
 Player2's cards: 
 DESCRIPTION    SIZE           SPEED          RANGE          FIREPOWER      CARGO          
-Hurricane      2              5              3              5              0               
-Vanguard       3              4              5              5              2               
+Constellation  4              5              7              3              4               
+Idris          8              2              7              10             6               
+Avenger        2              5              4              3              2               
 Hurricane      2              5              3              5              0               
 Merchantman    7              3              5              6              8               
-Carrack        6              2              10             4              6               
-Idris          8              2              7              10             6               
-Hurricane      2              5              3              5              0               
-Orion          10             1              6              2              9               
+350r           1              9              2              3              0               
+Hawk           1              3              2              4              0               
 Hawk           1              3              2              4              0               
 Vanguard       3              4              5              5              2               
-Hawk           1              3              2              4              0               
-Sabre          2              7              2              5              0               
 Hornet         2              5              3              4              1               
+Orion          10             1              6              2              9               
 m50            1              10             2              2              0               
-350r           1              9              2              3              0               
-Avenger        2              5              4              3              2               
+Carrack        6              2              10             4              6               
+Idris          8              2              7              10             6               
+Merchantman    7              3              5              6              8               
+Hurricane      2              5              3              5              0               
 
 Player3's cards: 
 DESCRIPTION    SIZE           SPEED          RANGE          FIREPOWER      CARGO          
-Carrack        6              2              10             4              6               
+Merchantman    7              3              5              6              8               
+350r           1              9              2              3              0               
+Idris          8              2              7              10             6               
 Hornet         2              5              3              4              1               
-Constellation  4              5              7              3              4               
-Avenger        2              5              4              3              2               
 Vanguard       3              4              5              5              2               
 Sabre          2              7              2              5              0               
 
 Player4's cards: 
 DESCRIPTION    SIZE           SPEED          RANGE          FIREPOWER      CARGO          
-Merchantman    7              3              5              6              8               
-Carrack        6              2              10             4              6               
-Idris          8              2              7              10             6               
-Merchantman    7              3              5              6              8               
-Idris          8              2              7              10             6               
-350r           1              9              2              3              0               
-
-
-
-================================================================================================
-ROUND LOG FOR ROUND 3
-================================================================================================
-
-The active player for round 3 is Player2
-The category for round 3 is Speed
-There are no cards in the communal pile
-
-Your card details are printed below:
-DESCRIPTION    SIZE           SPEED          RANGE          FIREPOWER      CARGO          
-m50            1              10             2              2              0               
-
-------------------------------------------------------------------------------------------------
-
-Comparing cards for round 3
-
-The cards in play are:
-		DESCRIPTION    SIZE           SPEED          RANGE          FIREPOWER      CARGO          
-Human		m50            1              10             2              2              0               
-Player1		Orion          10             1              6              2              9               
-Player2		Hurricane      2              5              3              5              0               
-Player3		Carrack        6              2              10             4              6               
-Player4		Merchantman    7              3              5              6              8               
-
-The competing values are printed below:
-Human: 10
-Player1: 1
-Player2: 5
-Player3: 2
-Player4: 3
-
-------------------------------------------------------------------------------------------------
-
-The winner of round 3 was Human
-
-------------------------------------------------------------------------------------------------
-
-Human's cards: 
-DESCRIPTION    SIZE           SPEED          RANGE          FIREPOWER      CARGO          
-Sabre          2              7              2              5              0               
-Constellation  4              5              7              3              4               
 Orion          10             1              6              2              9               
-Avenger        2              5              4              3              2               
-Constellation  4              5              7              3              4               
-m50            1              10             2              2              0               
-Orion          10             1              6              2              9               
-Hurricane      2              5              3              5              0               
-Carrack        6              2              10             4              6               
-Merchantman    7              3              5              6              8               
-
-Player1's cards: 
-DESCRIPTION    SIZE           SPEED          RANGE          FIREPOWER      CARGO          
 350r           1              9              2              3              0               
-m50            1              10             2              2              0               
-Avenger        2              5              4              3              2               
-Hornet         2              5              3              4              1               
-Hawk           1              3              2              4              0               
-
-Player2's cards: 
-DESCRIPTION    SIZE           SPEED          RANGE          FIREPOWER      CARGO          
-Vanguard       3              4              5              5              2               
 Hurricane      2              5              3              5              0               
-Merchantman    7              3              5              6              8               
-Carrack        6              2              10             4              6               
-Idris          8              2              7              10             6               
-Hurricane      2              5              3              5              0               
-Orion          10             1              6              2              9               
-Hawk           1              3              2              4              0               
-Vanguard       3              4              5              5              2               
-Hawk           1              3              2              4              0               
-Sabre          2              7              2              5              0               
-Hornet         2              5              3              4              1               
-m50            1              10             2              2              0               
-350r           1              9              2              3              0               
-Avenger        2              5              4              3              2               
-
-Player3's cards: 
-DESCRIPTION    SIZE           SPEED          RANGE          FIREPOWER      CARGO          
-Hornet         2              5              3              4              1               
-Constellation  4              5              7              3              4               
 Avenger        2              5              4              3              2               
 Vanguard       3              4              5              5              2               
-Sabre          2              7              2              5              0               
-
-Player4's cards: 
-DESCRIPTION    SIZE           SPEED          RANGE          FIREPOWER      CARGO          
-Carrack        6              2              10             4              6               
-Idris          8              2              7              10             6               
-Merchantman    7              3              5              6              8               
-Idris          8              2              7              10             6               
-350r           1              9              2              3              0               
-
-
-
-================================================================================================
-ROUND LOG FOR ROUND 4
-================================================================================================
-
-The active player for round 4 is Human
-The category for round 4 is Speed
-There are no cards in the communal pile
-
-Your card details are printed below:
-DESCRIPTION    SIZE           SPEED          RANGE          FIREPOWER      CARGO          
-Sabre          2              7              2              5              0               
-
-------------------------------------------------------------------------------------------------
-
-Comparing cards for round 4
-
-The cards in play are:
-		DESCRIPTION    SIZE           SPEED          RANGE          FIREPOWER      CARGO          
-Human		Sabre          2              7              2              5              0               
-Player1		350r           1              9              2              3              0               
-Player2		Vanguard       3              4              5              5              2               
-Player3		Hornet         2              5              3              4              1               
-Player4		Carrack        6              2              10             4              6               
-
-The competing values are printed below:
-Human: 7
-Player1: 9
-Player2: 4
-Player3: 5
-Player4: 2
-
-------------------------------------------------------------------------------------------------
-
-The winner of round 4 was Player1
-
-------------------------------------------------------------------------------------------------
-
-Human's cards: 
-DESCRIPTION    SIZE           SPEED          RANGE          FIREPOWER      CARGO          
 Constellation  4              5              7              3              4               
-Orion          10             1              6              2              9               
-Avenger        2              5              4              3              2               
-Constellation  4              5              7              3              4               
-m50            1              10             2              2              0               
-Orion          10             1              6              2              9               
-Hurricane      2              5              3              5              0               
-Carrack        6              2              10             4              6               
-Merchantman    7              3              5              6              8               
-
-Player1's cards: 
-DESCRIPTION    SIZE           SPEED          RANGE          FIREPOWER      CARGO          
-m50            1              10             2              2              0               
-Avenger        2              5              4              3              2               
-Hornet         2              5              3              4              1               
-Hawk           1              3              2              4              0               
-Sabre          2              7              2              5              0               
-350r           1              9              2              3              0               
-Vanguard       3              4              5              5              2               
-Hornet         2              5              3              4              1               
-Carrack        6              2              10             4              6               
-
-Player2's cards: 
-DESCRIPTION    SIZE           SPEED          RANGE          FIREPOWER      CARGO          
-Hurricane      2              5              3              5              0               
-Merchantman    7              3              5              6              8               
-Carrack        6              2              10             4              6               
-Idris          8              2              7              10             6               
-Hurricane      2              5              3              5              0               
-Orion          10             1              6              2              9               
-Hawk           1              3              2              4              0               
-Vanguard       3              4              5              5              2               
-Hawk           1              3              2              4              0               
-Sabre          2              7              2              5              0               
-Hornet         2              5              3              4              1               
-m50            1              10             2              2              0               
-350r           1              9              2              3              0               
-Avenger        2              5              4              3              2               
-
-Player3's cards: 
-DESCRIPTION    SIZE           SPEED          RANGE          FIREPOWER      CARGO          
-Constellation  4              5              7              3              4               
-Avenger        2              5              4              3              2               
-Vanguard       3              4              5              5              2               
-Sabre          2              7              2              5              0               
-
-Player4's cards: 
-DESCRIPTION    SIZE           SPEED          RANGE          FIREPOWER      CARGO          
-Idris          8              2              7              10             6               
-Merchantman    7              3              5              6              8               
-Idris          8              2              7              10             6               
-350r           1              9              2              3              0               
-
-
-
-================================================================================================
-ROUND LOG FOR ROUND 5
-================================================================================================
-
-The active player for round 5 is Player1
-The category for round 5 is Speed
-There are no cards in the communal pile
-
-Your card details are printed below:
-DESCRIPTION    SIZE           SPEED          RANGE          FIREPOWER      CARGO          
-Constellation  4              5              7              3              4               
-
-------------------------------------------------------------------------------------------------
-
-Comparing cards for round 5
-
-The cards in play are:
-		DESCRIPTION    SIZE           SPEED          RANGE          FIREPOWER      CARGO          
-Human		Constellation  4              5              7              3              4               
-Player1		m50            1              10             2              2              0               
-Player2		Hurricane      2              5              3              5              0               
-Player3		Constellation  4              5              7              3              4               
-Player4		Idris          8              2              7              10             6               
-
-The competing values are printed below:
-Human: 5
-Player1: 10
-Player2: 5
-Player3: 5
-Player4: 2
-
-------------------------------------------------------------------------------------------------
-
-The winner of round 5 was Player1
-
-------------------------------------------------------------------------------------------------
-
-Human's cards: 
-DESCRIPTION    SIZE           SPEED          RANGE          FIREPOWER      CARGO          
-Orion          10             1              6              2              9               
-Avenger        2              5              4              3              2               
-Constellation  4              5              7              3              4               
-m50            1              10             2              2              0               
-Orion          10             1              6              2              9               
-Hurricane      2              5              3              5              0               
-Carrack        6              2              10             4              6               
-Merchantman    7              3              5              6              8               
-
-Player1's cards: 
-DESCRIPTION    SIZE           SPEED          RANGE          FIREPOWER      CARGO          
-Avenger        2              5              4              3              2               
-Hornet         2              5              3              4              1               
-Hawk           1              3              2              4              0               
-Sabre          2              7              2              5              0               
-350r           1              9              2              3              0               
-Vanguard       3              4              5              5              2               
-Hornet         2              5              3              4              1               
-Carrack        6              2              10             4              6               
-Constellation  4              5              7              3              4               
-m50            1              10             2              2              0               
-Hurricane      2              5              3              5              0               
-Constellation  4              5              7              3              4               
-Idris          8              2              7              10             6               
-
-Player2's cards: 
-DESCRIPTION    SIZE           SPEED          RANGE          FIREPOWER      CARGO          
-Merchantman    7              3              5              6              8               
-Carrack        6              2              10             4              6               
-Idris          8              2              7              10             6               
-Hurricane      2              5              3              5              0               
-Orion          10             1              6              2              9               
-Hawk           1              3              2              4              0               
-Vanguard       3              4              5              5              2               
-Hawk           1              3              2              4              0               
-Sabre          2              7              2              5              0               
-Hornet         2              5              3              4              1               
-m50            1              10             2              2              0               
-350r           1              9              2              3              0               
-Avenger        2              5              4              3              2               
-
-Player3's cards: 
-DESCRIPTION    SIZE           SPEED          RANGE          FIREPOWER      CARGO          
-Avenger        2              5              4              3              2               
-Vanguard       3              4              5              5              2               
-Sabre          2              7              2              5              0               
-
-Player4's cards: 
-DESCRIPTION    SIZE           SPEED          RANGE          FIREPOWER      CARGO          
-Merchantman    7              3              5              6              8               
-Idris          8              2              7              10             6               
-350r           1              9              2              3              0               
-
-
-
-================================================================================================
-ROUND LOG FOR ROUND 6
-================================================================================================
-
-The active player for round 6 is Player1
-The category for round 6 is Speed
-There are no cards in the communal pile
-
-Your card details are printed below:
-DESCRIPTION    SIZE           SPEED          RANGE          FIREPOWER      CARGO          
-Orion          10             1              6              2              9               
-
-------------------------------------------------------------------------------------------------
-
-Comparing cards for round 6
-
-The cards in play are:
-		DESCRIPTION    SIZE           SPEED          RANGE          FIREPOWER      CARGO          
-Human		Orion          10             1              6              2              9               
-Player1		Avenger        2              5              4              3              2               
-Player2		Merchantman    7              3              5              6              8               
-Player3		Avenger        2              5              4              3              2               
-Player4		Merchantman    7              3              5              6              8               
-
-The competing values are printed below:
-Human: 1
-Player1: 5
-Player2: 3
-Player3: 5
-Player4: 3
-
-------------------------------------------------------------------------------------------------
-
-Round 6 was a draw
-
-New cards have been added to the communal pile!
-There are 5 cards in the communal pile:
-
-DESCRIPTION    SIZE           SPEED          RANGE          FIREPOWER      CARGO          
-Orion          10             1              6              2              9               
-Avenger        2              5              4              3              2               
-Merchantman    7              3              5              6              8               
-Avenger        2              5              4              3              2               
-Merchantman    7              3              5              6              8               
-
-
-Human's cards: 
-DESCRIPTION    SIZE           SPEED          RANGE          FIREPOWER      CARGO          
-Avenger        2              5              4              3              2               
-Constellation  4              5              7              3              4               
-m50            1              10             2              2              0               
-Orion          10             1              6              2              9               
-Hurricane      2              5              3              5              0               
-Carrack        6              2              10             4              6               
-Merchantman    7              3              5              6              8               
-
-Player1's cards: 
-DESCRIPTION    SIZE           SPEED          RANGE          FIREPOWER      CARGO          
-Hornet         2              5              3              4              1               
-Hawk           1              3              2              4              0               
-Sabre          2              7              2              5              0               
-350r           1              9              2              3              0               
-Vanguard       3              4              5              5              2               
-Hornet         2              5              3              4              1               
-Carrack        6              2              10             4              6               
-Constellation  4              5              7              3              4               
-m50            1              10             2              2              0               
-Hurricane      2              5              3              5              0               
-Constellation  4              5              7              3              4               
-Idris          8              2              7              10             6               
-
-Player2's cards: 
-DESCRIPTION    SIZE           SPEED          RANGE          FIREPOWER      CARGO          
-Carrack        6              2              10             4              6               
-Idris          8              2              7              10             6               
-Hurricane      2              5              3              5              0               
-Orion          10             1              6              2              9               
-Hawk           1              3              2              4              0               
-Vanguard       3              4              5              5              2               
-Hawk           1              3              2              4              0               
-Sabre          2              7              2              5              0               
-Hornet         2              5              3              4              1               
-m50            1              10             2              2              0               
-350r           1              9              2              3              0               
-Avenger        2              5              4              3              2               
-
-Player3's cards: 
-DESCRIPTION    SIZE           SPEED          RANGE          FIREPOWER      CARGO          
-Vanguard       3              4              5              5              2               
-Sabre          2              7              2              5              0               
-
-Player4's cards: 
-DESCRIPTION    SIZE           SPEED          RANGE          FIREPOWER      CARGO          
-Idris          8              2              7              10             6               
-350r           1              9              2              3              0               
-
-
-
-================================================================================================
-ROUND LOG FOR ROUND 7
-================================================================================================
-
-The active player for round 7 is Player1
-The category for round 7 is Speed
-There are 5 cards in the communal pile:
-
-DESCRIPTION    SIZE           SPEED          RANGE          FIREPOWER      CARGO          
-Orion          10             1              6              2              9               
-Avenger        2              5              4              3              2               
-Merchantman    7              3              5              6              8               
-Avenger        2              5              4              3              2               
-Merchantman    7              3              5              6              8               
-
-
-Your card details are printed below:
-DESCRIPTION    SIZE           SPEED          RANGE          FIREPOWER      CARGO          
-Avenger        2              5              4              3              2               
-
-------------------------------------------------------------------------------------------------
-
-Comparing cards for round 7
-
-The cards in play are:
-		DESCRIPTION    SIZE           SPEED          RANGE          FIREPOWER      CARGO          
-Human		Avenger        2              5              4              3              2               
-Player1		Hornet         2              5              3              4              1               
-Player2		Carrack        6              2              10             4              6               
-Player3		Vanguard       3              4              5              5              2               
-Player4		Idris          8              2              7              10             6               
-
-The competing values are printed below:
-Human: 5
-Player1: 5
-Player2: 2
-Player3: 4
-Player4: 2
-
-------------------------------------------------------------------------------------------------
-
-Round 7 was a draw
-
-New cards have been added to the communal pile!
-There are 10 cards in the communal pile:
-
-DESCRIPTION    SIZE           SPEED          RANGE          FIREPOWER      CARGO          
-Orion          10             1              6              2              9               
-Avenger        2              5              4              3              2               
-Merchantman    7              3              5              6              8               
-Avenger        2              5              4              3              2               
-Merchantman    7              3              5              6              8               
-Avenger        2              5              4              3              2               
-Hornet         2              5              3              4              1               
-Carrack        6              2              10             4              6               
-Vanguard       3              4              5              5              2               
-Idris          8              2              7              10             6               
-
-
-Human's cards: 
-DESCRIPTION    SIZE           SPEED          RANGE          FIREPOWER      CARGO          
-Constellation  4              5              7              3              4               
-m50            1              10             2              2              0               
-Orion          10             1              6              2              9               
-Hurricane      2              5              3              5              0               
-Carrack        6              2              10             4              6               
-Merchantman    7              3              5              6              8               
-
-Player1's cards: 
-DESCRIPTION    SIZE           SPEED          RANGE          FIREPOWER      CARGO          
-Hawk           1              3              2              4              0               
-Sabre          2              7              2              5              0               
-350r           1              9              2              3              0               
-Vanguard       3              4              5              5              2               
-Hornet         2              5              3              4              1               
-Carrack        6              2              10             4              6               
-Constellation  4              5              7              3              4               
-m50            1              10             2              2              0               
-Hurricane      2              5              3              5              0               
-Constellation  4              5              7              3              4               
-Idris          8              2              7              10             6               
-
-Player2's cards: 
-DESCRIPTION    SIZE           SPEED          RANGE          FIREPOWER      CARGO          
-Idris          8              2              7              10             6               
-Hurricane      2              5              3              5              0               
-Orion          10             1              6              2              9               
-Hawk           1              3              2              4              0               
-Vanguard       3              4              5              5              2               
-Hawk           1              3              2              4              0               
-Sabre          2              7              2              5              0               
-Hornet         2              5              3              4              1               
-m50            1              10             2              2              0               
-350r           1              9              2              3              0               
-Avenger        2              5              4              3              2               
-
-Player3's cards: 
-DESCRIPTION    SIZE           SPEED          RANGE          FIREPOWER      CARGO          
-Sabre          2              7              2              5              0               
-
-Player4's cards: 
-DESCRIPTION    SIZE           SPEED          RANGE          FIREPOWER      CARGO          
-350r           1              9              2              3              0               
-
-
-
-================================================================================================
-ROUND LOG FOR ROUND 8
-================================================================================================
-
-The active player for round 8 is Player1
-The category for round 8 is Firepower
-There are 10 cards in the communal pile:
-
-DESCRIPTION    SIZE           SPEED          RANGE          FIREPOWER      CARGO          
-Orion          10             1              6              2              9               
-Avenger        2              5              4              3              2               
-Merchantman    7              3              5              6              8               
-Avenger        2              5              4              3              2               
-Merchantman    7              3              5              6              8               
-Avenger        2              5              4              3              2               
-Hornet         2              5              3              4              1               
-Carrack        6              2              10             4              6               
-Vanguard       3              4              5              5              2               
-Idris          8              2              7              10             6               
-
-
-Your card details are printed below:
-DESCRIPTION    SIZE           SPEED          RANGE          FIREPOWER      CARGO          
-Constellation  4              5              7              3              4               
-
-------------------------------------------------------------------------------------------------
-
-Comparing cards for round 8
-
-The cards in play are:
-		DESCRIPTION    SIZE           SPEED          RANGE          FIREPOWER      CARGO          
-Human		Constellation  4              5              7              3              4               
-Player1		Hawk           1              3              2              4              0               
-Player2		Idris          8              2              7              10             6               
-Player3		Sabre          2              7              2              5              0               
-Player4		350r           1              9              2              3              0               
-
-The competing values are printed below:
-Human: 3
-Player1: 4
-Player2: 10
-Player3: 5
-Player4: 3
-
-------------------------------------------------------------------------------------------------
-
-Player2 took all cards from the communal pile
-There are no cards in the communal pile
-
-The winner of round 8 was Player2
-
-------------------------------------------------------------------------------------------------
-
-Human's cards: 
-DESCRIPTION    SIZE           SPEED          RANGE          FIREPOWER      CARGO          
-m50            1              10             2              2              0               
-Orion          10             1              6              2              9               
-Hurricane      2              5              3              5              0               
-Carrack        6              2              10             4              6               
-Merchantman    7              3              5              6              8               
-
-Player1's cards: 
-DESCRIPTION    SIZE           SPEED          RANGE          FIREPOWER      CARGO          
-Sabre          2              7              2              5              0               
-350r           1              9              2              3              0               
-Vanguard       3              4              5              5              2               
-Hornet         2              5              3              4              1               
-Carrack        6              2              10             4              6               
-Constellation  4              5              7              3              4               
-m50            1              10             2              2              0               
-Hurricane      2              5              3              5              0               
-Constellation  4              5              7              3              4               
-Idris          8              2              7              10             6               
-
-Player2's cards: 
-DESCRIPTION    SIZE           SPEED          RANGE          FIREPOWER      CARGO          
-Hurricane      2              5              3              5              0               
-Orion          10             1              6              2              9               
-Hawk           1              3              2              4              0               
-Vanguard       3              4              5              5              2               
-Hawk           1              3              2              4              0               
-Sabre          2              7              2              5              0               
-Hornet         2              5              3              4              1               
-m50            1              10             2              2              0               
-350r           1              9              2              3              0               
-Avenger        2              5              4              3              2               
-Orion          10             1              6              2              9               
-Avenger        2              5              4              3              2               
-Merchantman    7              3              5              6              8               
-Avenger        2              5              4              3              2               
-Merchantman    7              3              5              6              8               
-Avenger        2              5              4              3              2               
-Hornet         2              5              3              4              1               
-Carrack        6              2              10             4              6               
-Vanguard       3              4              5              5              2               
-Idris          8              2              7              10             6               
-Constellation  4              5              7              3              4               
-Hawk           1              3              2              4              0               
-Idris          8              2              7              10             6               
-Sabre          2              7              2              5              0               
-350r           1              9              2              3              0               
-
-Player3's cards: 
-Player3 has no cards
-
-Player4's cards: 
-Player4 has no cards
-
-
-
-================================================================================================
-ROUND LOG FOR ROUND 9
-================================================================================================
-
-The active player for round 9 is Player2
-The category for round 9 is Speed
-There are no cards in the communal pile
-
-Your card details are printed below:
-DESCRIPTION    SIZE           SPEED          RANGE          FIREPOWER      CARGO          
-m50            1              10             2              2              0               
-
-------------------------------------------------------------------------------------------------
-
-Comparing cards for round 9
-
-The cards in play are:
-		DESCRIPTION    SIZE           SPEED          RANGE          FIREPOWER      CARGO          
-Human		m50            1              10             2              2              0               
-Player1		Sabre          2              7              2              5              0               
-Player2		Hurricane      2              5              3              5              0               
-
-The competing values are printed below:
-Human: 10
-Player1: 7
-Player2: 5
-
-------------------------------------------------------------------------------------------------
-
-The winner of round 9 was Human
-
-------------------------------------------------------------------------------------------------
-
-Human's cards: 
-DESCRIPTION    SIZE           SPEED          RANGE          FIREPOWER      CARGO          
-Orion          10             1              6              2              9               
-Hurricane      2              5              3              5              0               
-Carrack        6              2              10             4              6               
-Merchantman    7              3              5              6              8               
-m50            1              10             2              2              0               
-Sabre          2              7              2              5              0               
-Hurricane      2              5              3              5              0               
-
-Player1's cards: 
-DESCRIPTION    SIZE           SPEED          RANGE          FIREPOWER      CARGO          
-350r           1              9              2              3              0               
-Vanguard       3              4              5              5              2               
-Hornet         2              5              3              4              1               
-Carrack        6              2              10             4              6               
-Constellation  4              5              7              3              4               
-m50            1              10             2              2              0               
-Hurricane      2              5              3              5              0               
-Constellation  4              5              7              3              4               
-Idris          8              2              7              10             6               
-
-Player2's cards: 
-DESCRIPTION    SIZE           SPEED          RANGE          FIREPOWER      CARGO          
-Orion          10             1              6              2              9               
-Hawk           1              3              2              4              0               
-Vanguard       3              4              5              5              2               
-Hawk           1              3              2              4              0               
-Sabre          2              7              2              5              0               
-Hornet         2              5              3              4              1               
-m50            1              10             2              2              0               
-350r           1              9              2              3              0               
-Avenger        2              5              4              3              2               
-Orion          10             1              6              2              9               
-Avenger        2              5              4              3              2               
-Merchantman    7              3              5              6              8               
-Avenger        2              5              4              3              2               
-Merchantman    7              3              5              6              8               
-Avenger        2              5              4              3              2               
-Hornet         2              5              3              4              1               
-Carrack        6              2              10             4              6               
-Vanguard       3              4              5              5              2               
-Idris          8              2              7              10             6               
-Constellation  4              5              7              3              4               
-Hawk           1              3              2              4              0               
-Idris          8              2              7              10             6               
-Sabre          2              7              2              5              0               
-350r           1              9              2              3              0               
-
-Player3's cards: 
-Player3 has no cards
-
-Player4's cards: 
-Player4 has no cards
-
-
-
-================================================================================================
-ROUND LOG FOR ROUND 10
-================================================================================================
-
-The active player for round 10 is Human
-The category for round 10 is Size
-There are no cards in the communal pile
-
-Your card details are printed below:
-DESCRIPTION    SIZE           SPEED          RANGE          FIREPOWER      CARGO          
-Orion          10             1              6              2              9               
-
-------------------------------------------------------------------------------------------------
-
-Comparing cards for round 10
-
-The cards in play are:
-		DESCRIPTION    SIZE           SPEED          RANGE          FIREPOWER      CARGO          
-Human		Orion          10             1              6              2              9               
-Player1		350r           1              9              2              3              0               
-Player2		Orion          10             1              6              2              9               
-
-The competing values are printed below:
-Human: 10
-Player1: 1
-Player2: 10
-
-------------------------------------------------------------------------------------------------
-
-Round 10 was a draw
-
-New cards have been added to the communal pile!
-There are 3 cards in the communal pile:
-
-DESCRIPTION    SIZE           SPEED          RANGE          FIREPOWER      CARGO          
-Orion          10             1              6              2              9               
-350r           1              9              2              3              0               
-Orion          10             1              6              2              9               
-
-
-Human's cards: 
-DESCRIPTION    SIZE           SPEED          RANGE          FIREPOWER      CARGO          
-Hurricane      2              5              3              5              0               
-Carrack        6              2              10             4              6               
-Merchantman    7              3              5              6              8               
-m50            1              10             2              2              0               
-Sabre          2              7              2              5              0               
-Hurricane      2              5              3              5              0               
-
-Player1's cards: 
-DESCRIPTION    SIZE           SPEED          RANGE          FIREPOWER      CARGO          
-Vanguard       3              4              5              5              2               
-Hornet         2              5              3              4              1               
-Carrack        6              2              10             4              6               
-Constellation  4              5              7              3              4               
-m50            1              10             2              2              0               
-Hurricane      2              5              3              5              0               
-Constellation  4              5              7              3              4               
-Idris          8              2              7              10             6               
-
-Player2's cards: 
-DESCRIPTION    SIZE           SPEED          RANGE          FIREPOWER      CARGO          
-Hawk           1              3              2              4              0               
-Vanguard       3              4              5              5              2               
-Hawk           1              3              2              4              0               
-Sabre          2              7              2              5              0               
-Hornet         2              5              3              4              1               
-m50            1              10             2              2              0               
-350r           1              9              2              3              0               
-Avenger        2              5              4              3              2               
-Orion          10             1              6              2              9               
-Avenger        2              5              4              3              2               
-Merchantman    7              3              5              6              8               
-Avenger        2              5              4              3              2               
-Merchantman    7              3              5              6              8               
-Avenger        2              5              4              3              2               
-Hornet         2              5              3              4              1               
-Carrack        6              2              10             4              6               
-Vanguard       3              4              5              5              2               
-Idris          8              2              7              10             6               
-Constellation  4              5              7              3              4               
-Hawk           1              3              2              4              0               
-Idris          8              2              7              10             6               
-Sabre          2              7              2              5              0               
-350r           1              9              2              3              0               
-
-Player3's cards: 
-Player3 has no cards
-
-Player4's cards: 
-Player4 has no cards
-
-
-
-================================================================================================
-ROUND LOG FOR ROUND 11
-================================================================================================
-
-The active player for round 11 is Human
-The category for round 11 is Speed
-There are 3 cards in the communal pile:
-
-DESCRIPTION    SIZE           SPEED          RANGE          FIREPOWER      CARGO          
-Orion          10             1              6              2              9               
-350r           1              9              2              3              0               
-Orion          10             1              6              2              9               
-
-
-Your card details are printed below:
-DESCRIPTION    SIZE           SPEED          RANGE          FIREPOWER      CARGO          
-Hurricane      2              5              3              5              0               
-
-------------------------------------------------------------------------------------------------
-
-Comparing cards for round 11
-
-The cards in play are:
-		DESCRIPTION    SIZE           SPEED          RANGE          FIREPOWER      CARGO          
-Human		Hurricane      2              5              3              5              0               
-Player1		Vanguard       3              4              5              5              2               
-Player2		Hawk           1              3              2              4              0               
-
-The competing values are printed below:
-Human: 5
-Player1: 4
-Player2: 3
-
-------------------------------------------------------------------------------------------------
-
-Human took all cards from the communal pile
-There are no cards in the communal pile
-
-The winner of round 11 was Human
-
-------------------------------------------------------------------------------------------------
-
-Human's cards: 
-DESCRIPTION    SIZE           SPEED          RANGE          FIREPOWER      CARGO          
-Carrack        6              2              10             4              6               
-Merchantman    7              3              5              6              8               
-m50            1              10             2              2              0               
-Sabre          2              7              2              5              0               
-Hurricane      2              5              3              5              0               
-Orion          10             1              6              2              9               
-350r           1              9              2              3              0               
-Orion          10             1              6              2              9               
-Hurricane      2              5              3              5              0               
-Vanguard       3              4              5              5              2               
-Hawk           1              3              2              4              0               
-
-Player1's cards: 
-DESCRIPTION    SIZE           SPEED          RANGE          FIREPOWER      CARGO          
-Hornet         2              5              3              4              1               
-Carrack        6              2              10             4              6               
-Constellation  4              5              7              3              4               
-m50            1              10             2              2              0               
-Hurricane      2              5              3              5              0               
-Constellation  4              5              7              3              4               
-Idris          8              2              7              10             6               
-
-Player2's cards: 
-DESCRIPTION    SIZE           SPEED          RANGE          FIREPOWER      CARGO          
-Vanguard       3              4              5              5              2               
-Hawk           1              3              2              4              0               
-Sabre          2              7              2              5              0               
-Hornet         2              5              3              4              1               
-m50            1              10             2              2              0               
-350r           1              9              2              3              0               
-Avenger        2              5              4              3              2               
-Orion          10             1              6              2              9               
-Avenger        2              5              4              3              2               
-Merchantman    7              3              5              6              8               
-Avenger        2              5              4              3              2               
-Merchantman    7              3              5              6              8               
-Avenger        2              5              4              3              2               
-Hornet         2              5              3              4              1               
-Carrack        6              2              10             4              6               
-Vanguard       3              4              5              5              2               
-Idris          8              2              7              10             6               
-Constellation  4              5              7              3              4               
-Hawk           1              3              2              4              0               
-Idris          8              2              7              10             6               
-Sabre          2              7              2              5              0               
-350r           1              9              2              3              0               
-
-Player3's cards: 
-Player3 has no cards
-
-Player4's cards: 
-Player4 has no cards
 

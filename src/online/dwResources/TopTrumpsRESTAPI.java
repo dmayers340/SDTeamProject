@@ -85,8 +85,6 @@ public class TopTrumpsRESTAPI
 		game.setNumberOfPlayers(numberOfPlayers);
 		game.setUsername("Human");
 		game.initialiseGame();
-		
-	
 	}
 
 
@@ -95,12 +93,11 @@ public class TopTrumpsRESTAPI
 	@GET
 	@Path("/newgame")
 	public String newGame() throws IOException
-	
 	{ 
 		game.chooseActivePlayer();
 		activePlayer = game.getActivePlayer();
-		int cm = activePlayer.findBestCategory();
-		game.setCurrentCategory(cm);
+		int categorySelect = activePlayer.findBestCategory();
+		game.setCurrentCategory(categorySelect);
 
 		game.startRound();
 		
@@ -123,17 +120,13 @@ public class TopTrumpsRESTAPI
 			String values4 = game.getPlayer(3).getTopCard().toString();
 			card4 = game.getPlayer(3).getTopCard().cString() + values4;
 			String values5 = game.getPlayer(4).getTopCard().toString();
-			card5 = game.getPlayer(4).getTopCard().cString() + values5;
-			
+			card5 = game.getPlayer(4).getTopCard().cString() + values5;	
 		}
-		
-		
+
 		winner=game.getWinner().getName();
  
 		// here is return the card num but seems not work
 		numcard=game.getHumanPlayer().getHand().size();
-		// here is return the card num but seems not work
-
 		return card1;
 	}
 
@@ -219,7 +212,7 @@ public class TopTrumpsRESTAPI
 	
 	// when user click the new game button should start a new game
 	@GET
-	@Path("/newg")
+	@Path("/playagain")
 
 	public int newg(@QueryParam("num") int a) throws IOException {
 		if (a==1)
@@ -236,7 +229,7 @@ public class TopTrumpsRESTAPI
 	// return the category of user select as int 1:size 2: speed 3:range 4:firepower  5:cargo
 	// it does return and value is correct
 	@GET
-	@Path("/sca")
+	@Path("/category")
 
 	public int sca(@QueryParam("num") int categ) throws IOException {
 		System.err.println(categ);
