@@ -30,6 +30,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectReader;
 import com.fasterxml.jackson.databind.ObjectWriter;
 
+
+
 //imports from commandline
 import commandline.Card;
 import commandline.Deck;
@@ -79,36 +81,34 @@ public class TopTrumpsRESTAPI
 		//THIS IS STRING==need to pass to deck class to make categories
 		deck = conf.getDeckFile();
 		numberOfPlayers=conf.getNumAIPlayers()+1;
+		game = new Game();
+		game.setNumberOfPlayers(numberOfPlayers);
+		game.setUsername("Human");
+		game.initialiseGame();
+		
 	
 	}
 
 
 
-	// API Methods 
-
-	//This starts the game for game screen
+	//This starts the game for game screen and user get his top card at hand
 	@GET
 	@Path("/newgame")
 	public String newGame() throws IOException
-	{
 	
-		String card = "";
-		
-		
-		System.out.println("new Game");
-		game = new Game();
-		game.setNumberOfPlayers(numberOfPlayers);
-		game.setUsername("Human");
-		game.initialiseGame();
-
-		//start the game by getting number of players and dealing cards
+	{ 
+	
 		game.chooseActivePlayer();
-		
 		activePlayer = game.getActivePlayer();
-		int c = activePlayer.findBestCategory();
+		int cm = activePlayer.findBestCategory();
+		game.setCurrentCategory(cm);
+
+		game.startRound();
 		
-		game.setCurrentCategory(c);
+	
+		//start the game by getting number of players and dealing cards
 		
+		String card = "";
 		if (game.getHumanPlayer().isInGame() == false)
 		{
 			card = "You are out of cards";
@@ -130,19 +130,18 @@ public class TopTrumpsRESTAPI
 			
 		}
 		
-		game.startRound();
-		winner=game.getWinner().getName();
 		
-		 
+		winner=game.getWinner().getName();
+ 
 		// here is return the card num but seems not work
 		numcard=game.getHumanPlayer().getHand().size();
 		System.err.println("AT first the number of players cards is   " + numcard);
 		// here is return the card num but seems not work
-		
+
 		return card1;
-		
 	}
 
+	//get AI1 top card at hand
 	@GET
 	@Path("/cardCategories2")
 	public String cardDescription2() throws IOException
@@ -159,7 +158,7 @@ public class TopTrumpsRESTAPI
 
 	}
 
-
+	//get AI2 top card at hand
 	@GET
 	@Path("/cardCategories3")
 	public String cardDescription3() throws IOException
@@ -167,7 +166,8 @@ public class TopTrumpsRESTAPI
 		
 		return card3;
 	}
-
+	
+	//get AI3 top card at hand
 	@GET
 	@Path("/cardCategories4")
 	public String cardDescription4() throws IOException
@@ -176,6 +176,7 @@ public class TopTrumpsRESTAPI
 		return card4;
 	}
 
+	//get AI4 top card at hand
 	@GET
 	@Path("/cardCategories5")
 	public String cardDescription5() throws IOException
@@ -183,6 +184,8 @@ public class TopTrumpsRESTAPI
 		
 		return card5;
 	}
+	
+	//get the round winner
 	@GET
 	@Path("/roundwinner")
 	public String showRoundWinner() throws IOException
@@ -190,6 +193,8 @@ public class TopTrumpsRESTAPI
 	
 		return winner;
 	}
+	
+	//get the active player name
 	@GET
 	@Path("/activeplayer")
 	public String showActivePlayer() throws IOException
@@ -218,7 +223,35 @@ public class TopTrumpsRESTAPI
 		return CardNum;
 	}
 	
+	// when user click the new game button should start a new game
+	@GET
+	@Path("/newg")
 
+	public int newg(@QueryParam("num") int a) throws IOException {
+		if (a==1)
+		{
+		game = new Game();
+		game.setNumberOfPlayers(numberOfPlayers);
+		game.setUsername("Human");
+		game.initialiseGame();
+		}
+		System.err.println(a);
+		return a;	
+	}
+	
+	// return the category of user select as int 1:size 2: speed 3:range 4:firepower  5:cargo
+	// it does return and value is correct
+	@GET
+	@Path("/sca")
+
+	public int sca(@QueryParam("num") int categ) throws IOException {
+		System.err.println(categ);
+		
+		return categ; //I dont know how to send this categ to the category line
+		
+	}
+
+	
 //	//Get the number of games played from database for statistic screen
 //	@GET
 //	@Path("/numGames")

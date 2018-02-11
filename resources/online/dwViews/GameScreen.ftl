@@ -231,7 +231,7 @@
 	</div>	  
 	                 
   <div class="btn btn-primary">
-  		<div style="left: 300px; position: absolute; top: 700px"><a href="http://localhost:7777/toptrumps"><button style="width:200px;height:60px; font-size:1.4em; font-family: Arial; font-weight: bold;">New Game</button></a></div>
+  		<div style="left: 300px; position: absolute; top: 700px"><button type="submit" value="1" onclick="newg(1)" style="width:200px;height:60px; font-size:1.4em; font-family: Arial; font-weight: bold;"><a href="http://localhost:7777/toptrumps">New Game</a></button></div>
     	<div style="left: 300px; position: absolute; top: 800px"><a href="http://localhost:7777/toptrumps/stats"><button style="width:200px;height:60px; font-size:1.4em; font-family: Arial; font-weight: bold;">Statistics</button></a></div>
         <div style="left: 10px; position: absolute; top: 800px"><a href="http://localhost:7777/toptrumps/game"><button style="width:200px;height:60px; font-size:1.4em; font-family: Arial; font-weight: bold;">Save</button></a></div>
 		<div style="left: 10px; position: absolute; top: 700px; "><input type="button" value="Next Round" onClick="window.location.href=window.location.href" style="width:200px;height:60px; font-size:1.4em; font-family: Arial; font-weight: bold;"></div>		
@@ -252,6 +252,8 @@
 			roundwinner();
 			draw();
 			cardnum();
+			newg();
+			sca();
 		}	
 		
 			// --------------------------------------------------------------------------
@@ -454,7 +456,29 @@
 			xhr.send();
 			}
 			
+			function newg(i)
+			{
+			var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/newg?num="+i);
+			if (!xhr) {
+				alert("CORS not supported");
+			}
+			xhr.onload = function(e) {
+				var n= xhr.response; // the text of the response			
+				};
+			xhr.send();
+			}
 			
+			function sca(i)
+			{
+			var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/sca?num="+i);
+			if (!xhr) {
+				alert("CORS not supported");
+			}
+			xhr.onload = function(e) {
+				var n= xhr.response; // the text of the response			
+				};
+			xhr.send();
+			}
 
 	</script>	
 	</body>
