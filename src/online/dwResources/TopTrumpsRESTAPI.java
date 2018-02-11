@@ -63,7 +63,11 @@ public class TopTrumpsRESTAPI
 	private Player activePlayer;
 	private String deck;
 	private int numberOfPlayers;
-	private String card="";
+	private String card1="";
+	private String card2="";
+	private String card3="";
+	private String card4="";
+	private String card5="";
 	private String winner;
 	private int numcard;
 	//Database Connection
@@ -81,8 +85,6 @@ public class TopTrumpsRESTAPI
 		game.setNumberOfPlayers(numberOfPlayers);
 		game.setUsername("Human");
 		game.initialiseGame();
-		
-	
 	}
 
 
@@ -91,49 +93,50 @@ public class TopTrumpsRESTAPI
 	@GET
 	@Path("/newgame")
 	public String newGame() throws IOException
-	
 	{ 
 		game.chooseActivePlayer();
 		activePlayer = game.getActivePlayer();
-		int cm = activePlayer.findBestCategory();
-		game.setCurrentCategory(cm);
+		int categorySelect = activePlayer.findBestCategory();
+		game.setCurrentCategory(categorySelect);
 
 		game.startRound();
 		
-		winner=game.getWinner().getName();	
-		
-		if (game.isFinished() == true)		
-		{
-			card = "The game is over! The winner is " + winner;
-		}
-		
 		//start the game by getting number of players and dealing cards	
-		else if (game.getHumanPlayer().isInGame() == false)
+		String card = "";
+		if (game.getHumanPlayer().isInGame() == false)
 		{
 			card = "You are out of cards";
 		}
-			
+		
 		else
 		{
-			String values1 = game.getHumanPlayer().getTopCard().toString();		
-			card = game.getHumanPlayer().getTopCard().cString() + values1;		
+			String values1 = game.getHumanPlayer().getTopCard().toString();
+			
+			card1 = game.getHumanPlayer().getTopCard().cString() + values1;
+			String values2 = game.getPlayer(1).getTopCard().toString();
+			card2 = game.getPlayer(1).getTopCard().cString() + values2;
+			String values3 = game.getPlayer(2).getTopCard().toString();
+			card3 = game.getPlayer(2).getTopCard().cString() + values3;
+			String values4 = game.getPlayer(3).getTopCard().toString();
+			card4 = game.getPlayer(3).getTopCard().cString() + values4;
+			String values5 = game.getPlayer(4).getTopCard().toString();
+			card5 = game.getPlayer(4).getTopCard().cString() + values5;	
 		}
-		
+
+		winner=game.getWinner().getName();
  
 		// here is return the card num but seems not work
 		numcard=game.getHumanPlayer().getHand().size();
-		// here is return the card num but seems not work
-		
-		return card;
+		return card1;
 	}
 
-//	//get AI1 top card at hand
-//	@GET
-//	@Path("/cardCategories2")
-//	public String cardDescription2() throws IOException
-//	{	
-//		return card2;
-//	}
+	//get AI1 top card at hand
+	@GET
+	@Path("/cardCategories2")
+	public String cardDescription2() throws IOException
+	{	
+		return card2;
+	}
 	
 	//This method saves the data from the game that was just played, and sends to the database
 	@GET
@@ -144,32 +147,32 @@ public class TopTrumpsRESTAPI
 
 	}
 
-//	//get AI2 top card at hand
-//	@GET
-//	@Path("/cardCategories3")
-//	public String cardDescription3() throws IOException
-//	{
-//		
-//		return card3;
-//	}
+	//get AI2 top card at hand
+	@GET
+	@Path("/cardCategories3")
+	public String cardDescription3() throws IOException
+	{
+		
+		return card3;
+	}
 	
-//	//get AI3 top card at hand
-//	@GET
-//	@Path("/cardCategories4")
-//	public String cardDescription4() throws IOException
-//	{
-//		
-//		return card4;
-//	}
-//
-//	//get AI4 top card at hand
-//	@GET
-//	@Path("/cardCategories5")
-//	public String cardDescription5() throws IOException
-//	{
-//		
-//		return card5;
-//	}
+	//get AI3 top card at hand
+	@GET
+	@Path("/cardCategories4")
+	public String cardDescription4() throws IOException
+	{
+		
+		return card4;
+	}
+
+	//get AI4 top card at hand
+	@GET
+	@Path("/cardCategories5")
+	public String cardDescription5() throws IOException
+	{
+		
+		return card5;
+	}
 	
 	//get the round winner
 	@GET
@@ -209,7 +212,7 @@ public class TopTrumpsRESTAPI
 	
 	// when user click the new game button should start a new game
 	@GET
-	@Path("/newg")
+	@Path("/playagain")
 
 	public int newg(@QueryParam("num") int a) throws IOException {
 		if (a==1)
@@ -226,7 +229,7 @@ public class TopTrumpsRESTAPI
 	// return the category of user select as int 1:size 2: speed 3:range 4:firepower  5:cargo
 	// it does return and value is correct
 	@GET
-	@Path("/sca")
+	@Path("/category")
 
 	public int sca(@QueryParam("num") int categ) throws IOException {
 		System.err.println(categ);
