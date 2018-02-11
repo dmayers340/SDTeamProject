@@ -168,6 +168,8 @@ public class TopTrumpsCLIApplication {
 		System.out.println();
 		
 		System.out.println("The winning card was:");
+		System.out.println();
+		
 		System.out.println(winner.getTopCard().cString());
 		System.out.println(winner.getTopCard().toString());	
 		System.out.println();
