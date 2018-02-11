@@ -31,7 +31,7 @@ public class Game
 	private static ArrayList <Player> listOfPlayers;
 
 	private static boolean isFinished;	
-	private static DatabaseConnection db;
+//	private static DatabaseConnection db;
 	private static int gameNumber;
 	
 	private static final String newLine = (System.getProperty("line.separator"));
@@ -51,10 +51,10 @@ public class Game
 	 * @param Deck d = current deck 
 	 */
 
-	public Game (DatabaseConnection db)
+	public Game ()
 	{	
-		this.db = db;
-		gameNumber = db.getNumberOfGames()+1;
+	//	this.db = db;
+	//	gameNumber = db.getNumberOfGames()+1;
 		
 		roundCount = 1;
 		drawCount = 0; 
@@ -137,7 +137,7 @@ public class Game
 
 		{
 			isFinished = true; 
-			db.updateDB(getGameData(), getRoundData());
+		//	db.updateDB(getGameData(), getRoundData());
 		}
 
 		if (newRound.isDraw() == true)

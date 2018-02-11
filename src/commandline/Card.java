@@ -57,7 +57,7 @@ public class Card {
 	/**
 	 * @return categories;
 	 */
-	public ArrayList<String> getCategories ()
+	public static ArrayList<String> getCategories ()
 	{
 		return categories;
 	}

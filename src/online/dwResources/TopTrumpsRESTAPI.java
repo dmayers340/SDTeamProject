@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,10 +23,13 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+
 import online.configuration.TopTrumpsJSONConfiguration;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectReader;
 import com.fasterxml.jackson.databind.ObjectWriter;
+
 //imports from commandline
 import commandline.Card;
 import commandline.Deck;
@@ -33,7 +37,7 @@ import commandline.Game;
 import commandline.Player;
 import commandline.Round;
 import commandline.TopTrumpsCLIApplication;
-import commandline.DatabaseConnection;
+//import commandline.DatabaseConnection;
 
 @Path("/toptrumps")
 // Resources specified here should be hosted at http://localhost:7777/toptrumps
@@ -59,7 +63,7 @@ public class TopTrumpsRESTAPI
 	private int numberOfPlayers;
 
 	//Database Connection
-	private DatabaseConnection db = new DatabaseConnection();
+//	private DatabaseConnection db = new DatabaseConnection();
 
 	ObjectWriter oWriter = new ObjectMapper().writerWithDefaultPrettyPrinter();
 
@@ -78,12 +82,12 @@ public class TopTrumpsRESTAPI
 	//This starts the game for game screen
 	@GET
 	@Path("/newgame")
-	public String newGame() throws IOException
+	public void newGame() throws IOException
 	{
 		String card = "";	
 		String loser;
 		
-		Game game = new Game(db);
+		Game game = new Game();
 		game.setNumberOfPlayers(numberOfPlayers);
 		game.setUsername("Human");
 		game.initialiseGame();
@@ -99,13 +103,13 @@ public class TopTrumpsRESTAPI
 
 		}
 		//start the game by getting number of players and dealing cards
-		game.runGame();
-		return card;
+		//game.startOnlineRound();
+	//	return card;
 		//display all player cards
 
 		//get new game from game.java
-		game = new Game(db);
-		game.setOnline(true);
+		game = new Game();
+		//game.setOnline(true);
 		game.setNumberOfPlayers(numberOfPlayers);
 		game.setUsername("Human");
 
@@ -124,7 +128,7 @@ public class TopTrumpsRESTAPI
 
 			else
 			{
-				game.findBestCategory();
+				game.getActivePlayer().findBestCategory();
 			}
 
 			game.startRound();
@@ -200,56 +204,56 @@ public class TopTrumpsRESTAPI
 	}
 
 
-	//Get the number of games played from database for statistic screen
-	@GET
-	@Path("/numGames")
-	public int numberOfGames() throws IOException
-	{
-		int numGames = db.getNumberOfGames();
-		return numGames;
-	}
-
-	//Get number of times computer has won from database for stat screen
-	@GET
-	@Path("/timescomputerwon")
-	public int timesComputerWon() throws IOException
-	{
-		int compWins = db.getComputerWin();
-		return compWins;
-	}
-
-	//Get number of times human has won from database for stat screen
-	@GET
-	@Path("/humanwin")
-	public int timesPersonWon() throws IOException
-	{
-		int humanwin = db.getHumanWin();
-		return humanwin;
-	}
-
-	//Get average number of draws from database for stat screen
-	@GET
-	@Path("/numDraws")
-	public double numDraws() throws IOException
-	{
-		double numDraws = db.getNumberOfDraws();
-		return numDraws;
-	}
-
-	//Get the maximum amount of rounds from database for stat screen
-	@GET 
-	@Path("/numRounds")
-	public int numRounds() throws IOException
-	{
-		int numRounds = db.getMaxRounds();
-		return numRounds;
-	}
-
-	//Not sure where to close the database, made this an attempt to close
-	@GET
-	@Path("/closedb")
-	public void closedb() throws IOException
-	{
-		db.closeConnection();
-	}
+//	//Get the number of games played from database for statistic screen
+//	@GET
+//	@Path("/numGames")
+//	public int numberOfGames() throws IOException
+//	{
+//		int numGames = db.getNumberOfGames();
+//		return numGames;
+//	}
+//
+//	//Get number of times computer has won from database for stat screen
+//	@GET
+//	@Path("/timescomputerwon")
+//	public int timesComputerWon() throws IOException
+//	{
+//		int compWins = db.getComputerWin();
+//		return compWins;
+//	}
+//
+//	//Get number of times human has won from database for stat screen
+//	@GET
+//	@Path("/humanwin")
+//	public int timesPersonWon() throws IOException
+//	{
+//		int humanwin = db.getHumanWin();
+//		return humanwin;
+//	}
+//
+//	//Get average number of draws from database for stat screen
+//	@GET
+//	@Path("/numDraws")
+//	public double numDraws() throws IOException
+//	{
+//		double numDraws = db.getNumberOfDraws();
+//		return numDraws;
+//	}
+//
+//	//Get the maximum amount of rounds from database for stat screen
+//	@GET 
+//	@Path("/numRounds")
+//	public int numRounds() throws IOException
+//	{
+//		int numRounds = db.getMaxRounds();
+//		return numRounds;
+//	}
+//
+//	//Not sure where to close the database, made this an attempt to close
+//	@GET
+//	@Path("/closedb")
+//	public void closedb() throws IOException
+//	{
+//		db.closeConnection();
+//	}
 }
