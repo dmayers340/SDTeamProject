@@ -57,6 +57,7 @@ public class TopTrumpsRESTAPI
 
 	private String deck;
 	private int numberOfPlayers;
+	private Player activePlayer;
 
 	//Database Connection
 	private DatabaseConnection db = new DatabaseConnection();
@@ -80,59 +81,38 @@ public class TopTrumpsRESTAPI
 	@Path("/newgame")
 	public String newGame() throws IOException
 	{
-		String card = "";	
-		String loser;
+		String card = "";
 		
-		Game game = new Game(db);
+		Game game = new Game();
 		game.setNumberOfPlayers(numberOfPlayers);
 		game.setUsername("Human");
 		game.initialiseGame();
 
+		//start the game by getting number of players and dealing cards
+		game.chooseActivePlayer();
+		
+		activePlayer = game.getActivePlayer();
+		int c = activePlayer.findBestCategory();
+		
+		game.setCurrentCategory(c);
+		
 		if (game.getHumanPlayer().isInGame() == false)
 		{
-			loser = "You are out of cards";
+			card = "You are out of cards";
 		}
+		
 		else
 		{
 			String values = game.getHumanPlayer().getTopCard().toString();
-			card = game.getHumanPlayer().getTopCard().cString();
-
-		}
-		//start the game by getting number of players and dealing cards
-		game.runGame();
-		return card;
-		//display all player cards
-
-		//get new game from game.java
-		game = new Game(db);
-		game.setOnline(true);
-		game.setNumberOfPlayers(numberOfPlayers);
-		game.setUsername("Human");
-
-		//start the game by getting number of players and dealing cards
-		game.initialiseGame();
-
-		while (game.getStatus() == false)
-		{
-			game.chooseActivePlayer();
-
-			if (game.getActivePlayer().isHuman()==true)
-			{
-
-				game.setCurrentCategory(0);;
-			}
-
-			else
-			{
-				game.findBestCategory();
-			}
-
-			game.startRound();
-			//round.numberOfGames++; /// add variable
+			card = values + game.getHumanPlayer().getTopCard().cString();
 		}
 		
+		game.startRound();
+		return card;
+		
 	}
-
+	
+	
 	//This method saves the data from the game that was just played, and sends to the database
 	@GET
 	@Path("/saveandquit")
@@ -155,7 +135,7 @@ public class TopTrumpsRESTAPI
 	@Path("/cardDescription")
 	public String cardDescription() throws IOException
 	{
-		String cD=oWriter.writeValueAsString(Card.getCategories());
+		String cD=oWriter.writeValueAsString(activePlayer.getTopCard().getCategories());
 		return cD;		
 	}
 
