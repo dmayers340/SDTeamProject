@@ -82,37 +82,37 @@ public class TopTrumpsRESTAPI
 	public String newGame() throws IOException
 	{
 		String card = "";
-		
-		Game game = new Game();
+
+		game = new Game();
 		game.setNumberOfPlayers(numberOfPlayers);
 		game.setUsername("Human");
 		game.initialiseGame();
 
 		//start the game by getting number of players and dealing cards
 		game.chooseActivePlayer();
-		
+
 		activePlayer = game.getActivePlayer();
 		int c = activePlayer.findBestCategory();
-		
+
 		game.setCurrentCategory(c);
-		
+
 		if (game.getHumanPlayer().isInGame() == false)
 		{
 			card = "You are out of cards";
 		}
-		
+
 		else
 		{
 			String values = game.getHumanPlayer().getTopCard().toString();
 			card = game.getHumanPlayer().getTopCard().cString() + values;
 		}
-		
+
 		game.startRound();
 		return card;
-		
+
 	}
-	
-	
+
+
 	//This method saves the data from the game that was just played, and sends to the database
 	@GET
 	@Path("/saveandquit")
@@ -127,6 +127,11 @@ public class TopTrumpsRESTAPI
 	@Path("/nextround")
 	public void nextRound() throws IOException
 	{
+		game.chooseActivePlayer();
+		activePlayer = game.getActivePlayer();
+		int c = activePlayer.findBestCategory();
+		game.setCurrentCategory(c);
+
 		game.startRound();
 		System.err.println("asdsdada");
 	}
@@ -146,7 +151,7 @@ public class TopTrumpsRESTAPI
 		String cD=oWriter.writeValueAsString(game.getPlayer(0).getTopCard().toString());
 		return cD;
 	}
-	
+
 	@GET
 	@Path("/cardCategories2")
 	public String cardDescription2() throws IOException
