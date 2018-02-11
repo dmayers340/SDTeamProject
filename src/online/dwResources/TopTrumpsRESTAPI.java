@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,10 +23,15 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+
 import online.configuration.TopTrumpsJSONConfiguration;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectReader;
 import com.fasterxml.jackson.databind.ObjectWriter;
+
+
+
 //imports from commandline
 import commandline.Card;
 import commandline.Deck;
@@ -33,7 +39,7 @@ import commandline.Game;
 import commandline.Player;
 import commandline.Round;
 import commandline.TopTrumpsCLIApplication;
-import commandline.DatabaseConnection;
+//import commandline.DatabaseConnection;
 
 @Path("/toptrumps")
 // Resources specified here should be hosted at http://localhost:7777/toptrumps
@@ -54,13 +60,18 @@ import commandline.DatabaseConnection;
 public class TopTrumpsRESTAPI 
 {  
 	private Game game;
-
+	private Player activePlayer;
 	private String deck;
 	private int numberOfPlayers;
-	private Player activePlayer;
-
+	private String card1="";
+	private String card2="";
+	private String card3="";
+	private String card4="";
+	private String card5="";
+	private String winner;
+	private int numcard;
 	//Database Connection
-	private DatabaseConnection db = new DatabaseConnection();
+//	private DatabaseConnection db = new DatabaseConnection();
 
 	ObjectWriter oWriter = new ObjectMapper().writerWithDefaultPrettyPrinter();
 
@@ -70,49 +81,70 @@ public class TopTrumpsRESTAPI
 		//THIS IS STRING==need to pass to deck class to make categories
 		deck = conf.getDeckFile();
 		numberOfPlayers=conf.getNumAIPlayers()+1;
+		game = new Game();
+		game.setNumberOfPlayers(numberOfPlayers);
+		game.setUsername("Human");
+		game.initialiseGame();
+		
+	
 	}
 
 
 
-	// API Methods 
-
-	//This starts the game for game screen
+	//This starts the game for game screen and user get his top card at hand
 	@GET
 	@Path("/newgame")
 	public String newGame() throws IOException
-	{
-		String card = "";
-
-		game = new Game(db);
-		game.setNumberOfPlayers(numberOfPlayers);
-		game.setUsername("Human");
-		game.initialiseGame();
-
-		//start the game by getting number of players and dealing cards
+	
+	{ 
 		game.chooseActivePlayer();
-
 		activePlayer = game.getActivePlayer();
-		int c = activePlayer.findBestCategory();
+		int cm = activePlayer.findBestCategory();
+		game.setCurrentCategory(cm);
 
-		game.setCurrentCategory(c);
-
+		game.startRound();
+		
+		//start the game by getting number of players and dealing cards	
+		String card = "";
 		if (game.getHumanPlayer().isInGame() == false)
 		{
 			card = "You are out of cards";
 		}
-
+		
 		else
 		{
-			String values = game.getHumanPlayer().getTopCard().toString();
-			card = game.getHumanPlayer().getTopCard().cString() + values;
+			String values1 = game.getHumanPlayer().getTopCard().toString();
+			
+			card1 = game.getHumanPlayer().getTopCard().cString() + values1;
+			String values2 = game.getPlayer(1).getTopCard().toString();
+			card2 = game.getPlayer(1).getTopCard().cString() + values2;
+			String values3 = game.getPlayer(2).getTopCard().toString();
+			card3 = game.getPlayer(2).getTopCard().cString() + values3;
+			String values4 = game.getPlayer(3).getTopCard().toString();
+			card4 = game.getPlayer(3).getTopCard().cString() + values4;
+			String values5 = game.getPlayer(4).getTopCard().toString();
+			card5 = game.getPlayer(4).getTopCard().cString() + values5;
+			
 		}
+		
+		
+		winner=game.getWinner().getName();
+ 
+		// here is return the card num but seems not work
+		numcard=game.getHumanPlayer().getHand().size();
+		// here is return the card num but seems not work
 
-		game.startRound();
-		return card;
-
+		return card1;
 	}
 
-
+	//get AI1 top card at hand
+	@GET
+	@Path("/cardCategories2")
+	public String cardDescription2() throws IOException
+	{	
+		return card2;
+	}
+	
 	//This method saves the data from the game that was just played, and sends to the database
 	@GET
 	@Path("/saveandquit")
@@ -122,119 +154,148 @@ public class TopTrumpsRESTAPI
 
 	}
 
-	//Goes to next round
-	@GET
-	@Path("/nextround")
-	public void nextRound() throws IOException
-	{
-		game.chooseActivePlayer();
-		activePlayer = game.getActivePlayer();
-		int c = activePlayer.findBestCategory();
-		game.setCurrentCategory(c);
-
-		game.startRound();
-		System.err.println("asdsdada");
-	}
-
-	@GET
-	@Path("/cardDescription")
-	public String cardDescription() throws IOException
-	{
-		String cD=oWriter.writeValueAsString(activePlayer.getTopCard().getCategories());
-		return cD;		
-	}
-
-	@GET
-	@Path("/cardCategories1")
-	public String cardDescription1() throws IOException
-	{
-		String cD=oWriter.writeValueAsString(game.getPlayer(0).getTopCard().toString());
-		return cD;
-	}
-
-	@GET
-	@Path("/cardCategories2")
-	public String cardDescription2() throws IOException
-	{
-		String cD=oWriter.writeValueAsString(game.getPlayer(1).getTopCard().toString());
-		return cD;
-	}
-
+	//get AI2 top card at hand
 	@GET
 	@Path("/cardCategories3")
 	public String cardDescription3() throws IOException
 	{
-		String cD=oWriter.writeValueAsString(game.getPlayer(2).getTopCard().toString());
-		return cD;
+		
+		return card3;
 	}
-
+	
+	//get AI3 top card at hand
 	@GET
 	@Path("/cardCategories4")
 	public String cardDescription4() throws IOException
 	{
-		String cD=oWriter.writeValueAsString(game.getPlayer(3).getTopCard().toString());
-		return cD;
+		
+		return card4;
 	}
 
+	//get AI4 top card at hand
 	@GET
 	@Path("/cardCategories5")
 	public String cardDescription5() throws IOException
 	{
-		String cD=oWriter.writeValueAsString(game.getPlayer(4).getTopCard().toString());
-		return cD;
+		
+		return card5;
 	}
-
-
-	//Get the number of games played from database for statistic screen
+	
+	//get the round winner
 	@GET
-	@Path("/numGames")
-	public int numberOfGames() throws IOException
+	@Path("/roundwinner")
+	public String showRoundWinner() throws IOException
 	{
-		int numGames = db.getNumberOfGames();
-		return numGames;
+	
+		return winner;
 	}
-
-	//Get number of times computer has won from database for stat screen
+	
+	//get the active player name
 	@GET
-	@Path("/timescomputerwon")
-	public int timesComputerWon() throws IOException
+	@Path("/activeplayer")
+	public String showActivePlayer() throws IOException
 	{
-		int compWins = db.getComputerWin();
-		return compWins;
+		String act=activePlayer.getName();
+		return act;
 	}
-
-	//Get number of times human has won from database for stat screen
+	
+	// send round result of whether is a draw to html but returns not true/false or 0/1
 	@GET
-	@Path("/humanwin")
-	public int timesPersonWon() throws IOException
+	@Path("/draw")
+	public String ndraw() throws IOException
 	{
-		int humanwin = db.getHumanWin();
-		return humanwin;
+		String dr=oWriter.writeValueAsString(game.getDraw());
+		return dr;
 	}
-
-	//Get average number of draws from database for stat screen
+	
+	//send card number of human player hand to html but number not correct
 	@GET
-	@Path("/numDraws")
-	public double numDraws() throws IOException
+	@Path("/cardnum")
+	public String getCardNum() throws IOException
 	{
-		double numDraws = db.getNumberOfDraws();
-		return numDraws;
+		String CardNum=oWriter.writeValueAsString(numcard);
+		return CardNum;
 	}
-
-	//Get the maximum amount of rounds from database for stat screen
-	@GET 
-	@Path("/numRounds")
-	public int numRounds() throws IOException
-	{
-		int numRounds = db.getMaxRounds();
-		return numRounds;
-	}
-
-	//Not sure where to close the database, made this an attempt to close
+	
+	// when user click the new game button should start a new game
 	@GET
-	@Path("/closedb")
-	public void closedb() throws IOException
-	{
-		db.closeConnection();
+	@Path("/newg")
+
+	public int newg(@QueryParam("num") int a) throws IOException {
+		if (a==1)
+		{
+		game = new Game();
+		game.setNumberOfPlayers(numberOfPlayers);
+		game.setUsername("Human");
+		game.initialiseGame();
+		}
+		System.err.println(a);
+		return a;	
 	}
+	
+	// return the category of user select as int 1:size 2: speed 3:range 4:firepower  5:cargo
+	// it does return and value is correct
+	@GET
+	@Path("/sca")
+
+	public int sca(@QueryParam("num") int categ) throws IOException {
+		System.err.println(categ);
+		
+		return categ; //I dont know how to send this categ to the category line
+		
+	}
+
+	
+//	//Get the number of games played from database for statistic screen
+//	@GET
+//	@Path("/numGames")
+//	public int numberOfGames() throws IOException
+//	{
+//		int numGames = db.getNumberOfGames();
+//		return numGames;
+//	}
+//
+//	//Get number of times computer has won from database for stat screen
+//	@GET
+//	@Path("/timescomputerwon")
+//	public int timesComputerWon() throws IOException
+//	{
+//		int compWins = db.getComputerWin();
+//		return compWins;
+//	}
+//
+//	//Get number of times human has won from database for stat screen
+//	@GET
+//	@Path("/humanwin")
+//	public int timesPersonWon() throws IOException
+//	{
+//		int humanwin = db.getHumanWin();
+//		return humanwin;
+//	}
+//
+//	//Get average number of draws from database for stat screen
+//	@GET
+//	@Path("/numDraws")
+//	public double numDraws() throws IOException
+//	{
+//		double numDraws = db.getNumberOfDraws();
+//		return numDraws;
+//	}
+//
+//	//Get the maximum amount of rounds from database for stat screen
+//	@GET 
+//	@Path("/numRounds")
+//	public int numRounds() throws IOException
+//	{
+//		int numRounds = db.getMaxRounds();
+//		return numRounds;
+//	}
+//
+//	//Not sure where to close the database, made this an attempt to close
+//	@GET
+//	@Path("/closedb")
+//	public void closedb() throws IOException
+//	{
+//		db.closeConnection();
+//	}
 }

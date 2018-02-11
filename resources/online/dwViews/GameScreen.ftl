@@ -60,6 +60,7 @@
 		font-size:1.2em;
 			font-weight: bold;	
 		}
+		
 	
 		h5,li,ol,strong{
 		margin:0;
@@ -121,6 +122,11 @@
 	.left{
 		float:left;
 	}
+	.topcard-block{
+		color:White;
+		font-size:1.3em;
+		font-weight: bold;
+	}
 </style>
 
 <body onload="initalize()"> <!-- Call the initalize method when the page loads --> 
@@ -135,6 +141,24 @@
   </div>
 </nav> 
 
+				<div class="topcard-block" style="left:10px; top:50px;position:absolute;">
+  
+    						
+    						<p id="activeplayer"><h4></h4></p><br>
+				
+    						<p id="roundwinner"><h4></h4></p><br>
+
+    						<p id="draw"></p>
+    						<div id="cate" style="display: none;">	
+                      <li><strong>Please choose one category</strong><br>
+                    <button type="submit" id="nu" value="1" onclick="sca(1)" style="width:120px;height:30px; font-size:1.4em; font-family: Arial; font-weight: bold;">Size</button><br>
+                      <button type="submit" id="nu" value="2" onclick="sca(2)" style="width:120px;height:30px; font-size:1.4em; font-family: Arial; font-weight: bold;">Speed</button><br>
+                	<button type="submit" id="nu" value="3" onclick="sca(3)" style="width:120px;height:30px; font-size:1.4em; font-family: Arial; font-weight: bold;">Range</button><br>
+           			<button type="submit" id="nu" value="4" onclick="sca(4)" style="width:120px;height:30px; font-size:1.4em; font-family: Arial; font-weight: bold;">Firepower</button><br>
+           			<button type="submit" id="nu" value="5" onclick="sca(5)" style="width:120px;height:30px; font-size:1.4em; font-family: Arial; font-weight: bold;">Cargo</button><br>
+                    </div>
+    			</div>
+
 
 	<div class="player">
 		<div class="card border-dark mb-3" style="max-width: 15rem; height: 30rem;">  		
@@ -145,14 +169,10 @@
   				<div class="left">
           			<p id = "cardDescription"></p></h4>
     				<br />
-    				<p id="cardCategories1"></p>
-  					<p id = "playerCard"></p>
-    				<p>Description</p>
-    				<p>Size</p>
-    				<p>Speed</p>
-    				<p>Range</p>
-    				<p>Firepower</p>
-    				<p>Cargo</p>
+    				
+  					<p id = "playerCard"></p><br>
+  					<p id ="cardnum"></p>
+    				
     			</div>
   			</div>
 		</div>
@@ -164,16 +184,9 @@
   			<br />
   			<div class="card-block">
     			<center><h4><b>AI 1</b></h4></center>
-    			<p id = "cardDescription"></p></h4>    
-    			<p id="cardCategories2"></p>          
-    			<div class="left">
-    				<p>Description</p>
-    				<p>Size</p>
-    				<p>Speed</p>
-    				<p>Range</p>
-    				<p>Firepower</p>
-    				<p>Cargo</p>
-    			</div>
+    	  
+    			<p id = "cardCategories2"></p>          
+    			
   			</div>
 		</div>
 	</div>
@@ -184,16 +197,9 @@
   			<br />
   			<div class="card-block">
     			<center><h4><b>AI 2</b></h4></center>
-      			<p id = "cardDescription"></p></h4>  			
+      		 			
         		<p id="cardCategories3"></p>
-    			<div class="left">
-    				<p>Description</p>
-    				<p>Size</p>
-    				<p>Speed</p>
-    				<p>Range</p>
-    				<p>Firepower</p>
-    				<p>Cargo</p>
-    			</div>
+    		
     		</div>
 		</div>
 	</div>		
@@ -204,16 +210,9 @@
   			<br />
   			<div class="card-block">
 				<center><h4><b>AI 3</b></h4></center>
-          		<p id = "cardDescription"></p></h4>
+          	
        			<p id="cardCategories4"></p>
-    			<div class="left">
-    				<p>Description</p>
-    				<p>Size</p>
-    				<p>Speed</p>
-    				<p>Range</p>
-    				<p>Firepower</p>
-    				<p>Cargo</p>
-    			</div>    			
+    		    			
   			</div>
 		</div>
 	</div>    
@@ -224,25 +223,18 @@
   			<br />
   			<div class="card-block">
 				<center><h4><b>AI 4</b></h4></center>
-    			<p id = "cardDescription"></p></h4>    			
+    		  			
      			<p id="cardCategories5"></p>
-   			  	<div class="left">
-    				<p>Description</p>
-    				<p>Size</p>
-    				<p>Speed</p>
-    				<p>Range</p>
-    				<p>Firepower</p>
-    				<p>Cargo</p>
-    			</div>    			
+   			    			
   			</div>
 		</div>
 	</div>	  
 	                 
   <div class="btn btn-primary">
-  		<div style="left: 300px; position: absolute; top: 700px"><a href="http://localhost:7777/toptrumps"><button style="width:200px;height:60px; font-size:1.4em; font-family: Arial; font-weight: bold;">New Game</button></a></div>
+  		<div style="left: 300px; position: absolute; top: 700px"><button type="submit" value="1" onclick="newg(1)" style="width:200px;height:60px; font-size:1.4em; font-family: Arial; font-weight: bold;"><a href="http://localhost:7777/toptrumps">New Game</a></button></div>
     	<div style="left: 300px; position: absolute; top: 800px"><a href="http://localhost:7777/toptrumps/stats"><button style="width:200px;height:60px; font-size:1.4em; font-family: Arial; font-weight: bold;">Statistics</button></a></div>
         <div style="left: 10px; position: absolute; top: 800px"><a href="http://localhost:7777/toptrumps/game"><button style="width:200px;height:60px; font-size:1.4em; font-family: Arial; font-weight: bold;">Save</button></a></div>
-		<div style="left: 10px; position: absolute; top: 700px"><button type="submit" value="submit" onclick="next()" style="width:200px;height:60px; font-size:1.4em; font-family: Arial; font-weight: bold;">Next Round</button></div>		
+		<div style="left: 10px; position: absolute; top: 700px; "><input type="button" value="Next Round" onClick="window.location.href=window.location.href" style="width:200px;height:60px; font-size:1.4em; font-family: Arial; font-weight: bold;"></div>		
   </div>		
 	</div>
 
@@ -252,14 +244,16 @@
 		function initalize() 
 		{
 			newGame();
-			nextRound();
-			saveAndQuit();
-			cardDescription();
-			cardCategories1();
 			cardCategories2();
 			cardCategories3();
 			cardCategories4();
 			cardCategories5();
+			activeplayer();
+			roundwinner();
+			draw();
+			cardnum();
+			newg();
+			sca();
 		}	
 		
 			// --------------------------------------------------------------------------
@@ -285,6 +279,8 @@
 				 return xhr;
 		}
 		
+	</script>
+		<script type="text/javascript">
 		function newGame() 
     {		
 		  // First create a CORS request, this is the message we are going to send (a get request in this case)
@@ -307,6 +303,21 @@
 				// We have done everything we need to prepare the CORS request, so send it
 				xhr.send();		
 			}
+			
+				function cardCategories2()
+			{
+			var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/cardCategories2");
+			if (!xhr) {
+				alert("CORS not supported");
+			}
+
+			xhr.onload = function(e) {
+				var n= xhr.response; 
+				document.getElementById('cardCategories2').innerHTML=n;
+			};
+
+			xhr.send();	
+			}
 		
 		function nextRound()
 		{
@@ -322,49 +333,9 @@
 
 			xhr.send();		
 		}
-		function cardDescription()
-		{
-			var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/cardDescription");
-			if (!xhr) {
-				alert("CORS not supported");
-			}
-
-			xhr.onload = function(e) {
-				var n= xhr.response; // the text of the response
-				document.getElementById('cardDescription').innerHTML=n;
-			};
-
-			xhr.send();	
-		}
 		
-		function cardCategories1()
-		{
-			var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/cardCategories1");
-			if (!xhr) {
-				alert("CORS not supported");
-			}
-
-			xhr.onload = function(e) {
-				var n= xhr.response; // the text of the response
-				document.getElementById('cardCategories1').innerHTML=n;
-			};
-
-			xhr.send();	
-		}
-			function cardCategories2()
-			{
-			var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/cardCategories2");
-			if (!xhr) {
-				alert("CORS not supported");
-			}
-
-			xhr.onload = function(e) {
-				var n= xhr.response; // the text of the response
-				document.getElementById('cardCategories2').innerHTML=n;
-			};
-
-			xhr.send();	
-			}
+	
+		
 			
 			function cardCategories3()
 			{
@@ -407,6 +378,106 @@
 			};
 
 			xhr.send();	
+			}
+			function activeplayer()
+			{			
+			var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/activeplayer");
+			if (!xhr) {
+				alert("CORS not supported");
+			}
+
+			xhr.onload = function(e) {
+				var n= xhr.response; // the text of the response
+				if (n.indexOf('Human') > -1){
+ 						
+ 						document.getElementById('activeplayer').innerHTML="The Active Player is: "+n;
+ 					
+ 						document.getElementById("cate").style.display="";
+
+ 					}
+					else{
+					document.getElementById('activeplayer').innerHTML="The Active Player is: "+n;
+					document.getElementById("cate").style.display="none";
+					}
+				
+			};
+
+			xhr.send();
+			}
+			
+			function roundwinner()
+			{
+			
+			var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/roundwinner");
+			if (!xhr) {
+				alert("CORS not supported");
+			}
+
+			xhr.onload = function(e) {
+				var n= xhr.response; // the text of the response
+				document.getElementById('roundwinner').innerHTML="Round Winner is: "+n;
+			};
+
+			xhr.send();
+			}
+			
+			function draw()
+			{
+			
+			var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/draw");
+			if (!xhr) {
+				alert("CORS not supported");
+			}
+
+			xhr.onload = function(e) {
+				var n= xhr.response; // the text of the response
+				if (n.indexOf("false")>-1){
+ 						document.getElementById('draw').innerHTML = "Not a draw";
+ 					}
+					else{
+					document.getElementById('draw').innerHTML = "It's a draw";
+				
+					}
+			};
+
+			xhr.send();
+			}
+			
+			function cardnum()
+			{
+			var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/cardnum");
+			if (!xhr) {
+				alert("CORS not supported");
+			}
+			xhr.onload = function(e) {
+				var n= xhr.response; // the text of the response
+				document.getElementById('cardnum').innerHTML = n+" cards left";
+				};
+			xhr.send();
+			}
+			
+			function newg(i)
+			{
+			var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/newg?num="+i);
+			if (!xhr) {
+				alert("CORS not supported");
+			}
+			xhr.onload = function(e) {
+				var n= xhr.response; // the text of the response			
+				};
+			xhr.send();
+			}
+			
+			function sca(i)
+			{
+			var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/sca?num="+i);
+			if (!xhr) {
+				alert("CORS not supported");
+			}
+			xhr.onload = function(e) {
+				var n= xhr.response; // the text of the response			
+				};
+			xhr.send();
 			}
 
 	</script>	

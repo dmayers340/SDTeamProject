@@ -110,7 +110,7 @@ public class Player {
 
 		else 
 		{
-			h = h + this.getName() + "has no cards" + System.getProperty("line.separator");
+			h = h + this.getName() + " has no cards" + System.getProperty("line.separator");
 		}
 
 		return h;
