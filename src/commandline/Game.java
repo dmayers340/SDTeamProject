@@ -534,7 +534,7 @@ public class Game
 	 */
 
 	// return whether game  is finished
-	public boolean getStatus()
+	public boolean isFinished()
 	{
 		return isFinished;
 

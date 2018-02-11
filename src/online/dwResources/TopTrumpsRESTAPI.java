@@ -63,11 +63,7 @@ public class TopTrumpsRESTAPI
 	private Player activePlayer;
 	private String deck;
 	private int numberOfPlayers;
-	private String card1="";
-	private String card2="";
-	private String card3="";
-	private String card4="";
-	private String card5="";
+	private String card="";
 	private String winner;
 	private int numcard;
 	//Database Connection
@@ -104,36 +100,40 @@ public class TopTrumpsRESTAPI
 
 		game.startRound();
 		
+		winner=game.getWinner().getName();	
+		
+		if (game.isFinished() == true)		
+		{
+			card = "The game is over! The winner is " + winner;
+		}
+		
 		//start the game by getting number of players and dealing cards	
-		String card = "";
-		if (game.getHumanPlayer().isInGame() == false)
+		else if (game.getHumanPlayer().isInGame() == false)
 		{
 			card = "You are out of cards";
 		}
-		
+			
 		else
 		{
 			String values1 = game.getHumanPlayer().getTopCard().toString();		
-			card1 = game.getHumanPlayer().getTopCard().cString() + values1;		
+			card = game.getHumanPlayer().getTopCard().cString() + values1;		
 		}
 		
-		
-		winner=game.getWinner().getName();
  
 		// here is return the card num but seems not work
 		numcard=game.getHumanPlayer().getHand().size();
 		// here is return the card num but seems not work
-
-		return card1;
+		
+		return card;
 	}
 
-	//get AI1 top card at hand
-	@GET
-	@Path("/cardCategories2")
-	public String cardDescription2() throws IOException
-	{	
-		return card2;
-	}
+//	//get AI1 top card at hand
+//	@GET
+//	@Path("/cardCategories2")
+//	public String cardDescription2() throws IOException
+//	{	
+//		return card2;
+//	}
 	
 	//This method saves the data from the game that was just played, and sends to the database
 	@GET
@@ -144,32 +144,32 @@ public class TopTrumpsRESTAPI
 
 	}
 
-	//get AI2 top card at hand
-	@GET
-	@Path("/cardCategories3")
-	public String cardDescription3() throws IOException
-	{
-		
-		return card3;
-	}
+//	//get AI2 top card at hand
+//	@GET
+//	@Path("/cardCategories3")
+//	public String cardDescription3() throws IOException
+//	{
+//		
+//		return card3;
+//	}
 	
-	//get AI3 top card at hand
-	@GET
-	@Path("/cardCategories4")
-	public String cardDescription4() throws IOException
-	{
-		
-		return card4;
-	}
-
-	//get AI4 top card at hand
-	@GET
-	@Path("/cardCategories5")
-	public String cardDescription5() throws IOException
-	{
-		
-		return card5;
-	}
+//	//get AI3 top card at hand
+//	@GET
+//	@Path("/cardCategories4")
+//	public String cardDescription4() throws IOException
+//	{
+//		
+//		return card4;
+//	}
+//
+//	//get AI4 top card at hand
+//	@GET
+//	@Path("/cardCategories5")
+//	public String cardDescription5() throws IOException
+//	{
+//		
+//		return card5;
+//	}
 	
 	//get the round winner
 	@GET

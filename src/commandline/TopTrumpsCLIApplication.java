@@ -70,7 +70,7 @@ public class TopTrumpsCLIApplication {
 				newGame.setUsername(getInput());
 				newGame.initialiseGame();
 
-				while (newGame.getStatus() == false)
+				while (newGame.isFinished() == false)
 				{
 					runRound(); 
 				}
