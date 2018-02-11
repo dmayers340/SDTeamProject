@@ -32,6 +32,7 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 
 
 
+
 //imports from commandline
 import commandline.Card;
 import commandline.Deck;
@@ -63,11 +64,7 @@ public class TopTrumpsRESTAPI
 	private Player activePlayer;
 	private String deck;
 	private int numberOfPlayers;
-	private String card1="";
-	private String card2="";
-	private String card3="";
-	private String card4="";
-	private String card5="";
+	private String card="";
 	private String winner;
 	private int numcard;
 	//Database Connection
@@ -85,6 +82,8 @@ public class TopTrumpsRESTAPI
 		game.setNumberOfPlayers(numberOfPlayers);
 		game.setUsername("Human");
 		game.initialiseGame();
+		
+	
 	}
 
 
@@ -93,41 +92,40 @@ public class TopTrumpsRESTAPI
 	@GET
 	@Path("/newgame")
 	public String newGame() throws IOException
+	
 	{ 
 		game.chooseActivePlayer();
 		activePlayer = game.getActivePlayer();
-		int categorySelect = activePlayer.findBestCategory();
-		game.setCurrentCategory(categorySelect);
+		int cm = activePlayer.findBestCategory();
+		game.setCurrentCategory(cm);
 
 		game.startRound();
 		
+		winner=game.getWinner().getName();	
+		
+		if (game.isFinished() == true)		
+		{
+			card = "The game is over! The winner is " + winner;
+		}
+		
 		//start the game by getting number of players and dealing cards	
-		String card = "";
-		if (game.getHumanPlayer().isInGame() == false)
+		else if (game.getHumanPlayer().isInGame() == false)
 		{
 			card = "You are out of cards";
 		}
-		
+			
 		else
 		{
-			String values1 = game.getHumanPlayer().getTopCard().toString();
-			
-			card1 = game.getHumanPlayer().getTopCard().cString() + values1;
-			String values2 = game.getPlayer(1).getTopCard().toString();
-			card2 = game.getPlayer(1).getTopCard().cString() + values2;
-			String values3 = game.getPlayer(2).getTopCard().toString();
-			card3 = game.getPlayer(2).getTopCard().cString() + values3;
-			String values4 = game.getPlayer(3).getTopCard().toString();
-			card4 = game.getPlayer(3).getTopCard().cString() + values4;
-			String values5 = game.getPlayer(4).getTopCard().toString();
-			card5 = game.getPlayer(4).getTopCard().cString() + values5;	
+			String values1 = game.getHumanPlayer().getTopCard().toString();		
+			card = game.getHumanPlayer().getTopCard().cString() + values1;		
 		}
-
-		winner=game.getWinner().getName();
+		
  
 		// here is return the card num but seems not work
 		numcard=game.getHumanPlayer().getHand().size();
-		return card1;
+		// here is return the card num but seems not work
+		
+		return card;
 	}
 
 	//get AI1 top card at hand
@@ -135,7 +133,9 @@ public class TopTrumpsRESTAPI
 	@Path("/cardCategories2")
 	public String cardDescription2() throws IOException
 	{	
-		return card2;
+		String values2 = game.getPlayer(1).getTopCard().toString();
+		String AI1=oWriter.writeValueAsString(game.getPlayer(1).getTopCard().cString() + values2);
+		return AI1;
 	}
 	
 	//This method saves the data from the game that was just played, and sends to the database
@@ -153,7 +153,9 @@ public class TopTrumpsRESTAPI
 	public String cardDescription3() throws IOException
 	{
 		
-		return card3;
+		String values3 = game.getPlayer(2).getTopCard().toString();
+		String AI2=oWriter.writeValueAsString(game.getPlayer(2).getTopCard().cString() + values3);
+		return AI2;
 	}
 	
 	//get AI3 top card at hand
@@ -161,8 +163,9 @@ public class TopTrumpsRESTAPI
 	@Path("/cardCategories4")
 	public String cardDescription4() throws IOException
 	{
-		
-		return card4;
+		String values4 = game.getPlayer(3).getTopCard().toString();
+		String AI3=oWriter.writeValueAsString(game.getPlayer(3).getTopCard().cString() + values4);
+		return AI3;
 	}
 
 	//get AI4 top card at hand
@@ -170,8 +173,9 @@ public class TopTrumpsRESTAPI
 	@Path("/cardCategories5")
 	public String cardDescription5() throws IOException
 	{
-		
-		return card5;
+		String values5 = game.getPlayer(4).getTopCard().toString();
+		String AI4=oWriter.writeValueAsString(game.getPlayer(4).getTopCard().cString() + values5);
+		return AI4;
 	}
 	
 	//get the round winner
@@ -195,7 +199,7 @@ public class TopTrumpsRESTAPI
 	// send round result of whether is a draw to html but returns not true/false or 0/1
 	@GET
 	@Path("/draw")
-	public String ndraw() throws IOException
+	public String isdraw() throws IOException
 	{
 		String dr=oWriter.writeValueAsString(game.getDraw());
 		return dr;
@@ -212,9 +216,9 @@ public class TopTrumpsRESTAPI
 	
 	// when user click the new game button should start a new game
 	@GET
-	@Path("/playagain")
+	@Path("/newg")
 
-	public int newg(@QueryParam("num") int a) throws IOException {
+	public int startNewGame(@QueryParam("num") int a) throws IOException {
 		if (a==1)
 		{
 		game = new Game();
@@ -226,15 +230,14 @@ public class TopTrumpsRESTAPI
 		return a;	
 	}
 	
-	// return the category of user select as int 1:size 2: speed 3:range 4:firepower  5:cargo
-	// it does return and value is correct
+	// return the category of user selected as int 1:size 2: speed 3:range 4:firepower  5:cargo
 	@GET
-	@Path("/category")
+	@Path("/sca")
 
-	public int sca(@QueryParam("num") int categ) throws IOException {
-		System.err.println(categ);
+	public int getCategory(@QueryParam("num") int category) throws IOException {
+		System.err.println(category);
 		
-		return categ; //I dont know how to send this categ to the category line
+		return category; 
 		
 	}
 
