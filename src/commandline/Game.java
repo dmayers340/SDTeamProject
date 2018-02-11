@@ -31,13 +31,13 @@ public class Game
 	private static ArrayList <Player> listOfPlayers;
 
 	private static boolean isFinished;	
-	private static DatabaseConnection db;
+//	private static DatabaseConnection db;
 	private static int gameNumber;
-
+	
 	private static final String newLine = (System.getProperty("line.separator"));
 	private static final String logSeparator = newLine + 
 			"------------------------------------------------------------------------------------------------" + newLine;
-
+	 
 	private boolean writeToLog = false;
 	private final String LOG_FILE = "toptrumps.log";
 
@@ -51,11 +51,11 @@ public class Game
 	 * @param Deck d = current deck 
 	 */
 
-	public Game (DatabaseConnection db)
+	public Game ()
 	{	
-		this.db = db;
-		gameNumber = db.getNumberOfGames()+1;
-
+	//	this.db = db;
+	//	gameNumber = db.getNumberOfGames()+1;
+		
 		roundCount = 1;
 		drawCount = 0; 
 		isFinished = false;
@@ -70,16 +70,16 @@ public class Game
 
 	{
 		readIn();
-
+	
 		boolean logExists = false;
-		if (writeToLog == true)
+		if (writeToLog = true)
 		{
 			logDeck(currentDeck,logExists);
 		}
 
 		currentDeck.shuffleDeck();
 
-		if (writeToLog == true)
+		if (writeToLog = true)
 		{
 			logExists = true;
 			logDeck(currentDeck, logExists); //prints shuffled deck to log file
@@ -92,24 +92,33 @@ public class Game
 		// choose the 1st active player
 
 	} 
-
+	
 	public void writeToLog(boolean w)
 	{
-		writeToLog = w;
+		writeToLog = true;
 	}
 
+	public void startOnlineRound()
 
+	{
+		newRound = new Round(listOfPlayers, activePlayer, currentCategory, roundCount, writeToLog);
+		//newRound.addRound();
+		newRound.playRound();
 
+		finishRound();  
+	}
+	
+	
 	/**
 	 * rounds continue until there is only 1 player left
 	 * the last remaining player is the winner 
 	 */
 	public void startRound() 
 	{
-
+		
 		newRound = new Round(listOfPlayers, activePlayer, currentCategory, roundCount, writeToLog);
 		newRound.playRound();
-		newRound.addRound();
+		//newRound.addRound();
 
 		finishRound();
 	}
@@ -118,7 +127,7 @@ public class Game
 	/**
 	 * 
 	 */
-
+	
 	private void finishRound() 
 
 	{
@@ -128,7 +137,7 @@ public class Game
 
 		{
 			isFinished = true; 
-			db.updateDB(getGameData(), getRoundData());
+		//	db.updateDB(getGameData(), getRoundData());
 		}
 
 		if (newRound.isDraw() == true)
@@ -141,13 +150,9 @@ public class Game
 			currentWinner = newRound.getWinner();
 			currentWinner.addWin();
 		}
-
-		if (writeToLog == true)
-		{
-			roundLog();
-			logCards();
-		}
 		
+		roundLog();
+		logCards();
 		roundCount++;
 	}
 
@@ -431,11 +436,11 @@ public class Game
 		try {
 			try {
 				FileWriter fw = new FileWriter(LOG_FILE, true);
-
+				
 				BufferedWriter bw = new BufferedWriter(fw);
 				printer = new PrintWriter(bw);
-
-
+				
+				 
 				{ 
 					printer.println();
 					printer.print(newRound.getRoundLog());
@@ -472,7 +477,7 @@ public class Game
 
 				{ 
 					printer.println(newLine + currentWinner.getName() + " WON THE GAME!");
-
+					
 				}
 			}
 
@@ -506,11 +511,11 @@ public class Game
 	{
 		username = u;	
 	}
-
+	
 	public Player getHumanPlayer ()
 	{
 		return listOfPlayers.get(0);
-	}	
+  }	
 
 	public void setCurrentCategory(int c)
 
@@ -552,7 +557,7 @@ public class Game
 		{
 			logGameWinner();
 		}
-
+		
 		return currentWinner;
 	}
 
@@ -583,7 +588,7 @@ public class Game
 		String roundData = rData.toString();
 		return roundData;
 	}
-
+	
 
 	private String getWinsPerPlayer(int i)
 	{
@@ -613,7 +618,7 @@ public class Game
 	{
 		return newRound.isDraw();
 	}
-
+	
 	public int getRoundCount ()
 	{
 		return roundCount;

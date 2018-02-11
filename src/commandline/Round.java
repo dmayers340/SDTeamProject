@@ -50,17 +50,17 @@ public class Round {
 
 	}
 
-	public void addRound() 
-
-	{
-		try{
-			Thread.sleep(2000);
-
-		}
-
-		catch(InterruptedException e){		
-		}
-	}
+//	public void addRound() 
+//
+//	{
+//		try{
+//			Thread.sleep(2000);
+//
+//		}
+//
+//		catch(InterruptedException e){		
+//		}
+//	}
 
 	/**
 	 */
