@@ -35,6 +35,7 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 
 //imports from commandline
 import commandline.Card;
+import commandline.DatabaseConnection;
 import commandline.Deck;
 import commandline.Game;
 import commandline.Player;
@@ -69,7 +70,7 @@ public class TopTrumpsRESTAPI
 	private int numcard;
 	private int cm;
 	//Database Connection
-	//	private DatabaseConnection db = new DatabaseConnection();
+	private DatabaseConnection db = new DatabaseConnection();
 
 	ObjectWriter oWriter = new ObjectMapper().writerWithDefaultPrettyPrinter();
 
@@ -79,7 +80,7 @@ public class TopTrumpsRESTAPI
 		//THIS IS STRING==need to pass to deck class to make categories
 		deck = conf.getDeckFile();
 		numberOfPlayers=conf.getNumAIPlayers()+1;
-		game = new Game();
+		game = new Game(db);
 		game.setNumberOfPlayers(numberOfPlayers);
 		game.setUsername("Human");
 		game.initialiseGame();
@@ -264,7 +265,7 @@ public class TopTrumpsRESTAPI
 	public int startNewGame(@QueryParam("num") int a) throws IOException {
 		if (a==1)
 		{
-			game = new Game();
+			game = new Game(db);
 			game.setNumberOfPlayers(numberOfPlayers);
 			game.setUsername("Human");
 			game.initialiseGame();
@@ -287,56 +288,56 @@ public class TopTrumpsRESTAPI
 	}
 
 
-	//	//Get the number of games played from database for statistic screen
-	//	@GET
-	//	@Path("/numGames")
-	//	public int numberOfGames() throws IOException
-	//	{
-	//		int numGames = db.getNumberOfGames();
-	//		return numGames;
-	//	}
-	//
-	//	//Get number of times computer has won from database for stat screen
-	//	@GET
-	//	@Path("/timescomputerwon")
-	//	public int timesComputerWon() throws IOException
-	//	{
-	//		int compWins = db.getComputerWin();
-	//		return compWins;
-	//	}
-	//
-	//	//Get number of times human has won from database for stat screen
-	//	@GET
-	//	@Path("/humanwin")
-	//	public int timesPersonWon() throws IOException
-	//	{
-	//		int humanwin = db.getHumanWin();
-	//		return humanwin;
-	//	}
-	//
-	//	//Get average number of draws from database for stat screen
-	//	@GET
-	//	@Path("/numDraws")
-	//	public double numDraws() throws IOException
-	//	{
-	//		double numDraws = db.getNumberOfDraws();
-	//		return numDraws;
-	//	}
-	//
-	//	//Get the maximum amount of rounds from database for stat screen
-	//	@GET 
-	//	@Path("/numRounds")
-	//	public int numRounds() throws IOException
-	//	{
-	//		int numRounds = db.getMaxRounds();
-	//		return numRounds;
-	//	}
-	//
-	//	//Not sure where to close the database, made this an attempt to close
-	//	@GET
-	//	@Path("/closedb")
-	//	public void closedb() throws IOException
-	//	{
-	//		db.closeConnection();
-	//	}
+		//Get the number of games played from database for statistic screen
+		@GET
+		@Path("/numGames")
+		public int numberOfGames() throws IOException
+		{
+			int numGames = db.getNumberOfGames();
+			return numGames;
+		}
+	
+		//Get number of times computer has won from database for stat screen
+		@GET
+		@Path("/timescomputerwon")
+		public int timesComputerWon() throws IOException
+		{
+			int compWins = db.getComputerWin();
+			return compWins;
+		}
+	
+		//Get number of times human has won from database for stat screen
+		@GET
+		@Path("/humanwin")
+		public int timesPersonWon() throws IOException
+		{
+			int humanwin = db.getHumanWin();
+			return humanwin;
+		}
+	
+		//Get average number of draws from database for stat screen
+		@GET
+		@Path("/numDraws")
+		public double numDraws() throws IOException
+		{
+			double numDraws = db.getNumberOfDraws();
+			return numDraws;
+		}
+	
+		//Get the maximum amount of rounds from database for stat screen
+		@GET 
+		@Path("/numRounds")
+		public int numRounds() throws IOException
+		{
+			int numRounds = db.getMaxRounds();
+			return numRounds;
+		}
+	
+		//Not sure where to close the database, made this an attempt to close
+		@GET
+		@Path("/closedb")
+		public void closedb() throws IOException
+		{
+			db.closeConnection();
+		}
 }

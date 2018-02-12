@@ -37,9 +37,9 @@ public class Game
 	private int drawCount; // number of draws in game
 	private int roundCount = 0; // always starts from 0
 	
-	private boolean writeToLog = true;
+	private boolean writeToLog = false;
 	private static boolean isFinished;	
-//	private static DatabaseConnection db;
+	private static DatabaseConnection db;
 	
 	// class constants below
 	private static final String FILE_NAME = "StarCitizenDeck.txt"; // name of deck file
@@ -55,10 +55,10 @@ public class Game
 	 * @param Deck d = current deck 
 	 */
 
-	public Game ()
+	public Game (DatabaseConnection db)
 	{	
-	//	this.db = db;
-	//	gameNumber = db.getNumberOfGames()+1;
+		this.db = db;
+		gameNumber = db.getNumberOfGames()+1;
 		
 		roundCount = 1;
 		drawCount = 0; 
@@ -130,7 +130,7 @@ public class Game
 				logGameWinner();
 			}
 			
-		//	db.updateDB(getGameData(), getRoundData());
+			db.updateDB(getGameData(), getRoundData());
 		}
 
 		if (newRound.isDraw() == true)
