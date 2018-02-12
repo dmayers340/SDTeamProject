@@ -4,25 +4,32 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+
+/**
+ * Represents a deck of cards. 
+ * Any methods for modifying the deck (adding new cards, shuffling)
+ * are also stored in this class.
+ */
+
 public class Deck {
 
 	/**
 	 * instance variables
 	 */
-
 	private ArrayList<String> categories;
 	private ArrayList<Card> cardsInDeck;
 	private int numberOfCards;
+
 	
 	/**
 	 * class constants
 	 */
-	private static final int maxAttributes = 6; 
+	private static final int MAX_ATTRIBUTES = 6; // max No. of attributes per card
 
+	
 	/**
-	 * constructor
+	 * Constructor
 	 */
-
 	public Deck () 
 	{
 		cardsInDeck = new ArrayList<Card>(); // we have a new deck!
@@ -31,53 +38,39 @@ public class Deck {
 
 
 	/**
-	 * category names are stored in an array list ('categories')
+	 * Category names are stored in an array list ('categories')
 	 * @param String c = a category name
 	 */
-
 	public void setCategories (String line)	
 	{
-		String [] split = new String [maxAttributes];
+		String [] split = new String [MAX_ATTRIBUTES];
 		split = line.split(" ");
 		Collections.addAll(categories, split);
 	}
-	
+
 
 	/**
-	 * adds a new card to the deck
-	 * @param String line
+	 * Adds a new card to the deck
+	 * @param a String containing the card's attributes
 	 */
-
 	public void addCard(String line) 
 	{
-	
-		String [] split = new String [maxAttributes];
+
+		String [] split = new String [MAX_ATTRIBUTES];
 		split = line.split(" ");
-		
+
 		ArrayList<String> card = new ArrayList<String>();
 		Collections.addAll(card, split);
-		
+
 		Card newCard = new Card(categories, card);
 		cardsInDeck.add(newCard);
 		numberOfCards++; 
 	}
 	
-
-	public int getNumberOfCards() {
-
-		return numberOfCards;
-	}
-
-	public Card getCardAt(int i) {
-
-		return cardsInDeck.get(i);
-	}
-
 	/**
-	 * shuffles current deck
-	 * swaps each card with another card at a random index
+	 * Shuffles current deck
+	 * Swaps each card with another card at a random index
 	 */
-
 	public void shuffleDeck()
 	{
 		// get length of the list
@@ -98,14 +91,38 @@ public class Deck {
 			cardsInDeck.set(random,temp);
 		}
 	}
+	
+	
+
+	/**
+	 * Getter methods below
+	 */
+	
+	
+	
+	/**
+	 * @return deck size
+	 */
+	public int getNumberOfCards() {
+
+		return numberOfCards;
+	}
+	
+
+	/**
+	 * Returns a card at a particular index.
+	 * @param card index
+	 * @return a Card object
+	 */
+	public Card getCardAt(int i) {
+
+		return cardsInDeck.get(i);
+	}
 
 
 	/**
-	 * accessor method 
-	 * @returns category names as an array list
-	 * could also return a long String....
+	 * @return category names as an array list
 	 */
-
 	public ArrayList<String> getCategories ()
 	{
 		return categories;
@@ -113,10 +130,8 @@ public class Deck {
 
 
 	/**
-	 * toString
 	 * @return deck as a string 
 	 */
-
 	public String dString () 
 	{
 		String dString = "";
@@ -124,6 +139,7 @@ public class Deck {
 
 		dString = dString + String.format( "%s ", cString());
 
+		// iterates through each of the cards
 		for (int i = 0; i < numberOfCards; i++)
 		{
 			temp = cardsInDeck.get(i);
@@ -135,10 +151,8 @@ public class Deck {
 
 
 	/**
-	 * toString method
 	 * @return categories in one String 
 	 */
-
 	public String cString ()
 	{
 		String cString = "";
@@ -154,11 +168,8 @@ public class Deck {
 
 
 	/**
-	 * accessor method
 	 * @return current deck
-	 * will need this after each shuffle!
 	 */
-
 	public ArrayList<Card> getDeck()
 	{
 		return cardsInDeck;

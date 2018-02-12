@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * 
- * @author giedrestulgyte
- *
+ * This class represents a single game round. 
+ * It also contains methods necessary to run the round and redistribute cards
+ * at the end of the round.
  */
 
 public class Round {
@@ -14,59 +14,57 @@ public class Round {
 	/**
 	 * instance variables
 	 */
-
 	private Player activePlayer;
 	private ArrayList<Player> players;
-	public static String cate;
 
-	private static int c; // category
+	private int c; // category
+	public int roundCount;
 	private Player winner;
 
-	public int roundCount;
-
 	public static boolean draw = false; // 1st round starts with no draw
-	public static ArrayList<Card> communalPile = new ArrayList<Card>(); 
+	public static ArrayList<Card> communalPile = new ArrayList<Card>(); // static because communal pile is shared between rounds
 
-	private StringBuilder roundLog = new StringBuilder();
-
+	// related to the log 
 	private boolean writeToLog;
+	private StringBuilder roundLog = new StringBuilder(); // each round has a new log
 	private static final String newLine = (System.getProperty("line.separator"));
 	private static final String logSeparator = newLine + 
 			"------------------------------------------------------------------------------------------------" + newLine;
 	private static final String logSeparator2 = newLine + 
 			"================================================================================================" + newLine;
-	 
-	/**
-	 * constructor method 
-	 */
 
-	public Round (ArrayList <Player> p, Player ap, Integer category, int r, boolean w)
+	/**
+	 * Constructor method 
+	 */
+	public Round (int r, boolean w)
 	{
 		roundCount = r;
 		writeToLog = w;
-
-		players = p;  
-		activePlayer = ap; 
-		c = category; // sets category
-
-		if ( writeToLog == true)	
-		{ 
-			startLog();
-		}
-
+	}
+	
+	/**
+	 * @param p - players in game
+	 */
+	public void setPlayers(ArrayList<Player> p)
+	{
+		players = p;
+	}
+	
+	/**
+	 * @param ap - active Player
+	 */
+	public void setActivePlayer(Player ap)
+	{
+		activePlayer = ap;
 	}
 
-//	public void addRound() 
-//
-//	{
-//		try{
-//			Thread.sleep(2000);
-//
-//		}
-//
-//		catch(InterruptedException e){		
-//		}
-//	}
+	/**
+	 * @param category of the orund
+	 */
+	public void setCategroy(int category)
+	{
+		c = category;
+	}
 
 	/**
 	 */
@@ -103,6 +101,11 @@ public class Round {
 	public void playRound() 
 
 	{	
+		if ( writeToLog == true)	
+		{ 
+			startLog();
+		}
+
 		compareCards();
 		setWinner();  
 	} 

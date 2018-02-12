@@ -98,29 +98,20 @@ public class Game
 		writeToLog = true;
 	}
 
-	public void startOnlineRound()
-
-	{
-		newRound = new Round(listOfPlayers, activePlayer, currentCategory, roundCount, writeToLog);
-		//newRound.addRound();
-		newRound.playRound();
-
-		finishRound();  
-	}
-	
 	
 	/**
 	 * rounds continue until there is only 1 player left
 	 * the last remaining player is the winner 
 	 */
 	public void startRound() 
-	{
-		
-		newRound = new Round(listOfPlayers, activePlayer, currentCategory, roundCount, writeToLog);
+	{	
+		newRound = new Round(roundCount, writeToLog);
+		newRound.setPlayers(listOfPlayers);
+		newRound.setActivePlayer(activePlayer);
+		newRound.setCategroy(currentCategory);
 		newRound.playRound();
-		//newRound.addRound();
 
-		finishRound();
+		finishRound();  
 	}
 
 
@@ -254,6 +245,7 @@ public class Game
 		if (!currentDeck.getDeck().isEmpty()) { //if cards remaining in deck
 
 			listOfPlayers.get(pickRandomPlayer()).receiveCards(currentDeck.getDeck());
+			
 
 		}
 

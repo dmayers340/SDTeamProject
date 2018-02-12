@@ -1,18 +1,24 @@
 package commandline;
 import java.util.ArrayList;
 
+/**
+ * This class represents a single card object as it was read in from the deck.
+ * This class also contains getter methods. 
+ * Once read in, a card cannot be modified.
+ */
+
 public class Card {
 
 
 	private static ArrayList<String> categories;  //e.g. Speed, Firepower etc
-	private ArrayList<String> cardAttributes;     //numerical value of a category
-	
+	private ArrayList<String> cardAttributes;     //numerical value of the attribute
+
 
 	/**
 	 * constructor
+	 * @param c = categories
 	 * @param cA = array containing attributes
 	 */
-
 	public Card(ArrayList<String> c, ArrayList<String> cA)
 
 	{ 
@@ -26,7 +32,6 @@ public class Card {
 	 * @param index of the attribute
 	 * @return the value 
 	 */
-
 	public String getAttribute(int index) 
 
 	{
@@ -36,9 +41,7 @@ public class Card {
 
 	/**
 	 * write to String
-	 * self explanatory
 	 */
-
 	public String toString () 
 
 	{
@@ -52,22 +55,20 @@ public class Card {
 		cardString = String.format ("%s ", cardString);
 		return cardString;
 	}
-	
-	
+
+
 	/**
 	 * @return categories;
 	 */
-	public static ArrayList<String> getCategories ()
+	public ArrayList<String> getCategories ()
 	{
 		return categories;
 	}
-	
-	
+
+
 	/**
-	 * writes categories to String
-	 * @return
+	 * @return card's categories as a String
 	 */
-	
 	public String cString ()
 	{
 		String cString = "";
@@ -81,12 +82,12 @@ public class Card {
 		return cString.toUpperCase(); 	
 	}
 
+
 	/**
-	 * return array 
+	 * @return the card's values
 	 */
-	
 	public ArrayList<String> getCard () 
-	
+
 	{
 		return cardAttributes;
 	}

@@ -30,6 +30,7 @@ public class Player {
 	public Player() 
 	{ 
 		isInGame = true;
+		hand = new ArrayList<Card>();
 	}
 
 	/**
@@ -39,6 +40,7 @@ public class Player {
 
 	public void receiveCards(ArrayList<Card>cards) 
 	{
+		System.out.println("player received cards");
 		this.hand.addAll(cards);
 	}
 
