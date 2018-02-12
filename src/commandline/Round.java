@@ -3,6 +3,12 @@ package commandline;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * 
+ * @author giedrestulgyte
+ *
+ */
+
 public class Round {
 
 	/**
@@ -138,7 +144,7 @@ public class Round {
 
 		{
 			// from communal pile 
-			winner.receiveExtraCards(communalPile);
+			winner.receiveCards(communalPile);
 			communalPile.removeAll(communalPile); // empties pile
 
 			if (writeToLog == true)

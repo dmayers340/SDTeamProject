@@ -217,14 +217,16 @@ public class Game
 		int i = 0;
 
 		// creates the human player
-		Player h = new Player(username);
+		Player h = new Player();
+		h.setPlayerName(username);
 		h.setHuman();
 		listOfPlayers.add(h);
 
 		// create AI players
 		for (i = 1; i < numberOfPlayers; i++) 
 		{
-			Player p = new Player("Player" + i);
+			Player p = new Player();
+			p.setPlayerName("Player" + i);
 			listOfPlayers.add(p);
 		}
 
@@ -242,7 +244,7 @@ public class Game
 
 		int i;
 		for (i = 0; i < numberOfPlayers; i++) {
-
+			
 			ArrayList<Card> cardsForEachPlayer = new ArrayList<Card>(currentDeck.getDeck().subList(0, numCardsEach));  
 			listOfPlayers.get(i).receiveCards(cardsForEachPlayer); // gives cards
 			currentDeck.getDeck().removeAll(cardsForEachPlayer); // removes from current deck
@@ -251,7 +253,7 @@ public class Game
 
 		if (!currentDeck.getDeck().isEmpty()) { //if cards remaining in deck
 
-			listOfPlayers.get(pickRandomPlayer()).receiveExtraCards(currentDeck.getDeck());
+			listOfPlayers.get(pickRandomPlayer()).receiveCards(currentDeck.getDeck());
 
 		}
 
@@ -625,7 +627,7 @@ public class Game
 		return roundCount;
 	}
 
-	public boolean getDraw()
+	public boolean wasADraw()
 	{
 		return newRound.isDraw();
 	}

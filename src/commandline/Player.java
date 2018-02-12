@@ -2,63 +2,61 @@ package commandline;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * This class represents different players of the game
+ * and stores information about the particular player object. 
+ * It also contains methods that update player information as 
+ * the game progresses.
+ */
+
 public class Player { 
 
+	/**
+	 * instance variables
+	 */
+
 	private String playerName;
-	private ArrayList<Card> hand;
+	private ArrayList<Card> hand; // stores cards in hand
+	private int roundWins; // number of won rounds
 	private boolean human; 
 	private boolean isInGame;
-	private int roundWins; // number of won rounds
 
-	// what are these?
-	private Card card;
 	private int numberOfCardsEach;
 
-	public Player(String pName) { 
-
-		this.playerName = pName;
+	/**
+	 * Constructor method.
+	 * Once a new player is created, they are always in game.
+	 */
+	public Player() 
+	{ 
 		isInGame = true;
 	}
 
-	public void setUsername (String username) 
+	/**
+	 * Adds an array of new cards to the player's hand.
+	 * @param cards = the cards to be added
+	 */
 
+	public void receiveCards(ArrayList<Card>cards) 
 	{
-		this.playerName = username.toUpperCase();
-	}
-
-	public void setNumberOfCardsEach(int numC) {
-
-		this.numberOfCardsEach = numC;
+		this.hand.addAll(cards);
 	}
 
 
 
-	public String toString() {
-
-		return playerName + hand;
-	}
-
-	public void receiveCards(ArrayList<Card>dealtCards) {
-
-		this.hand = dealtCards; 
-	}
-
-	public void receiveExtraCards(ArrayList<Card>extraCards) {
-
-		this.hand.addAll(extraCards);
-	}
-
+	/**
+	 * Adds a single card to the player's hand
+	 * @param c = the card to be added
+	 */
 	public void receiveCard(Card c) 
-
 	{
 		this.hand.add(c);
 	}
 
-	/**
-	 * removes top card from the hand
-	 * removes the player if needed
-	 */
 
+	/**
+	 * Removes top card from the hand
+	 */
 	public void removeCard ()
 
 	{
@@ -67,61 +65,10 @@ public class Player {
 
 
 	/**
-	 * @return hand
-	 */
-
-	public ArrayList<Card> getHand() {
-
-		return hand;
-
-	}
-
-
-
-
-	/**
-	 * @return top card in hand
-	 */
-
-	public Card getTopCard() 
-
-	{	
-		return hand.get(0);
-
-	}
-
-	public String handToString()
-
-	{
-		String h = System.getProperty("line.separator") + this.getName() + "'s cards: " + System.getProperty("line.separator");
-
-		if (this.isInGame)
-
-		{
-			h = h + this.getTopCard().cString() + System.getProperty("line.separator");
-
-			for (int i = 0; i<hand.size(); i++)
-
-			{
-				h = h + hand.get(i) + System.getProperty("line.separator");
-			}
-		}
-
-
-		else 
-		{
-			h = h + this.getName() + " has no cards" + System.getProperty("line.separator");
-		}
-
-		return h;
-	}
-
-	/**
 	 * The human player is able to choose the category through command line input. 
 	 * The player must enter the category name as a String without any spelling mistakes.
 	 * "Description" is not considered to be a valid category.
 	 */
-
 	public int chooseCategory ()
 
 	{
@@ -159,10 +106,12 @@ public class Player {
 
 	}
 
+
 	/**
-	 * searches active user's top card 
-	 * finds the category with the highest value
-	 * sets it to c
+	 * Used for auto-finding a category for the roundl.
+	 * Searches player's top card and finds the category with the highest value.
+	 * 
+	 * @return the index of the category as it's stored in the Card object.
 	 */
 	public int findBestCategory () 
 
@@ -185,39 +134,132 @@ public class Player {
 
 		return index;
 	}
-	
+
 
 	/**
-	 * @return player name
-	 * need this for the interface
+	 *  increments the number of rounds the player won
+	 */
+	public void addWin()
+	{
+		roundWins++;
+	}
+
+
+	/**
+	 * Setter methods below
 	 */
 
-	public String getName()
+	public void setPlayerName (String name) 
 
 	{
-		return playerName;
+		this.playerName = name.toUpperCase();
+	}
+
+
+	/**
+	 * @param numC = number of cards the player receives once cards are dealt
+	 */
+	public void setNumberOfCardsEach(int numC) {
+
+		this.numberOfCardsEach = numC;
+	}
+
+
+	/**
+	 * @param whether the player is still in game.
+	 */
+	public void setStatus (boolean inGame)
+	{
+		isInGame = inGame;
 	}
 
 
 	/**
 	 * set player type 
 	 */
-
 	public void setHuman ()
-
 	{
 		human = true;
 	}
 
-	// increments the number of rounds the player won
-	public void addWin()
+
+
+
+	/**
+	 * Getter methods below
+	 */
+
+
+	/**
+	 * @return hand
+	 */
+	public ArrayList<Card> getHand() 
 	{
-		roundWins++;
+		return hand;
 	}
 
-	// returns the number of rounds the player has won
-	public int getRoundWins()
 
+	/**
+	 * Returns the Player object as a String
+	 */
+	public String toString() 
+	{
+		return playerName + hand;
+	}
+
+
+	/**
+	 * @return top card in hand
+	 */
+	public Card getTopCard() 
+	{	
+		return hand.get(0);
+
+	}
+
+	/**
+	 * @return cards in hand as a String
+	 */
+	public String handToString()
+
+	{
+		String h = System.getProperty("line.separator") + this.getName() + "'s cards: " + System.getProperty("line.separator");
+
+		if (this.isInGame)
+
+		{
+			h = h + this.getTopCard().cString() + System.getProperty("line.separator");
+
+			for (int i = 0; i<hand.size(); i++)
+
+			{
+				h = h + hand.get(i) + System.getProperty("line.separator");
+			}
+		}
+
+
+		else 
+		{
+			h = h + this.getName() + " has no cards" + System.getProperty("line.separator");
+		}
+
+		return h;
+	}
+
+
+	/**
+	 * @return player name
+	 */
+	public String getName()
+	{
+		return playerName;
+	}
+
+
+	/**
+	 * @return the number of rounds the player has won
+	 */
+	public int getRoundWins()
 	{
 		return roundWins;
 	}
@@ -226,24 +268,20 @@ public class Player {
 	/**
 	 * @return whether the user is human or not
 	 */
-
-
 	public boolean isHuman ()
-
 	{
 		return human;
 	}
 
 
+	/**
+	 * @return whether the player is still in game.
+	 */
 	public boolean isInGame ()
 
 	{
 		return isInGame; 
 	}
 
-	public void setStatus (boolean inGame)
 
-	{
-		isInGame = inGame;
-	}
 }
