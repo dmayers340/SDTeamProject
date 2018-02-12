@@ -11,39 +11,43 @@ import java.util.Scanner;
 
 import javax.swing.JOptionPane;
 
-public class Game 
+/**
+ * This class represents an single Top Trumps game. 
+ * It contains all the methods necessary to run a game, 
+ * stores information about a single game, and updates
+ * it as the game progresses.
+ */
 
+public class Game 
 {
 	/**
 	 *  instance variables
 	 */
-	public static int numberOfPlayers; // number of players in game
-	private int drawCount; // number of draws in game
-
-	public String username;
+	public int numberOfPlayers; // number of players in game
 	private int remainingPlayers; // players still in game
+	public String username; // chosen username
 	private Deck currentDeck;
 	private Round newRound;
 	private Player activePlayer; // active player makes the category choice
 	private Player currentWinner;
 	private int currentCategory;
-	private int roundCount = 0;
 	private static ArrayList <Player> listOfPlayers;
-
-	private static boolean isFinished;	
-//	private static DatabaseConnection db;
 	private static int gameNumber;
 	
+	private int drawCount; // number of draws in game
+	private int roundCount = 0; // always starts from 0
+	
+	private boolean writeToLog = false;
+	private static boolean isFinished;	
+//	private static DatabaseConnection db;
+	
+	// class constants below
+	private static final String FILE_NAME = "StarCitizenDeck.txt"; // name of deck file
 	private static final String newLine = (System.getProperty("line.separator"));
 	private static final String logSeparator = newLine + 
 			"------------------------------------------------------------------------------------------------" + newLine;
-	 
-	private boolean writeToLog = true;
-	private final String LOG_FILE = "toptrumps.log";
-
-	private static String FILE_NAME = "StarCitizenDeck.txt"; // name of deck file
-
-
+	private static final String LOG_FILE = "toptrumps.log";
+	
 	/**
 	 * Constructor method. 
 	 * Creates a new Game object and connects to the database.
