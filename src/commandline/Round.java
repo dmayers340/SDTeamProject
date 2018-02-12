@@ -3,66 +3,62 @@ package commandline;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * This class represents a single game round. 
+ * It also contains methods necessary to run the round and redistribute cards
+ * at the end of the round.
+ */
+
 public class Round {
 
 	/**
 	 * instance variables
 	 */
-
 	private Player activePlayer;
 	private ArrayList<Player> players;
-	public static String cate;
 
-	private static int c; // category
+	private int c; // category
+	public int roundCount;
 	private Player winner;
 
-	public int roundCount;
-
 	public static boolean draw = false; // 1st round starts with no draw
-	public static ArrayList<Card> communalPile = new ArrayList<Card>(); 
+	public static ArrayList<Card> communalPile = new ArrayList<Card>(); // static because communal pile is shared between rounds
 
-	private StringBuilder roundLog = new StringBuilder();
-
+	// related to the log 
 	private boolean writeToLog;
+	private StringBuilder roundLog = new StringBuilder(); // each round has a new log
 	private static final String newLine = (System.getProperty("line.separator"));
 	private static final String logSeparator = newLine + 
 			"------------------------------------------------------------------------------------------------" + newLine;
 	private static final String logSeparator2 = newLine + 
 			"================================================================================================" + newLine;
-	 
-	/**
-	 * constructor method 
-	 */
 
-	public Round (ArrayList <Player> p, Player ap, Integer category, int r, boolean w)
+	/**
+	 * Constructor method 
+	 */
+	public Round (int r, boolean w)
 	{
 		roundCount = r;
 		writeToLog = w;
+	}
 
-		players = p;  
-		activePlayer = ap; 
-		c = category; // sets category
 
+	/**
+	 * Calls methods necessary to execute the round
+	 */
+	public void playRound() 
+	{	
 		if ( writeToLog == true)	
 		{ 
 			startLog();
 		}
 
-	}
-
-//	public void addRound() 
-//
-//	{
-//		try{
-//			Thread.sleep(2000);
-//
-//		}
-//
-//		catch(InterruptedException e){		
-//		}
-//	}
+		compareCards();
+		finishRound();  
+	} 
 
 	/**
+	 * Starts appending the log
 	 */
 	private void startLog() 
 	{	
@@ -90,36 +86,25 @@ public class Round {
 	}
 
 
-	/**
-	 * game sequence
-	 */
-
-	public void playRound() 
-
-	{	
-		compareCards();
-		setWinner();  
-	} 
-
 
 	/**
-	 *  sets winner
+	 *  Updates the round as needed
 	 */
-
-	public void setWinner() 
+	public void finishRound() 
 	{
 		if (draw == false)
-
 		{
 			distributeCards();			
 			communalPile = new ArrayList<Card>(); // resets communal pile
 
-			String w = (newLine + "The winner of round " + roundCount + " was " + winner.getName() + newLine);		
-			roundLog.append(w + logSeparator);
+			if (writeToLog == true)
+			{
+				String w = (newLine + "The winner of round " + roundCount + " was " + winner.getName() + newLine);		
+				roundLog.append(w + logSeparator);
+			}
 		}
 
 		if (draw == true)
-
 		{
 			draw();
 			winner = null; // no winner
@@ -128,47 +113,10 @@ public class Round {
 
 
 	/**
-	 * winner receives cards 
+	 * Compares all the cards in play and determines the winner of the round.
+	 * Updates the currentWinner variable.
 	 */
-
-	private void distributeCards() 
-
-	{
-		if (communalPile.size()>0)
-
-		{
-			// from communal pile 
-			winner.receiveExtraCards(communalPile);
-			communalPile.removeAll(communalPile); // empties pile
-
-			if (writeToLog == true)
-			{
-				String winnerIs = winner.getName() + " took all cards from the communal pile";			
-				roundLog.append(newLine + winnerIs + newLine);
-				roundLog.append(getCommunalPile() + newLine); 
-			}
-
-		}
-
-		// winner receives cards from other players
-		for (int i = 0; i<players.size(); i++)
-		{
-			Player p = players.get(i); // for readability
-			if (p.isInGame())
-			{
-				winner.receiveCard(p.getTopCard());
-				p.removeCard();
-			}	
-		}
-	}
-
-
-	/**
-	 * sets round winner
-	 */
-
 	public void compareCards()
-
 	{
 		int j = 0; // winner's index
 		int w = 0; // highest value
@@ -179,12 +127,10 @@ public class Round {
 
 		String values = "The competing values are printed below:" + newLine;
 
-		// finds the highest value
+		// finds the highest value - iterates through all player cards
 		for (int i = 0; i<players.size(); i++)
-
 		{
 			if (players.get(i).isInGame()) 
-
 			{
 				t = Integer.valueOf(players.get(i).getTopCard().getAttribute(c));
 
@@ -192,7 +138,6 @@ public class Round {
 				values = values + players.get(i).getName() + ": " + t + newLine;
 
 				if (t>w)
-
 				{	
 					w = t; // stores highest value
 					j = i; // stores player index
@@ -208,69 +153,132 @@ public class Round {
 			}
 		}
 
+		// writes to log
 		if (writeToLog == true)
 		{
-
 			roundLog.append(newLine);
 			roundLog.append(cards);
 			roundLog.append(newLine);
 			roundLog.append(values);
 			roundLog.append(logSeparator);
 		}
-
 	}
 
 
+
 	/**
-	 * if draw
+	 * Distributes cards at the end of a round.
+	 * Winner receives cards from other players.
+	 * If there are cards in the communal pile, winner receives all cards in it.
 	 */
+	private void distributeCards() 
+	{
+		if (communalPile.size()>0) // from communal pile 
+		{
+			winner.receiveCards(communalPile);
+			communalPile.removeAll(communalPile); // empties pile
 
+			if (writeToLog == true)
+			{
+				String winnerIs = winner.getName() + " took all cards from the communal pile";			
+				roundLog.append(newLine + winnerIs + newLine);
+				roundLog.append(getCommunalPile() + newLine); 
+			}
+
+		}
+
+		for (int i = 0; i<players.size(); i++) // from other players
+		{
+			Player p = players.get(i); // for readability
+			if (p.isInGame())
+			{
+				winner.receiveCard(p.getTopCard());
+				p.removeCard();
+			}	
+		}
+	}
+	
+
+	/**
+	 * This method adds new cards to the communal pile.
+	 */
 	private void draw() 
-
 	{
 		// adds cards to communal pile 
 		for (int i = 0; i < players.size(); i++)
-
 		{
 			if (players.get(i).isInGame())
 			{	
 				communalPile.add(players.get(i).getTopCard());
 				players.get(i).removeCard();
 			}
-
-
 		}
 
-		String d = newLine + "Round " + roundCount + " was a draw" + newLine;
-
-		roundLog.append(d);	
-		roundLog.append(newLine + "New cards have been added to the communal pile!");
-		roundLog.append(newLine + getCommunalPile() + newLine);
-
+		// updates log
+		if (writeToLog == true)
+		{
+			String d = newLine + "Round " + roundCount + " was a draw" + newLine;
+			roundLog.append(d);	
+			roundLog.append(newLine + "New cards have been added to the communal pile!");
+			roundLog.append(newLine + getCommunalPile() + newLine);
+		}
 	}
+
+
+
+
+	/**
+	 * Setter methods below
+	 */
+
+
+	/**
+	 * @param p - players in game
+	 */
+	public void setPlayers(ArrayList<Player> p)
+	{
+		players = p;
+	}
+
+	/**
+	 * @param ap - active Player
+	 */
+	public void setActivePlayer(Player ap)
+	{
+		activePlayer = ap;
+	}
+
+	/**
+	 * @param category of the round
+	 */
+	public void setCategroy(int category)
+	{
+		c = category;
+	}
+
+
+
+
+	/** 
+	 * Getter methods below
+	 */
+
 
 
 	/**
 	 * returns round winner
 	 */
-
 	public Player getWinner()
-
 	{
 		return winner;
 	}
 
 
 	/**
-	 * accessor method 
 	 * @return the contents of the communal pile as String
-	 * if empty, @return a message stating that
+	 * if empty, @return a message saying that it's empty
 	 */
-
-
-
 	public String getCommunalPile()
-
 	{
 		if (communalPile.size()>0)
 
@@ -297,22 +305,11 @@ public class Round {
 
 
 	/**
-	 * accessor method
-	 * @return if draw or not (boolean)
+	 * @return if round was a or not  
 	 */
 	public boolean isDraw()
-
 	{
 		return draw;
-	}
-
-
-	/**
-	 * accessor method
-	 * @return int
-	 */
-	public int getRoundCount() {
-		return roundCount;
 	}
 
 
@@ -322,7 +319,6 @@ public class Round {
 	 * @return all info about round
 	 */
 	public String getRoundLog() 
-
 	{
 		return roundLog.toString();
 	}

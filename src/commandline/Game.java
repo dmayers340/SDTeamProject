@@ -11,39 +11,43 @@ import java.util.Scanner;
 
 import javax.swing.JOptionPane;
 
-public class Game 
+/**
+ * This class represents an single Top Trumps game. 
+ * It contains all the methods necessary to run a game, 
+ * stores information about a single game, and updates
+ * it as the game progresses.
+ */
 
+public class Game 
 {
 	/**
 	 *  instance variables
 	 */
-	public static int numberOfPlayers; // number of players in game
-	private int drawCount; // number of draws in game
-
-	public String username;
+	public int numberOfPlayers; // number of players in game
 	private int remainingPlayers; // players still in game
+	public String username; // chosen username
 	private Deck currentDeck;
 	private Round newRound;
 	private Player activePlayer; // active player makes the category choice
 	private Player currentWinner;
 	private int currentCategory;
-	private int roundCount = 0;
 	private static ArrayList <Player> listOfPlayers;
-
-	private static boolean isFinished;	
-//	private static DatabaseConnection db;
 	private static int gameNumber;
 	
+	private int drawCount; // number of draws in game
+	private int roundCount = 0; // always starts from 0
+	
+	private boolean writeToLog = true;
+	private static boolean isFinished;	
+//	private static DatabaseConnection db;
+	
+	// class constants below
+	private static final String FILE_NAME = "StarCitizenDeck.txt"; // name of deck file
 	private static final String newLine = (System.getProperty("line.separator"));
 	private static final String logSeparator = newLine + 
 			"------------------------------------------------------------------------------------------------" + newLine;
-	 
-	private boolean writeToLog = true;
-	private final String LOG_FILE = "toptrumps.log";
-
-	private static String FILE_NAME = "StarCitizenDeck.txt"; // name of deck file
-
-
+	private static final String LOG_FILE = "toptrumps.log";
+	
 	/**
 	 * Constructor method. 
 	 * Creates a new Game object and connects to the database.
@@ -62,16 +66,16 @@ public class Game
 	}
 
 	/**
-	 * Initialises a new game (shuffles deck, creates players and deals cards). 
+	 * Initialises a new game (reads in a new deck, shuffles deck, resets instance variables, 
+	 * creates players, and deals cards).
 	 * Called from the TopTrumpsCLIApplication.java class.
 	 */
-
 	public void initialiseGame()
 
 	{
 		readIn();
-	
 		boolean logExists = false;
+		
 		if (writeToLog = true)
 		{
 			logDeck(currentDeck,logExists);
@@ -89,47 +93,30 @@ public class Game
 
 		createPlayers();
 		dealCards();
-		// choose the 1st active player
 
 	} 
 	
-	public void writeToLog(boolean w)
-	{
-		writeToLog = true;
-	}
-
-	public void startOnlineRound()
-
-	{
-		newRound = new Round(listOfPlayers, activePlayer, currentCategory, roundCount, writeToLog);
-		//newRound.addRound();
-		newRound.playRound();
-
-		finishRound();  
-	}
-	
 	
 	/**
-	 * rounds continue until there is only 1 player left
-	 * the last remaining player is the winner 
+	 * Creates a new round object and updates instance variables, then starts the round
+	 * and calls the endRound() method.
 	 */
 	public void startRound() 
-	{
+	{	
+		newRound = new Round(roundCount, writeToLog);
+		newRound.setPlayers(listOfPlayers);
+		newRound.setActivePlayer(activePlayer);
+		newRound.setCategroy(currentCategory);
 		
-		newRound = new Round(listOfPlayers, activePlayer, currentCategory, roundCount, writeToLog);
 		newRound.playRound();
-		//newRound.addRound();
-
-		finishRound();
+		endRound();  
 	}
 
 
 	/**
-	 * 
-	 */
-	
-	private void finishRound() 
-
+	 * Updates players after a round
+	 */	
+	private void endRound() 
 	{
 		updatePlayers(); // updates number of remaining players
 
@@ -168,7 +155,10 @@ public class Game
 	 * Sets categories for the new deck (contained in the first line of the file).
 	 * Add cards to the deck (each card is a new line).
 	 * Uses FILE_NAME, which is stored as a class constant.
+	 * 
+	 * 	@SuppressWarnings("resource") - System.in should not be closed
 	 */
+
 	private void readIn()
 	{
 		currentDeck = new Deck();
@@ -178,6 +168,7 @@ public class Game
 		{
 			reader = new FileReader(FILE_NAME);
 
+			@SuppressWarnings("resource") // see comments
 			Scanner in = new Scanner (reader);
 			String line = in.nextLine();
 
@@ -217,14 +208,16 @@ public class Game
 		int i = 0;
 
 		// creates the human player
-		Player h = new Player(username);
+		Player h = new Player();
+		h.setPlayerName(username);
 		h.setHuman();
 		listOfPlayers.add(h);
 
 		// create AI players
 		for (i = 1; i < numberOfPlayers; i++) 
 		{
-			Player p = new Player("Player" + i);
+			Player p = new Player();
+			p.setPlayerName("Player" + i);
 			listOfPlayers.add(p);
 		}
 
@@ -242,7 +235,7 @@ public class Game
 
 		int i;
 		for (i = 0; i < numberOfPlayers; i++) {
-
+			
 			ArrayList<Card> cardsForEachPlayer = new ArrayList<Card>(currentDeck.getDeck().subList(0, numCardsEach));  
 			listOfPlayers.get(i).receiveCards(cardsForEachPlayer); // gives cards
 			currentDeck.getDeck().removeAll(cardsForEachPlayer); // removes from current deck
@@ -251,7 +244,8 @@ public class Game
 
 		if (!currentDeck.getDeck().isEmpty()) { //if cards remaining in deck
 
-			listOfPlayers.get(pickRandomPlayer()).receiveExtraCards(currentDeck.getDeck());
+			listOfPlayers.get(pickRandomPlayer()).receiveCards(currentDeck.getDeck());
+			
 
 		}
 
@@ -269,7 +263,6 @@ public class Game
 	 * If the player has no cards, sets the Player.java isInGame instance variable to false 
 	 * and updates the number of remaining players.
 	 */
-
 	private void updatePlayers ()
 
 	{
@@ -294,7 +287,6 @@ public class Game
 	 * If previous round was a draw, the active player stays the same.
 	 * Otherwise, the winner of the previous round becomes the active player.
 	 */
-
 	public void chooseActivePlayer()
 
 	{
@@ -324,7 +316,6 @@ public class Game
 	 * The number cannot be greater than the total number of players.
 	 * @return random integer
 	 */
-
 	private int pickRandomPlayer() { 
 
 		int randomIndex = (int)Math.floor(Math.random() * numberOfPlayers);
@@ -333,12 +324,11 @@ public class Game
 
 
 	/**
-	 * 
+	 * Writes deck contents to the log
 	 * 
 	 * @param d = current deck 
-	 * @param logExists  
+	 * @param logExists - is there a log file already?
 	 */
-
 	private void logDeck(Deck d, boolean logExists)	{ //for printing to output log
 
 		PrintWriter printer = null;
@@ -390,9 +380,8 @@ public class Game
 	}
 
 	/**
-	 * 
+	 * Writes every player's cards to the log
 	 */
-
 	private void logCards() {
 
 		PrintWriter printer = null;
@@ -432,9 +421,8 @@ public class Game
 	}
 
 	/**
-	 * 
+	 * Writes round information to a log
 	 */
-
 	private void roundLog() {
 
 		PrintWriter printer = null;
@@ -468,9 +456,8 @@ public class Game
 
 
 	/**
-	 * 
+	 * Writes the winner of the game to the log
 	 */
-
 	private void logGameWinner() {
 
 		PrintWriter printer = null;
@@ -501,11 +488,15 @@ public class Game
 
 	}
 
-
-	/**
-	setter methods below
-	accessed from the ToptrumpsCLIApplication.java class
+	/** 
+	 * Setter methods below
 	 */
+	
+	public void writeToLog(boolean w)
+	{
+		writeToLog = true;
+	}
+
 
 	public void setNumberOfPlayers(int n) 
 	{
@@ -604,7 +595,6 @@ public class Game
 		}
 	}
 
-	// return current active player
 	public Player getActivePlayer()
 	{
 		return activePlayer;
@@ -615,17 +605,14 @@ public class Game
 		return listOfPlayers.get(i);
 	}
 
-	public boolean isDraw ()
-	{
-		return newRound.isDraw();
-	}
+	
 	
 	public int getRoundCount ()
 	{
 		return roundCount;
 	}
 
-	public boolean getDraw()
+	public boolean wasADraw()
 	{
 		return newRound.isDraw();
 	}
